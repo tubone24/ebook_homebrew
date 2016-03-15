@@ -17,13 +17,60 @@ __version__ = '0.1'
 import sys
 import os
 import re
+import argparse
 
-def main(folderpass, digits, extension):
+def main():
+    u"""    
+    コマンドライン引数で書き換え対象フォルダ、連番桁数、拡張子、手動書き換えを行うかを指定します
+    """
+    
+    p = argparse.ArgumentParser(description=u'連番ファイルのゴミ文字列を取り除くスクリプト')
+    p.add_argument('path_root_src', \
+                   action='store', \
+                   nargs=None, \
+                   const=None, \
+                   default=None, \
+                   type=str, \
+                   choices=None, \
+                   help=u'書き換え対象フォルダのパス指定.', \
+                   metavar=None)
+    p.add_argument('-d', '--digits', \
+                   action='store', \
+                   nargs='?', \
+                   const=None, \
+                   default=None, \
+                   required=True, \
+                   type=int, \
+                   choices=None, \
+                   help=u'連番の桁数を指定', \
+                   metavar=None)
+    p.add_argument('-e', '--extension', \
+                   action='store', \
+                   nargs='?', \
+                   const=None, \
+                   default=None, \
+                   required=True, \
+                   type=str, \
+                   choices=None, \
+                   help=u'書き換えるファイル拡張子を指定　※ドットをつけろ(例 .jpg)', \
+                   metavar=None)
+    p.add_argument('-m', '--manual', \
+                   action='store_true', \
+                   help=u'連番が被った際に手動書き換えモードに移行するか')
+    args = p.parse_args()
+    
+    if (args.manual):
+        changeNameHand(name2number(args.path_root_src, args.digits, args.extension))
+    else:
+        name2number(args.path_root_src, args.digits, args.extension)
+
+def name2number(folderpass, digits, extension):
     u"""    
     第一引数にフォルダパス、第二引数に連番の桁数、第三引数に拡張子(例　.jpg)を指定します
     """    
 
     count = 0
+    existfiles = []
     files = os.listdir(folderpass) # フォルダパスからファイル一覧を取得
     os.chdir(folderpass) # 作業ディレクトリ変更
     print("書き換え先フォルダ: " + folderpass)
@@ -40,7 +87,10 @@ def main(folderpass, digits, extension):
             oldname = str(file)
             if (ext.search(file) and num):
                 if os.path.isfile(newname): # 他の連番ファイルの有無を確認
-                    print("ファイル名%sが存在するため%sは書き換えません" % (newname, oldname))
+                    print("ファイル名%sが存在するため%sは書き換えません" % (str(file), oldname))
+                    if (oldname != newname):
+                        existfiles.append(file) # 同一連番で他の文字列(例 000a と 000b)によって区別しているものをリスト
+                        
                 else:
                     os.rename(file, newname) # 書き換え
                     print("書き換え: %s => %s" % (oldname, newname))
@@ -49,7 +99,28 @@ def main(folderpass, digits, extension):
                 pass
     print("--------------------------------------------------------")
     print("処理終了！　書き換えファイル数: %s" % count)
+    return existfiles
 
+def changeNameHand(existfiles):
+    u"""    
+    file一覧のリストを引数とし、それらのファイル名を標準入力から読み込み書き換えます
+    """ 
+    
+    print("----------------------------------------------------")
+    print("連番が被ったファイル名を手動で決定します\n")    
+    for file in existfiles:
+        print("ファイル名: %s を書き換えますか? (y/n)" % str(file))
+        flug = input()
+        if (flug == "y" or flug == "Y"):
+            print("新しいファイル名を入力して下さい %s =>" % str(file))
+            newname = input()
+            while(os.path.isfile(newname)): # 被らないファイル名が指定されるまでループ ToDo:上書きモード作成
+                print("既にファイル %s が存在しています　別の名前を指定して下さい %s => ?" % (str(file), str(file)))
+                newname = input()
+            os.rename(file, newname)
+            print("書き換え: %s => %s \n" % (str(file), newname))
+        else:
+            print("%s はそのままにします \n" % str(file))
+    print("全てのファイルの書き換えが終了しました")
 if __name__ == "__main__":
-    param = sys.argv
-    main(param[1], param[2], param[3])
+    main()
