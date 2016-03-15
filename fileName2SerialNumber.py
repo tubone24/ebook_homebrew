@@ -57,12 +57,34 @@ def main():
     p.add_argument('-m', '--manual', \
                    action='store_true', \
                    help=u'連番が被った際に手動書き換えモードに移行するか')
+    p.add_argument('-b', '--before', \
+                   action='store', \
+                   nargs='?', \
+                   const=None, \
+                   default=None, \
+                   type=str, \
+                   choices=None, \
+                   help=u'連番名の前に指定文字列をくっつける', \
+                   metavar=None)
+    p.add_argument('-a', '--after', \
+                   action='store', \
+                   nargs='?', \
+                   const=None, \
+                   default=None, \
+                   type=str, \
+                   choices=None, \
+                   help=u'連番名の後に指定文字列をくっつける', \
+                   metavar=None)    
+    
     args = p.parse_args()
     
     if (args.manual):
         changeNameHand(name2number(args.path_root_src, args.digits, args.extension))
     else:
         name2number(args.path_root_src, args.digits, args.extension)
+        
+    if (args.before != None or args.after != None):
+        addstr(args.before, args.after, args.digits, args.extension)    
 
 def name2number(folderpass, digits, extension):
     u"""    
@@ -77,8 +99,8 @@ def name2number(folderpass, digits, extension):
     print("連番桁: %s桁" % digits)
     print("拡張子: %s" % extension)
     print("-------------------------------------------------------")
+    ext = re.compile(extension) # 拡張子の正規表現をコンパイル
     for file in files:
-        ext = re.compile(extension) # 拡張子の正規表現をコンパイル
         num = re.search('\\d{' + str(digits) +'}', file) # 取得ファイル名から連番部分を取り出す
         if (num == None): 
             pass
@@ -121,6 +143,38 @@ def changeNameHand(existfiles):
             print("書き換え: %s => %s \n" % (str(file), newname))
         else:
             print("%s はそのままにします \n" % str(file))
-    print("全てのファイルの書き換えが終了しました")
+    print("全てのファイルの書き換えが終了しました\n")
+    
+def addstr(before, after, digits, extension):
+    print("----------------------------------------------------")
+    files = os.listdir()
+    ext = re.compile(extension) # 拡張子の正規表現をコンパイル 
+    if (before != None):
+        print("連番ファイル名の前に %s をくっつけます" % before)
+    if (after != None):
+        print("連番ファイル名の後に %s をくっつけます" % after)
+    
+    for file in files:
+        num = re.search('\\d{' + str(digits) +'}', file) # 取得ファイル名から連番部分を取り出す
+        if (before == None):
+            before = ""
+        if (after == None):
+            after = ""
+        
+        if (num == None):
+            pass
+        else:
+            if (ext.search(file)):
+                center, e = str(file).split(".")
+                newname = before + center + after + extension
+                oldname = str(file)
+                if (num):
+                    if os.path.isfile(newname):
+                        pass
+                    else:
+                        os.rename(file, newname)
+                        print("書き換え: %s => %s" %(oldname, newname))   
+    return None
+    
 if __name__ == "__main__":
     main()
