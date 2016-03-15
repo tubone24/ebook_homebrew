@@ -1,0 +1,2 @@
+# fileName2SerialNumber
+連番ファイルのゴミ文字列を取り除くスクリプト
