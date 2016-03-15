@@ -12,7 +12,7 @@ hogehoge部分を取り除き、単純な連番（例 000.jpg）にするだけ�
 　　　　 フォルダパスは絶対参照で、ファイル拡張子は必ずドットを含めて下さい　　
 """
 __author__ = 'tubone'
-__version__ = '0.1'
+__version__ = '0.3'
 
 import sys
 import os
