@@ -9,7 +9,7 @@ pipなどを利用して環境を整えてください
 　
 """
 __author__ = 'tubone'
-__version__ = '0.3.2'
+__version__ = '0.3.1'
 __copyright__ = 'Copyright (c) tubone'
 __license__ = "MIT License"
 
@@ -25,7 +25,7 @@ import zipfile
 
 def main():
     u"""    
-    コマンドライン引数を参照する　オプションについてはusage()で
+    コマンドライン引数を参照する　オプションについては-hで
     """
     
     p = argparse.ArgumentParser(description=u'連番ファイルのゴミ文字列を取り除くスクリプト')
