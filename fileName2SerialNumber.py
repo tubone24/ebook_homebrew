@@ -176,7 +176,7 @@ def addstr(before, after, digits, extension):
             pass
         else:
             if (ext.search(file)):
-                center, e = str(file).split(".")
+                center, e = str(file).split(".") # ファイル名を実と拡張子部分にわける
                 newname = before + center + after + extension
                 oldname = str(file)
                 if (num):
