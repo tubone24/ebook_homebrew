@@ -58,4 +58,4 @@ pip install PyPDF2
 
 ###License
 * MIT License
-      *see LICENSE 
+      * see LICENSE 
