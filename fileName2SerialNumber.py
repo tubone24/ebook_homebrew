@@ -9,9 +9,8 @@ pipなどを利用して環境を整えてください
 　
 """
 __author__ = 'tubone'
-__version__ = '0.3.1'
+__version__ = '0.3.2'
 __copyright__ = 'Copyright (c) tubone'
-__status__ = "Production"
 __license__ = "MIT License"
 
 import sys
