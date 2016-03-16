@@ -64,8 +64,9 @@ pip install PyPDF2
 ###今後の予定
 - ~~連番にした写真を連番順にPDF化するスクリプトを書く~~
 
-- zipで固めるオプションをつける
+- ~~zipで固めるオプションをつける~~
 
+- 特になし
 ###License
 * MIT License
       * see LICENSE 
