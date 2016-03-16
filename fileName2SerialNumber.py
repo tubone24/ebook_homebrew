@@ -21,6 +21,7 @@ import argparse
 import PIL
 import PIL.Image
 from PyPDF2 import PdfFileWriter, PdfFileReader
+import zipfile
 
 
 def main():
@@ -42,8 +43,11 @@ def main():
     p.add_argument('-p', '--pdf', action='store', nargs='?', type=str, \
                    help=u'連番にした画像ファイルをpdf化する', metavar=None)
     p.add_argument('-P', '--pdfRemoveImage', action='store', nargs='?', type=str, \
-                   help=u'連番にした画像ファイルをpdf化し画像ファイルは削除する', metavar=None)    
-    
+                   help=u'連番にした画像ファイルをpdf化し画像ファイルは削除する', metavar=None) 
+    p.add_argument('-z', '--zip', action='store', nargs='?', type=str, \
+                   help=u'連番にしたファイルをzipに固める', metavar=None)
+    p.add_argument('-Z', '--zipRemoveFiles', action='store', nargs='?', type=str, \
+                   help=u'連番にしたファイルをzipに固め、ファイルは削除する', metavar=None)    
     args = p.parse_args()
     
     if (re.match(r'^\d*,?\d*$', args.digits)):
@@ -61,6 +65,10 @@ def main():
         image2pdf(args.pdf, args.digits, args.extension, False)
     if (args.pdfRemoveImage != None):
         image2pdf(args.pdf, args.digits, args.extension, True)
+    if (args.zip != None):
+        makeZip(args.zip, False)
+    if (args.zipRemoveFiles != None):
+        makeZip(args.zipRemoveFiles, True)
 
 def name2number(folderpass, digits, extension):
     u"""    
@@ -121,14 +129,23 @@ def changeNameHand(existfiles):
         elif (flug == "r"):
             print("ファイル %s を削除します　よろしいですか? (y/n/c)" % str(file)) # y="Yes" n="No" c="check"
             flug = input()
-            if (file[-1:-4] == ".jpg" or ".png" or ".gif" and flug == "c"):
-                d1 = PIL.Image.open(file) # 画像ファイルを開いて表示
-                d1.show()
-            print("ファイル %s を削除します　よろしいですか? (y/n)" % str(file))
+            if (file[:-4] == ".jpg" or ".png" or ".gif"):
+                if (flug == "c"):
+                    d1 = PIL.Image.open(file) # 画像ファイルを開いて表示
+                    d1.show()
+            print("ファイル %s を削除します　本当によろしいですか? (y/n/r)" % str(file))
             flug = input()
             if (flug == "Y" or flug == "y"):
                 os.remove(file)
                 print("ファイル %sを削除しました" % file)
+            elif (flug == "r"):
+                print("リネームします。新しい名前を入力して下さい %s =>" % str(file))
+                newname = input()
+                while(os.path.isfile(newname)): # 被らないファイル名が指定されるまでループ ToDo:上書きモード作成
+                    print("既にファイル %s が存在しています　別の名前を指定して下さい %s => ?" % (newname, str(file)))
+                    newname = input()
+                os.rename(file, newname)
+                print("書き換え: %s => %s \n" % (str(file), newname))                
             else:
                 print("ファイル %s はそのままにします\n" % str(file))
         else:
@@ -214,5 +231,24 @@ def image2pdf(filename, digits, extension, removeflug):
     print("--------------------------------------------------------")
     print("終わり！成果物: %s" % filename)
     return None
+
+def makeZip(filename, flug):
+    """
+    zipアーカイブを作る関数
+    """
+    files = os.listdir()
+    count = 0
+    zips = zipfile.ZipFile(filename, "w", zipfile.ZIP_DEFLATED)
+    for file in files:
+        zips.write(file)
+        print("ファイル名 %s をzipアーカイブに追加しました" % str(file))
+        count += 1
+        if (flug):
+            os.remove(file)
+            print("ファイル名 %s を削除しました" % str(file))
+    zips.close()
+    print("---------------------------------------------------------")
+    print("終わり！　成果物: %s" % str(filename))
+    
 if __name__ == "__main__":
     main()
