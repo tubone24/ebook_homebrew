@@ -154,6 +154,9 @@ def changeNameHand(existfiles):
     print("全てのファイルの書き換えが終了しました\n")
     
 def addstr(before, after, digits, extension):
+    u"""    
+    第一引数に前につける文字列、第二引数に後につける文字列、第三引数に連番桁数、第四引数に拡張子を指定します
+    """ 
     print("----------------------------------------------------")
     files = os.listdir()
     ext = re.compile(extension) # 拡張子の正規表現をコンパイル 
