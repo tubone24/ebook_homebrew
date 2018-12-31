@@ -1,0 +1,350 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ebook_homebrew.change_filename &mdash; ebook_homebrew 1.0.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/cloud.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../../_static/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../../_static/cloud.base.js"></script>
+    <script type="text/javascript" src="../../_static/cloud.js"></script>
+    <link rel="top" title="ebook_homebrew 1.0.0 documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body role="document">
+    <div class="relbar-top">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> &nbsp; &nbsp;</li>
+    <li><a href="../../index.html">ebook_homebrew 1.0.0 documentation</a> &raquo;</li>
+
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    </div>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for ebook_homebrew.change_filename</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">os.path</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Match</span>
+<span class="kn">from</span> <span class="nn">core</span> <span class="kn">import</span> <span class="n">Common</span>
+<span class="kn">from</span> <span class="nn">utils.logging</span> <span class="kn">import</span> <span class="n">get_logger</span>
+<span class="kn">from</span> <span class="nn">utils.exceptions</span> <span class="kn">import</span> <span class="n">InvalidNumberParameterType</span><span class="p">,</span>\
+    <span class="n">ChangeFileNameOSError</span><span class="p">,</span> <span class="n">InvalidImageParameterType</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">get_logger</span><span class="p">(</span><span class="s2">&quot;change_filename&quot;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="ChangeFilename"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.change_filename.ChangeFilename">[docs]</a><span class="k">class</span> <span class="nc">ChangeFilename</span><span class="p">(</span><span class="n">Common</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Change file name to only digit name.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">directory_path</span><span class="p">,</span> <span class="n">digits</span><span class="p">,</span> <span class="n">extension</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Constructor</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            directory_path (str): Target directory path.</span>
+<span class="sd">            digits (str): Regex target digit.</span>
+<span class="sd">            extension (str): Target file extension.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__directory_path</span> <span class="o">=</span> <span class="n">directory_path</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__digits</span> <span class="o">=</span> <span class="n">digits</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__exist_files</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__extension</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_extension_with_dot</span><span class="p">(</span><span class="n">extension</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__regex_ext</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__extension</span><span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__directory_path</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">__create_new_name</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">digit</span><span class="p">,</span> <span class="n">extension</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create only digit file name.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            num (Match): Match object</span>
+<span class="sd">            digit (int): digit number</span>
+<span class="sd">            extension (str): File Extension</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: Only digit file name.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            InvalidNumberParameterType: If input digit is not Match object.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="ow">is</span> <span class="n">Match</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidNumberParameterType</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">num</span><span class="o">.</span><span class="n">group</span><span class="p">()</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="n">digit</span><span class="p">)</span> <span class="o">+</span> <span class="n">extension</span>
+
+    <span class="k">def</span> <span class="nf">__check_exist_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_name</span><span class="p">,</span> <span class="n">old_name</span><span class="p">,</span> <span class="n">append_list</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check current directory and exists same name file, return true.</span>
+<span class="sd">        Args:</span>
+<span class="sd">            new_name (str): Target file name.</span>
+<span class="sd">            old_name (str): before name</span>
+<span class="sd">            append_list (bool): If true, make duplicate name list</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            bool: If success, return true</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ChangeFileNameOSError: If input a bad filename or path.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">new_name</span><span class="p">):</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;File Exist: {filename}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">new_name</span><span class="p">))</span>
+                <span class="k">if</span> <span class="n">old_name</span> <span class="o">!=</span> <span class="n">new_name</span> <span class="ow">and</span> <span class="n">append_list</span><span class="p">:</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Append exist files list: {filename}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">old_name</span><span class="p">))</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__exist_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">old_name</span><span class="p">)</span>
+                <span class="k">return</span> <span class="bp">True</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">except</span> <span class="ne">OSError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">ChangeFileNameOSError</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">__input_new_file_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">old_name</span><span class="p">,</span> <span class="n">overwrite</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Provide input command prompt.</span>
+<span class="sd">        Args:</span>
+<span class="sd">            old_name (str): Old name</span>
+<span class="sd">            overwrite (bool): If true, ignore exist file name.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: new file name.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Input new name? {old_name} =&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">old_name</span><span class="o">=</span><span class="n">old_name</span><span class="p">))</span>
+        <span class="n">new_name</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
+        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">__check_exist_file</span><span class="p">(</span><span class="n">new_name</span><span class="p">,</span> <span class="n">new_name</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">overwrite</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Already file exist: {new_name}   &quot;</span>
+                        <span class="s2">&quot;Input Another file name {old_name} =&gt; ?&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">new_name</span><span class="o">=</span><span class="n">new_name</span><span class="p">,</span>
+                                                                         <span class="n">old_name</span><span class="o">=</span><span class="n">old_name</span><span class="p">))</span>
+            <span class="n">new_name</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">new_name</span>
+
+<div class="viewcode-block" id="ChangeFilename.filename_to_digit_number"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.change_filename.ChangeFilename.filename_to_digit_number">[docs]</a>    <span class="k">def</span> <span class="nf">filename_to_digit_number</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Change file name to only digit name.</span>
+
+<span class="sd">        Change file name contains digit like &quot;foo001bar.txt&quot; to</span>
+<span class="sd">        only digit file name like &quot;001.txt&quot;.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List[str]: Skipping files list by exists same name.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">files</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__directory_path</span><span class="p">)</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Target directory: {directory_path}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">directory_path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__directory_path</span><span class="p">))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Digit: {digits}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">digits</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__digits</span><span class="p">))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Extension: {extension}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">extension</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__extension</span><span class="p">))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">55</span><span class="p">)</span>
+
+        <span class="n">max_digit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_digit_format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__digits</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+            <span class="n">num</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_serial_number</span><span class="p">(</span><span class="nb">file</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__digits</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">num</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Skip(No number): {filename}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="nb">file</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">__regex_ext</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="nb">file</span><span class="p">):</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Skip(No target extension): {filename}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="nb">file</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">new_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__create_new_name</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">max_digit</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extension</span><span class="p">)</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">__check_exist_file</span><span class="p">(</span><span class="n">new_name</span><span class="p">,</span> <span class="nb">file</span><span class="p">,</span> <span class="bp">True</span><span class="p">):</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_rename_file</span><span class="p">(</span><span class="nb">file</span><span class="p">,</span> <span class="n">new_name</span><span class="p">)</span>
+                    <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">55</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Finished! Rename file count: {count}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">count</span><span class="o">=</span><span class="n">count</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__exist_files</span></div>
+
+<div class="viewcode-block" id="ChangeFilename.change_name_manually"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.change_filename.ChangeFilename.change_name_manually">[docs]</a>    <span class="k">def</span> <span class="nf">change_name_manually</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">overwrite</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Change filename manually looking exist_file list.</span>
+
+<span class="sd">        After changing file name for filename_to_digit_number() method,</span>
+<span class="sd">        duplicate file name change manually.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            overwrite (bool): If true, overwrite file name even if exist same name file.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            bool: If success, return True.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">55</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Manually determine file names duplicated by the serial number</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__exist_files</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;File name: {file_name} &quot;</span>
+                        <span class="s2">&quot;Does it rename? (y/n/r)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="nb">file</span><span class="p">))</span>  <span class="c1"># y=&quot;Yes&quot; n=&quot;No&quot; r=&quot;Remove&quot;</span>
+
+            <span class="n">flag</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">flag</span> <span class="o">==</span> <span class="s2">&quot;y&quot;</span> <span class="ow">or</span> <span class="n">flag</span> <span class="o">==</span> <span class="s2">&quot;Y&quot;</span><span class="p">:</span>
+                <span class="n">new_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__input_new_file_name</span><span class="p">(</span><span class="nb">file</span><span class="p">,</span> <span class="n">overwrite</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_rename_file</span><span class="p">(</span><span class="nb">file</span><span class="p">,</span> <span class="n">new_name</span><span class="p">)</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Rename: {old_name} =&gt; {new_name} </span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">old_name</span><span class="o">=</span><span class="nb">file</span><span class="p">,</span> <span class="n">new_name</span><span class="o">=</span><span class="n">new_name</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="n">flag</span> <span class="o">==</span> <span class="s2">&quot;r&quot;</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Will be {file} deleted?&quot;</span>
+                            <span class="s2">&quot;　OK? (y/n/c)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">file</span><span class="o">=</span><span class="nb">file</span><span class="p">))</span>  <span class="c1"># y=&quot;Yes&quot; n=&quot;No&quot; c=&quot;check&quot;</span>
+                <span class="n">flag</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">flag</span> <span class="o">==</span> <span class="s2">&quot;c&quot;</span><span class="p">:</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_check_image_file</span><span class="p">(</span><span class="nb">file</span><span class="p">)</span>
+                    <span class="k">except</span> <span class="n">InvalidImageParameterType</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                        <span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+                        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Skip..&quot;</span><span class="p">)</span>
+
+                <span class="n">flag</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">flag</span> <span class="o">==</span> <span class="s2">&quot;Y&quot;</span> <span class="ow">or</span> <span class="n">flag</span> <span class="o">==</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_remove_file</span><span class="p">(</span><span class="nb">file</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">flag</span> <span class="o">==</span> <span class="s2">&quot;r&quot;</span><span class="p">:</span>
+                    <span class="n">new_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__input_new_file_name</span><span class="p">(</span><span class="nb">file</span><span class="p">,</span> <span class="n">overwrite</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_rename_file</span><span class="p">(</span><span class="nb">file</span><span class="p">,</span> <span class="n">new_name</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Leave file: {file}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">file</span><span class="o">=</span><span class="nb">file</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Leave file: {file}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">file</span><span class="o">=</span><span class="nb">file</span><span class="p">))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Finished.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">True</span></div>
+
+<div class="viewcode-block" id="ChangeFilename.add_before_after_str"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.change_filename.ChangeFilename.add_before_after_str">[docs]</a>    <span class="k">def</span> <span class="nf">add_before_after_str</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">before</span><span class="p">,</span> <span class="n">after</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add file name specify string.</span>
+
+<span class="sd">        After changing file name for filename_to_digit_number() method,</span>
+<span class="sd">        add specify string before or after file name.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            before (str): String before file name</span>
+<span class="sd">            after (str): String after file name</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            bool: If success, return True.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">55</span><span class="p">)</span>
+        <span class="n">files</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__directory_path</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">before</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Add {before} before serial digit&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">before</span><span class="o">=</span><span class="n">before</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">before</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">after</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Add {after} before serial digit&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">after</span><span class="o">=</span><span class="n">after</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">after</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+        <span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+            <span class="n">num</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_serial_number</span><span class="p">(</span><span class="nb">file</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__digits</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">num</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Skip(No number): {filename}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="nb">file</span><span class="p">)))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__regex_ext</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="nb">file</span><span class="p">):</span>
+                    <span class="n">_</span><span class="p">,</span> <span class="n">center</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_split_dir_root_ext</span><span class="p">(</span><span class="nb">file</span><span class="p">)</span>
+                    <span class="n">new_name</span> <span class="o">=</span> <span class="n">before</span> <span class="o">+</span> <span class="n">center</span> <span class="o">+</span> <span class="n">after</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extension</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__check_exist_file</span><span class="p">(</span><span class="n">new_name</span><span class="p">,</span> <span class="n">new_name</span><span class="p">,</span> <span class="bp">False</span><span class="p">):</span>
+                        <span class="k">pass</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_rename_file</span><span class="p">(</span><span class="nb">file</span><span class="p">,</span> <span class="n">new_name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">True</span></div></div>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">obj</span> <span class="o">=</span> <span class="n">ChangeFilename</span><span class="p">(</span><span class="s2">&quot;../tests&quot;</span><span class="p">,</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="s2">&quot;jpg&quot;</span><span class="p">)</span>
+    <span class="n">obj</span><span class="o">.</span><span class="n">filename_to_digit_number</span><span class="p">()</span>
+    <span class="c1"># obj.change_name_hand(False)</span>
+    <span class="c1"># obj.add_str(&quot;before&quot;, &quot;after&quot;)</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+    
+    
+        <div class="sidebar-toggle-group no-js">
+            
+            <button class="sidebar-toggle" id="sidebar-hide" title="Hide the sidebar menu">
+                 «
+                <span class="show-for-small">hide menu</span>
+                
+            </button>
+            <button class="sidebar-toggle" id="sidebar-show" title="Show the sidebar menu">
+                
+                <span class="show-for-small">menu</span>
+                <span class="hide-for-small">sidebar</span>
+                 »
+            </button>
+        </div>
+    
+      <div class="clearer"></div>
+    </div>
+    <div class="relbar-bottom">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> &nbsp; &nbsp;</li>
+    <li><a href="../../index.html">ebook_homebrew 1.0.0 documentation</a> &raquo;</li>
+
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2018, tubone.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+    <!-- cloud_sptheme 1.4 -->
+  </body>
+</html>
