@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 import os
+import shutil
 import re
 import PIL.Image
-from utils.logging import get_logger
-from utils.exceptions import InvalidDigitsFormat, ChangeFileNameOSError, InvalidImageParameterType
+from ebook_homebrew.utils.logging import get_logger
+from ebook_homebrew.exceptions import InvalidDigitsFormat, ChangeFileNameOSError, InvalidImageParameterType
 
 logger = get_logger("Core")
 
@@ -109,7 +110,7 @@ class Common(object):
 
         Args:
             file (str): filename
-            assume_yes (bool): If True, verify the user.
+            assume_yes (bool): If True, no verify the user.
 
         Returns:
             bool: If success, return true.
@@ -127,6 +128,33 @@ class Common(object):
         os.remove(file)
         logger.info("Remove file success: {file_name}".format(file_name=file))
         return True
+
+    def _move_file(self, file, dst, assume_yes=False):
+        """Move file another directory
+
+        Args:
+            file (str): Target source file
+            dst (str): Target destination directory or filename
+            assume_yes (bool): If true, no verify the user
+
+        Returns:
+            bool: If success, return True.
+
+        """
+        dst_dir, _, _ = self._split_dir_root_ext(dst)
+        if assume_yes is True:
+            pass
+        else:
+            logger.info("Move file: {file_name} OK? (y/n/r)".format(file_name=file))
+            flag = input()
+            if flag == "Y" or flag == "y":
+                pass
+            else:
+                logger.info("Nothing..")
+                return False
+            shutil.move(file, dst_dir)
+            logger.info("Move file success: {file_name} => {dst_dir}".format(file_name=file, dst_dir=dst_dir))
+            return True
 
     @staticmethod
     def _remove_file_bulk(file_list):

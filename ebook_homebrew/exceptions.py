@@ -49,6 +49,12 @@ class InvalidDigitsFormat(ChangeFileNameError):
                        "please divide into comma separator"
 
 
+class TargetSrcFileNotFoundError(ChangeFileNameError):
+    def __init__(self):
+        self.error_class = "TargetSrcFileNotFoundError"
+        self.message = "Source directory you choose is no Target file."
+
+
 class InvalidNumberParameterType(ChangeFileNameError):
     def __init__(self):
         self.error_class = "InvalidNumberParameterType"

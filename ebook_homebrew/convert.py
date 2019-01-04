@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
+"""Convert file format.
+"""
 import os
 import re
 import PyPDF2
 import PIL.Image
-from core import Common
-from utils.logging import get_logger
-from utils.exceptions import InvalidImageFileFormat
+from ebook_homebrew.core import Common
+from ebook_homebrew.utils.logging import get_logger
+from ebook_homebrew.exceptions import InvalidImageFileFormat
 
 logger = get_logger("image2pdf")
 
@@ -130,6 +132,20 @@ class Image2PDF(Common):
         with open(file_name, "wb") as f:
             self.__file_writer.write(f)
         return True
+
+    def move_file(self, file, dst, assume_yes):
+        """Move file
+
+        Args:
+            file (str): Target file name
+            dst (str): Target destination path
+            assume_yes (bool): If true, no verify users
+
+        Returns:
+            bool: If success, return true. Nothing target, return false.
+
+        """
+        return self._move_file(file=file, dst=dst, assume_yes=assume_yes)
 
 
 if __name__ == '__main__':

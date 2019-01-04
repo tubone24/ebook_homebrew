@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
+"""Rename file name.
+"""
 import os
 import os.path
 import re
 from typing import List, Match
-from core import Common
-from utils.logging import get_logger
-from utils.exceptions import InvalidNumberParameterType,\
-    ChangeFileNameOSError, InvalidImageParameterType
+from ebook_homebrew.core import Common
+from ebook_homebrew.utils.logging import get_logger
+from ebook_homebrew.exceptions import InvalidNumberParameterType,\
+    ChangeFileNameOSError, InvalidImageParameterType, TargetSrcFileNotFoundError
 
 logger = get_logger("change_filename")
 
@@ -105,7 +107,10 @@ class ChangeFilename(Common):
             List[str]: Skipping files list by exists same name.
         """
         count = 0
-        files = os.listdir(self.__directory_path)
+        try:
+            files = os.listdir(self.__directory_path)
+        except FileNotFoundError:
+            raise TargetSrcFileNotFoundError()
 
         logger.info("Target directory: {directory_path}".format(directory_path=self.__directory_path))
         logger.info("Digit: {digits}".format(digits=self.__digits))
@@ -130,7 +135,7 @@ class ChangeFilename(Common):
         logger.info("Finished! Rename file count: {count}".format(count=count))
         return self.__exist_files
 
-    def change_name_manually(self, overwrite):
+    def change_name_manually(self, overwrite=False):
         """Change filename manually looking exist_file list.
 
         After changing file name for filename_to_digit_number() method,
