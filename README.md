@@ -1,50 +1,64 @@
-最初にアイキャッチ画像などを表示
+![ebook_homebrew](https://raw.githubusercontent.com/tubone24/ebook_homebrew/master/doc_src/bookicon.png
+ "ebook_homebrew_icon")
+
 
 # ebook_homebrew
-このソフトはどんなもので、何ができるのかを書く
-合わせて、簡単なデモ（使用例）などスクリーンショットやGIFアニメで表示
+Change file name to only digit name like `001.jpg` and make e-book format files.
 
-# Dependency
-使用言語とバージョン、必要なライブラリとそのバージョンを書く
-Pythonならrequirements.txtを用意するのも良い
+# Getting Started
+Ebook_homebrew is a python package, so that you can use `setup.py` or `pip` installer.
 
-# Setup````````
-セットアップ方法を書く。用意するハードウェアとソフトウェアをセットアップするためのコマンドを記載する
+## Using setup.py
+```bash
+$ python setup.py install
+```
+
+## Or using pip installer
+Unimplemented
+```bash
+$ pip install ebook_homebrew
+```
 
 # Usage
-使い方。なるべく具体的に書く。サンプルも書く
+You can use global command "ebookhomebrew".
+
+Show help.
+```bash
+$ ebookhomebrew -h
+```
+
+Ex) Rename image file to only digit and Create PDF file.
+
+```bash
+$ ebookhomebrew auto -s ./tests -d 3,4 -e jpg -f test.pdf
+```
+
+## ebookhomebrew command line interface
+
+### Subcommands
+
+```bash
+  Choose subcommands. Usually choose "auto"
+
+  {auto}
+    auto      Make only digit file name, convert e-book file such as PDF
+```
+  
+### Options
+```bash
+  -h, --help            show this help message and exit
+  -s SRC_DIR, --src_dir SRC_DIR
+                        Source directory which put original image files.
+  --dst_dir DST_DIR     Destination directory which put e-book file.
+  -d N,N, --digit N,N   Serial number digits you remain file name
+  -e EXT, --extension EXT
+                        Destination directory which put e-book file.
+  -f FILENAME, --filename FILENAME
+                        Destination directory which put e-book file.
+  -m, --manual          Duplicate file name, solving manually.
+  -r, --remove          Remove original image file.
+  -y, --assume_yes      no verify users.
+```
 
 # Licence
 This software is released under the MIT License, see LICENSE.
-
-# Authors
-作者を明示する。特に、他者が作成したコードを利用する場合は、そのコードのライセンスに従った上で、リポジトリのそれぞれのコードのオリジナルの作者が誰か分かるように明示する（私はそれが良いと思い自主的にしています）。
-
-# References
-参考にした情報源（サイト・論文）などの情報、リンク
-
-###使い方 
-####コマンドライン引数に
-書き換えファイルが存在する対象フォルダ　を指定（必須）
-
--d または --digits オプションで連番桁数を指定　（オプションだけど必須）
-
--e または --extension オプションで変更したいファイルの拡張子を指定　（オプションだけど必須）
-
-
-####オプション
--m または --manual で処理後、連番が被ってしまうファイル(例 000a.jpg と 000b.jpgとか)のファイル名を手動で入力するモードに移行します。
-
--b または --before で連番の前に指定した文字列をくっつけます
-
--a または --after で連番の後に指定した文字列をくっつけます
-
--p または --pdf で連番にした画像ファイルを順番通りひとつのpdfにします
-
--P または --pdfRemoveImage で連番にした画像ファイルをpdf化し画像ファイルは削除します　すっきり！
-
--z または --zip で連番にしたファイルをzipに固めます
--Z または --zipRemoveFiles で連番にしたファイルをzipに固め、ファイルは削除します　　
-
-###License
-* MIT License
