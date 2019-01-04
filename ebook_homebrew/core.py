@@ -3,8 +3,8 @@ import os
 import shutil
 import re
 import PIL.Image
-from ebook_homebrew.utils.logging import get_logger
-from ebook_homebrew.exceptions import InvalidDigitsFormat, ChangeFileNameOSError, \
+from .utils.logging import get_logger
+from .exceptions import InvalidDigitsFormat, ChangeFileNameOSError, \
     InvalidImageParameterType, InvalidExtensionType, InvalidPathType
 
 logger = get_logger("Core")
@@ -92,10 +92,14 @@ class Common(object):
         Raises:
             InvalidDigitsFormat: If digit is not supported regex format.
         """
-        if re.match(r"^\d*,?\d*$", digits):
-            return max(map(int, (digits.split(","))))
-        else:
+        try:
+            if re.match(r"^\d*,?\d*$", digits):
+                return max(map(int, (digits.split(","))))
+            else:
+                raise InvalidDigitsFormat()
+        except TypeError:
             raise InvalidDigitsFormat()
+
 
     @staticmethod
     def _rename_file(old_name, new_name):
@@ -134,7 +138,7 @@ class Common(object):
         if assume_yes is True:
             pass
         else:
-            logger.info("Remove file: {file_name} OK? (y/n/r)".format(file_name=file))
+            logger.info("Remove file: {file_name} OK? (y/n)".format(file_name=file))
             flag = input()
             if flag == "Y" or flag == "y":
                 pass
@@ -168,9 +172,9 @@ class Common(object):
             else:
                 logger.info("Nothing..")
                 return False
-            shutil.move(file, dst_dir)
-            logger.info("Move file success: {file_name} => {dst_dir}".format(file_name=file, dst_dir=dst_dir))
-            return True
+        shutil.move(file, dst_dir)
+        logger.info("Move file success: {file_name} => {dst_dir}".format(file_name=file, dst_dir=dst_dir))
+        return True
 
     @staticmethod
     def _remove_file_bulk(file_list):
@@ -181,15 +185,14 @@ class Common(object):
         Returns:
             bool: If success, return true.
         """
-        if file_list is None:
+        if not file_list:
             return False
         for file in file_list:
             os.remove(file)
             logger.debug("Remove file: {file}".format(file=file))
         return True
 
-    @staticmethod
-    def _check_image_file(file_name):
+    def _check_image_file(self, file_name):
         """Show image file.
         Args:
             file_name(str): Image file name
@@ -197,7 +200,8 @@ class Common(object):
         Raises:
             InvalidImageParameterType: If you doesn't choose image file.
         """
-        if file_name[:-4] == ".jpg" or ".png" or ".gif":
+        _, _, ext = self._split_dir_root_ext(file_name)
+        if ext == ".jpg" or ext == ".png" or ext == ".gif":
             draw_pic = PIL.Image.open(file_name)
             draw_pic.show()
         else:

@@ -5,9 +5,9 @@ import os
 import os.path
 import re
 from typing import List, Match
-from ebook_homebrew.core import Common
-from ebook_homebrew.utils.logging import get_logger
-from ebook_homebrew.exceptions import InvalidNumberParameterType,\
+from .core import Common
+from .utils.logging import get_logger
+from .exceptions import InvalidNumberParameterType,\
     ChangeFileNameOSError, InvalidImageParameterType, TargetSrcFileNotFoundError
 
 logger = get_logger("change_filename")

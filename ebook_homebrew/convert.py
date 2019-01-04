@@ -5,9 +5,9 @@ import os
 import re
 import PyPDF2
 import PIL.Image
-from ebook_homebrew.core import Common
-from ebook_homebrew.utils.logging import get_logger
-from ebook_homebrew.exceptions import InvalidImageFileFormat
+from .core import Common
+from .utils.logging import get_logger
+from .exceptions import InvalidImageFileFormat
 
 logger = get_logger("image2pdf")
 

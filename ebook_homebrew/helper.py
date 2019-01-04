@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
 import sys
-from ebook_homebrew.rename import ChangeFilename
-from ebook_homebrew.convert import Image2PDF
-from ebook_homebrew.exceptions import BaseError
-from ebook_homebrew.utils.logging import get_logger
+from .rename import ChangeFilename
+from .convert import Image2PDF
+from .exceptions import BaseError
+from .utils.logging import get_logger
 # from archive import MakeArchive
 
 logger = get_logger("helper")
