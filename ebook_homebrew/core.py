@@ -4,7 +4,8 @@ import shutil
 import re
 import PIL.Image
 from ebook_homebrew.utils.logging import get_logger
-from ebook_homebrew.exceptions import InvalidDigitsFormat, ChangeFileNameOSError, InvalidImageParameterType
+from ebook_homebrew.exceptions import InvalidDigitsFormat, ChangeFileNameOSError, \
+    InvalidImageParameterType, InvalidExtensionType, InvalidPathType
 
 logger = get_logger("Core")
 
@@ -17,7 +18,7 @@ class Common(object):
         pass
 
     @staticmethod
-    def _convert_extension_with_dot(extension: str):
+    def _convert_extension_with_dot(extension):
         """Convert extension with dot like "jpg" to ".jpg"
 
         Args:
@@ -26,11 +27,23 @@ class Common(object):
         Returns:
             str: Convert extension with dot like "jpg" to ".jpg"
         """
-        if re.match(r"^\..+", extension):
-            return extension
-        else:
-            extension_with_dot = "." + extension
-            return extension_with_dot
+        try:
+            if type(extension) is str:
+                pass
+            elif type(extension) is int:
+                extension = str(extension)
+            elif type(extension) is float:
+                extension = str(extension)
+            else:
+                raise TypeError
+
+            if re.match(r"^\..+", extension):
+                return extension
+            else:
+                extension_with_dot = "." + extension
+                return extension_with_dot
+        except TypeError:
+            raise InvalidExtensionType()
 
     @staticmethod
     def _split_dir_root_ext(path):
@@ -44,10 +57,13 @@ class Common(object):
             str: file_root like "test"
             str: extension like ".py"
         """
-        dir_name = os.path.dirname(path)
-        base_name = os.path.basename(path)
-        base_root, ext = os.path.splitext(base_name)
-        return dir_name, base_root, ext
+        try:
+            dir_name = os.path.dirname(path)
+            base_name = os.path.basename(path)
+            base_root, ext = os.path.splitext(base_name)
+            return dir_name, base_root, ext
+        except TypeError:
+            raise InvalidPathType()
 
     @staticmethod
     def _check_serial_number(filename, digits):

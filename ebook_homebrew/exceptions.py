@@ -49,6 +49,20 @@ class InvalidDigitsFormat(ChangeFileNameError):
                        "please divide into comma separator"
 
 
+class InvalidExtensionType(ChangeFileNameError):
+    def __init__(self):
+        self.error_class = "InvalidExtensionType"
+        self.message = "Invalid Extension Type. " \
+                       "Expected string or bytes-like object"
+
+
+class InvalidPathType(ChangeFileNameError):
+    def __init__(self):
+        self.error_class = "InvalidPathType"
+        self.message = "Invalid Path string Type. " \
+                       "Expected string, bytes-like, os.Path-like object"
+
+
 class TargetSrcFileNotFoundError(ChangeFileNameError):
     def __init__(self):
         self.error_class = "TargetSrcFileNotFoundError"
