@@ -6,6 +6,8 @@
 Welcome to ebook_homebrew's documentation!
 ==========================================
 
+.. image:: bookicon.png
+
 Contents:
 
 .. toctree::

@@ -51,10 +51,11 @@
   <h1>Source code for ebook_homebrew.core</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
 <span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">import</span> <span class="nn">PIL.Image</span>
-<span class="kn">from</span> <span class="nn">utils.logging</span> <span class="k">import</span> <span class="n">get_logger</span>
-<span class="kn">from</span> <span class="nn">utils.exceptions</span> <span class="k">import</span> <span class="n">InvalidDigitsFormat</span><span class="p">,</span> <span class="n">ChangeFileNameOSError</span><span class="p">,</span> <span class="n">InvalidImageParameterType</span>
+<span class="kn">from</span> <span class="nn">ebook_homebrew.utils.logging</span> <span class="k">import</span> <span class="n">get_logger</span>
+<span class="kn">from</span> <span class="nn">ebook_homebrew.exceptions</span> <span class="k">import</span> <span class="n">InvalidDigitsFormat</span><span class="p">,</span> <span class="n">ChangeFileNameOSError</span><span class="p">,</span> <span class="n">InvalidImageParameterType</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">get_logger</span><span class="p">(</span><span class="s2">&quot;Core&quot;</span><span class="p">)</span>
 
@@ -160,7 +161,7 @@
 
 <span class="sd">        Args:</span>
 <span class="sd">            file (str): filename</span>
-<span class="sd">            assume_yes (bool): If True, verify the user.</span>
+<span class="sd">            assume_yes (bool): If True, no verify the user.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            bool: If success, return true.</span>
@@ -178,6 +179,33 @@
         <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Remove file success: </span><span class="si">{file_name}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="n">file</span><span class="p">))</span>
         <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="k">def</span> <span class="nf">_move_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">,</span> <span class="n">dst</span><span class="p">,</span> <span class="n">assume_yes</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Move file another directory</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            file (str): Target source file</span>
+<span class="sd">            dst (str): Target destination directory or filename</span>
+<span class="sd">            assume_yes (bool): If true, no verify the user</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            bool: If success, return True.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">dst_dir</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_split_dir_root_ext</span><span class="p">(</span><span class="n">dst</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">assume_yes</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Move file: </span><span class="si">{file_name}</span><span class="s2"> OK? (y/n/r)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="n">file</span><span class="p">))</span>
+            <span class="n">flag</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">flag</span> <span class="o">==</span> <span class="s2">&quot;Y&quot;</span> <span class="ow">or</span> <span class="n">flag</span> <span class="o">==</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span>
+                <span class="k">pass</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Nothing..&quot;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            <span class="n">shutil</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">dst_dir</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Move file success: </span><span class="si">{file_name}</span><span class="s2"> =&gt; </span><span class="si">{dst_dir}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="n">file</span><span class="p">,</span> <span class="n">dst_dir</span><span class="o">=</span><span class="n">dst_dir</span><span class="p">))</span>
+            <span class="k">return</span> <span class="kc">True</span>
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">_remove_file_bulk</span><span class="p">(</span><span class="n">file_list</span><span class="p">):</span>

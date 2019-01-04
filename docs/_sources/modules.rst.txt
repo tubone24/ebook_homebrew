@@ -5,3 +5,4 @@ fileName2SerialNumber
    :maxdepth: 4
 
    ebook_homebrew
+   setup

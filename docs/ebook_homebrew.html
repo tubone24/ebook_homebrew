@@ -55,7 +55,6 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="ebook_homebrew.utils.html">ebook_homebrew.utils package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="ebook_homebrew.utils.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ebook_homebrew.utils.html#module-ebook_homebrew.utils.exceptions">ebook_homebrew.utils.exceptions module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ebook_homebrew.utils.html#module-ebook_homebrew.utils.logging">ebook_homebrew.utils.logging module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ebook_homebrew.utils.html#module-ebook_homebrew.utils">Module contents</a></li>
 </ul>
@@ -66,136 +65,17 @@
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-ebook_homebrew.change_filename">
-<span id="ebook-homebrew-change-filename-module"></span><h2>ebook_homebrew.change_filename module<a class="headerlink" href="#module-ebook_homebrew.change_filename" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-ebook_homebrew.archive">
+<span id="ebook-homebrew-archive-module"></span><h2>ebook_homebrew.archive module<a class="headerlink" href="#module-ebook_homebrew.archive" title="Permalink to this headline">¶</a></h2>
+<p>Create archive file.</p>
 <dl class="class">
-<dt id="ebook_homebrew.change_filename.ChangeFilename">
-<em class="property">class </em><code class="descclassname">ebook_homebrew.change_filename.</code><code class="descname">ChangeFilename</code><span class="sig-paren">(</span><em>directory_path</em>, <em>digits</em>, <em>extension</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebook_homebrew/change_filename.html#ChangeFilename"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.change_filename.ChangeFilename" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">core.Common</span></code></p>
-<p>Change file name to only digit name.</p>
-<dl class="method">
-<dt id="ebook_homebrew.change_filename.ChangeFilename.add_before_after_str">
-<code class="descname">add_before_after_str</code><span class="sig-paren">(</span><em>before</em>, <em>after</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebook_homebrew/change_filename.html#ChangeFilename.add_before_after_str"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.change_filename.ChangeFilename.add_before_after_str" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add file name specify string.</p>
-<p>After changing file name for filename_to_digit_number() method,
-add specify string before or after file name.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>before</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – String before file name</li>
-<li><strong>after</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – String after file name</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">If success, return True.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)">bool</a></p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="ebook_homebrew.change_filename.ChangeFilename.change_name_manually">
-<code class="descname">change_name_manually</code><span class="sig-paren">(</span><em>overwrite</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebook_homebrew/change_filename.html#ChangeFilename.change_name_manually"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.change_filename.ChangeFilename.change_name_manually" title="Permalink to this definition">¶</a></dt>
-<dd><p>Change filename manually looking exist_file list.</p>
-<p>After changing file name for filename_to_digit_number() method,
-duplicate file name change manually.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>overwrite</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – If true, overwrite file name even if exist same name file.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">If success, return True.</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)">bool</a></td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="ebook_homebrew.change_filename.ChangeFilename.filename_to_digit_number">
-<code class="descname">filename_to_digit_number</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebook_homebrew/change_filename.html#ChangeFilename.filename_to_digit_number"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.change_filename.ChangeFilename.filename_to_digit_number" title="Permalink to this definition">¶</a></dt>
-<dd><p>Change file name to only digit name.</p>
-<p>Change file name contains digit like “foo001bar.txt” to
-only digit file name like “001.txt”.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Skipping files list by exists same name.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a>]</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-</dd></dl>
-
-</div>
-<div class="section" id="module-ebook_homebrew.core">
-<span id="ebook-homebrew-core-module"></span><h2>ebook_homebrew.core module<a class="headerlink" href="#module-ebook_homebrew.core" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="ebook_homebrew.core.Common">
-<em class="property">class </em><code class="descclassname">ebook_homebrew.core.</code><code class="descname">Common</code><a class="reference internal" href="_modules/ebook_homebrew/core.html#Common"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.core.Common" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
-<p>Common Class</p>
-</dd></dl>
-
-</div>
-<div class="section" id="module-ebook_homebrew.make_pdf">
-<span id="ebook-homebrew-make-pdf-module"></span><h2>ebook_homebrew.make_pdf module<a class="headerlink" href="#module-ebook_homebrew.make_pdf" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="ebook_homebrew.make_pdf.Image2PDF">
-<em class="property">class </em><code class="descclassname">ebook_homebrew.make_pdf.</code><code class="descname">Image2PDF</code><span class="sig-paren">(</span><em>digits</em>, <em>extension</em>, <em>directory_path=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebook_homebrew/make_pdf.html#Image2PDF"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.make_pdf.Image2PDF" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">core.Common</span></code></p>
-<p>Make pdf file for using e-books.</p>
-<dl class="method">
-<dt id="ebook_homebrew.make_pdf.Image2PDF.make_pdf">
-<code class="descname">make_pdf</code><span class="sig-paren">(</span><em>filename</em>, <em>remove_flag=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebook_homebrew/make_pdf.html#Image2PDF.make_pdf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.make_pdf.Image2PDF.make_pdf" title="Permalink to this definition">¶</a></dt>
-<dd><p>Make pdf file take in some image files.</p>
-<p>Make pdf file which you use e-books by take in some image
-files such as jpeg, png and gif.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – pdf file name</li>
-<li><strong>remove_flag</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – If true, original image file is deleted</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">If success, return true.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)">bool</a></p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-</dd></dl>
-
-</div>
-<div class="section" id="module-ebook_homebrew.make_zip">
-<span id="ebook-homebrew-make-zip-module"></span><h2>ebook_homebrew.make_zip module<a class="headerlink" href="#module-ebook_homebrew.make_zip" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="ebook_homebrew.make_zip.MakeArchive">
-<em class="property">class </em><code class="descclassname">ebook_homebrew.make_zip.</code><code class="descname">MakeArchive</code><span class="sig-paren">(</span><em>extension</em>, <em>directory_path=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebook_homebrew/make_zip.html#MakeArchive"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.make_zip.MakeArchive" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">core.Common</span></code></p>
+<dt id="ebook_homebrew.archive.MakeArchive">
+<em class="property">class </em><code class="descclassname">ebook_homebrew.archive.</code><code class="descname">MakeArchive</code><span class="sig-paren">(</span><em>extension</em>, <em>directory_path=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebook_homebrew/archive.html#MakeArchive"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.archive.MakeArchive" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ebook_homebrew.core.Common" title="ebook_homebrew.core.Common"><code class="xref py py-class docutils literal notranslate"><span class="pre">ebook_homebrew.core.Common</span></code></a></p>
 <p>Make archive file.</p>
 <dl class="method">
-<dt id="ebook_homebrew.make_zip.MakeArchive.make_zip">
-<code class="descname">make_zip</code><span class="sig-paren">(</span><em>filename</em>, <em>remove_flag=False</em>, <em>overwrite=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebook_homebrew/make_zip.html#MakeArchive.make_zip"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.make_zip.MakeArchive.make_zip" title="Permalink to this definition">¶</a></dt>
+<dt id="ebook_homebrew.archive.MakeArchive.make_zip">
+<code class="descname">make_zip</code><span class="sig-paren">(</span><em>filename</em>, <em>remove_flag=False</em>, <em>overwrite=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebook_homebrew/archive.html#MakeArchive.make_zip"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.archive.MakeArchive.make_zip" title="Permalink to this definition">¶</a></dt>
 <dd><p>Make zip file for adding specify extension files.</p>
 <p>Make zip file for files which you choose extension.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -222,6 +102,244 @@ files such as jpeg, png and gif.</p>
 </dd></dl>
 
 </div>
+<div class="section" id="module-ebook_homebrew.cli">
+<span id="ebook-homebrew-cli-module"></span><h2>ebook_homebrew.cli module<a class="headerlink" href="#module-ebook_homebrew.cli" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="ebook_homebrew.cli.execute_auto">
+<code class="descclassname">ebook_homebrew.cli.</code><code class="descname">execute_auto</code><span class="sig-paren">(</span><em>args_auto</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebook_homebrew/cli.html#execute_auto"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.cli.execute_auto" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="ebook_homebrew.cli.main">
+<code class="descclassname">ebook_homebrew.cli.</code><code class="descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebook_homebrew/cli.html#main"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.cli.main" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-ebook_homebrew.convert">
+<span id="ebook-homebrew-convert-module"></span><h2>ebook_homebrew.convert module<a class="headerlink" href="#module-ebook_homebrew.convert" title="Permalink to this headline">¶</a></h2>
+<p>Convert file format.</p>
+<dl class="class">
+<dt id="ebook_homebrew.convert.Image2PDF">
+<em class="property">class </em><code class="descclassname">ebook_homebrew.convert.</code><code class="descname">Image2PDF</code><span class="sig-paren">(</span><em>digits</em>, <em>extension</em>, <em>directory_path=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebook_homebrew/convert.html#Image2PDF"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.convert.Image2PDF" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ebook_homebrew.core.Common" title="ebook_homebrew.core.Common"><code class="xref py py-class docutils literal notranslate"><span class="pre">ebook_homebrew.core.Common</span></code></a></p>
+<p>Make pdf file for using e-books.</p>
+<dl class="method">
+<dt id="ebook_homebrew.convert.Image2PDF.make_pdf">
+<code class="descname">make_pdf</code><span class="sig-paren">(</span><em>filename</em>, <em>remove_flag=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebook_homebrew/convert.html#Image2PDF.make_pdf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.convert.Image2PDF.make_pdf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make pdf file take in some image files.</p>
+<p>Make pdf file which you use e-books by take in some image
+files such as jpeg, png and gif.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – pdf file name</li>
+<li><strong>remove_flag</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – If true, original image file is deleted</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">If success, return true.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)">bool</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="ebook_homebrew.convert.Image2PDF.move_file">
+<code class="descname">move_file</code><span class="sig-paren">(</span><em>file</em>, <em>dst</em>, <em>assume_yes</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebook_homebrew/convert.html#Image2PDF.move_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.convert.Image2PDF.move_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Move file</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>file</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Target file name</li>
+<li><strong>dst</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – Target destination path</li>
+<li><strong>assume_yes</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – If true, no verify users</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">If success, return true. Nothing target, return false.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)">bool</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-ebook_homebrew.core">
+<span id="ebook-homebrew-core-module"></span><h2>ebook_homebrew.core module<a class="headerlink" href="#module-ebook_homebrew.core" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="ebook_homebrew.core.Common">
+<em class="property">class </em><code class="descclassname">ebook_homebrew.core.</code><code class="descname">Common</code><a class="reference internal" href="_modules/ebook_homebrew/core.html#Common"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.core.Common" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Common Class</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-ebook_homebrew.exceptions">
+<span id="ebook-homebrew-exceptions-module"></span><h2>ebook_homebrew.exceptions module<a class="headerlink" href="#module-ebook_homebrew.exceptions" title="Permalink to this headline">¶</a></h2>
+<p>Exception Classes</p>
+<dl class="exception">
+<dt id="ebook_homebrew.exceptions.BaseError">
+<em class="property">exception </em><code class="descclassname">ebook_homebrew.exceptions.</code><code class="descname">BaseError</code><a class="reference internal" href="_modules/ebook_homebrew/exceptions.html#BaseError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.exceptions.BaseError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="ebook_homebrew.exceptions.ChangeFileNameError">
+<em class="property">exception </em><code class="descclassname">ebook_homebrew.exceptions.</code><code class="descname">ChangeFileNameError</code><span class="sig-paren">(</span><em>error_class</em>, <em>message</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebook_homebrew/exceptions.html#ChangeFileNameError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.exceptions.ChangeFileNameError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ebook_homebrew.exceptions.BaseError" title="ebook_homebrew.exceptions.BaseError"><code class="xref py py-class docutils literal notranslate"><span class="pre">ebook_homebrew.exceptions.BaseError</span></code></a></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="ebook_homebrew.exceptions.ChangeFileNameOSError">
+<em class="property">exception </em><code class="descclassname">ebook_homebrew.exceptions.</code><code class="descname">ChangeFileNameOSError</code><a class="reference internal" href="_modules/ebook_homebrew/exceptions.html#ChangeFileNameOSError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.exceptions.ChangeFileNameOSError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ebook_homebrew.exceptions.ChangeFileNameError" title="ebook_homebrew.exceptions.ChangeFileNameError"><code class="xref py py-class docutils literal notranslate"><span class="pre">ebook_homebrew.exceptions.ChangeFileNameError</span></code></a></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="ebook_homebrew.exceptions.InvalidDigitsFormat">
+<em class="property">exception </em><code class="descclassname">ebook_homebrew.exceptions.</code><code class="descname">InvalidDigitsFormat</code><a class="reference internal" href="_modules/ebook_homebrew/exceptions.html#InvalidDigitsFormat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.exceptions.InvalidDigitsFormat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ebook_homebrew.exceptions.ChangeFileNameError" title="ebook_homebrew.exceptions.ChangeFileNameError"><code class="xref py py-class docutils literal notranslate"><span class="pre">ebook_homebrew.exceptions.ChangeFileNameError</span></code></a></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="ebook_homebrew.exceptions.InvalidImageFileFormat">
+<em class="property">exception </em><code class="descclassname">ebook_homebrew.exceptions.</code><code class="descname">InvalidImageFileFormat</code><a class="reference internal" href="_modules/ebook_homebrew/exceptions.html#InvalidImageFileFormat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.exceptions.InvalidImageFileFormat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ebook_homebrew.exceptions.MakePDFError" title="ebook_homebrew.exceptions.MakePDFError"><code class="xref py py-class docutils literal notranslate"><span class="pre">ebook_homebrew.exceptions.MakePDFError</span></code></a></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="ebook_homebrew.exceptions.InvalidImageParameterType">
+<em class="property">exception </em><code class="descclassname">ebook_homebrew.exceptions.</code><code class="descname">InvalidImageParameterType</code><a class="reference internal" href="_modules/ebook_homebrew/exceptions.html#InvalidImageParameterType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.exceptions.InvalidImageParameterType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ebook_homebrew.exceptions.ChangeFileNameError" title="ebook_homebrew.exceptions.ChangeFileNameError"><code class="xref py py-class docutils literal notranslate"><span class="pre">ebook_homebrew.exceptions.ChangeFileNameError</span></code></a></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="ebook_homebrew.exceptions.InvalidNumberParameterType">
+<em class="property">exception </em><code class="descclassname">ebook_homebrew.exceptions.</code><code class="descname">InvalidNumberParameterType</code><a class="reference internal" href="_modules/ebook_homebrew/exceptions.html#InvalidNumberParameterType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.exceptions.InvalidNumberParameterType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ebook_homebrew.exceptions.ChangeFileNameError" title="ebook_homebrew.exceptions.ChangeFileNameError"><code class="xref py py-class docutils literal notranslate"><span class="pre">ebook_homebrew.exceptions.ChangeFileNameError</span></code></a></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="ebook_homebrew.exceptions.MakePDFError">
+<em class="property">exception </em><code class="descclassname">ebook_homebrew.exceptions.</code><code class="descname">MakePDFError</code><span class="sig-paren">(</span><em>error_class</em>, <em>message</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebook_homebrew/exceptions.html#MakePDFError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.exceptions.MakePDFError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ebook_homebrew.exceptions.BaseError" title="ebook_homebrew.exceptions.BaseError"><code class="xref py py-class docutils literal notranslate"><span class="pre">ebook_homebrew.exceptions.BaseError</span></code></a></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="ebook_homebrew.exceptions.MakeZIPError">
+<em class="property">exception </em><code class="descclassname">ebook_homebrew.exceptions.</code><code class="descname">MakeZIPError</code><span class="sig-paren">(</span><em>error_class</em>, <em>message</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebook_homebrew/exceptions.html#MakeZIPError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.exceptions.MakeZIPError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ebook_homebrew.exceptions.BaseError" title="ebook_homebrew.exceptions.BaseError"><code class="xref py py-class docutils literal notranslate"><span class="pre">ebook_homebrew.exceptions.BaseError</span></code></a></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="ebook_homebrew.exceptions.TargetSrcFileNotFoundError">
+<em class="property">exception </em><code class="descclassname">ebook_homebrew.exceptions.</code><code class="descname">TargetSrcFileNotFoundError</code><a class="reference internal" href="_modules/ebook_homebrew/exceptions.html#TargetSrcFileNotFoundError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.exceptions.TargetSrcFileNotFoundError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ebook_homebrew.exceptions.ChangeFileNameError" title="ebook_homebrew.exceptions.ChangeFileNameError"><code class="xref py py-class docutils literal notranslate"><span class="pre">ebook_homebrew.exceptions.ChangeFileNameError</span></code></a></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="ebook_homebrew.exceptions.ZipFileExistError">
+<em class="property">exception </em><code class="descclassname">ebook_homebrew.exceptions.</code><code class="descname">ZipFileExistError</code><a class="reference internal" href="_modules/ebook_homebrew/exceptions.html#ZipFileExistError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.exceptions.ZipFileExistError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ebook_homebrew.exceptions.MakeZIPError" title="ebook_homebrew.exceptions.MakeZIPError"><code class="xref py py-class docutils literal notranslate"><span class="pre">ebook_homebrew.exceptions.MakeZIPError</span></code></a></p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-ebook_homebrew.helper">
+<span id="ebook-homebrew-helper-module"></span><h2>ebook_homebrew.helper module<a class="headerlink" href="#module-ebook_homebrew.helper" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="ebook_homebrew.helper.auto">
+<code class="descclassname">ebook_homebrew.helper.</code><code class="descname">auto</code><span class="sig-paren">(</span><em>args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebook_homebrew/helper.html#auto"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.helper.auto" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-ebook_homebrew.rename">
+<span id="ebook-homebrew-rename-module"></span><h2>ebook_homebrew.rename module<a class="headerlink" href="#module-ebook_homebrew.rename" title="Permalink to this headline">¶</a></h2>
+<p>Rename file name.</p>
+<dl class="class">
+<dt id="ebook_homebrew.rename.ChangeFilename">
+<em class="property">class </em><code class="descclassname">ebook_homebrew.rename.</code><code class="descname">ChangeFilename</code><span class="sig-paren">(</span><em>directory_path</em>, <em>digits</em>, <em>extension</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebook_homebrew/rename.html#ChangeFilename"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.rename.ChangeFilename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ebook_homebrew.core.Common" title="ebook_homebrew.core.Common"><code class="xref py py-class docutils literal notranslate"><span class="pre">ebook_homebrew.core.Common</span></code></a></p>
+<p>Change file name to only digit name.</p>
+<dl class="method">
+<dt id="ebook_homebrew.rename.ChangeFilename.add_before_after_str">
+<code class="descname">add_before_after_str</code><span class="sig-paren">(</span><em>before</em>, <em>after</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebook_homebrew/rename.html#ChangeFilename.add_before_after_str"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.rename.ChangeFilename.add_before_after_str" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add file name specify string.</p>
+<p>After changing file name for filename_to_digit_number() method,
+add specify string before or after file name.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>before</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – String before file name</li>
+<li><strong>after</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – String after file name</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">If success, return True.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)">bool</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="ebook_homebrew.rename.ChangeFilename.change_name_manually">
+<code class="descname">change_name_manually</code><span class="sig-paren">(</span><em>overwrite=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebook_homebrew/rename.html#ChangeFilename.change_name_manually"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.rename.ChangeFilename.change_name_manually" title="Permalink to this definition">¶</a></dt>
+<dd><p>Change filename manually looking exist_file list.</p>
+<p>After changing file name for filename_to_digit_number() method,
+duplicate file name change manually.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>overwrite</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – If true, overwrite file name even if exist same name file.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">If success, return True.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)">bool</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="ebook_homebrew.rename.ChangeFilename.filename_to_digit_number">
+<code class="descname">filename_to_digit_number</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebook_homebrew/rename.html#ChangeFilename.filename_to_digit_number"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.rename.ChangeFilename.filename_to_digit_number" title="Permalink to this definition">¶</a></dt>
+<dd><p>Change file name to only digit name.</p>
+<p>Change file name contains digit like “foo001bar.txt” to
+only digit file name like “001.txt”.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Skipping files list by exists same name.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
 <div class="section" id="module-ebook_homebrew">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-ebook_homebrew" title="Permalink to this headline">¶</a></h2>
 </div>
@@ -238,10 +356,13 @@ files such as jpeg, png and gif.</p>
 <li><a class="reference internal" href="#">ebook_homebrew package</a><ul>
 <li><a class="reference internal" href="#subpackages">Subpackages</a></li>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-ebook_homebrew.change_filename">ebook_homebrew.change_filename module</a></li>
+<li><a class="reference internal" href="#module-ebook_homebrew.archive">ebook_homebrew.archive module</a></li>
+<li><a class="reference internal" href="#module-ebook_homebrew.cli">ebook_homebrew.cli module</a></li>
+<li><a class="reference internal" href="#module-ebook_homebrew.convert">ebook_homebrew.convert module</a></li>
 <li><a class="reference internal" href="#module-ebook_homebrew.core">ebook_homebrew.core module</a></li>
-<li><a class="reference internal" href="#module-ebook_homebrew.make_pdf">ebook_homebrew.make_pdf module</a></li>
-<li><a class="reference internal" href="#module-ebook_homebrew.make_zip">ebook_homebrew.make_zip module</a></li>
+<li><a class="reference internal" href="#module-ebook_homebrew.exceptions">ebook_homebrew.exceptions module</a></li>
+<li><a class="reference internal" href="#module-ebook_homebrew.helper">ebook_homebrew.helper module</a></li>
+<li><a class="reference internal" href="#module-ebook_homebrew.rename">ebook_homebrew.rename module</a></li>
 <li><a class="reference internal" href="#module-ebook_homebrew">Module contents</a></li>
 </ul>
 </li>

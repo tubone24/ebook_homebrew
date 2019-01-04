@@ -4,14 +4,6 @@ ebook\_homebrew.utils package
 Submodules
 ----------
 
-ebook\_homebrew.utils.exceptions module
----------------------------------------
-
-.. automodule:: ebook_homebrew.utils.exceptions
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 ebook\_homebrew.utils.logging module
 ------------------------------------
 
