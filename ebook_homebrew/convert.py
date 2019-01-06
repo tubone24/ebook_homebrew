@@ -50,7 +50,7 @@ class Image2PDF(Common):
             bool: If success, return true.
 
         """
-        if self.__extension != ".jpg" and ".png" and ".gif":
+        if self.__extension != ".jpg" and self.__extension != ".png" and self.__extension != ".gif":
             raise InvalidImageFileFormat()
 
         files = os.listdir(self.__directory_path)
@@ -94,7 +94,7 @@ class Image2PDF(Common):
         Returns:
             str: Convert pdf file name.
         """
-        image = PIL.Image.open(file)
+        image = PIL.Image.open(file).convert("RGB")
         pdf_file_name = file.replace(self.__extension, ".pdf")
         image.save(pdf_file_name, "PDF", resolution=resolution)
         return pdf_file_name

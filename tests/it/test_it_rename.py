@@ -1,6 +1,5 @@
 import os
 import shutil
-import tempfile
 from unittest.mock import patch
 import pytest
 import logging
@@ -30,25 +29,24 @@ class TestItRename(object):
             yield out
 
     @pytest.mark.it
-    def test_it_rename(self):
-        with tempfile.TemporaryDirectory() as tmp_dir:
-            _logger.debug("Temp directory: {tmp_dir}".format(tmp_dir=tmp_dir))
-            self.copy_image_file(tmp_dir)
-            rename_ins = ChangeFilename(directory_path=tmp_dir, digits="3", extension="png")
-            actual = rename_ins.filename_to_digit_number()
-            assert len(actual) == 1
+    def test_it_rename(self, tmpdir):
+        _logger.debug("Temp directory: {tmp_dir}".format(tmp_dir=tmpdir))
+        self.copy_image_file(tmpdir)
+        rename_ins = ChangeFilename(directory_path=tmpdir, digits="3", extension="png")
+        actual = rename_ins.filename_to_digit_number()
+        assert len(actual) == 1
 
-            with patch("builtins.input") as mock_input:
-                mock_input.side_effect = self.interactive_input()
-                actual = rename_ins.change_name_manually(overwrite=True)
-                assert actual is True
-
-            actual = rename_ins.add_before_after_str("foo", "bar")
+        with patch("builtins.input") as mock_input:
+            mock_input.side_effect = self.interactive_input()
+            actual = rename_ins.change_name_manually(overwrite=True)
             assert actual is True
 
-            actual_file_list = set(os.listdir(tmp_dir))
-            expected = {"foo" + str(x).zfill(3) + "bar.png" for x in range(100)}
-            actual = actual_file_list - expected
-            assert actual == {"test.png"}
+        actual = rename_ins.add_before_after_str("foo", "bar")
+        assert actual is True
+
+        actual_file_list = set(os.listdir(tmpdir))
+        expected = {"foo" + str(x).zfill(3) + "bar.png" for x in range(100)}
+        actual = actual_file_list - expected
+        assert actual == {"test.png"}
 
 
