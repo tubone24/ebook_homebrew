@@ -34,13 +34,13 @@ class ChangeFilename(Common):
         os.chdir(self.__directory_path)
 
     @staticmethod
-    def __create_new_name(num, digit, extension):
+    def _create_new_name(num, digit, extension):
         """Create only digit file name.
 
         Args:
             num (Match): Match object
             digit (int): digit number
-            extension (str): File Extension
+            extension (str): File Extension like ".jpg"
 
         Returns:
             str: Only digit file name.
@@ -49,9 +49,11 @@ class ChangeFilename(Common):
             InvalidNumberParameterType: If input digit is not Match object.
 
         """
-        if type(num) is Match:
+        try:
+            return num.group().zfill(digit) + extension
+        except AttributeError as e:
+            logger.exception(e)
             raise InvalidNumberParameterType()
-        return num.group().zfill(digit) + extension
 
     def __check_exist_file(self, new_name, old_name, append_list):
         """Check current directory and exists same name file, return true.
@@ -126,7 +128,7 @@ class ChangeFilename(Common):
             elif not self.__regex_ext.search(file):
                 logger.debug("Skip(No target extension): {filename}".format(filename=file))
             else:
-                new_name = self.__create_new_name(num, max_digit, self.__extension)
+                new_name = self._create_new_name(num, max_digit, self.__extension)
                 if not self.__check_exist_file(new_name, file, True):
                     self._rename_file(file, new_name)
                     count += 1
@@ -161,7 +163,7 @@ class ChangeFilename(Common):
                 logger.info("Rename: {old_name} => {new_name} \n".format(old_name=file, new_name=new_name))
             elif flag == "r":
                 logger.info("Will be {file} deleted?"
-                            "　OK? (y/n/c)".format(file=file))  # y="Yes" n="No" c="check"
+                            "　OK? (y/n/c/r)".format(file=file))  # y="Yes" n="No" c="check" r="rename"
                 flag = input()
                 if flag == "c":
                     try:
@@ -170,7 +172,6 @@ class ChangeFilename(Common):
                         logger.warn(e)
                         logger.info("Skip..")
 
-                flag = input()
                 if flag == "Y" or flag == "y":
                     self._remove_file(file)
                 elif flag == "r":
@@ -221,10 +222,3 @@ class ChangeFilename(Common):
                     else:
                         self._rename_file(file, new_name)
         return True
-
-
-if __name__ == "__main__":
-    obj = ChangeFilename("../tests", "3", "jpg")
-    obj.filename_to_digit_number()
-    # obj.change_name_hand(False)
-    # obj.add_str("before", "after")

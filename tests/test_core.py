@@ -101,14 +101,13 @@ class TestCommon(object):
         ("N", False),
         ("hoge", False)])
     def test_ok__remove_file(self, input_param, expected):
-        with patch("os.remove") as mock_remove:
-            with patch("builtins.input") as mock_input:
-                mock_input.return_value = input_param
-                actual = self.target._remove_file("foo", assume_yes=False)
-                if expected is True:
-                    mock_remove.assert_called_once_with("foo")
-                _logger.debug("\nactual:   {actual}\nexpected: {expected}".format(actual=actual, expected=expected))
-                assert actual is expected
+        with patch("os.remove") as mock_remove, patch("builtins.input") as mock_input:
+            mock_input.return_value = input_param
+            actual = self.target._remove_file("foo", assume_yes=False)
+            if expected is True:
+                mock_remove.assert_called_once_with("foo")
+            _logger.debug("\nactual:   {actual}\nexpected: {expected}".format(actual=actual, expected=expected))
+            assert actual is expected
 
     def test_ok__remove_file_with_assume_yes(self):
         with patch("os.remove") as mock_remove:
@@ -127,14 +126,13 @@ class TestCommon(object):
         (("foo", "bar1/bar2"), ("foo", "/bar1"), "N", False),
         (("foo", "bar1/bar2"), ("foo", "/bar1"), "hoge", False)])
     def test_ok__move_file(self, test_input, called, input_param, expected):
-        with patch("shutil.move") as mock_move:
-            with patch("builtins.input") as mock_input:
-                mock_input.return_value = input_param
-                actual = self.target._move_file(*test_input, assume_yes=False)
-                if expected is True:
-                    mock_move.assert_called_once_with(*called)
-                _logger.debug("\nactual:   {actual}\nexpected: {expected}".format(actual=actual, expected=expected))
-                assert actual is expected
+        with patch("shutil.move") as mock_move, patch("builtins.input") as mock_input:
+            mock_input.return_value = input_param
+            actual = self.target._move_file(*test_input, assume_yes=False)
+            if expected is True:
+                mock_move.assert_called_once_with(*called)
+            _logger.debug("\nactual:   {actual}\nexpected: {expected}".format(actual=actual, expected=expected))
+            assert actual is expected
 
     def test_ok__move_file_with_assume_yes(self):
         with patch("shutil.move") as mock_move:
@@ -162,18 +160,16 @@ class TestCommon(object):
         ("test.png", None),
         ("test.gif", None)])
     def test_ok__check_image_file(self, test_input, expected):
-        with patch("PIL.Image.open") as mock_pil_open:
-            with patch("PIL.Image.open.show"):
-                actual = self.target._check_image_file(test_input)
-                mock_pil_open.assert_called_once_with(test_input)
-                assert actual == expected
+        with patch("PIL.Image.open") as mock_pil_open, patch("PIL.Image.open.show"):
+            actual = self.target._check_image_file(test_input)
+            mock_pil_open.assert_called_once_with(test_input)
+            assert actual == expected
 
     def test_error__check_image_file(self):
         test_input = "test.txt"
-        with patch("PIL.Image.open"):
-            with patch("PIL.Image.open.show"):
-                with pytest.raises(InvalidImageParameterType):
-                    self.target._check_image_file(test_input)
+        with patch("PIL.Image.open"), patch("PIL.Image.open.show"):
+            with pytest.raises(InvalidImageParameterType):
+                self.target._check_image_file(test_input)
 
 
 
