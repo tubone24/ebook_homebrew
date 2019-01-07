@@ -2,7 +2,6 @@ import os
 import shutil
 import pytest
 import logging
-import hashlib
 
 from ebook_homebrew.convert import Image2PDF
 
@@ -36,9 +35,4 @@ class TestItRename(object):
         target_ins = Image2PDF(directory_path=tmpdir, digits="3", extension="png")
         actual = target_ins.make_pdf("foobar.pdf", remove_flag=True)
         assert actual is True
-        md5 = hashlib.md5()
-        with open(os.path.join(tmpdir, "foobar.pdf"), "rb") as f:
-            for chunk in iter(lambda: f.read(2048 * md5.block_size), b''):
-                md5.update(chunk)
-        checksum = md5.hexdigest()
-        assert checksum == "07809f78db02d9357f6d8b1fdc7d7e4e"
+        assert os.path.getsize(os.path.join(tmpdir, "foobar.pdf")) > 2720000
