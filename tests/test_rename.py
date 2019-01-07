@@ -1,6 +1,5 @@
 import re
 import pytest
-from unittest.mock import call
 from unittest.mock import patch
 import logging
 
@@ -15,8 +14,7 @@ class TestChangeFilename(object):
 
     def setup_method(self, method):
         _logger.info("method{}".format(method.__name__))
-        with patch("os.chdir") as mock_chdir:
-            mock_chdir.return_value = True
+        with patch("os.chdir"):
             self.target = ChangeFilename(directory_path="test", digits="3", extension="jpg")
 
     @pytest.mark.parametrize("test_input, expected", [
@@ -46,6 +44,7 @@ class TestChangeFilename(object):
             mock_isfile.return_value = is_file
             actual = self.target.filename_to_digit_number()
             assert len(actual) is expected
+            mock_listdir.assert_called_once_with("test")
 
     def test_file_not_found_error_filename_to_digit(self):
         with patch("os.listdir") as mock_listdir:
