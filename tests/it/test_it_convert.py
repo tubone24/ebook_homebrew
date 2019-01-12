@@ -1,7 +1,8 @@
+import logging
 import os
 import shutil
+
 import pytest
-import logging
 
 from ebook_homebrew.convert import Image2PDF
 
@@ -35,4 +36,4 @@ class TestItRename(object):
         target_ins = Image2PDF(directory_path=tmpdir, digits="3", extension="png")
         actual = target_ins.make_pdf("foobar.pdf", remove_flag=True)
         assert actual is True
-        assert os.path.getsize(os.path.join(tmpdir, "foobar.pdf")) > 2720000
+        assert os.path.getsize(os.path.join(tmpdir, "foobar.pdf")) > 270000

@@ -3,11 +3,13 @@
 """
 import os
 import re
-import PyPDF2
+
 import PIL.Image
+import PyPDF2
+
 from .core import Common
-from .utils.logging import get_logger
 from .exceptions import InvalidImageFileFormat
+from .utils.logging import get_logger
 
 logger = get_logger("image2pdf")
 
@@ -68,7 +70,7 @@ class Image2PDF(Common):
             else:
                 logger.debug(file)
                 pdf_file = self._convert_image_to_pdf(file)
-                result_merge_pdf = self.__merge_pdf_file(pdf_file, filename)
+                result_merge_pdf = self._merge_pdf_file(pdf_file, filename)
 
                 if result_merge_pdf:
                     logger.info("Success write pdf for {page} page.".format(page=page_count+1))
@@ -99,7 +101,7 @@ class Image2PDF(Common):
         image.save(pdf_file_name, "PDF", resolution=resolution)
         return pdf_file_name
 
-    def __merge_pdf_file(self, pdf_file, filename):
+    def _merge_pdf_file(self, pdf_file, filename):
         """Marge pdf files
 
         Args:
@@ -115,11 +117,11 @@ class Image2PDF(Common):
             file_reader = PyPDF2.PdfFileReader(f)
             self.__file_writer.addPage(file_reader.getPage(0))
             logger.debug("Merge {pdf_file}".format(pdf_file=pdf_file))
-            self.__write_pdf(filename)
+            self._write_pdf(filename)
         self._remove_file(pdf_file, assume_yes=True)
         return True
 
-    def __write_pdf(self, file_name):
+    def _write_pdf(self, file_name):
         """Write pdf file
 
         Args:
@@ -146,8 +148,3 @@ class Image2PDF(Common):
 
         """
         return self._move_file(file=file, dst=dst, assume_yes=assume_yes)
-
-
-if __name__ == '__main__':
-    obj = Image2PDF("3", "jpg", "../tests")
-    obj.make_pdf("test.pdf")

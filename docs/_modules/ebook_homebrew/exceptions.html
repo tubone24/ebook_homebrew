@@ -100,6 +100,32 @@
                        <span class="s2">&quot;please divide into comma separator&quot;</span></div>
 
 
+<div class="viewcode-block" id="InvalidExtensionType"><a class="viewcode-back"
+                                                         href="../../ebook_homebrew.html#ebook_homebrew.exceptions.InvalidExtensionType">[docs]</a><span
+        class="k">class</span> <span class="nc">InvalidExtensionType</span><span class="p">(</span><span class="n">ChangeFileNameError</span><span
+        class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span
+            class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_class</span> <span class="o">=</span> <span
+            class="s2">&quot;InvalidExtensionType&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span
+            class="o">=</span> <span class="s2">&quot;Invalid Extension Type. &quot;</span> \
+                       <span class="s2">&quot;Expected string or bytes-like object&quot;</span></div>
+
+
+<div class="viewcode-block" id="InvalidPathType"><a class="viewcode-back"
+                                                    href="../../ebook_homebrew.html#ebook_homebrew.exceptions.InvalidPathType">[docs]</a><span
+        class="k">class</span> <span class="nc">InvalidPathType</span><span class="p">(</span><span class="n">ChangeFileNameError</span><span
+        class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span
+            class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_class</span> <span class="o">=</span> <span
+            class="s2">&quot;InvalidPathType&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span
+            class="o">=</span> <span class="s2">&quot;Invalid Path string Type. &quot;</span> \
+                       <span class="s2">&quot;Expected string, bytes-like, os.Path-like object&quot;</span></div>
+
+
 <div class="viewcode-block" id="TargetSrcFileNotFoundError"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.exceptions.TargetSrcFileNotFoundError">[docs]</a><span class="k">class</span> <span class="nc">TargetSrcFileNotFoundError</span><span class="p">(</span><span class="n">ChangeFileNameError</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">error_class</span> <span class="o">=</span> <span class="s2">&quot;TargetSrcFileNotFoundError&quot;</span>
