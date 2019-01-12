@@ -67,7 +67,7 @@ class Image2PDF(Common):
                 logger.debug("Skip(No target extension): {filename}".format(filename=file))
             else:
                 logger.debug(file)
-                pdf_file = self.__convert_image_to_pdf(file)
+                pdf_file = self._convert_image_to_pdf(file)
                 result_merge_pdf = self.__merge_pdf_file(pdf_file, filename)
 
                 if result_merge_pdf:
@@ -84,7 +84,7 @@ class Image2PDF(Common):
             logger.info("Post possess is finished")
         return True
 
-    def __convert_image_to_pdf(self, file, resolution=100.0):
+    def _convert_image_to_pdf(self, file, resolution=100.0):
         """Convert Image file to pdf file format.
 
         Args:
