@@ -5,6 +5,7 @@
 # ebook_homebrew
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 [![Build Status](https://travis-ci.org/tubone24/ebook_homebrew.svg?branch=master)](https://travis-ci.org/tubone24/ebook_homebrew)
+
 Change file name to only digit name like `001.jpg` and make e-book format files.
 
 # Getting Started
@@ -12,6 +13,7 @@ Ebook_homebrew is a python package, so that you can use `setup.py` or `pip` inst
 
 ## Using setup.py
 ```bash
+$ pip install -r requirements.txt
 $ python setup.py install
 ```
 
@@ -61,6 +63,34 @@ $ ebookhomebrew auto -s ./tests -d 3,4 -e jpg -f test.pdf
   -r, --remove          Remove original image file.
   -y, --assume_yes      no verify users.
 ```
+
+# Testing
+
+## Unit Test
+Using pytest, if you want to test.
+
+```bash
+pytest
+```
+
+Coverage report contains "htmlcov/index.html"
+
+## Integration Test
+Using pytest, if you want to test with mark "--it"
+
+```bash
+pytest --it
+```
+
+## With tox
+With tox, you can test multiple python version.(only python3.5, 3.6)
+
+```bash
+tox
+```
+
+## Travis-CI
+This repository uses [Travis-CI](https://travis-ci.org/) and be building jobs by push or PR branches.
 
 # Licence
 This software is released under the MIT License, see LICENSE.
