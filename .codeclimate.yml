@@ -4,7 +4,6 @@ engines:
     channel: "beta"
   bandit:
     enabled: true
-
 plugins:
   editorconfig:
     enabled: true
@@ -26,7 +25,6 @@ plugins:
     enabled: true
  radon:
   enabled: true
-
 exclude_paths:
 - "tests/"
 - "docs/"
