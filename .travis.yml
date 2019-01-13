@@ -12,10 +12,10 @@ before_install:
       export PATH="/usr/local/opt/python/libexec/bin:${PATH}"
     fi
 install:
-  - pip install tox
+  - pip install -r requirements-test.txt
 
 script:
-  - tox
+  - pytest
 
 cache:
   directories:
