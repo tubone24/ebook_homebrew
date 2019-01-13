@@ -4,11 +4,11 @@
 import os
 import os.path
 import re
-from typing import List, Match
+
 from .core import Common
-from .utils.logging import get_logger
-from .exceptions import InvalidNumberParameterType,\
+from .exceptions import InvalidNumberParameterType, \
     ChangeFileNameOSError, InvalidImageParameterType, TargetSrcFileNotFoundError
+from .utils.logging import get_logger
 
 logger = get_logger("change_filename")
 

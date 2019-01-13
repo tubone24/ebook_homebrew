@@ -31,9 +31,9 @@ class TestItRename(object):
 
     @pytest.mark.it
     def test_it_make_pdf(self, tmpdir):
-        _logger.debug("Temp directory: {tmp_dir}".format(tmp_dir=tmpdir))
-        self.copy_image_file(tmpdir)
-        target_ins = Image2PDF(directory_path=tmpdir, digits="3", extension="png")
+        _logger.debug("Temp directory: {tmp_dir}".format(tmp_dir=str(tmpdir)))
+        self.copy_image_file(str(tmpdir))
+        target_ins = Image2PDF(directory_path=str(tmpdir), digits="3", extension="png")
         actual = target_ins.make_pdf("foobar.pdf", remove_flag=True)
         assert actual is True
-        assert os.path.getsize(os.path.join(tmpdir, "foobar.pdf")) > 270000
+        assert os.path.getsize(os.path.join(str(tmpdir), "foobar.pdf")) > 270000

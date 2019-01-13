@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 import os
-import shutil
 import re
+import shutil
+
 import PIL.Image
-from .utils.logging import get_logger
+
 from .exceptions import InvalidDigitsFormat, ChangeFileNameOSError, \
     InvalidImageParameterType, InvalidExtensionType, InvalidPathType
+from .utils.logging import get_logger
 
 logger = get_logger("Core")
 
@@ -99,7 +101,6 @@ class Common(object):
                 raise InvalidDigitsFormat()
         except TypeError:
             raise InvalidDigitsFormat()
-
 
     @staticmethod
     def _rename_file(old_name, new_name):

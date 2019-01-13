@@ -1,8 +1,9 @@
+import logging
 import os
 import shutil
 from unittest.mock import patch
+
 import pytest
-import logging
 
 from ebook_homebrew.rename import ChangeFilename
 
@@ -31,8 +32,8 @@ class TestItRename(object):
     @pytest.mark.it
     def test_it_rename(self, tmpdir):
         _logger.debug("Temp directory: {tmp_dir}".format(tmp_dir=tmpdir))
-        self.copy_image_file(tmpdir)
-        rename_ins = ChangeFilename(directory_path=tmpdir, digits="3", extension="png")
+        self.copy_image_file(str(tmpdir))
+        rename_ins = ChangeFilename(directory_path=str(tmpdir), digits="3", extension="png")
         actual = rename_ins.filename_to_digit_number()
         assert len(actual) == 1
 
@@ -44,7 +45,7 @@ class TestItRename(object):
         actual = rename_ins.add_before_after_str("foo", "bar")
         assert actual is True
 
-        actual_file_list = set(os.listdir(tmpdir))
+        actual_file_list = set(os.listdir(str(tmpdir)))
         expected = {"foo" + str(x).zfill(3) + "bar.png" for x in range(100)}
         actual = actual_file_list - expected
         assert actual == {"test.png"}

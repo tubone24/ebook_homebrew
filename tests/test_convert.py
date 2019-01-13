@@ -21,7 +21,7 @@ class TestImage2PDF(object):
         with patch("PyPDF2.PdfFileWriter"), patch("os.chdir") as mock_chdir, \
                 patch("os.getcwd", return_value="tests") as mock_getcwd:
             Image2PDF(digits="3", extension="jpg")
-            mock_getcwd.assert_called_once()
+            mock_getcwd.assert_called_once_with()
             mock_chdir.assert_called_once_with("tests")
 
     def test__convert_image_to_pdf(self):
@@ -44,7 +44,7 @@ class TestImage2PDF(object):
                 patch.object(self.target, "_Image2PDF__file_writer") as mock_pdf_writer:
             actual = self.target._write_pdf(test_input)
             mock_open.assert_called_once_with(test_input, "wb")
-            mock_pdf_writer.write.assert_called_once()
+            mock_pdf_writer.write.assert_called_once_with(mock_open().__enter__())
             assert actual == expected
 
     def test__merge_pdf_file(self):
@@ -56,14 +56,14 @@ class TestImage2PDF(object):
                 patch.object(self.target, "_Image2PDF__file_writer") as mock_pdf_writer, \
                 patch.object(self.target, "_write_pdf") as mock_write_pdf, \
                 patch.object(self.target, "_remove_file") as mock_remove_file:
-            mock_file_reader = MagicMock()
+            mock_file_reader = MagicMock(name="file_reader")
             mock_pdf_reader.return_value = mock_file_reader
 
             actual = self.target._merge_pdf_file(test_input_pdf_file, test_input_filename)
 
             mock_open.assert_called_once_with(test_input_pdf_file, "rb")
             mock_file_reader.getPage.assert_called_once_with(0)
-            mock_pdf_writer.addPage.assert_called_once()
+            mock_pdf_writer.addPage.assert_called_once_with(mock_file_reader.getPage())
             mock_write_pdf.assert_called_once_with(test_input_filename)
             mock_remove_file.assert_called_once_with(test_input_pdf_file, assume_yes=True)
             assert actual == expected

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import argparse
+
 from ebook_homebrew.helper import auto
 
 
@@ -19,8 +20,10 @@ def main():
     subparsers = parser.add_subparsers(description="Choose subcommands. Usually choose \"auto\"")
 
     parser_auto = subparsers.add_parser("auto",
-                                        description="Make only digit file name, convert e-book file such as PDF",
-                                        help="Make only digit file name, convert e-book file such as PDF")
+                                        description="Make only digit file name, "
+                                                    "convert e-book file such as PDF",
+                                        help="Make only digit file name, "
+                                             "convert e-book file such as PDF")
 
     parser_auto.set_defaults(handler=execute_auto)
 

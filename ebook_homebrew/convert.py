@@ -73,7 +73,7 @@ class Image2PDF(Common):
                 result_merge_pdf = self._merge_pdf_file(pdf_file, filename)
 
                 if result_merge_pdf:
-                    logger.info("Success write pdf for {page} page.".format(page=page_count+1))
+                    logger.info("Success write pdf for {page} page.".format(page=page_count + 1))
                     page_count += 1
                     if remove_flag:
                         remove_files.append(file)
