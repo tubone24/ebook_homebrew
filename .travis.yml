@@ -1,0 +1,27 @@
+os: linux
+dist: xenial
+language: python
+python:
+  - "3.6"
+  - "3.5"
+
+before_install:
+  - |
+    if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
+      brew upgrade python
+      export PATH="/usr/local/opt/python/libexec/bin:${PATH}"
+    fi
+install:
+  - pip install tox
+
+script:
+  - tox
+
+cache:
+  directories:
+    - $HOME/.cache/pip
+    - $HOME/.cache/pre-commit
+
+notifications:
+  slack:
+    secure: "KmPt/b+P3Dm1L4TS0K6Q96cPvCvVJS5lXwCcqVMzjBExuWTFQXiBMyvtq/cUyxweWAspsQhrra1sysl3D5BgzORT5OewoXLJZ9HHsc7iNszAtiZ2wh7mpeZsA9j+akV0FEhl5pjopTVfXZMMR4l+SsNMpAGs2j80d4sDmidfzRZ0ccKNgtN1OOTYN0jntQL7ragtG0UovMXgU96rkSrDLbkbx9M+KGRM+DqBnFmPExMfgzHATeZhJNL3Pp0QXAuoNsFLgN/r2kHzuXfefm++LyOklZmNXyLlKAJyHbOZIWYXd4IyaTynnsu1Orhp95rctDkqcV0q4SPNWbOTpE6y2QaBrkX2Zi6FLI6fqJzI1Dau9AjFMP4PFmG01HXCUKFJ66cNHOj4m7RfdDLxj4R6RBeesb9bG/HHSbKVI35h54uakJA/Euir7Cq5qAEJ/8fNo84Rz+l9IaleP1ta7ZqRdaoNWiXWC23aToQfWTiFxpuEG5Hg8tQVzLlf1iefE6mg3d6H6vuYhwzJyMlnwpMtuAkG3u9V5y+a/TLuAsi6IO1TGM/AKJZQkVBOjEj61UkmuQkGhGraUiq2y2f/CajdpqnYVk3sUatmYRcULI6Aia2kDFjkzR7segLx+F7kiZIrGlu9AaQXupuJHftBdQ4NjbDVjz0f4pHvZ+9Wj44gHcU="
