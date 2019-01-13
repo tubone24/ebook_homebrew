@@ -5,6 +5,7 @@
 # ebook_homebrew
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 [![Build Status](https://travis-ci.org/tubone24/ebook_homebrew.svg?branch=master)](https://travis-ci.org/tubone24/ebook_homebrew)
+[![codecov](https://codecov.io/gh/tubone24/ebook_homebrew/branch/master/graph/badge.svg)](https://codecov.io/gh/tubone24/ebook_homebrew)
 
 Change file name to only digit name like `001.jpg` and make e-book format files.
 
@@ -73,7 +74,18 @@ Using pytest, if you want to test.
 pytest
 ```
 
-Coverage report contains "htmlcov/index.html"
+If you get coverage report, run coverage and report.
+
+```bash
+$ coverage run --source=ebook_homebrew -m pytest
+$ coverage report -m
+```
+
+Or pytest-cov param for pytest
+
+```bash
+$ pytest --cov=ebook_homebrew --cov-report html --cov-report xml
+```
 
 ## Integration Test
 Using pytest, if you want to test with mark "--it"
