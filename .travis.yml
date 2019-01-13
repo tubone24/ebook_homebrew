@@ -20,7 +20,7 @@ script:
   - pytest
 
 script:
-    - coverage run --source=ebook_homebrew pytest
+    - coverage run --source=ebook_homebrew -m pytest
     - coverage report -m
 
 after_success:
