@@ -64,7 +64,7 @@ class Common(object):
             base_name = os.path.basename(path)
             base_root, ext = os.path.splitext(base_name)
             return dir_name, base_root, ext
-        except TypeError:
+        except (TypeError, AttributeError):
             raise InvalidPathType()
 
     @staticmethod
