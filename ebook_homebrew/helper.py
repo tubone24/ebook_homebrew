@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 
 import sys
-from .rename import ChangeFilename
+
 from .convert import Image2PDF
 from .exceptions import BaseError
+from .rename import ChangeFilename
 from .utils.logging import get_logger
+
 # from archive import MakeArchive
 
 logger = get_logger("helper")
@@ -30,4 +32,5 @@ def auto(args):
     except Exception as e:
         logger.error("Unhandled Error occurred.")
         logger.exception(e)
+        logger.critical(e)
         sys.exit(1)

@@ -84,7 +84,7 @@ def test_base_error_auto(args_no_support_file):
 
 
 @pytest.fixture
-def args_no_unhandled_args(tmpdir):
+def args_unhandled(tmpdir):
     _logger.debug("Temp directory: {tmp_dir}".format(tmp_dir=str(tmpdir)))
     copy_image_file(str(tmpdir))
     args_obj = ArgNameSpace()
@@ -92,7 +92,7 @@ def args_no_unhandled_args(tmpdir):
 
 
 @pytest.mark.it
-def test_base_error_auto(args_no_unhandled_args):
+def test_unhandled_error_auto(args_unhandled):
     with pytest.raises(SystemExit) as e:
-        auto(args_no_unhandled_args)
+        auto(args_unhandled)
         assert e.code == 1
