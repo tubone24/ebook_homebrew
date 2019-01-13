@@ -1,31 +1,44 @@
 engines:
-  pylint:
+  brakeman:
     enabled: true
-    channel: "beta"
-  bandit:
+  bundler-audit:
     enabled: true
-plugins:
-  editorconfig:
+  csslint:
     enabled: true
-    channel: beta
-  fixme:
+  coffeelint:
+    enabled: true
+  duplication:
     enabled: true
     config:
-      strings:
-      - FIXME
-      - BUG
-      - CUSTOM
-  git-legal:
+      languages:
+      - ruby
+      - javascript
+      - python
+      - php
+  eslint:
     enabled: true
-  markdownlint:
+  fixme:
     enabled: true
-  pep8:
+  rubocop:
     enabled: true
-  sonar-python:
-    enabled: true
- radon:
-  enabled: true
+ratings:
+  paths:
+  - Gemfile.lock
+  - "**.erb"
+  - "**.haml"
+  - "**.rb"
+  - "**.rhtml"
+  - "**.slim"
+  - "**.css"
+  - "**.coffee"
+  - "**.inc"
+  - "**.js"
+  - "**.jsx"
+  - "**.module"
+  - "**.php"
+  - "**.py"
 exclude_paths:
-- "tests/"
-- "docs/"
-- "doc_src/"
+- config/**/*
+- db/**/*
+- spec/**/*
+- vendor/**/*
