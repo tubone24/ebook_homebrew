@@ -1,6 +1,22 @@
 engines:
   bandit:
     enabled: true
+  fixme:
+    enabled: true
+    config:
+      strings:
+      - FIXME
+      - BUG
+      - CUSTOM
+  markdownlint:
+    enabled: true
+  pep8:
+    enabled: true
+  pylint:
+    enabled: true
+    channel: "beta"
+  radon:
+    enabled: true
   duplication:
     enabled: true
     config:
@@ -25,5 +41,6 @@ ratings:
 exclude_paths:
 - config/**/*
 - db/**/*
-- spec/**/*
-- vendor/**/*
+- test/**/*
+- docs/**/*
+- doc_src/**/*
