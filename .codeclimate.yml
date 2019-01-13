@@ -41,6 +41,6 @@ ratings:
 exclude_paths:
 - config/**/*
 - db/**/*
-- test/**/*
+- tests/**/*
 - docs/**/*
 - doc_src/**/*
