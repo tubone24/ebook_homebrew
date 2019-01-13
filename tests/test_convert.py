@@ -1,4 +1,5 @@
 import logging
+import os
 from unittest.mock import MagicMock
 from unittest.mock import patch
 
@@ -75,8 +76,9 @@ class TestImage2PDF(object):
         with patch.object(self.target, "_move_file") as mock_move_file:
             self.target.move_file(test_input_file, test_input_dst, test_input_assume_yes)
 
+            destination = os.path.join(test_input_dst, test_input_file)
             mock_move_file.assert_called_once_with(file=test_input_file,
-                                                   dst=test_input_dst,
+                                                   dst=destination,
                                                    assume_yes=test_input_assume_yes)
 
     @pytest.mark.parametrize("test_input_filename, test_input_remove_flag, filelist, pdf_file_name, expected", [

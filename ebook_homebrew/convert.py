@@ -147,4 +147,5 @@ class Image2PDF(Common):
             bool: If success, return true. Nothing target, return false.
 
         """
-        return self._move_file(file=file, dst=dst, assume_yes=assume_yes)
+        destination = os.path.join(dst, file)
+        return self._move_file(file=file, dst=destination, assume_yes=assume_yes)
