@@ -1,0 +1,33 @@
+engines:
+  pylint:
+    enabled: true
+    channel: "beta"
+  bandit:
+    enabled: true
+
+plugins:
+  editorconfig:
+    enabled: true
+    channel: beta
+  fixme:
+    enabled: true
+    config:
+      strings:
+      - FIXME
+      - BUG
+      - CUSTOM
+  git-legal:
+    enabled: true
+  markdownlint:
+    enabled: true
+  pep8:
+    enabled: true
+  sonar-python:
+    enabled: true
+ radon:
+  enabled: true
+
+exclude_paths:
+- "tests/"
+- "docs/"
+- "doc_src/"
