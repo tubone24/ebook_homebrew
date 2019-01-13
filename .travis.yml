@@ -6,9 +6,6 @@ os:
 dist: xenial
 language:
   - python
-  - ruby
-rvm:
-  - 2.2.0
 python:
   - "3.6"
   - "3.5"
@@ -27,7 +24,6 @@ install:
   - pip install -r requirements-test.txt
 
 script:
-    - bundle exec rspec
     - coverage run --source=ebook_homebrew -m pytest --it
     - coverage report -m
 
