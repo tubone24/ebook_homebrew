@@ -79,10 +79,10 @@ class TestImage2PDF(object):
                                                    dst=test_input_dst,
                                                    assume_yes=test_input_assume_yes)
 
-    @pytest.mark.parametrize("test_input_filename, test_input_remove_flug, filelist, pdf_file_name, expected", [
+    @pytest.mark.parametrize("test_input_filename, test_input_remove_flag, filelist, pdf_file_name, expected", [
         ("test.pdf", False, ["test001.jpg"], "test001.pdf", True),
         ("test.pdf", True, ["test001.jpg"], "test001.pdf", True)])
-    def test_ok_make_pdf(self, test_input_filename, test_input_remove_flug, filelist, pdf_file_name, expected):
+    def test_ok_make_pdf(self, test_input_filename, test_input_remove_flag, filelist, pdf_file_name, expected):
         with patch("os.listdir") as mock_list_dir, \
                 patch.object(self.target, "_convert_image_to_pdf") as mock_convert_image_to_pdf, \
                 patch.object(self.target, "_merge_pdf_file") as mock_merge_pdf_file, \
@@ -91,10 +91,10 @@ class TestImage2PDF(object):
             mock_convert_image_to_pdf.return_value = pdf_file_name
             mock_merge_pdf_file.return_value = True
             mock_remove_file_bulk.return_value = True
-            actual = self.target.make_pdf(test_input_filename, test_input_remove_flug)
+            actual = self.target.make_pdf(test_input_filename, test_input_remove_flag)
             mock_convert_image_to_pdf.assert_called_with(*filelist)
             mock_merge_pdf_file.assert_called_with(pdf_file_name, test_input_filename)
-            if test_input_remove_flug:
+            if test_input_remove_flag:
                 mock_remove_file_bulk.assert_called_with(filelist)
             assert actual == expected
 

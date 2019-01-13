@@ -4,9 +4,10 @@
 import os
 import re
 import zipfile
+
 from .core import Common
-from .utils.logging import get_logger
 from .exceptions import ZipFileExistError
+from .utils.logging import get_logger
 
 logger = get_logger("MakeArchive")
 
@@ -72,8 +73,3 @@ class MakeArchive(Common):
         logger.info("-" * 55)
         logger.info("Finished. Zipfile: {filename}".format(filename=filename))
         return True
-
-
-if __name__ == '__main__':
-    obj = MakeArchive("txt", "../tests")
-    obj.make_zip("test.zip", overwrite=False, remove_flag=True)
