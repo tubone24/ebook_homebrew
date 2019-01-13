@@ -3,6 +3,8 @@
 
 
 # ebook_homebrew
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+[![Build Status](https://travis-ci.org/tubone24/ebook_homebrew.svg?branch=master)](https://travis-ci.org/tubone24/ebook_homebrew)
 Change file name to only digit name like `001.jpg` and make e-book format files.
 
 # Getting Started
