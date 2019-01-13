@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+"""Provides helper for command line interface
+"""
 
 import sys
 

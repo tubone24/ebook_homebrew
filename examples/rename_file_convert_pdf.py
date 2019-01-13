@@ -6,6 +6,8 @@ from ebook_homebrew.rename import ChangeFilename
 
 
 def main():
+    """Example import modules and use ebook_homebrew
+    """
     rename = ChangeFilename(directory_path="example_file",
                             digits="3",
                             extension="png")

@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+"""Core module
+"""
 import os
 import re
 import shutil
@@ -141,7 +143,7 @@ class Common(object):
         else:
             logger.info("Remove file: {file_name} OK? (y/n)".format(file_name=file))
             flag = input()
-            if flag == "Y" or flag == "y":
+            if flag in ("Y", "y"):
                 pass
             else:
                 logger.info("Nothing..")
@@ -202,7 +204,7 @@ class Common(object):
             InvalidImageParameterType: If you doesn't choose image file.
         """
         _, _, ext = self._split_dir_root_ext(file_name)
-        if ext == ".jpg" or ext == ".png" or ext == ".gif":
+        if ext in (".jpg", ".png", ".gif"):
             draw_pic = PIL.Image.open(file_name)
             draw_pic.show()
         else:
