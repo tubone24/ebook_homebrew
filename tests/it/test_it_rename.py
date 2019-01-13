@@ -49,5 +49,3 @@ class TestItRename(object):
         expected = {"foo" + str(x).zfill(3) + "bar.png" for x in range(100)}
         actual = actual_file_list - expected
         assert actual == {"test.png"}
-
-

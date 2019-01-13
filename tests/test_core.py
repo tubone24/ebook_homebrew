@@ -1,12 +1,12 @@
-import pytest
+import logging
 from unittest.mock import call
 from unittest.mock import patch
-import logging
+
+import pytest
 
 from ebook_homebrew.core import Common
 from ebook_homebrew.exceptions import InvalidExtensionType, \
     InvalidPathType, InvalidDigitsFormat, ChangeFileNameOSError, InvalidImageParameterType
-
 
 _logger = logging.getLogger(name=__name__)
 
@@ -170,9 +170,3 @@ class TestCommon(object):
         with patch("PIL.Image.open"), patch("PIL.Image.open.show"):
             with pytest.raises(InvalidImageParameterType):
                 self.target._check_image_file(test_input)
-
-
-
-
-
-

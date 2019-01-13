@@ -1,11 +1,12 @@
-import re
-import pytest
-from unittest.mock import patch
 import logging
+import re
+from unittest.mock import patch
 
-from ebook_homebrew.rename import ChangeFilename
+import pytest
+
 from ebook_homebrew.exceptions import InvalidNumberParameterType, \
     TargetSrcFileNotFoundError, ChangeFileNameOSError, InvalidImageParameterType
+from ebook_homebrew.rename import ChangeFilename
 
 _logger = logging.getLogger(name=__name__)
 
@@ -38,8 +39,8 @@ class TestChangeFilename(object):
         (["test001test.jpg", "test001foo.jpg"], True, 2),
         ([], False, 0)])
     def test_ok_filename_to_digit_number(self, file_list, is_file, expected):
-        with patch("os.listdir") as mock_listdir, patch("os.path.isfile") as mock_isfile,\
-                patch("os.rename"):
+        with patch("os.listdir") as mock_listdir, patch("os.path.isfile") as mock_isfile, \
+                patch.object(self.target, "_rename_file"):
             mock_listdir.return_value = file_list
             mock_isfile.return_value = is_file
             actual = self.target.filename_to_digit_number()
@@ -75,8 +76,10 @@ class TestChangeFilename(object):
         (["r", "n"], [True, False], True)])
     def test_ok_change_name_manually(self, test_interactive, is_file_return, expected):
         with patch("os.listdir") as mock_listdir, patch("os.path.isfile") as mock_isfile, \
-                patch("os.rename"), patch("builtins.input") as mock_input,\
-                patch("os.remove"), patch("PIL.Image.open"), patch("PIL.Image.open.show"):
+                patch.object(self.target, "_rename_file"), \
+                patch("builtins.input") as mock_input, \
+                patch.object(self.target, "_remove_file"), \
+                patch.object(self.target, "_check_image_file"):
             mock_listdir.return_value = ["test001test.jpg"]
             mock_isfile.side_effect = is_file_return
             mock_input.side_effect = self.interactive_input(test_interactive)
@@ -89,7 +92,7 @@ class TestChangeFilename(object):
     def test_skip_change_name_manually(self, test_interactive, is_file_return):
         with patch("os.listdir") as mock_listdir, patch("os.path.isfile") as mock_isfile, \
                 patch("builtins.input") as mock_input, \
-                patch("PIL.Image.open") as mock_image:
+                patch.object(self.target, "_check_image_file") as mock_image:
             mock_listdir.return_value = ["test001test.jpg"]
             mock_isfile.side_effect = is_file_return
             mock_input.side_effect = self.interactive_input(test_interactive)
@@ -106,16 +109,9 @@ class TestChangeFilename(object):
         (["001.jpg", "aaa.jpg"], True, ["foo", "bar"]),
         (["001.jpg", "foo001bar.jpg"], [False, True], ["foo", "bar"])])
     def test_add_before_after_str(self, test_file_list, is_file_return, test_input):
-        with patch("os.listdir") as mock_listdir, patch("os.path.isfile") as mock_isfile,\
-                patch("os.rename"):
+        with patch("os.listdir") as mock_listdir, patch("os.path.isfile") as mock_isfile, \
+                patch.object(self.target, "_rename_file"):
             mock_listdir.return_value = test_file_list
             mock_isfile.return_value = is_file_return
             actual = self.target.add_before_after_str(*test_input)
             assert actual is True
-
-
-
-
-
-
-
