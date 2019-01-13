@@ -36,58 +36,51 @@ class MakeZIPError(BaseError):
 
 class ZipFileExistError(MakeZIPError):
     def __init__(self):
-        self.error_class = "ZipFileExistError"
-        self.message = "Already Zipfile you decide name exist." \
-                       "If overwrite, choose 'overwrite' parameter."
+        super().__init__("ZipFileExistError", "Already Zipfile you decide name exist. "
+                                              "If overwrite, choose 'overwrite' parameter.")
 
 
 class InvalidDigitsFormat(ChangeFileNameError):
     def __init__(self):
-        self.error_class = "ChangeFileNameError"
-        self.message = "Invalid serial number digit value. " \
-                       "If you want to use multiple digits, " \
-                       "please divide into comma separator"
+        super().__init__("ChangeFileNameError", "Invalid serial number digit value. "
+                                                "If you want to use multiple digits, "
+                                                "please divide into comma separator")
 
 
 class InvalidExtensionType(ChangeFileNameError):
     def __init__(self):
-        self.error_class = "InvalidExtensionType"
-        self.message = "Invalid Extension Type. " \
-                       "Expected string or bytes-like object"
+        super().__init__("InvalidExtensionType", "Invalid Extension Type. "
+                                                 "Expected string or bytes-like object")
 
 
 class InvalidPathType(ChangeFileNameError):
     def __init__(self):
-        self.error_class = "InvalidPathType"
-        self.message = "Invalid Path string Type. " \
-                       "Expected string, bytes-like, os.Path-like object"
+        super().__init__("InvalidPathType", "Invalid Path string Type. "
+                                            "Expected string, bytes-like, os.Path-like object")
 
 
 class TargetSrcFileNotFoundError(ChangeFileNameError):
     def __init__(self):
-        self.error_class = "TargetSrcFileNotFoundError"
-        self.message = "Source directory you choose is no Target file."
+        super().__init__("TargetSrcFileNotFoundError", "Source directory you choose is no Target file.")
 
 
 class InvalidNumberParameterType(ChangeFileNameError):
     def __init__(self):
-        self.error_class = "InvalidNumberParameterType"
-        self.message = "To create new file name, must be used 'Integer'."
+        super().__init__("InvalidNumberParameterType", "To create new file name, must be used 'Integer'.")
 
 
 class InvalidImageParameterType(ChangeFileNameError):
     def __init__(self):
-        self.error_class = "InvalidImageParameterType"
-        self.message = "To check image file, must be 'Image file' such as jpeg, png, or gif."
+        super().__init__("InvalidImageParameterType", "To check image file, "
+                                                      "must be 'Image file' such as jpeg, png, or gif.")
 
 
 class InvalidImageFileFormat(MakePDFError):
     def __init__(self):
-        self.error_class = "InvalidImageFileFormat"
-        self.message = "Not supported file format. Supported 'jpg', 'png', 'gif'"
+        super().__init__("InvalidImageFileFormat", "Not supported file format. "
+                                                   "Supported 'jpg', 'png', 'gif'")
 
 
 class ChangeFileNameOSError(ChangeFileNameError):
     def __init__(self):
-        self.error_class = "ChangeFileNameOSError"
-        self.message = "OSError was occurred. Reading more message above."
+        super().__init__("ChangeFileNameOSError", "OSError was occurred. Reading more message above.")
