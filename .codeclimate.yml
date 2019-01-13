@@ -1,26 +1,11 @@
 engines:
-  brakeman:
-    enabled: true
-  bundler-audit:
-    enabled: true
-  csslint:
-    enabled: true
-  coffeelint:
+  bandit:
     enabled: true
   duplication:
     enabled: true
     config:
       languages:
-      - ruby
-      - javascript
       - python
-      - php
-  eslint:
-    enabled: true
-  fixme:
-    enabled: true
-  rubocop:
-    enabled: true
 ratings:
   paths:
   - Gemfile.lock
