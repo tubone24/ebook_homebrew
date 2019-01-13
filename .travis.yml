@@ -20,10 +20,10 @@ before_install:
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
 install:
-  - pip install -r requirements.txt
   - pip install -r requirements-test.txt
 
 script:
+    - python setup.py install
     - coverage run --source=ebook_homebrew -m pytest --it
     - coverage report -m
 
