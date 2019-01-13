@@ -14,14 +14,14 @@ class TestItRename(object):
 
     @staticmethod
     def copy_image_file(directory):
-        test_file = os.path.join(os.path.dirname(__file__), "assets", "test_image.png")
+        test_file = os.path.join(os.path.dirname(__file__), "assets", "test_001.png")
         for i in range(100):
             shutil.copy2(test_file, directory)
             dst_file_name = os.path.join(directory, "foo" + str(i).zfill(3) + "bar.png")
-            os.rename(os.path.join(directory, "test_image.png"), dst_file_name)
+            os.rename(os.path.join(directory, "test_001.png"), dst_file_name)
         shutil.copy2(test_file, directory)
         dst_ext_file_name = os.path.join(directory, "foofoo001" + "b_bar.png")
-        os.rename(os.path.join(directory, "test_image.png"), dst_ext_file_name)
+        os.rename(os.path.join(directory, "test_001.png"), dst_ext_file_name)
         return True
 
     @staticmethod

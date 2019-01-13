@@ -5,13 +5,37 @@
 
 Welcome to ebook_homebrew's documentation!
 ==========================================
+ebook_homebrew is command line interface which change file name to only digit name
+like `001.jpg` and make e-book format files.
 
 .. image:: bookicon.png
+
+Badges:
+
+.. image:: https://travis-ci.org/tubone24/ebook_homebrew.svg?branch=master
+   :target: https://travis-ci.org/tubone24/ebook_homebrew
+
+.. image:: https://codecov.io/gh/tubone24/ebook_homebrew/branch/master/graph/badge.svg
+   :target: https://codecov.io/gh/tubone24/ebook_homebrew
+
+.. image:: https://api.codeclimate.com/v1/badges/a3e2d70a87998a18e225/maintainability
+   :target: https://codeclimate.com/github/tubone24/ebook_homebrew/maintainability
+   :alt: Maintainability
+
+.. image:: https://api.codeclimate.com/v1/badges/a3e2d70a87998a18e225/test_coverage
+   :target: https://codeclimate.com/github/tubone24/ebook_homebrew/test_coverage
+   :alt: Test Coverage
+
+
 
 Contents:
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 2
+
+   installation.rst
+   overview.rst
+   howtouse.rst
 
 
 
