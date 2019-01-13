@@ -1,7 +1,14 @@
+env:
+  global:
+    - CC_TEST_REPORTER_ID=e5bcb7f1b58a5e7ee095d00bd8bee2b327e7c883606a8820e3b32cda61cef079
 os:
   - linux
 dist: xenial
-language: python
+language:
+  - python
+  - ruby
+rvm:
+  - 2.2.0
 python:
   - "3.6"
   - "3.5"
@@ -12,16 +19,21 @@ before_install:
       brew upgrade python
       export PATH="/usr/local/opt/python/libexec/bin:${PATH}"
     fi
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
 install:
   - pip install -r requirements.txt
   - pip install -r requirements-test.txt
 
 script:
+    - bundle exec rspec
     - coverage run --source=ebook_homebrew -m pytest --it
     - coverage report -m
 
 after_success:
     - codecov
+    - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 
 cache:
   directories:
