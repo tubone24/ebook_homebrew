@@ -1,136 +1,165 @@
+
+
 <!DOCTYPE html>
-<!--[if IE 8]>
-<html class="no-js lt-ie9" lang="en"> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html class="no-js" lang="en"> <!--<![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
-    <meta charset="utf-8">
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ebook_homebrew package &mdash; ebook_homebrew 1.0.0 documentation</title>
+  
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  
 
-    <title>ebook_homebrew package &mdash; ebook_homebrew 1.0.0 documentation</title>
+  
 
+  
+  
+    
 
-    <link rel="stylesheet" href="_static/css/theme.css" type="text/css"/>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css"/>
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html"/>
+    <link rel="search" title="Search" href="search.html" /> 
 
-
-    <script src="_static/js/modernizr.min.js"></script>
+  
+  <script src="_static/js/modernizr.min.js"></script>
 
 </head>
 
 <body class="wy-body-for-nav">
 
+   
+  <div class="wy-grid-for-nav">
 
-<div class="wy-grid-for-nav">
-
-
+    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-        <div class="wy-side-scroll">
-            <div class="wy-side-nav-search">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
 
+          
+            <a href="index.html" class="icon icon-home"> ebook_homebrew
+          
 
-                <a href="index.html" class="icon icon-home"> ebook_homebrew
+          
+          </a>
 
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
 
-                </a>
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
 
-
-                <div class="version">
-                    1.0.0
-                </div>
-
-
-                <div role="search">
-                    <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-                        <input type="text" name="q" placeholder="Search docs"/>
-                        <input type="hidden" name="check_keywords" value="yes"/>
-                        <input type="hidden" name="area" value="default"/>
-                    </form>
-                </div>
-
-
-            </div>
-
-            <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-
-
-                <!-- Local TOC -->
-                <div class="local-toc">
-                    <ul>
-                        <li><a class="reference internal" href="#">ebook_homebrew package</a>
-                            <ul>
-                                <li><a class="reference internal" href="#subpackages">Subpackages</a></li>
-                                <li><a class="reference internal" href="#submodules">Submodules</a></li>
-                                <li><a class="reference internal" href="#module-ebook_homebrew.archive">ebook_homebrew.archive
-                                    module</a></li>
-                                <li><a class="reference internal" href="#module-ebook_homebrew.cli">ebook_homebrew.cli
-                                    module</a></li>
-                                <li><a class="reference internal" href="#module-ebook_homebrew.convert">ebook_homebrew.convert
-                                    module</a></li>
-                                <li><a class="reference internal" href="#module-ebook_homebrew.core">ebook_homebrew.core
-                                    module</a></li>
-                                <li><a class="reference internal" href="#module-ebook_homebrew.exceptions">ebook_homebrew.exceptions
-                                    module</a></li>
-                                <li><a class="reference internal" href="#module-ebook_homebrew.helper">ebook_homebrew.helper
-                                    module</a></li>
-                                <li><a class="reference internal" href="#module-ebook_homebrew.rename">ebook_homebrew.rename
-                                    module</a></li>
-                                <li><a class="reference internal" href="#module-ebook_homebrew">Module contents</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-
-
-            </div>
+          
         </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">ebook_homebrew package</a><ul>
+<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-ebook_homebrew.archive">ebook_homebrew.archive module</a></li>
+<li><a class="reference internal" href="#module-ebook_homebrew.cli">ebook_homebrew.cli module</a></li>
+<li><a class="reference internal" href="#module-ebook_homebrew.convert">ebook_homebrew.convert module</a></li>
+<li><a class="reference internal" href="#module-ebook_homebrew.core">ebook_homebrew.core module</a></li>
+<li><a class="reference internal" href="#module-ebook_homebrew.exceptions">ebook_homebrew.exceptions module</a></li>
+<li><a class="reference internal" href="#module-ebook_homebrew.helper">ebook_homebrew.helper module</a></li>
+<li><a class="reference internal" href="#module-ebook_homebrew.rename">ebook_homebrew.rename module</a></li>
+<li><a class="reference internal" href="#module-ebook_homebrew">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
-
-        <nav class="wy-nav-top" aria-label="top navigation">
-
-            <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-            <a href="index.html">ebook_homebrew</a>
-
-        </nav>
-
-
-        <div class="wy-nav-content">
-
-            <div class="rst-content">
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ebook_homebrew</a>
+        
+      </nav>
 
 
-                <div role="navigation" aria-label="breadcrumbs navigation">
-
-                    <ul class="wy-breadcrumbs">
-
-                        <li><a href="index.html">Docs</a> &raquo;</li>
-
-                        <li>ebook_homebrew package</li>
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
 
 
-                        <li class="wy-breadcrumbs-aside">
 
 
-                            <a href="_sources/ebook_homebrew.rst.txt" rel="nofollow"> View page source</a>
 
 
-                        </li>
-
-                    </ul>
 
 
-                    <hr/>
-                </div>
-                <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-                    <div itemprop="articleBody">
 
-                        <div class="section" id="ebook-homebrew-package">
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>ebook_homebrew package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/ebook_homebrew.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="ebook-homebrew-package">
 <h1>ebook_homebrew package<a class="headerlink" href="#ebook-homebrew-package" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="subpackages">
 <h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
@@ -192,7 +221,7 @@
 <code class="descclassname">ebook_homebrew.cli.</code><code class="descname">execute_auto</code><span class="sig-paren">(</span><em>args_auto</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebook_homebrew/cli.html#execute_auto"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.cli.execute_auto" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-    <dl class="function">
+<dl class="function">
 <dt id="ebook_homebrew.cli.main">
 <code class="descclassname">ebook_homebrew.cli.</code><code class="descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebook_homebrew/cli.html#main"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.cli.main" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -232,7 +261,7 @@ files such as jpeg, png and gif.</p>
 </table>
 </dd></dl>
 
-    <dl class="method">
+<dl class="method">
 <dt id="ebook_homebrew.convert.Image2PDF.move_file">
 <code class="descname">move_file</code><span class="sig-paren">(</span><em>file</em>, <em>dst</em>, <em>assume_yes</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebook_homebrew/convert.html#Image2PDF.move_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.convert.Image2PDF.move_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Move file</p>
@@ -262,7 +291,7 @@ files such as jpeg, png and gif.</p>
 </div>
 <div class="section" id="module-ebook_homebrew.core">
 <span id="ebook-homebrew-core-module"></span><h2>ebook_homebrew.core module<a class="headerlink" href="#module-ebook_homebrew.core" title="Permalink to this headline">¶</a></h2>
-    <p>Core module</p>
+<p>Core module</p>
 <dl class="class">
 <dt id="ebook_homebrew.core.Common">
 <em class="property">class </em><code class="descclassname">ebook_homebrew.core.</code><code class="descname">Common</code><a class="reference internal" href="_modules/ebook_homebrew/core.html#Common"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.core.Common" title="Permalink to this definition">¶</a></dt>
@@ -280,91 +309,73 @@ files such as jpeg, png and gif.</p>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a></p>
 </dd></dl>
 
-    <dl class="exception">
+<dl class="exception">
 <dt id="ebook_homebrew.exceptions.ChangeFileNameError">
 <em class="property">exception </em><code class="descclassname">ebook_homebrew.exceptions.</code><code class="descname">ChangeFileNameError</code><span class="sig-paren">(</span><em>error_class</em>, <em>message</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebook_homebrew/exceptions.html#ChangeFileNameError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.exceptions.ChangeFileNameError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#ebook_homebrew.exceptions.BaseError" title="ebook_homebrew.exceptions.BaseError"><code class="xref py py-class docutils literal notranslate"><span class="pre">ebook_homebrew.exceptions.BaseError</span></code></a></p>
 </dd></dl>
 
-    <dl class="exception">
+<dl class="exception">
 <dt id="ebook_homebrew.exceptions.ChangeFileNameOSError">
 <em class="property">exception </em><code class="descclassname">ebook_homebrew.exceptions.</code><code class="descname">ChangeFileNameOSError</code><a class="reference internal" href="_modules/ebook_homebrew/exceptions.html#ChangeFileNameOSError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.exceptions.ChangeFileNameOSError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#ebook_homebrew.exceptions.ChangeFileNameError" title="ebook_homebrew.exceptions.ChangeFileNameError"><code class="xref py py-class docutils literal notranslate"><span class="pre">ebook_homebrew.exceptions.ChangeFileNameError</span></code></a></p>
 </dd></dl>
 
-    <dl class="exception">
+<dl class="exception">
 <dt id="ebook_homebrew.exceptions.InvalidDigitsFormat">
 <em class="property">exception </em><code class="descclassname">ebook_homebrew.exceptions.</code><code class="descname">InvalidDigitsFormat</code><a class="reference internal" href="_modules/ebook_homebrew/exceptions.html#InvalidDigitsFormat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.exceptions.InvalidDigitsFormat" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#ebook_homebrew.exceptions.ChangeFileNameError" title="ebook_homebrew.exceptions.ChangeFileNameError"><code class="xref py py-class docutils literal notranslate"><span class="pre">ebook_homebrew.exceptions.ChangeFileNameError</span></code></a></p>
 </dd></dl>
 
-    <dl class="exception">
-        <dt id="ebook_homebrew.exceptions.InvalidExtensionType">
-            <em class="property">exception </em><code class="descclassname">ebook_homebrew.exceptions.</code><code
-                class="descname">InvalidExtensionType</code><a class="reference internal"
-                                                               href="_modules/ebook_homebrew/exceptions.html#InvalidExtensionType"><span
-                class="viewcode-link">[source]</span></a><a class="headerlink"
-                                                            href="#ebook_homebrew.exceptions.InvalidExtensionType"
-                                                            title="Permalink to this definition">¶</a></dt>
-        <dd><p>Bases: <a class="reference internal" href="#ebook_homebrew.exceptions.ChangeFileNameError"
-                         title="ebook_homebrew.exceptions.ChangeFileNameError"><code
-                class="xref py py-class docutils literal notranslate"><span class="pre">ebook_homebrew.exceptions.ChangeFileNameError</span></code></a>
-        </p>
-        </dd>
-    </dl>
+<dl class="exception">
+<dt id="ebook_homebrew.exceptions.InvalidExtensionType">
+<em class="property">exception </em><code class="descclassname">ebook_homebrew.exceptions.</code><code class="descname">InvalidExtensionType</code><a class="reference internal" href="_modules/ebook_homebrew/exceptions.html#InvalidExtensionType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.exceptions.InvalidExtensionType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ebook_homebrew.exceptions.ChangeFileNameError" title="ebook_homebrew.exceptions.ChangeFileNameError"><code class="xref py py-class docutils literal notranslate"><span class="pre">ebook_homebrew.exceptions.ChangeFileNameError</span></code></a></p>
+</dd></dl>
 
-    <dl class="exception">
+<dl class="exception">
 <dt id="ebook_homebrew.exceptions.InvalidImageFileFormat">
 <em class="property">exception </em><code class="descclassname">ebook_homebrew.exceptions.</code><code class="descname">InvalidImageFileFormat</code><a class="reference internal" href="_modules/ebook_homebrew/exceptions.html#InvalidImageFileFormat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.exceptions.InvalidImageFileFormat" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#ebook_homebrew.exceptions.MakePDFError" title="ebook_homebrew.exceptions.MakePDFError"><code class="xref py py-class docutils literal notranslate"><span class="pre">ebook_homebrew.exceptions.MakePDFError</span></code></a></p>
 </dd></dl>
 
-    <dl class="exception">
+<dl class="exception">
 <dt id="ebook_homebrew.exceptions.InvalidImageParameterType">
 <em class="property">exception </em><code class="descclassname">ebook_homebrew.exceptions.</code><code class="descname">InvalidImageParameterType</code><a class="reference internal" href="_modules/ebook_homebrew/exceptions.html#InvalidImageParameterType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.exceptions.InvalidImageParameterType" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#ebook_homebrew.exceptions.ChangeFileNameError" title="ebook_homebrew.exceptions.ChangeFileNameError"><code class="xref py py-class docutils literal notranslate"><span class="pre">ebook_homebrew.exceptions.ChangeFileNameError</span></code></a></p>
 </dd></dl>
 
-    <dl class="exception">
+<dl class="exception">
 <dt id="ebook_homebrew.exceptions.InvalidNumberParameterType">
 <em class="property">exception </em><code class="descclassname">ebook_homebrew.exceptions.</code><code class="descname">InvalidNumberParameterType</code><a class="reference internal" href="_modules/ebook_homebrew/exceptions.html#InvalidNumberParameterType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.exceptions.InvalidNumberParameterType" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#ebook_homebrew.exceptions.ChangeFileNameError" title="ebook_homebrew.exceptions.ChangeFileNameError"><code class="xref py py-class docutils literal notranslate"><span class="pre">ebook_homebrew.exceptions.ChangeFileNameError</span></code></a></p>
 </dd></dl>
 
-    <dl class="exception">
-        <dt id="ebook_homebrew.exceptions.InvalidPathType">
-            <em class="property">exception </em><code class="descclassname">ebook_homebrew.exceptions.</code><code
-                class="descname">InvalidPathType</code><a class="reference internal"
-                                                          href="_modules/ebook_homebrew/exceptions.html#InvalidPathType"><span
-                class="viewcode-link">[source]</span></a><a class="headerlink"
-                                                            href="#ebook_homebrew.exceptions.InvalidPathType"
-                                                            title="Permalink to this definition">¶</a></dt>
-        <dd><p>Bases: <a class="reference internal" href="#ebook_homebrew.exceptions.ChangeFileNameError"
-                         title="ebook_homebrew.exceptions.ChangeFileNameError"><code
-                class="xref py py-class docutils literal notranslate"><span class="pre">ebook_homebrew.exceptions.ChangeFileNameError</span></code></a>
-        </p>
-        </dd>
-    </dl>
+<dl class="exception">
+<dt id="ebook_homebrew.exceptions.InvalidPathType">
+<em class="property">exception </em><code class="descclassname">ebook_homebrew.exceptions.</code><code class="descname">InvalidPathType</code><a class="reference internal" href="_modules/ebook_homebrew/exceptions.html#InvalidPathType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.exceptions.InvalidPathType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ebook_homebrew.exceptions.ChangeFileNameError" title="ebook_homebrew.exceptions.ChangeFileNameError"><code class="xref py py-class docutils literal notranslate"><span class="pre">ebook_homebrew.exceptions.ChangeFileNameError</span></code></a></p>
+</dd></dl>
 
-    <dl class="exception">
+<dl class="exception">
 <dt id="ebook_homebrew.exceptions.MakePDFError">
 <em class="property">exception </em><code class="descclassname">ebook_homebrew.exceptions.</code><code class="descname">MakePDFError</code><span class="sig-paren">(</span><em>error_class</em>, <em>message</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebook_homebrew/exceptions.html#MakePDFError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.exceptions.MakePDFError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#ebook_homebrew.exceptions.BaseError" title="ebook_homebrew.exceptions.BaseError"><code class="xref py py-class docutils literal notranslate"><span class="pre">ebook_homebrew.exceptions.BaseError</span></code></a></p>
 </dd></dl>
 
-    <dl class="exception">
+<dl class="exception">
 <dt id="ebook_homebrew.exceptions.MakeZIPError">
 <em class="property">exception </em><code class="descclassname">ebook_homebrew.exceptions.</code><code class="descname">MakeZIPError</code><span class="sig-paren">(</span><em>error_class</em>, <em>message</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebook_homebrew/exceptions.html#MakeZIPError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.exceptions.MakeZIPError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#ebook_homebrew.exceptions.BaseError" title="ebook_homebrew.exceptions.BaseError"><code class="xref py py-class docutils literal notranslate"><span class="pre">ebook_homebrew.exceptions.BaseError</span></code></a></p>
 </dd></dl>
 
-    <dl class="exception">
+<dl class="exception">
 <dt id="ebook_homebrew.exceptions.TargetSrcFileNotFoundError">
 <em class="property">exception </em><code class="descclassname">ebook_homebrew.exceptions.</code><code class="descname">TargetSrcFileNotFoundError</code><a class="reference internal" href="_modules/ebook_homebrew/exceptions.html#TargetSrcFileNotFoundError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.exceptions.TargetSrcFileNotFoundError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#ebook_homebrew.exceptions.ChangeFileNameError" title="ebook_homebrew.exceptions.ChangeFileNameError"><code class="xref py py-class docutils literal notranslate"><span class="pre">ebook_homebrew.exceptions.ChangeFileNameError</span></code></a></p>
 </dd></dl>
 
-    <dl class="exception">
+<dl class="exception">
 <dt id="ebook_homebrew.exceptions.ZipFileExistError">
 <em class="property">exception </em><code class="descclassname">ebook_homebrew.exceptions.</code><code class="descname">ZipFileExistError</code><a class="reference internal" href="_modules/ebook_homebrew/exceptions.html#ZipFileExistError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.exceptions.ZipFileExistError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#ebook_homebrew.exceptions.MakeZIPError" title="ebook_homebrew.exceptions.MakeZIPError"><code class="xref py py-class docutils literal notranslate"><span class="pre">ebook_homebrew.exceptions.MakeZIPError</span></code></a></p>
@@ -373,7 +384,7 @@ files such as jpeg, png and gif.</p>
 </div>
 <div class="section" id="module-ebook_homebrew.helper">
 <span id="ebook-homebrew-helper-module"></span><h2>ebook_homebrew.helper module<a class="headerlink" href="#module-ebook_homebrew.helper" title="Permalink to this headline">¶</a></h2>
-    <p>Provides helper for command line interface</p>
+<p>Provides helper for command line interface</p>
 <dl class="function">
 <dt id="ebook_homebrew.helper.auto">
 <code class="descclassname">ebook_homebrew.helper.</code><code class="descname">auto</code><span class="sig-paren">(</span><em>args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebook_homebrew/helper.html#auto"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.helper.auto" title="Permalink to this definition">¶</a></dt>
@@ -414,7 +425,7 @@ add specify string before or after file name.</p>
 </table>
 </dd></dl>
 
-    <dl class="method">
+<dl class="method">
 <dt id="ebook_homebrew.rename.ChangeFilename.change_name_manually">
 <code class="descname">change_name_manually</code><span class="sig-paren">(</span><em>overwrite=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebook_homebrew/rename.html#ChangeFilename.change_name_manually"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.rename.ChangeFilename.change_name_manually" title="Permalink to this definition">¶</a></dt>
 <dd><p>Change filename manually looking exist_file list.</p>
@@ -434,7 +445,7 @@ duplicate file name change manually.</p>
 </table>
 </dd></dl>
 
-    <dl class="method">
+<dl class="method">
 <dt id="ebook_homebrew.rename.ChangeFilename.filename_to_digit_number">
 <code class="descname">filename_to_digit_number</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebook_homebrew/rename.html#ChangeFilename.filename_to_digit_number"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.rename.ChangeFilename.filename_to_digit_number" title="Permalink to this definition">¶</a></dt>
 <dd><p>Change file name to only digit name.</p>
@@ -461,49 +472,53 @@ only digit file name like “001.txt”.</p>
 </div>
 
 
-                    </div>
+           </div>
+           
+          </div>
+          <footer>
+  
 
-                </div>
-                <footer>
+  <hr/>
 
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, tubone
 
-                    <hr/>
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
-                    <div role="contentinfo">
-                        <p>
-                            &copy; Copyright 2018, tubone
+</footer>
 
-                        </p>
-                    </div>
-                    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a
-                        href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a
-                        href="https://readthedocs.org">Read the Docs</a>.
-
-                </footer>
-
-            </div>
         </div>
+      </div>
 
     </section>
 
-</div>
+  </div>
+  
 
 
-<script type="text/javascript" id="documentation_options" data-url_root="./"
-        src="_static/documentation_options.js"></script>
-<script type="text/javascript" src="_static/jquery.js"></script>
-<script type="text/javascript" src="_static/underscore.js"></script>
-<script type="text/javascript" src="_static/doctools.js"></script>
-<script type="text/javascript" src="_static/language_data.js"></script>
+  
 
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
 
-<script type="text/javascript" src="_static/js/theme.js"></script>
+  
 
-<script type="text/javascript">
-    jQuery(function () {
-        SphinxRtdTheme.Navigation.enable(true);
-    });
-</script>
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
 
 </body>
 </html>

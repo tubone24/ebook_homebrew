@@ -37,6 +37,7 @@ Badges:
    installation.rst
    overview.rst
    howtouse.rst
+   releasenotes/index.rst
 
 
 Indices and tables

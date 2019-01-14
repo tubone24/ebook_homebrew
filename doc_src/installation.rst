@@ -26,7 +26,7 @@ We provide ebook_homebrew binaries for Windows compiled for the matrix of
 supported Pythons in both 32 and 64-bit versions in wheel, egg, and
 executable installers. ::
 
-  > pip install ebook_homebrew
+  > pip install ebook-homebrew
 
 
 macOS Installation
@@ -35,7 +35,7 @@ macOS Installation
 We provide binaries for macOS for each of the supported Python
 3.5 and 3.6 in the wheel format. ::
 
-  $ pip install Pillow
+  $ pip install ebook-homebrew
 
 Linux Installation
 ^^^^^^^^^^^^^^^^^^
@@ -43,7 +43,7 @@ Linux Installation
 We provide binaries for Linux for each of the supported Python
 versions in the manylinux wheel format. ::
 
-  $ pip install Pillow
+  $ pip install ebook-homebrew
 
 
 Building From Source
