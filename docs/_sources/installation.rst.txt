@@ -16,7 +16,7 @@ Basic Installation
 
 Install ebook_homebrew with :command:`pip`::
 
-    $ pip install ebook_homebrew
+    $ pip install ebook-homebrew
 
 
 Windows Installation
