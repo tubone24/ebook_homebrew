@@ -10,6 +10,8 @@
 [![Documentation Status](https://readthedocs.org/projects/ebook-homebrew/badge/?version=latest)](https://ebook-homebrew.readthedocs.io/en/latest/?badge=latest)
 [![codecov](https://codecov.io/gh/tubone24/ebook_homebrew/branch/master/graph/badge.svg)](https://codecov.io/gh/tubone24/ebook_homebrew)
 [![Maintainability](https://api.codeclimate.com/v1/badges/a3e2d70a87998a18e225/maintainability)](https://codeclimate.com/github/tubone24/ebook_homebrew/maintainability)
+![Downloads](https://img.shields.io/pypi/dm/ebook-homebrew.svg)
+![PyPi](https://img.shields.io/pypi/v/ebook-homebrew.svg)
 
 Change file name to only digit name like `001.jpg` and make e-book format files.
 
@@ -20,7 +22,6 @@ Ebook_homebrew is a python package, so that you can use `setup.py` or `pip` inst
 ### Using setup.py
 
 ```bash
-$ pip install -r requirements.txt
 $ python setup.py install
 ```
 

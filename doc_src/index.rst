@@ -30,6 +30,13 @@ Badges:
    :target: https://ebook-homebrew.readthedocs.io/en/latest/?badge=latest
    :alt: Documentation Status
 
+.. image:: https://img.shields.io/pypi/dm/ebook-homebrew.svg
+   :target: https://pypi.org/project/ebook-homebrew/#files
+
+.. image:: https://img.shields.io/pypi/v/ebook-homebrew.svg
+   :target: https://pypi.org/project/ebook-homebrew/
+   :alt: Latest PyPI version
+
 
 .. toctree::
    :maxdepth: 2
