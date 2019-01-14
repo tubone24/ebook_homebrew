@@ -37,6 +37,15 @@ Badges:
    :target: https://pypi.org/project/ebook-homebrew/
    :alt: Latest PyPI version
 
+.. image:: https://img.shields.io/pypi/pyversions/ebook-homebrew.svg
+   :target: https://pypi.org/project/ebook-homebrew/
+
+.. image:: https://img.shields.io/pypi/format/ebook-homebrew.svg
+   :target: https://pypi.org/project/ebook-homebrew/
+
+.. image:: https://img.shields.io/gitter/room/tubone24/ebook_homebrew.svg
+   :target: https://gitter.im/ebook_homebrew/community#
+
 
 .. toctree::
    :maxdepth: 2

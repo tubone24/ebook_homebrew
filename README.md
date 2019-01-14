@@ -12,6 +12,9 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/a3e2d70a87998a18e225/maintainability)](https://codeclimate.com/github/tubone24/ebook_homebrew/maintainability)
 ![Downloads](https://img.shields.io/pypi/dm/ebook-homebrew.svg)
 ![PyPi](https://img.shields.io/pypi/v/ebook-homebrew.svg)
+![Python version](https://img.shields.io/pypi/pyversions/ebook-homebrew.svg)
+[![format](https://img.shields.io/pypi/format/ebook-homebrew.svg)](https://pypi.org/project/ebook-homebrew/)
+![Gitter](https://img.shields.io/gitter/room/tubone24/ebook_homebrew.svg)
 
 Change file name to only digit name like `001.jpg` and make e-book format files.
 
