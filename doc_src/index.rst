@@ -26,9 +26,10 @@ Badges:
 :target: https://codeclimate.com/github/tubone24/ebook_homebrew/test_coverage
    :alt: Test Coverage
 
+.. image:: https://readthedocs.org/projects/ebook-homebrew/badge/?version=latest
+:target: https://ebook-homebrew.readthedocs.io/en/latest/?badge=latest
+   :alt: Documentation Status
 
-
-    Contents:
 
 .. toctree::
 :maxdepth: 2
@@ -36,7 +37,6 @@ Badges:
        installation.rst
        overview.rst
        howtouse.rst
-
 
 
 Indices and tables
