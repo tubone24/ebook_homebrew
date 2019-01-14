@@ -26,10 +26,9 @@ $ python setup.py install
 
 ### Or using pip installer
 
-Unimplemented
 
 ```bash
-$ pip install ebook_homebrew
+$ pip install ebook-homebrew
 ```
 
 ## Usage
