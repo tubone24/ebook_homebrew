@@ -2,6 +2,7 @@
 import argparse
 
 from ebook_homebrew.helper import auto
+from ebook_homebrew.helper import show_version
 
 
 def execute_auto(args_auto):
@@ -16,6 +17,9 @@ def main():
         epilog="More information? Access here: https://github.com/tubone24/ebook_homebrew",
         add_help=True,
     )
+    parser.add_argument("-v", "--version",
+                        action="store_true",
+                        help="Show version")
 
     subparsers = parser.add_subparsers(description="Choose subcommands. Usually choose \"auto\"")
 
@@ -92,6 +96,8 @@ def main():
 
     if hasattr(args, "handler"):
         args.handler(args)
+    elif args.version:
+        show_version()
     else:
         parser.print_help()
 

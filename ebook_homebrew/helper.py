@@ -4,6 +4,7 @@
 
 import sys
 
+from .__init__ import __version__
 from .convert import Image2PDF
 from .exceptions import BaseError
 from .rename import ChangeFilename
@@ -36,3 +37,7 @@ def auto(args):
         logger.exception(e)
         logger.critical(e)
         sys.exit(1)
+
+
+def show_version():
+    print("ebook_homebrew: {version}".format(version=__version__))
