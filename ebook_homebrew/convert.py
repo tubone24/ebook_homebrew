@@ -63,16 +63,12 @@ class Image2PDF(Common):
 
         for file in files:
             num = self._check_serial_number(file, self.__digits)
-            if not num:
-                logger.debug("Skip(No number): {filename}".format(filename=file))
-            elif not self.__regex_ext.search(file):
-                logger.debug("Skip(No target extension): {filename}".format(filename=file))
+            if self._check_skip_file(file, self.__regex_ext, num):
+                pass
             else:
-                logger.debug(file)
                 pdf_file = self._convert_image_to_pdf(file)
-                result_merge_pdf = self._merge_pdf_file(pdf_file, filename)
 
-                if result_merge_pdf:
+                if self._merge_pdf_file(pdf_file, filename):
                     logger.info("Success write pdf for {page} page.".format(page=page_count + 1))
                     page_count += 1
                     if remove_flag:

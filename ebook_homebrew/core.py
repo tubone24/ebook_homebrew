@@ -105,6 +105,26 @@ class Common(object):
             raise InvalidDigitsFormat()
 
     @staticmethod
+    def _check_skip_file(filename, regex_ext, num):
+        """Check skip or target file for target extension and num regex
+        Args:
+            filename (str): Filename which check
+            regex_ext (Match): Compile extension object
+            num (Match): Number match object
+
+        Returns:
+            bool: If True, filename is skip file.
+        """
+        if not num:
+            logger.debug("Skip(No number): {filename}".format(filename=filename))
+            return True
+        elif not regex_ext.search(filename):
+            logger.debug("Skip(No target extension): {filename}".format(filename=filename))
+            return True
+        else:
+            return False
+
+    @staticmethod
     def _rename_file(old_name, new_name):
         """Rename filename.
 

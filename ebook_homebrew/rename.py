@@ -123,10 +123,8 @@ class ChangeFilename(Common):
 
         for file in files:
             num = self._check_serial_number(file, self.__digits)
-            if not num:
-                logger.debug("Skip(No number): {filename}".format(filename=file))
-            elif not self.__regex_ext.search(file):
-                logger.debug("Skip(No target extension): {filename}".format(filename=file))
+            if self._check_skip_file(file, self.__regex_ext, num):
+                pass
             else:
                 new_name = self._create_new_name(num, max_digit, self.__extension)
                 if not self.__check_exist_file(new_name, file, True):
