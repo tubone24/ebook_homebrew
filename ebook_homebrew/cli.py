@@ -92,6 +92,58 @@ def main():
                              action="store_true",
                              help="no verify users.")
 
+    parser_make_zip = subparsers.add_parser("makezip",
+                                            description="Make zip file for files "
+                                                        "which you choose extension.",
+                                            help="Make zip file for adding specify extension files.")
+
+    parser_make_zip.add_argument("-s", "--src_dir",
+                                 action="store",
+                                 nargs=1,
+                                 const=None,
+                                 default=None,
+                                 required=True,
+                                 type=str,
+                                 help="Source directory which put original image files.",
+                                 metavar="SRC_DIR")
+
+    parser_make_zip.add_argument("--dst_dir",
+                                 action="store",
+                                 nargs=1,
+                                 const=None,
+                                 default=None,
+                                 type=str,
+                                 help="Destination directory which put e-book file.",
+                                 metavar="DST_DIR")
+
+    parser_make_zip.add_argument("-e", "--extension",
+                                 action="store",
+                                 nargs=1,
+                                 const=None,
+                                 default=None,
+                                 required=True,
+                                 type=str,
+                                 help="Destination directory which put e-book file.",
+                                 metavar="EXT")
+
+    parser_make_zip.add_argument("-f", "--filename",
+                                 action="store",
+                                 nargs=1,
+                                 const=None,
+                                 default=None,
+                                 required=True,
+                                 type=str,
+                                 help="Destination directory which put e-book file.",
+                                 metavar="FILENAME")
+
+    parser_make_zip.add_argument("-r", "--remove",
+                                 action="store_true",
+                                 help="Remove original image file.")
+
+    parser_make_zip.add_argument("-y", "--assume_yes",
+                                 action="store_true",
+                                 help="no verify users.")
+
     args = parser.parse_args()
 
     if hasattr(args, "handler"):

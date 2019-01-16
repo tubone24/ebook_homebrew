@@ -229,3 +229,18 @@ class Common(object):
             draw_pic.show()
         else:
             raise InvalidImageParameterType()
+
+    def move_file(self, file, dst, assume_yes):
+        """Move file
+
+        Args:
+            file (str): Target file name
+            dst (str): Target destination path
+            assume_yes (bool): If true, no verify users
+
+        Returns:
+            bool: If success, return true. Nothing target, return false.
+
+        """
+        destination = os.path.join(dst, file)
+        return self._move_file(file=file, dst=destination, assume_yes=assume_yes)

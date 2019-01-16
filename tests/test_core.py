@@ -1,3 +1,4 @@
+import os
 import logging
 from unittest.mock import call
 from unittest.mock import patch
@@ -141,6 +142,18 @@ class TestCommon(object):
             expected = True
             _logger.debug("\nactual:   {actual}\nexpected: {expected}".format(actual=actual, expected=expected))
             assert actual is expected
+
+    def test_ok_move_file(self):
+        test_input_file = "test.pdf"
+        test_input_dst = "tests"
+        test_input_assume_yes = True
+        with patch.object(self.target, "_move_file") as mock_move_file:
+            self.target.move_file(test_input_file, test_input_dst, test_input_assume_yes)
+
+            destination = os.path.join(test_input_dst, test_input_file)
+            mock_move_file.assert_called_once_with(file=test_input_file,
+                                                   dst=destination,
+                                                   assume_yes=test_input_assume_yes)
 
     @pytest.mark.parametrize("test_input, calls, expected", [
         (["foo", "bar"], [call("foo"), call("bar")], True),
