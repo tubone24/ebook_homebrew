@@ -1,11 +1,11 @@
-ebook\_homebrew.utils package
-=============================
+ebook\_homebrew\.utils package
+==============================
 
 Submodules
 ----------
 
-ebook\_homebrew.utils.logging module
-------------------------------------
+ebook\_homebrew\.utils\.logging module
+--------------------------------------
 
 .. automodule:: ebook_homebrew.utils.logging
     :members:
