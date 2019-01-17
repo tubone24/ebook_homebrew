@@ -1,4 +1,5 @@
 import os
+import re
 import logging
 from unittest.mock import call
 from unittest.mock import patch
@@ -80,6 +81,28 @@ class TestCommon(object):
     def test_error__check_digit_format(self, test_input):
         with pytest.raises(InvalidDigitsFormat):
             self.target._check_digit_format(test_input)
+
+    @pytest.fixture()
+    def input_num(self):
+        return re.search("\\d{3}", "test001foo.jpg")
+
+    @pytest.fixture()
+    def input_regex_ext(self):
+        return re.compile(".jpg")
+
+    @pytest.mark.parametrize("test_filename, expected",[
+        ("test001foo.jpg", False),
+        ("test001.txt", True)])
+    def test_1_check_skip_file(self, test_filename, input_regex_ext, input_num, expected):
+        actual = self.target._check_skip_file(test_filename, input_regex_ext, input_num)
+        assert actual == expected
+
+    def test_2_check_skip_file(self, input_regex_ext):
+        test_input = "test001foo.jpg"
+        input_num = None
+        expected = True
+        actual = self.target._check_skip_file(test_input, input_regex_ext, input_num)
+        assert actual == expected
 
     def test_ok__rename_file(self):
         with patch("os.rename") as mock_rename:
