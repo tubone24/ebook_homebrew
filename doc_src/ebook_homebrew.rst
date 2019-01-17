@@ -11,56 +11,56 @@ Subpackages
 Submodules
 ----------
 
-ebook\_homebrew.archive module
-------------------------------
+ebook\_homebrew\.archive module
+-------------------------------
 
 .. automodule:: ebook_homebrew.archive
     :members:
     :undoc-members:
     :show-inheritance:
 
-ebook\_homebrew.cli module
---------------------------
+ebook\_homebrew\.cli module
+---------------------------
 
 .. automodule:: ebook_homebrew.cli
     :members:
     :undoc-members:
     :show-inheritance:
 
-ebook\_homebrew.convert module
-------------------------------
+ebook\_homebrew\.convert module
+-------------------------------
 
 .. automodule:: ebook_homebrew.convert
     :members:
     :undoc-members:
     :show-inheritance:
 
-ebook\_homebrew.core module
----------------------------
+ebook\_homebrew\.core module
+----------------------------
 
 .. automodule:: ebook_homebrew.core
     :members:
     :undoc-members:
     :show-inheritance:
 
-ebook\_homebrew.exceptions module
----------------------------------
+ebook\_homebrew\.exceptions module
+----------------------------------
 
 .. automodule:: ebook_homebrew.exceptions
     :members:
     :undoc-members:
     :show-inheritance:
 
-ebook\_homebrew.helper module
------------------------------
+ebook\_homebrew\.helper module
+------------------------------
 
 .. automodule:: ebook_homebrew.helper
     :members:
     :undoc-members:
     :show-inheritance:
 
-ebook\_homebrew.rename module
------------------------------
+ebook\_homebrew\.rename module
+------------------------------
 
 .. automodule:: ebook_homebrew.rename
     :members:
