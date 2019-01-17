@@ -154,6 +154,7 @@
 
 <span class="kn">import</span> <span class="nn">sys</span>
 
+<span class="kn">from</span> <span class="nn">.__init__</span> <span class="k">import</span> <span class="n">__version__</span>
 <span class="kn">from</span> <span class="nn">.convert</span> <span class="k">import</span> <span class="n">Image2PDF</span>
 <span class="kn">from</span> <span class="nn">.exceptions</span> <span class="k">import</span> <span class="n">BaseError</span>
 <span class="kn">from</span> <span class="nn">.rename</span> <span class="k">import</span> <span class="n">ChangeFilename</span>
@@ -186,6 +187,10 @@
         <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">critical</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
         <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="show_version"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.helper.show_version">[docs]</a><span class="k">def</span> <span class="nf">show_version</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ebook_homebrew: </span><span class="si">{version}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">version</span><span class="o">=</span><span class="n">__version__</span><span class="p">))</span></div>
 </pre></div>
 
            </div>

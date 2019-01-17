@@ -63,16 +63,12 @@ class Image2PDF(Common):
 
         for file in files:
             num = self._check_serial_number(file, self.__digits)
-            if not num:
-                logger.debug("Skip(No number): {filename}".format(filename=file))
-            elif not self.__regex_ext.search(file):
-                logger.debug("Skip(No target extension): {filename}".format(filename=file))
+            if self._check_skip_file(file, self.__regex_ext, num):
+                pass
             else:
-                logger.debug(file)
                 pdf_file = self._convert_image_to_pdf(file)
-                result_merge_pdf = self._merge_pdf_file(pdf_file, filename)
 
-                if result_merge_pdf:
+                if self._merge_pdf_file(pdf_file, filename):
                     logger.info("Success write pdf for {page} page.".format(page=page_count + 1))
                     page_count += 1
                     if remove_flag:
@@ -134,18 +130,3 @@ class Image2PDF(Common):
         with open(file_name, "wb") as f:
             self.__file_writer.write(f)
         return True
-
-    def move_file(self, file, dst, assume_yes):
-        """Move file
-
-        Args:
-            file (str): Target file name
-            dst (str): Target destination path
-            assume_yes (bool): If true, no verify users
-
-        Returns:
-            bool: If success, return true. Nothing target, return false.
-
-        """
-        destination = os.path.join(dst, file)
-        return self._move_file(file=file, dst=destination, assume_yes=assume_yes)
