@@ -4,7 +4,7 @@ import shutil
 
 import pytest
 
-from ebook_homebrew.helper import auto
+from ebook_homebrew.helper import auto, make_zip
 
 _logger = logging.getLogger(name=__name__)
 
@@ -40,7 +40,7 @@ def copy_image_file(directory):
 
 
 @pytest.fixture
-def args_ok(tmpdir):
+def args_ok_auto(tmpdir):
     _logger.debug("Temp directory: {tmp_dir}".format(tmp_dir=str(tmpdir)))
     copy_image_file(str(tmpdir))
     args_obj = ArgNameSpace()
@@ -56,12 +56,31 @@ def args_ok(tmpdir):
 
 
 @pytest.mark.it
-def test_ok_auto(args_ok):
-    auto(args_ok)
+def test_ok_auto(args_ok_auto):
+    auto(args_ok_auto)
 
 
 @pytest.fixture
-def args_no_support_file(tmpdir):
+def args_ok_make_zip(tmpdir):
+    _logger.debug("Temp directory: {tmp_dir}".format(tmp_dir=str(tmpdir)))
+    copy_image_file(str(tmpdir))
+    args_obj = ArgNameSpace()
+    args_obj.src_dir.append(str(tmpdir))
+    args_obj.dst_dir.append(os.path.join(str(tmpdir), "destination"))
+    args_obj.extension.append("png")
+    args_obj.filename.append("test.zip")
+    args_obj.assume_yes = True
+    args_obj.remove = True
+    return args_obj
+
+
+@pytest.mark.it
+def test_ok_make_zip(args_ok_make_zip):
+    make_zip(args_ok_make_zip)
+
+
+@pytest.fixture
+def args_no_support_file_auto(tmpdir):
     _logger.debug("Temp directory: {tmp_dir}".format(tmp_dir=str(tmpdir)))
     copy_image_file(str(tmpdir))
     args_obj = ArgNameSpace()
@@ -77,9 +96,31 @@ def args_no_support_file(tmpdir):
 
 
 @pytest.mark.it
-def test_base_error_auto(args_no_support_file):
+def test_base_error_auto(args_no_support_file_auto):
     with pytest.raises(SystemExit) as e:
-        auto(args_no_support_file)
+        auto(args_no_support_file_auto)
+        assert e.code == 2
+
+
+@pytest.fixture
+def args_no_support_file_make_zip(tmpdir):
+    _logger.debug("Temp directory: {tmp_dir}".format(tmp_dir=str(tmpdir)))
+    copy_image_file(str(tmpdir))
+    args_obj = ArgNameSpace()
+    args_obj.src_dir.append(str(tmpdir))
+    args_obj.dst_dir.append(os.path.join(str(tmpdir), "destination"))
+    args_obj.extension.append("png")
+    args_obj.filename.append("foo001bar.txt")
+    args_obj.manual = True
+    args_obj.assume_yes = False
+    args_obj.remove = True
+    return args_obj
+
+
+@pytest.mark.it
+def test_base_error_make_zip(args_no_support_file_make_zip):
+    with pytest.raises(SystemExit) as e:
+        make_zip(args_no_support_file_make_zip)
         assert e.code == 2
 
 
@@ -95,4 +136,11 @@ def args_unhandled(tmpdir):
 def test_unhandled_error_auto(args_unhandled):
     with pytest.raises(SystemExit) as e:
         auto(args_unhandled)
+        assert e.code == 1
+
+
+@pytest.mark.it
+def test_unhandled_error_make_zip(args_unhandled):
+    with pytest.raises(SystemExit) as e:
+        make_zip(args_unhandled)
         assert e.code == 1
