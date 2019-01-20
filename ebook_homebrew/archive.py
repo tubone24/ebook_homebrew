@@ -9,7 +9,7 @@ from .core import Common
 from .exceptions import ZipFileExistError
 from .utils.logging import get_logger
 
-logger = get_logger("MakeArchive")
+_logger = get_logger("MakeArchive")
 
 
 class MakeArchive(Common):
@@ -30,7 +30,7 @@ class MakeArchive(Common):
             self.__directory_path = directory_path
         else:
             self.__directory_path = os.getcwd()
-            logger.debug("Current Directory: {cwd}".format(cwd=self.__directory_path))
+            _logger.debug("Current Directory: {cwd}".format(cwd=self.__directory_path))
         os.chdir(self.__directory_path)
 
     def make_zip(self, filename, remove_flag=False, overwrite=False):
@@ -48,28 +48,28 @@ class MakeArchive(Common):
 
         """
         count = 0
-        files = os.listdir(self.__directory_path)
+        files = self._make_file_list(self.__directory_path)
         if overwrite:
             file_mode = "w"
         else:
             file_mode = "x"
         for file in files:
             if not self.__regex_ext.search(file):
-                logger.debug("Skip(No target extension): {filename}".format(filename=file))
+                _logger.debug("Skip(No target extension): {filename}".format(filename=file))
             else:
                 try:
                     with zipfile.ZipFile(filename, file_mode, zipfile.ZIP_DEFLATED) as zip_file:
                         zip_file.write(file)
                         count += 1
-                        logger.debug("Add Zipfile n files: {count}. Filename: "
-                                     "{filename}".format(count=count, filename=file))
+                        _logger.debug("Add Zipfile n files: {count}. Filename: "
+                                      "{filename}".format(count=count, filename=file))
                         file_mode = "a"
                 except FileExistsError:
                     raise ZipFileExistError()
 
                 if remove_flag:
                     self._remove_file(file, assume_yes=True)
-                    logger.debug("File removed: {filename}".format(filename=file))
-        logger.info("-" * 55)
-        logger.info("Finished. Zipfile: {filename}".format(filename=filename))
+                    _logger.debug("File removed: {filename}".format(filename=file))
+        _logger.info("-" * 55)
+        _logger.info("Finished. Zipfile: {filename}".format(filename=filename))
         return True

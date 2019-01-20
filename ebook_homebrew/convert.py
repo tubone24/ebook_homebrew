@@ -54,8 +54,7 @@ class Image2PDF(Common):
         """
         self._check_image_extension(self.__extension)
 
-        files = os.listdir(self.__directory_path)
-        files.sort()
+        files = self._make_file_list(self.__directory_path, sort=True)
         logger.debug("files: {files}".format(files=files))
         page_count = 0
         remove_files = []

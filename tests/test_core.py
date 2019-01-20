@@ -8,7 +8,8 @@ import pytest
 
 from ebook_homebrew.core import Common
 from ebook_homebrew.exceptions import InvalidExtensionType, \
-    InvalidPathType, InvalidDigitsFormat, ChangeFileNameOSError, InvalidImageParameterType
+    InvalidPathType, InvalidDigitsFormat, ChangeFileNameOSError,\
+    InvalidImageParameterType, TargetSrcFileNotFoundError
 
 _logger = logging.getLogger(name=__name__)
 
@@ -206,3 +207,18 @@ class TestCommon(object):
         with patch("PIL.Image.open"), patch("PIL.Image.open.show"):
             with pytest.raises(InvalidImageParameterType):
                 self.target._check_image_file(test_input)
+
+    @pytest.mark.parametrize("test_dir, test_sort, expected", [
+        ("test", False, ["aaa.txt", "test.txt", "aaa011.txt"]),
+        ("test", True, ["aaa.txt", "aaa011.txt", "test.txt"])])
+    def test_ok_make_file_list(self, test_dir, test_sort, expected):
+        with patch("os.listdir", return_value=["aaa.txt", "test.txt", "aaa011.txt"]) as mock_list_dir:
+            actual = self.target._make_file_list(test_dir, test_sort)
+            mock_list_dir.assert_called_once_with(test_dir)
+            assert actual == expected
+
+    def test_error_make_file_list(self):
+        with patch("os.listdir") as mock_list_dir:
+            mock_list_dir.side_effect = FileNotFoundError
+            with pytest.raises(TargetSrcFileNotFoundError):
+                self.target._make_file_list("test")

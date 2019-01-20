@@ -7,7 +7,7 @@ import re
 
 from .core import Common
 from .exceptions import InvalidNumberParameterType, \
-    ChangeFileNameOSError, InvalidImageParameterType, TargetSrcFileNotFoundError
+    ChangeFileNameOSError, InvalidImageParameterType
 from .utils.logging import get_logger
 
 _logger = get_logger("change_filename")
@@ -107,10 +107,7 @@ class ChangeFilename(Common):
             List[str]: Skipping files list by exists same name.
         """
         count = 0
-        try:
-            files = os.listdir(self.__directory_path)
-        except FileNotFoundError:
-            raise TargetSrcFileNotFoundError()
+        files = self._make_file_list(self.__directory_path)
 
         _logger.info("Target directory: {directory_path}".format(directory_path=self.__directory_path))
         _logger.info("Digit: {digits}".format(digits=self.__digits))
@@ -144,32 +141,37 @@ class ChangeFilename(Common):
             bool: If success, return True.
 
         """
+        def _flag_yes():
+            new_name_y = self.__input_new_file_name(file, overwrite)
+            self._rename_file(file, new_name_y)
+            _logger.info("Rename: {old_name} => {new_name} \n".format(old_name=file, new_name=new_name_y))
+
+        def _flag_rename():
+            flag_delete = input("Will be {file} deleted? "
+                                "OK? (y/n/c/r)".format(file=file))  # y="Yes" n="No" c="check" r="rename"
+            if flag_delete == "c":
+                self._check_image_file(file)
+            elif flag_delete in ("Y", "y"):
+                self._remove_file(file)
+            elif flag_delete == "r":
+                new_name_rename = self.__input_new_file_name(file, overwrite)
+                self._rename_file(file, new_name_rename)
+            else:
+                _logger.info("Leave file: {file}\n".format(file=file))
+
         _logger.info("-" * 55)
         _logger.info("Manually determine file names duplicated by the serial number\n")
         for file in self.__exist_files:
             _logger.info("File name: {file_name}")
             flag = input("Does it rename? (y/n/r)".format(file_name=file))  # y="Yes" n="No" r="Remove"
             if flag in ("Y", "y"):
-                new_name = self.__input_new_file_name(file, overwrite)
-                self._rename_file(file, new_name)
-                _logger.info("Rename: {old_name} => {new_name} \n".format(old_name=file, new_name=new_name))
+                _flag_yes()
             elif flag == "r":
-                flag = input("Will be {file} deleted? "
-                             "OK? (y/n/c/r)".format(file=file))  # y="Yes" n="No" c="check" r="rename"
-                if flag == "c":
-                    try:
-                        self._check_image_file(file)
-                    except InvalidImageParameterType as invalid_image_parameter_type:
-                        _logger.warn(invalid_image_parameter_type)
-                        _logger.info("Skip..")
-
-                if flag in ("Y", "y"):
-                    self._remove_file(file)
-                elif flag == "r":
-                    new_name = self.__input_new_file_name(file, overwrite)
-                    self._rename_file(file, new_name)
-                else:
-                    _logger.info("Leave file: {file}\n".format(file=file))
+                try:
+                    _flag_rename()
+                except InvalidImageParameterType as invalid_image_parameter_type:
+                    _logger.warn(invalid_image_parameter_type)
+                    _logger.info("Skip..")
             else:
                 _logger.info("Leave file: {file}\n".format(file=file))
         _logger.info("Finished.")
@@ -190,7 +192,7 @@ class ChangeFilename(Common):
 
         """
         _logger.info("-" * 55)
-        files = os.listdir(self.__directory_path)
+        files = self._make_file_list(self.__directory_path)
         if before is not None:
             _logger.info("Add {before} before serial digit".format(before=before))
         else:

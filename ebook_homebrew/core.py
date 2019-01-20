@@ -8,7 +8,8 @@ import shutil
 import PIL.Image
 
 from .exceptions import InvalidDigitsFormat, ChangeFileNameOSError, \
-    InvalidImageParameterType, InvalidExtensionType, InvalidPathType
+    InvalidImageParameterType, InvalidExtensionType, \
+    InvalidPathType, TargetSrcFileNotFoundError
 from .utils.logging import get_logger
 
 logger = get_logger("Core")
@@ -208,6 +209,16 @@ class Common(object):
             os.remove(file)
             logger.debug("Remove file: {file}".format(file=file))
         return True
+
+    @staticmethod
+    def _make_file_list(directory_path, sort=False):
+        try:
+            files = os.listdir(directory_path)
+        except FileNotFoundError:
+            raise TargetSrcFileNotFoundError()
+        if sort:
+            files.sort()
+        return files
 
     def _check_image_file(self, file_name):
         """Show image file.
