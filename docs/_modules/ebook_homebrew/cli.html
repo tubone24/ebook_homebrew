@@ -242,6 +242,58 @@
                              <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
                              <span class="n">help</span><span class="o">=</span><span class="s2">&quot;no verify users.&quot;</span><span class="p">)</span>
 
+    <span class="n">parser_make_zip</span> <span class="o">=</span> <span class="n">subparsers</span><span class="o">.</span><span class="n">add_parser</span><span class="p">(</span><span class="s2">&quot;makezip&quot;</span><span class="p">,</span>
+                                            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Make zip file for files &quot;</span>
+                                                        <span class="s2">&quot;which you choose extension.&quot;</span><span class="p">,</span>
+                                            <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Make zip file for adding specify extension files.&quot;</span><span class="p">)</span>
+
+    <span class="n">parser_make_zip</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-s&quot;</span><span class="p">,</span> <span class="s2">&quot;--src_dir&quot;</span><span class="p">,</span>
+                                 <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store&quot;</span><span class="p">,</span>
+                                 <span class="n">nargs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                                 <span class="n">const</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                 <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                 <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                 <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+                                 <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Source directory which put original image files.&quot;</span><span class="p">,</span>
+                                 <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;SRC_DIR&quot;</span><span class="p">)</span>
+
+    <span class="n">parser_make_zip</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--dst_dir&quot;</span><span class="p">,</span>
+                                 <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store&quot;</span><span class="p">,</span>
+                                 <span class="n">nargs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                                 <span class="n">const</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                 <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                 <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+                                 <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Destination directory which put e-book file.&quot;</span><span class="p">,</span>
+                                 <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;DST_DIR&quot;</span><span class="p">)</span>
+
+    <span class="n">parser_make_zip</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-e&quot;</span><span class="p">,</span> <span class="s2">&quot;--extension&quot;</span><span class="p">,</span>
+                                 <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store&quot;</span><span class="p">,</span>
+                                 <span class="n">nargs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                                 <span class="n">const</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                 <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                 <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                 <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+                                 <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Destination directory which put e-book file.&quot;</span><span class="p">,</span>
+                                 <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;EXT&quot;</span><span class="p">)</span>
+
+    <span class="n">parser_make_zip</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-f&quot;</span><span class="p">,</span> <span class="s2">&quot;--filename&quot;</span><span class="p">,</span>
+                                 <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store&quot;</span><span class="p">,</span>
+                                 <span class="n">nargs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                                 <span class="n">const</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                 <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                 <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                 <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+                                 <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Destination directory which put e-book file.&quot;</span><span class="p">,</span>
+                                 <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;FILENAME&quot;</span><span class="p">)</span>
+
+    <span class="n">parser_make_zip</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-r&quot;</span><span class="p">,</span> <span class="s2">&quot;--remove&quot;</span><span class="p">,</span>
+                                 <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
+                                 <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Remove original image file.&quot;</span><span class="p">)</span>
+
+    <span class="n">parser_make_zip</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-y&quot;</span><span class="p">,</span> <span class="s2">&quot;--assume_yes&quot;</span><span class="p">,</span>
+                                 <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
+                                 <span class="n">help</span><span class="o">=</span><span class="s2">&quot;no verify users.&quot;</span><span class="p">)</span>
+
     <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
 
     <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="s2">&quot;handler&quot;</span><span class="p">):</span>

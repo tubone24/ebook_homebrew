@@ -154,10 +154,14 @@
 
 
 <div class="viewcode-block" id="BaseError"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.exceptions.BaseError">[docs]</a><span class="k">class</span> <span class="nc">BaseError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Base error</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">pass</span></div>
 
 
 <div class="viewcode-block" id="ChangeFileNameError"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.exceptions.ChangeFileNameError">[docs]</a><span class="k">class</span> <span class="nc">ChangeFileNameError</span><span class="p">(</span><span class="n">BaseError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;rename::ChangeFileName module error</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">error_class</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">error_class</span> <span class="o">=</span> <span class="n">error_class</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="n">message</span>
@@ -167,6 +171,8 @@
 
 
 <div class="viewcode-block" id="MakePDFError"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.exceptions.MakePDFError">[docs]</a><span class="k">class</span> <span class="nc">MakePDFError</span><span class="p">(</span><span class="n">BaseError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;convert::MakePDF module error</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">error_class</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">error_class</span> <span class="o">=</span> <span class="n">error_class</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="n">message</span>
@@ -176,6 +182,8 @@
 
 
 <div class="viewcode-block" id="MakeZIPError"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.exceptions.MakeZIPError">[docs]</a><span class="k">class</span> <span class="nc">MakeZIPError</span><span class="p">(</span><span class="n">BaseError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;archive::MakeZip module error</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">error_class</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">error_class</span> <span class="o">=</span> <span class="n">error_class</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="n">message</span>
@@ -185,53 +193,71 @@
 
 
 <div class="viewcode-block" id="ZipFileExistError"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.exceptions.ZipFileExistError">[docs]</a><span class="k">class</span> <span class="nc">ZipFileExistError</span><span class="p">(</span><span class="n">MakeZIPError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Zip file already exist error</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;ZipFileExistError&quot;</span><span class="p">,</span> <span class="s2">&quot;Already Zipfile you decide name exist. &quot;</span>
                                               <span class="s2">&quot;If overwrite, choose &#39;overwrite&#39; parameter.&quot;</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="InvalidDigitsFormat"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.exceptions.InvalidDigitsFormat">[docs]</a><span class="k">class</span> <span class="nc">InvalidDigitsFormat</span><span class="p">(</span><span class="n">ChangeFileNameError</span><span class="p">):</span>
+<div class="viewcode-block" id="InvalidDigitsFormatError"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.exceptions.InvalidDigitsFormatError">[docs]</a><span class="k">class</span> <span class="nc">InvalidDigitsFormatError</span><span class="p">(</span><span class="n">ChangeFileNameError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Invalid serial number digit value error</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;ChangeFileNameError&quot;</span><span class="p">,</span> <span class="s2">&quot;Invalid serial number digit value. &quot;</span>
-                                                <span class="s2">&quot;If you want to use multiple digits, &quot;</span>
-                                                <span class="s2">&quot;please divide into comma separator&quot;</span><span class="p">)</span></div>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;InvalidDigitsFormatError&quot;</span><span class="p">,</span> <span class="s2">&quot;Invalid serial number digit value. &quot;</span>
+                                                     <span class="s2">&quot;If you want to use multiple digits, &quot;</span>
+                                                     <span class="s2">&quot;please divide into comma separator&quot;</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="InvalidExtensionType"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.exceptions.InvalidExtensionType">[docs]</a><span class="k">class</span> <span class="nc">InvalidExtensionType</span><span class="p">(</span><span class="n">ChangeFileNameError</span><span class="p">):</span>
+<div class="viewcode-block" id="InvalidExtensionTypeError"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.exceptions.InvalidExtensionTypeError">[docs]</a><span class="k">class</span> <span class="nc">InvalidExtensionTypeError</span><span class="p">(</span><span class="n">ChangeFileNameError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Invalid Extension Type error</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;InvalidExtensionType&quot;</span><span class="p">,</span> <span class="s2">&quot;Invalid Extension Type. &quot;</span>
-                                                 <span class="s2">&quot;Expected string or bytes-like object&quot;</span><span class="p">)</span></div>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;InvalidExtensionTypeError&quot;</span><span class="p">,</span> <span class="s2">&quot;Invalid Extension Type. &quot;</span>
+                                                      <span class="s2">&quot;Expected string or bytes-like object&quot;</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="InvalidPathType"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.exceptions.InvalidPathType">[docs]</a><span class="k">class</span> <span class="nc">InvalidPathType</span><span class="p">(</span><span class="n">ChangeFileNameError</span><span class="p">):</span>
+<div class="viewcode-block" id="InvalidPathTypeError"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.exceptions.InvalidPathTypeError">[docs]</a><span class="k">class</span> <span class="nc">InvalidPathTypeError</span><span class="p">(</span><span class="n">ChangeFileNameError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Invalid Path string Type error</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;InvalidPathType&quot;</span><span class="p">,</span> <span class="s2">&quot;Invalid Path string Type. &quot;</span>
-                                            <span class="s2">&quot;Expected string, bytes-like, os.Path-like object&quot;</span><span class="p">)</span></div>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;InvalidPathTypeError&quot;</span><span class="p">,</span> <span class="s2">&quot;Invalid Path string Type. &quot;</span>
+                                                 <span class="s2">&quot;Expected string, bytes-like, os.Path-like object&quot;</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="TargetSrcFileNotFoundError"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.exceptions.TargetSrcFileNotFoundError">[docs]</a><span class="k">class</span> <span class="nc">TargetSrcFileNotFoundError</span><span class="p">(</span><span class="n">ChangeFileNameError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Source directory you choose is no Target file error</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;TargetSrcFileNotFoundError&quot;</span><span class="p">,</span> <span class="s2">&quot;Source directory you choose is no Target file.&quot;</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="InvalidNumberParameterType"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.exceptions.InvalidNumberParameterType">[docs]</a><span class="k">class</span> <span class="nc">InvalidNumberParameterType</span><span class="p">(</span><span class="n">ChangeFileNameError</span><span class="p">):</span>
+<div class="viewcode-block" id="InvalidNumberParameterTypeError"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.exceptions.InvalidNumberParameterTypeError">[docs]</a><span class="k">class</span> <span class="nc">InvalidNumberParameterTypeError</span><span class="p">(</span><span class="n">ChangeFileNameError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;To create new file name, must be used &#39;Integer&#39; error</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;InvalidNumberParameterType&quot;</span><span class="p">,</span> <span class="s2">&quot;To create new file name, must be used &#39;Integer&#39;.&quot;</span><span class="p">)</span></div>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;InvalidNumberParameterTypeError&quot;</span><span class="p">,</span> <span class="s2">&quot;To create new file name, must be used &#39;Integer&#39;.&quot;</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="InvalidImageParameterType"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.exceptions.InvalidImageParameterType">[docs]</a><span class="k">class</span> <span class="nc">InvalidImageParameterType</span><span class="p">(</span><span class="n">ChangeFileNameError</span><span class="p">):</span>
+<div class="viewcode-block" id="InvalidImageParameterTypeError"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.exceptions.InvalidImageParameterTypeError">[docs]</a><span class="k">class</span> <span class="nc">InvalidImageParameterTypeError</span><span class="p">(</span><span class="n">ChangeFileNameError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;InvalidImageParameterTypeError</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;InvalidImageParameterType&quot;</span><span class="p">,</span> <span class="s2">&quot;To check image file, &quot;</span>
-                                                      <span class="s2">&quot;must be &#39;Image file&#39; such as jpeg, png, or gif.&quot;</span><span class="p">)</span></div>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;InvalidImageParameterTypeError&quot;</span><span class="p">,</span> <span class="s2">&quot;To check image file, &quot;</span>
+                                                           <span class="s2">&quot;must be &#39;Image file&#39; such as jpeg, png, or gif.&quot;</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="InvalidImageFileFormat"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.exceptions.InvalidImageFileFormat">[docs]</a><span class="k">class</span> <span class="nc">InvalidImageFileFormat</span><span class="p">(</span><span class="n">MakePDFError</span><span class="p">):</span>
+<div class="viewcode-block" id="InvalidImageFileFormatError"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.exceptions.InvalidImageFileFormatError">[docs]</a><span class="k">class</span> <span class="nc">InvalidImageFileFormatError</span><span class="p">(</span><span class="n">MakePDFError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;InvalidImageFileFormatError</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;InvalidImageFileFormat&quot;</span><span class="p">,</span> <span class="s2">&quot;Not supported file format. &quot;</span>
-                                                   <span class="s2">&quot;Supported &#39;jpg&#39;, &#39;png&#39;, &#39;gif&#39;&quot;</span><span class="p">)</span></div>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;InvalidImageFileFormatError&quot;</span><span class="p">,</span> <span class="s2">&quot;Not supported file format.&quot;</span>
+                                                        <span class="s2">&quot;Supported &#39;jpg&#39;, &#39;png&#39;, &#39;gif&#39;&quot;</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="ChangeFileNameOSError"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.exceptions.ChangeFileNameOSError">[docs]</a><span class="k">class</span> <span class="nc">ChangeFileNameOSError</span><span class="p">(</span><span class="n">ChangeFileNameError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;ChangeFileNameOSError</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;ChangeFileNameOSError&quot;</span><span class="p">,</span> <span class="s2">&quot;OSError was occurred. Reading more message above.&quot;</span><span class="p">)</span></div>
 </pre></div>

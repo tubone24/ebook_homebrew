@@ -6,8 +6,8 @@ import os.path
 import re
 
 from .core import Common
-from .exceptions import InvalidNumberParameterType, \
-    ChangeFileNameOSError, InvalidImageParameterType
+from .exceptions import InvalidNumberParameterTypeError, \
+    ChangeFileNameOSError, InvalidImageParameterTypeError
 from .utils.logging import get_logger
 
 _logger = get_logger("change_filename")
@@ -46,14 +46,14 @@ class ChangeFilename(Common):
             str: Only digit file name.
 
         Raises:
-            InvalidNumberParameterType: If input digit is not Match object.
+            InvalidNumberParameterTypeError: If input digit is not Match object.
 
         """
         try:
             return num.group().zfill(digit) + extension
         except AttributeError as attribute_error:
             _logger.exception(attribute_error)
-            raise InvalidNumberParameterType()
+            raise InvalidNumberParameterTypeError()
 
     def __check_exist_file(self, new_name, old_name, append_list):
         """Check current directory and exists same name file, return true.
@@ -169,7 +169,7 @@ class ChangeFilename(Common):
             elif flag == "r":
                 try:
                     _flag_rename()
-                except InvalidImageParameterType as invalid_image_parameter_type:
+                except InvalidImageParameterTypeError as invalid_image_parameter_type:
                     _logger.warn(invalid_image_parameter_type)
                     _logger.info("Skip..")
             else:

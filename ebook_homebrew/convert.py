@@ -8,7 +8,7 @@ import PIL.Image
 import PyPDF2
 
 from .core import Common
-from .exceptions import InvalidImageFileFormat
+from .exceptions import InvalidImageFileFormatError
 from .utils.logging import get_logger
 
 logger = get_logger("image2pdf")
@@ -104,10 +104,10 @@ class Image2PDF(Common):
         Returns:
             bool: If extension is image file, return true.
         Raises:
-            InvalidImageFileFormat: If extension is not image file.
+            InvalidImageFileFormatError: If extension is not image file.
         """
         if extension not in (".jpg", ".png", ".gif"):
-            raise InvalidImageFileFormat()
+            raise InvalidImageFileFormatError()
         return True
 
     def _merge_pdf_file(self, pdf_file, filename):

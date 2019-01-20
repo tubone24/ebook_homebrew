@@ -251,9 +251,20 @@ files such as jpeg, png and gif.</p>
 </table>
 </dd></dl>
 
+</dd></dl>
+
+</div>
+<div class="section" id="module-ebook_homebrew.core">
+<span id="ebook-homebrew-core-module"></span><h2>ebook_homebrew.core module<a class="headerlink" href="#module-ebook_homebrew.core" title="Permalink to this headline">¶</a></h2>
+<p>Core module</p>
+<dl class="class">
+<dt id="ebook_homebrew.core.Common">
+<em class="property">class </em><code class="descclassname">ebook_homebrew.core.</code><code class="descname">Common</code><a class="reference internal" href="_modules/ebook_homebrew/core.html#Common"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.core.Common" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Common Class</p>
 <dl class="method">
-<dt id="ebook_homebrew.convert.Image2PDF.move_file">
-<code class="descname">move_file</code><span class="sig-paren">(</span><em>file</em>, <em>dst</em>, <em>assume_yes</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebook_homebrew/convert.html#Image2PDF.move_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.convert.Image2PDF.move_file" title="Permalink to this definition">¶</a></dt>
+<dt id="ebook_homebrew.core.Common.move_file">
+<code class="descname">move_file</code><span class="sig-paren">(</span><em>file</em>, <em>dst</em>, <em>assume_yes</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebook_homebrew/core.html#Common.move_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.core.Common.move_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Move file</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -279,17 +290,6 @@ files such as jpeg, png and gif.</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-ebook_homebrew.core">
-<span id="ebook-homebrew-core-module"></span><h2>ebook_homebrew.core module<a class="headerlink" href="#module-ebook_homebrew.core" title="Permalink to this headline">¶</a></h2>
-<p>Core module</p>
-<dl class="class">
-<dt id="ebook_homebrew.core.Common">
-<em class="property">class </em><code class="descclassname">ebook_homebrew.core.</code><code class="descname">Common</code><a class="reference internal" href="_modules/ebook_homebrew/core.html#Common"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.core.Common" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
-<p>Common Class</p>
-</dd></dl>
-
-</div>
 <div class="section" id="module-ebook_homebrew.exceptions">
 <span id="ebook-homebrew-exceptions-module"></span><h2>ebook_homebrew.exceptions module<a class="headerlink" href="#module-ebook_homebrew.exceptions" title="Permalink to this headline">¶</a></h2>
 <p>Exception Classes</p>
@@ -297,12 +297,14 @@ files such as jpeg, png and gif.</p>
 <dt id="ebook_homebrew.exceptions.BaseError">
 <em class="property">exception </em><code class="descclassname">ebook_homebrew.exceptions.</code><code class="descname">BaseError</code><a class="reference internal" href="_modules/ebook_homebrew/exceptions.html#BaseError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.exceptions.BaseError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a></p>
+<p>Base error</p>
 </dd></dl>
 
 <dl class="exception">
 <dt id="ebook_homebrew.exceptions.ChangeFileNameError">
 <em class="property">exception </em><code class="descclassname">ebook_homebrew.exceptions.</code><code class="descname">ChangeFileNameError</code><span class="sig-paren">(</span><em>error_class</em>, <em>message</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebook_homebrew/exceptions.html#ChangeFileNameError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.exceptions.ChangeFileNameError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#ebook_homebrew.exceptions.BaseError" title="ebook_homebrew.exceptions.BaseError"><code class="xref py py-class docutils literal notranslate"><span class="pre">ebook_homebrew.exceptions.BaseError</span></code></a></p>
+<p>rename::ChangeFileName module error</p>
 </dd></dl>
 
 <dl class="exception">
@@ -312,63 +314,71 @@ files such as jpeg, png and gif.</p>
 </dd></dl>
 
 <dl class="exception">
-<dt id="ebook_homebrew.exceptions.InvalidDigitsFormat">
-<em class="property">exception </em><code class="descclassname">ebook_homebrew.exceptions.</code><code class="descname">InvalidDigitsFormat</code><a class="reference internal" href="_modules/ebook_homebrew/exceptions.html#InvalidDigitsFormat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.exceptions.InvalidDigitsFormat" title="Permalink to this definition">¶</a></dt>
+<dt id="ebook_homebrew.exceptions.InvalidDigitsFormatError">
+<em class="property">exception </em><code class="descclassname">ebook_homebrew.exceptions.</code><code class="descname">InvalidDigitsFormatError</code><a class="reference internal" href="_modules/ebook_homebrew/exceptions.html#InvalidDigitsFormatError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.exceptions.InvalidDigitsFormatError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#ebook_homebrew.exceptions.ChangeFileNameError" title="ebook_homebrew.exceptions.ChangeFileNameError"><code class="xref py py-class docutils literal notranslate"><span class="pre">ebook_homebrew.exceptions.ChangeFileNameError</span></code></a></p>
+<p>Invalid serial number digit value error</p>
 </dd></dl>
 
 <dl class="exception">
-<dt id="ebook_homebrew.exceptions.InvalidExtensionType">
-<em class="property">exception </em><code class="descclassname">ebook_homebrew.exceptions.</code><code class="descname">InvalidExtensionType</code><a class="reference internal" href="_modules/ebook_homebrew/exceptions.html#InvalidExtensionType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.exceptions.InvalidExtensionType" title="Permalink to this definition">¶</a></dt>
+<dt id="ebook_homebrew.exceptions.InvalidExtensionTypeError">
+<em class="property">exception </em><code class="descclassname">ebook_homebrew.exceptions.</code><code class="descname">InvalidExtensionTypeError</code><a class="reference internal" href="_modules/ebook_homebrew/exceptions.html#InvalidExtensionTypeError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.exceptions.InvalidExtensionTypeError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#ebook_homebrew.exceptions.ChangeFileNameError" title="ebook_homebrew.exceptions.ChangeFileNameError"><code class="xref py py-class docutils literal notranslate"><span class="pre">ebook_homebrew.exceptions.ChangeFileNameError</span></code></a></p>
+<p>Invalid Extension Type error</p>
 </dd></dl>
 
 <dl class="exception">
-<dt id="ebook_homebrew.exceptions.InvalidImageFileFormat">
-<em class="property">exception </em><code class="descclassname">ebook_homebrew.exceptions.</code><code class="descname">InvalidImageFileFormat</code><a class="reference internal" href="_modules/ebook_homebrew/exceptions.html#InvalidImageFileFormat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.exceptions.InvalidImageFileFormat" title="Permalink to this definition">¶</a></dt>
+<dt id="ebook_homebrew.exceptions.InvalidImageFileFormatError">
+<em class="property">exception </em><code class="descclassname">ebook_homebrew.exceptions.</code><code class="descname">InvalidImageFileFormatError</code><a class="reference internal" href="_modules/ebook_homebrew/exceptions.html#InvalidImageFileFormatError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.exceptions.InvalidImageFileFormatError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#ebook_homebrew.exceptions.MakePDFError" title="ebook_homebrew.exceptions.MakePDFError"><code class="xref py py-class docutils literal notranslate"><span class="pre">ebook_homebrew.exceptions.MakePDFError</span></code></a></p>
 </dd></dl>
 
 <dl class="exception">
-<dt id="ebook_homebrew.exceptions.InvalidImageParameterType">
-<em class="property">exception </em><code class="descclassname">ebook_homebrew.exceptions.</code><code class="descname">InvalidImageParameterType</code><a class="reference internal" href="_modules/ebook_homebrew/exceptions.html#InvalidImageParameterType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.exceptions.InvalidImageParameterType" title="Permalink to this definition">¶</a></dt>
+<dt id="ebook_homebrew.exceptions.InvalidImageParameterTypeError">
+<em class="property">exception </em><code class="descclassname">ebook_homebrew.exceptions.</code><code class="descname">InvalidImageParameterTypeError</code><a class="reference internal" href="_modules/ebook_homebrew/exceptions.html#InvalidImageParameterTypeError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.exceptions.InvalidImageParameterTypeError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#ebook_homebrew.exceptions.ChangeFileNameError" title="ebook_homebrew.exceptions.ChangeFileNameError"><code class="xref py py-class docutils literal notranslate"><span class="pre">ebook_homebrew.exceptions.ChangeFileNameError</span></code></a></p>
 </dd></dl>
 
 <dl class="exception">
-<dt id="ebook_homebrew.exceptions.InvalidNumberParameterType">
-<em class="property">exception </em><code class="descclassname">ebook_homebrew.exceptions.</code><code class="descname">InvalidNumberParameterType</code><a class="reference internal" href="_modules/ebook_homebrew/exceptions.html#InvalidNumberParameterType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.exceptions.InvalidNumberParameterType" title="Permalink to this definition">¶</a></dt>
+<dt id="ebook_homebrew.exceptions.InvalidNumberParameterTypeError">
+<em class="property">exception </em><code class="descclassname">ebook_homebrew.exceptions.</code><code class="descname">InvalidNumberParameterTypeError</code><a class="reference internal" href="_modules/ebook_homebrew/exceptions.html#InvalidNumberParameterTypeError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.exceptions.InvalidNumberParameterTypeError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#ebook_homebrew.exceptions.ChangeFileNameError" title="ebook_homebrew.exceptions.ChangeFileNameError"><code class="xref py py-class docutils literal notranslate"><span class="pre">ebook_homebrew.exceptions.ChangeFileNameError</span></code></a></p>
+<p>To create new file name, must be used ‘Integer’ error</p>
 </dd></dl>
 
 <dl class="exception">
-<dt id="ebook_homebrew.exceptions.InvalidPathType">
-<em class="property">exception </em><code class="descclassname">ebook_homebrew.exceptions.</code><code class="descname">InvalidPathType</code><a class="reference internal" href="_modules/ebook_homebrew/exceptions.html#InvalidPathType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.exceptions.InvalidPathType" title="Permalink to this definition">¶</a></dt>
+<dt id="ebook_homebrew.exceptions.InvalidPathTypeError">
+<em class="property">exception </em><code class="descclassname">ebook_homebrew.exceptions.</code><code class="descname">InvalidPathTypeError</code><a class="reference internal" href="_modules/ebook_homebrew/exceptions.html#InvalidPathTypeError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.exceptions.InvalidPathTypeError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#ebook_homebrew.exceptions.ChangeFileNameError" title="ebook_homebrew.exceptions.ChangeFileNameError"><code class="xref py py-class docutils literal notranslate"><span class="pre">ebook_homebrew.exceptions.ChangeFileNameError</span></code></a></p>
+<p>Invalid Path string Type error</p>
 </dd></dl>
 
 <dl class="exception">
 <dt id="ebook_homebrew.exceptions.MakePDFError">
 <em class="property">exception </em><code class="descclassname">ebook_homebrew.exceptions.</code><code class="descname">MakePDFError</code><span class="sig-paren">(</span><em>error_class</em>, <em>message</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebook_homebrew/exceptions.html#MakePDFError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.exceptions.MakePDFError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#ebook_homebrew.exceptions.BaseError" title="ebook_homebrew.exceptions.BaseError"><code class="xref py py-class docutils literal notranslate"><span class="pre">ebook_homebrew.exceptions.BaseError</span></code></a></p>
+<p>convert::MakePDF module error</p>
 </dd></dl>
 
 <dl class="exception">
 <dt id="ebook_homebrew.exceptions.MakeZIPError">
 <em class="property">exception </em><code class="descclassname">ebook_homebrew.exceptions.</code><code class="descname">MakeZIPError</code><span class="sig-paren">(</span><em>error_class</em>, <em>message</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebook_homebrew/exceptions.html#MakeZIPError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.exceptions.MakeZIPError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#ebook_homebrew.exceptions.BaseError" title="ebook_homebrew.exceptions.BaseError"><code class="xref py py-class docutils literal notranslate"><span class="pre">ebook_homebrew.exceptions.BaseError</span></code></a></p>
+<p>archive::MakeZip module error</p>
 </dd></dl>
 
 <dl class="exception">
 <dt id="ebook_homebrew.exceptions.TargetSrcFileNotFoundError">
 <em class="property">exception </em><code class="descclassname">ebook_homebrew.exceptions.</code><code class="descname">TargetSrcFileNotFoundError</code><a class="reference internal" href="_modules/ebook_homebrew/exceptions.html#TargetSrcFileNotFoundError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.exceptions.TargetSrcFileNotFoundError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#ebook_homebrew.exceptions.ChangeFileNameError" title="ebook_homebrew.exceptions.ChangeFileNameError"><code class="xref py py-class docutils literal notranslate"><span class="pre">ebook_homebrew.exceptions.ChangeFileNameError</span></code></a></p>
+<p>Source directory you choose is no Target file error</p>
 </dd></dl>
 
 <dl class="exception">
 <dt id="ebook_homebrew.exceptions.ZipFileExistError">
 <em class="property">exception </em><code class="descclassname">ebook_homebrew.exceptions.</code><code class="descname">ZipFileExistError</code><a class="reference internal" href="_modules/ebook_homebrew/exceptions.html#ZipFileExistError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.exceptions.ZipFileExistError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#ebook_homebrew.exceptions.MakeZIPError" title="ebook_homebrew.exceptions.MakeZIPError"><code class="xref py py-class docutils literal notranslate"><span class="pre">ebook_homebrew.exceptions.MakeZIPError</span></code></a></p>
+<p>Zip file already exist error</p>
 </dd></dl>
 
 </div>
@@ -378,12 +388,44 @@ files such as jpeg, png and gif.</p>
 <dl class="function">
 <dt id="ebook_homebrew.helper.auto">
 <code class="descclassname">ebook_homebrew.helper.</code><code class="descname">auto</code><span class="sig-paren">(</span><em>args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebook_homebrew/helper.html#auto"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.helper.auto" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Rename file, convert pdf.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>args</strong> – argparse namespace object</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">If success, return true.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)">bool</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ebook_homebrew.helper.make_zip">
+<code class="descclassname">ebook_homebrew.helper.</code><code class="descname">make_zip</code><span class="sig-paren">(</span><em>args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebook_homebrew/helper.html#make_zip"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.helper.make_zip" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make zip file</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>args</strong> – argparse namespace object</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">If success, return true.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)">bool</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="ebook_homebrew.helper.show_version">
 <code class="descclassname">ebook_homebrew.helper.</code><code class="descname">show_version</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebook_homebrew/helper.html#show_version"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.helper.show_version" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Show version</p>
+</dd></dl>
 
 </div>
 <div class="section" id="module-ebook_homebrew.rename">

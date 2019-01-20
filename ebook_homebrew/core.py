@@ -7,9 +7,9 @@ import shutil
 
 import PIL.Image
 
-from .exceptions import InvalidDigitsFormat, ChangeFileNameOSError, \
-    InvalidImageParameterType, InvalidExtensionType, \
-    InvalidPathType, TargetSrcFileNotFoundError
+from .exceptions import InvalidDigitsFormatError, ChangeFileNameOSError, \
+    InvalidImageParameterTypeError, InvalidExtensionTypeError, \
+    InvalidPathTypeError, TargetSrcFileNotFoundError
 from .utils.logging import get_logger
 
 logger = get_logger("Core")
@@ -48,7 +48,7 @@ class Common(object):
                 extension_with_dot = "." + extension
                 return extension_with_dot
         except TypeError:
-            raise InvalidExtensionType()
+            raise InvalidExtensionTypeError()
 
     @staticmethod
     def _split_dir_root_ext(path):
@@ -68,7 +68,7 @@ class Common(object):
             base_root, ext = os.path.splitext(base_name)
             return dir_name, base_root, ext
         except (TypeError, AttributeError):
-            raise InvalidPathType()
+            raise InvalidPathTypeError()
 
     @staticmethod
     def _check_serial_number(filename, digits):
@@ -95,15 +95,15 @@ class Common(object):
             int: Max digit number
 
         Raises:
-            InvalidDigitsFormat: If digit is not supported regex format.
+            InvalidDigitsFormatError: If digit is not supported regex format.
         """
         try:
             if re.match(r"^\d*,?\d*$", digits):
                 return max(map(int, (digits.split(","))))
             else:
-                raise InvalidDigitsFormat()
+                raise InvalidDigitsFormatError()
         except TypeError:
-            raise InvalidDigitsFormat()
+            raise InvalidDigitsFormatError()
 
     @staticmethod
     def _check_skip_file(filename, regex_ext, num):
@@ -226,14 +226,14 @@ class Common(object):
             file_name(str): Image file name
 
         Raises:
-            InvalidImageParameterType: If you doesn't choose image file.
+            InvalidImageParameterTypeError: If you doesn't choose image file.
         """
         _, _, ext = self._split_dir_root_ext(file_name)
         if ext in (".jpg", ".png", ".gif"):
             draw_pic = PIL.Image.open(file_name)
             draw_pic.show()
         else:
-            raise InvalidImageParameterType()
+            raise InvalidImageParameterTypeError()
 
     def move_file(self, file, dst, assume_yes):
         """Move file
