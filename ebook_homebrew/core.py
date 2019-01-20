@@ -7,8 +7,9 @@ import shutil
 
 import PIL.Image
 
-from .exceptions import InvalidDigitsFormat, ChangeFileNameOSError, \
-    InvalidImageParameterType, InvalidExtensionType, InvalidPathType
+from .exceptions import InvalidDigitsFormatError, ChangeFileNameOSError, \
+    InvalidImageParameterTypeError, InvalidExtensionTypeError, \
+    InvalidPathTypeError, TargetSrcFileNotFoundError
 from .utils.logging import get_logger
 
 logger = get_logger("Core")
@@ -47,7 +48,7 @@ class Common(object):
                 extension_with_dot = "." + extension
                 return extension_with_dot
         except TypeError:
-            raise InvalidExtensionType()
+            raise InvalidExtensionTypeError()
 
     @staticmethod
     def _split_dir_root_ext(path):
@@ -67,7 +68,7 @@ class Common(object):
             base_root, ext = os.path.splitext(base_name)
             return dir_name, base_root, ext
         except (TypeError, AttributeError):
-            raise InvalidPathType()
+            raise InvalidPathTypeError()
 
     @staticmethod
     def _check_serial_number(filename, digits):
@@ -94,15 +95,15 @@ class Common(object):
             int: Max digit number
 
         Raises:
-            InvalidDigitsFormat: If digit is not supported regex format.
+            InvalidDigitsFormatError: If digit is not supported regex format.
         """
         try:
             if re.match(r"^\d*,?\d*$", digits):
                 return max(map(int, (digits.split(","))))
             else:
-                raise InvalidDigitsFormat()
+                raise InvalidDigitsFormatError()
         except TypeError:
-            raise InvalidDigitsFormat()
+            raise InvalidDigitsFormatError()
 
     @staticmethod
     def _check_skip_file(filename, regex_ext, num):
@@ -143,8 +144,8 @@ class Common(object):
             logger.info("Rename file success: {old_name} => {new_name}".format(old_name=old_name,
                                                                                new_name=new_name))
             return True
-        except OSError as e:
-            logger.exception(e)
+        except OSError as os_error:
+            logger.exception(os_error)
             raise ChangeFileNameOSError()
 
     @staticmethod
@@ -161,8 +162,7 @@ class Common(object):
         if assume_yes is True:
             pass
         else:
-            logger.info("Remove file: {file_name} OK? (y/n)".format(file_name=file))
-            flag = input()
+            flag = input("Remove file: {file_name} OK? (y/n)".format(file_name=file))
             if flag in ("Y", "y"):
                 pass
             else:
@@ -185,14 +185,9 @@ class Common(object):
 
         """
         dst_dir, _, _ = self._split_dir_root_ext(dst)
-        if assume_yes is True:
-            pass
-        else:
-            logger.info("Move file: {file_name} OK? (y/n/r)".format(file_name=file))
-            flag = input()
-            if flag == "Y" or flag == "y":
-                pass
-            else:
+        if assume_yes is False:
+            flag = input("Move file: {file_name} OK? (y/n/r)".format(file_name=file))
+            if flag not in ("Y", "y"):
                 logger.info("Nothing..")
                 return False
         shutil.move(file, dst_dir)
@@ -215,20 +210,30 @@ class Common(object):
             logger.debug("Remove file: {file}".format(file=file))
         return True
 
+    @staticmethod
+    def _make_file_list(directory_path, sort=False):
+        try:
+            files = os.listdir(directory_path)
+        except FileNotFoundError:
+            raise TargetSrcFileNotFoundError()
+        if sort:
+            files.sort()
+        return files
+
     def _check_image_file(self, file_name):
         """Show image file.
         Args:
             file_name(str): Image file name
 
         Raises:
-            InvalidImageParameterType: If you doesn't choose image file.
+            InvalidImageParameterTypeError: If you doesn't choose image file.
         """
         _, _, ext = self._split_dir_root_ext(file_name)
         if ext in (".jpg", ".png", ".gif"):
             draw_pic = PIL.Image.open(file_name)
             draw_pic.show()
         else:
-            raise InvalidImageParameterType()
+            raise InvalidImageParameterTypeError()
 
     def move_file(self, file, dst, assume_yes):
         """Move file

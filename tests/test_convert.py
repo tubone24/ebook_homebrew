@@ -5,7 +5,7 @@ from unittest.mock import patch
 import pytest
 
 from ebook_homebrew.convert import Image2PDF
-from ebook_homebrew.exceptions import InvalidImageFileFormat
+from ebook_homebrew.exceptions import InvalidImageFileFormatError
 
 _logger = logging.getLogger(name=__name__)
 
@@ -105,5 +105,18 @@ class TestImage2PDF(object):
         with patch("PyPDF2.PdfFileWriter"), patch("os.chdir") as mock_chdir:
             target = Image2PDF(directory_path="test", digits="3", extension="txt")
             mock_chdir.assert_called_once_with("test")
-        with pytest.raises(InvalidImageFileFormat):
+        with pytest.raises(InvalidImageFileFormatError):
             target.make_pdf("test.pdf", False)
+
+    @pytest.mark.parametrize("test_input_extension", [
+        ".jpg",
+        ".png",
+        ".gif"])
+    def test_ok_check_image_extension(self, test_input_extension):
+        expected = True
+        actual = self.target._check_image_extension(test_input_extension)
+        assert actual == expected
+
+    def test_error_check_image_extension(self):
+        with pytest.raises(InvalidImageFileFormatError):
+            self.target._check_image_extension(".txt")

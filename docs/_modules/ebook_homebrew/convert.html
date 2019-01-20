@@ -158,7 +158,7 @@
 <span class="kn">import</span> <span class="nn">PyPDF2</span>
 
 <span class="kn">from</span> <span class="nn">.core</span> <span class="k">import</span> <span class="n">Common</span>
-<span class="kn">from</span> <span class="nn">.exceptions</span> <span class="k">import</span> <span class="n">InvalidImageFileFormat</span>
+<span class="kn">from</span> <span class="nn">.exceptions</span> <span class="k">import</span> <span class="n">InvalidImageFileFormatError</span>
 <span class="kn">from</span> <span class="nn">.utils.logging</span> <span class="k">import</span> <span class="n">get_logger</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">get_logger</span><span class="p">(</span><span class="s2">&quot;image2pdf&quot;</span><span class="p">)</span>
@@ -202,27 +202,21 @@
 <span class="sd">            bool: If success, return true.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extension</span> <span class="o">!=</span> <span class="s2">&quot;.jpg&quot;</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extension</span> <span class="o">!=</span> <span class="s2">&quot;.png&quot;</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">__extension</span> <span class="o">!=</span> <span class="s2">&quot;.gif&quot;</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">InvalidImageFileFormat</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_image_extension</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__extension</span><span class="p">)</span>
 
-        <span class="n">files</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__directory_path</span><span class="p">)</span>
-        <span class="n">files</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+        <span class="n">files</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_file_list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__directory_path</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;files: </span><span class="si">{files}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">files</span><span class="o">=</span><span class="n">files</span><span class="p">))</span>
         <span class="n">page_count</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="n">remove_files</span> <span class="o">=</span> <span class="p">[]</span>
 
         <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
             <span class="n">num</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_serial_number</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__digits</span><span class="p">)</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">num</span><span class="p">:</span>
-                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Skip(No number): </span><span class="si">{filename}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">file</span><span class="p">))</span>
-            <span class="k">elif</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">__regex_ext</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">file</span><span class="p">):</span>
-                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Skip(No target extension): </span><span class="si">{filename}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">file</span><span class="p">))</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_skip_file</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__regex_ext</span><span class="p">,</span> <span class="n">num</span><span class="p">):</span>
+                <span class="k">pass</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
                 <span class="n">pdf_file</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_image_to_pdf</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
-                <span class="n">result_merge_pdf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_merge_pdf_file</span><span class="p">(</span><span class="n">pdf_file</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
 
-                <span class="k">if</span> <span class="n">result_merge_pdf</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_merge_pdf_file</span><span class="p">(</span><span class="n">pdf_file</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
                     <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Success write pdf for </span><span class="si">{page}</span><span class="s2"> page.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">page</span><span class="o">=</span><span class="n">page_count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
                     <span class="n">page_count</span> <span class="o">+=</span> <span class="mi">1</span>
                     <span class="k">if</span> <span class="n">remove_flag</span><span class="p">:</span>
@@ -251,8 +245,23 @@
         <span class="n">image</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">pdf_file_name</span><span class="p">,</span> <span class="s2">&quot;PDF&quot;</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="n">resolution</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">pdf_file_name</span>
 
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_check_image_extension</span><span class="p">(</span><span class="n">extension</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Check image file extension or not.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            extension (str): Image file extension</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            bool: If extension is image file, return true.</span>
+<span class="sd">        Raises:</span>
+<span class="sd">            InvalidImageFileFormatError: If extension is not image file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">extension</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;.jpg&quot;</span><span class="p">,</span> <span class="s2">&quot;.png&quot;</span><span class="p">,</span> <span class="s2">&quot;.gif&quot;</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">InvalidImageFileFormatError</span><span class="p">()</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
     <span class="k">def</span> <span class="nf">_merge_pdf_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pdf_file</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Marge pdf files</span>
+        <span class="sd">&quot;&quot;&quot;Marge pdf files.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            pdf_file (str): 1 page pdf file</span>
@@ -283,22 +292,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__file_writer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-        <span class="k">return</span> <span class="kc">True</span>
-
-<div class="viewcode-block" id="Image2PDF.move_file"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.convert.Image2PDF.move_file">[docs]</a>    <span class="k">def</span> <span class="nf">move_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">,</span> <span class="n">dst</span><span class="p">,</span> <span class="n">assume_yes</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Move file</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            file (str): Target file name</span>
-<span class="sd">            dst (str): Target destination path</span>
-<span class="sd">            assume_yes (bool): If true, no verify users</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            bool: If success, return true. Nothing target, return false.</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">destination</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dst</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_move_file</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="n">file</span><span class="p">,</span> <span class="n">dst</span><span class="o">=</span><span class="n">destination</span><span class="p">,</span> <span class="n">assume_yes</span><span class="o">=</span><span class="n">assume_yes</span><span class="p">)</span></div></div>
+        <span class="k">return</span> <span class="kc">True</span></div>
 </pre></div>
 
            </div>

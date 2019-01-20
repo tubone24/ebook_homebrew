@@ -4,8 +4,8 @@ from unittest.mock import patch
 
 import pytest
 
-from ebook_homebrew.exceptions import InvalidNumberParameterType, \
-    TargetSrcFileNotFoundError, ChangeFileNameOSError, InvalidImageParameterType
+from ebook_homebrew.exceptions import InvalidNumberParameterTypeError, \
+    TargetSrcFileNotFoundError, ChangeFileNameOSError, InvalidImageParameterTypeError
 from ebook_homebrew.rename import ChangeFilename
 
 _logger = logging.getLogger(name=__name__)
@@ -29,7 +29,7 @@ class TestChangeFilename(object):
         assert actual == expected
 
     def test_error_create_new_name(self):
-        with pytest.raises(InvalidNumberParameterType):
+        with pytest.raises(InvalidNumberParameterTypeError):
             self.target._create_new_name("test", 5, ".jpg")
 
     @pytest.mark.parametrize("file_list, is_file, expected", [
@@ -96,7 +96,7 @@ class TestChangeFilename(object):
             mock_listdir.return_value = ["test001test.jpg"]
             mock_isfile.side_effect = is_file_return
             mock_input.side_effect = self.interactive_input(test_interactive)
-            mock_image.side_effect = InvalidImageParameterType
+            mock_image.side_effect = InvalidImageParameterTypeError
             self.target.filename_to_digit_number()
             actual = self.target.change_name_manually(overwrite=False)
             assert actual is True

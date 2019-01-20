@@ -7,8 +7,9 @@ from unittest.mock import patch
 import pytest
 
 from ebook_homebrew.core import Common
-from ebook_homebrew.exceptions import InvalidExtensionType, \
-    InvalidPathType, InvalidDigitsFormat, ChangeFileNameOSError, InvalidImageParameterType
+from ebook_homebrew.exceptions import InvalidExtensionTypeError, \
+    InvalidPathTypeError, InvalidDigitsFormatError, ChangeFileNameOSError,\
+    InvalidImageParameterTypeError, TargetSrcFileNotFoundError
 
 _logger = logging.getLogger(name=__name__)
 
@@ -34,7 +35,7 @@ class TestCommon(object):
                                             {},
                                             None])
     def test_error__convert_extension_with_dot(self, test_input):
-        with pytest.raises(InvalidExtensionType):
+        with pytest.raises(InvalidExtensionTypeError):
              self.target._convert_extension_with_dot(test_input)
 
     @pytest.mark.parametrize("test_input, expected", [
@@ -48,7 +49,7 @@ class TestCommon(object):
 
     def test_error__split_dir_root_ext(self):
         test_input = 32.445
-        with pytest.raises(InvalidPathType):
+        with pytest.raises(InvalidPathTypeError):
             self.target._split_dir_root_ext(test_input)
 
     @pytest.mark.parametrize("test_input, expected", [
@@ -79,7 +80,7 @@ class TestCommon(object):
         "3, 4",
         3.5])
     def test_error__check_digit_format(self, test_input):
-        with pytest.raises(InvalidDigitsFormat):
+        with pytest.raises(InvalidDigitsFormatError):
             self.target._check_digit_format(test_input)
 
     @pytest.fixture()
@@ -204,5 +205,20 @@ class TestCommon(object):
     def test_error__check_image_file(self):
         test_input = "test.txt"
         with patch("PIL.Image.open"), patch("PIL.Image.open.show"):
-            with pytest.raises(InvalidImageParameterType):
+            with pytest.raises(InvalidImageParameterTypeError):
                 self.target._check_image_file(test_input)
+
+    @pytest.mark.parametrize("test_dir, test_sort, expected", [
+        ("test", False, ["aaa.txt", "test.txt", "aaa011.txt"]),
+        ("test", True, ["aaa.txt", "aaa011.txt", "test.txt"])])
+    def test_ok_make_file_list(self, test_dir, test_sort, expected):
+        with patch("os.listdir", return_value=["aaa.txt", "test.txt", "aaa011.txt"]) as mock_list_dir:
+            actual = self.target._make_file_list(test_dir, test_sort)
+            mock_list_dir.assert_called_once_with(test_dir)
+            assert actual == expected
+
+    def test_error_make_file_list(self):
+        with patch("os.listdir") as mock_list_dir:
+            mock_list_dir.side_effect = FileNotFoundError
+            with pytest.raises(TargetSrcFileNotFoundError):
+                self.target._make_file_list("test")

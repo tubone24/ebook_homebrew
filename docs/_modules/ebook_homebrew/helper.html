@@ -159,37 +159,72 @@
 <span class="kn">from</span> <span class="nn">.exceptions</span> <span class="k">import</span> <span class="n">BaseError</span>
 <span class="kn">from</span> <span class="nn">.rename</span> <span class="k">import</span> <span class="n">ChangeFilename</span>
 <span class="kn">from</span> <span class="nn">.utils.logging</span> <span class="k">import</span> <span class="n">get_logger</span>
+<span class="kn">from</span> <span class="nn">.archive</span> <span class="k">import</span> <span class="n">MakeArchive</span>
 
-<span class="c1"># from archive import MakeArchive</span>
-
-<span class="n">logger</span> <span class="o">=</span> <span class="n">get_logger</span><span class="p">(</span><span class="s2">&quot;helper&quot;</span><span class="p">)</span>
+<span class="n">_logger</span> <span class="o">=</span> <span class="n">get_logger</span><span class="p">(</span><span class="s2">&quot;helper&quot;</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="auto"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.helper.auto">[docs]</a><span class="k">def</span> <span class="nf">auto</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">rename</span> <span class="o">=</span> <span class="n">ChangeFilename</span><span class="p">(</span><span class="n">directory_path</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">src_dir</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-                                <span class="n">digits</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">digit</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-                                <span class="n">extension</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">extension</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-        <span class="n">rename</span><span class="o">.</span><span class="n">filename_to_digit_number</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">manual</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
-            <span class="n">rename</span><span class="o">.</span><span class="n">change_name_manually</span><span class="p">(</span><span class="n">overwrite</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">assume_yes</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot; Rename file, convert pdf.</span>
 
-        <span class="n">convert</span> <span class="o">=</span> <span class="n">Image2PDF</span><span class="p">(</span><span class="n">digits</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">digit</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">extension</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">extension</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-        <span class="n">convert</span><span class="o">.</span><span class="n">make_pdf</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">filename</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">remove_flag</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">remove</span><span class="p">)</span>
+<span class="sd">    Args:</span>
+<span class="sd">        args: argparse namespace object</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        bool: If success, return true.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">rename_obj</span> <span class="o">=</span> <span class="n">ChangeFilename</span><span class="p">(</span><span class="n">directory_path</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">src_dir</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                                    <span class="n">digits</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">digit</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                                    <span class="n">extension</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">extension</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">rename_obj</span><span class="o">.</span><span class="n">filename_to_digit_number</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">manual</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">rename_obj</span><span class="o">.</span><span class="n">change_name_manually</span><span class="p">(</span><span class="n">overwrite</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">assume_yes</span><span class="p">)</span>
+
+        <span class="n">convert_obj</span> <span class="o">=</span> <span class="n">Image2PDF</span><span class="p">(</span><span class="n">digits</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">digit</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">extension</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">extension</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">convert_obj</span><span class="o">.</span><span class="n">make_pdf</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">filename</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">remove_flag</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">remove</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">dst_dir</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">convert</span><span class="o">.</span><span class="n">move_file</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">filename</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dst</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">dst_dir</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">assume_yes</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">assume_yes</span><span class="p">)</span>
-    <span class="k">except</span> <span class="n">BaseError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+            <span class="n">convert_obj</span><span class="o">.</span><span class="n">move_file</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">filename</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dst</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">dst_dir</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">assume_yes</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">assume_yes</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">except</span> <span class="n">BaseError</span> <span class="k">as</span> <span class="n">base_error</span><span class="p">:</span>
+        <span class="n">_logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="n">base_error</span><span class="p">)</span>
         <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Unhandled Error occurred.&quot;</span><span class="p">)</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">critical</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">other_error</span><span class="p">:</span>
+        <span class="n">_logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Unhandled Error occurred.&quot;</span><span class="p">)</span>
+        <span class="n">_logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="n">other_error</span><span class="p">)</span>
+        <span class="n">_logger</span><span class="o">.</span><span class="n">critical</span><span class="p">(</span><span class="n">other_error</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="make_zip"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.helper.make_zip">[docs]</a><span class="k">def</span> <span class="nf">make_zip</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Make zip file</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        args: argparse namespace object</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        bool: If success, return true.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">make_zip_obj</span> <span class="o">=</span> <span class="n">MakeArchive</span><span class="p">(</span><span class="n">extension</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">extension</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">directory_path</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">src_dir</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">make_zip_obj</span><span class="o">.</span><span class="n">make_zip</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">filename</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">remove_flag</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">remove</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">dst_dir</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">make_zip_obj</span><span class="o">.</span><span class="n">move_file</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">filename</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dst</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">dst_dir</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">assume_yes</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">assume_yes</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">except</span> <span class="n">BaseError</span> <span class="k">as</span> <span class="n">base_error</span><span class="p">:</span>
+        <span class="n">_logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="n">base_error</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">other_error</span><span class="p">:</span>
+        <span class="n">_logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Unhandled Error occurred.&quot;</span><span class="p">)</span>
+        <span class="n">_logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="n">other_error</span><span class="p">)</span>
+        <span class="n">_logger</span><span class="o">.</span><span class="n">critical</span><span class="p">(</span><span class="n">other_error</span><span class="p">)</span>
         <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="show_version"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.helper.show_version">[docs]</a><span class="k">def</span> <span class="nf">show_version</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Show version</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ebook_homebrew: </span><span class="si">{version}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">version</span><span class="o">=</span><span class="n">__version__</span><span class="p">))</span></div>
 </pre></div>
 

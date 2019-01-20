@@ -8,7 +8,7 @@ import PIL.Image
 import PyPDF2
 
 from .core import Common
-from .exceptions import InvalidImageFileFormat
+from .exceptions import InvalidImageFileFormatError
 from .utils.logging import get_logger
 
 logger = get_logger("image2pdf")
@@ -52,11 +52,9 @@ class Image2PDF(Common):
             bool: If success, return true.
 
         """
-        if self.__extension != ".jpg" and self.__extension != ".png" and self.__extension != ".gif":
-            raise InvalidImageFileFormat()
+        self._check_image_extension(self.__extension)
 
-        files = os.listdir(self.__directory_path)
-        files.sort()
+        files = self._make_file_list(self.__directory_path, sort=True)
         logger.debug("files: {files}".format(files=files))
         page_count = 0
         remove_files = []
@@ -97,8 +95,23 @@ class Image2PDF(Common):
         image.save(pdf_file_name, "PDF", resolution=resolution)
         return pdf_file_name
 
+    @staticmethod
+    def _check_image_extension(extension):
+        """ Check image file extension or not.
+
+        Args:
+            extension (str): Image file extension
+        Returns:
+            bool: If extension is image file, return true.
+        Raises:
+            InvalidImageFileFormatError: If extension is not image file.
+        """
+        if extension not in (".jpg", ".png", ".gif"):
+            raise InvalidImageFileFormatError()
+        return True
+
     def _merge_pdf_file(self, pdf_file, filename):
-        """Marge pdf files
+        """Marge pdf files.
 
         Args:
             pdf_file (str): 1 page pdf file
