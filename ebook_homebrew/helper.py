@@ -11,48 +11,68 @@ from .rename import ChangeFilename
 from .utils.logging import get_logger
 from .archive import MakeArchive
 
-logger = get_logger("helper")
+_logger = get_logger("helper")
 
 
 def auto(args):
-    try:
-        rename = ChangeFilename(directory_path=args.src_dir[0],
-                                digits=args.digit[0],
-                                extension=args.extension[0])
-        rename.filename_to_digit_number()
-        if args.manual is True:
-            rename.change_name_manually(overwrite=args.assume_yes)
+    """ Rename file, convert pdf.
 
-        convert = Image2PDF(digits=args.digit[0], extension=args.extension[0])
-        convert.make_pdf(filename=args.filename[0], remove_flag=args.remove)
+    Args:
+        args: argparse namespace object
+
+    Returns:
+        bool: If success, return true.
+    """
+    try:
+        rename_obj = ChangeFilename(directory_path=args.src_dir[0],
+                                    digits=args.digit[0],
+                                    extension=args.extension[0])
+        rename_obj.filename_to_digit_number()
+        if args.manual is True:
+            rename_obj.change_name_manually(overwrite=args.assume_yes)
+
+        convert_obj = Image2PDF(digits=args.digit[0], extension=args.extension[0])
+        convert_obj.make_pdf(filename=args.filename[0], remove_flag=args.remove)
 
         if args.dst_dir is not None:
-            convert.move_file(file=args.filename[0], dst=args.dst_dir[0], assume_yes=args.assume_yes)
-    except BaseError as e:
-        logger.exception(e)
+            convert_obj.move_file(file=args.filename[0], dst=args.dst_dir[0], assume_yes=args.assume_yes)
+        return True
+    except BaseError as base_error:
+        _logger.exception(base_error)
         sys.exit(2)
-    except Exception as e:
-        logger.error("Unhandled Error occurred.")
-        logger.exception(e)
-        logger.critical(e)
+    except Exception as other_error:
+        _logger.error("Unhandled Error occurred.")
+        _logger.exception(other_error)
+        _logger.critical(other_error)
         sys.exit(1)
 
 
 def make_zip(args):
+    """Make zip file
+
+    Args:
+        args: argparse namespace object
+
+    Returns:
+        bool: If success, return true.
+    """
     try:
-        make_zip = MakeArchive(extension=args.extension[0], directory_path=args.src_dir[0])
-        make_zip.make_zip(filename=args.filename[0], remove_flag=args.remove, overwrite=False)
+        make_zip_obj = MakeArchive(extension=args.extension[0], directory_path=args.src_dir[0])
+        make_zip_obj.make_zip(filename=args.filename[0], remove_flag=args.remove, overwrite=False)
         if args.dst_dir is not None:
-            make_zip.move_file(file=args.filename[0], dst=args.dst_dir[0], assume_yes=args.assume_yes)
-    except BaseError as e:
-        logger.exception(e)
+            make_zip_obj.move_file(file=args.filename[0], dst=args.dst_dir[0], assume_yes=args.assume_yes)
+        return True
+    except BaseError as base_error:
+        _logger.exception(base_error)
         sys.exit(2)
-    except Exception as e:
-        logger.error("Unhandled Error occurred.")
-        logger.exception(e)
-        logger.critical(e)
+    except Exception as other_error:
+        _logger.error("Unhandled Error occurred.")
+        _logger.exception(other_error)
+        _logger.critical(other_error)
         sys.exit(1)
 
 
 def show_version():
+    """Show version
+    """
     print("ebook_homebrew: {version}".format(version=__version__))

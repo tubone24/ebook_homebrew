@@ -52,8 +52,7 @@ class Image2PDF(Common):
             bool: If success, return true.
 
         """
-        if self.__extension != ".jpg" and self.__extension != ".png" and self.__extension != ".gif":
-            raise InvalidImageFileFormat()
+        self._check_image_extension(self.__extension)
 
         files = os.listdir(self.__directory_path)
         files.sort()
@@ -97,8 +96,23 @@ class Image2PDF(Common):
         image.save(pdf_file_name, "PDF", resolution=resolution)
         return pdf_file_name
 
+    @staticmethod
+    def _check_image_extension(extension):
+        """ Check image file extension or not.
+
+        Args:
+            extension (str): Image file extension
+        Returns:
+            bool: If extension is image file, return true.
+        Raises:
+            InvalidImageFileFormat: If extension is not image file.
+        """
+        if extension not in (".jpg", ".png", ".gif"):
+            raise InvalidImageFileFormat()
+        return True
+
     def _merge_pdf_file(self, pdf_file, filename):
-        """Marge pdf files
+        """Marge pdf files.
 
         Args:
             pdf_file (str): 1 page pdf file

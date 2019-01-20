@@ -143,8 +143,8 @@ class Common(object):
             logger.info("Rename file success: {old_name} => {new_name}".format(old_name=old_name,
                                                                                new_name=new_name))
             return True
-        except OSError as e:
-            logger.exception(e)
+        except OSError as os_error:
+            logger.exception(os_error)
             raise ChangeFileNameOSError()
 
     @staticmethod
@@ -161,8 +161,7 @@ class Common(object):
         if assume_yes is True:
             pass
         else:
-            logger.info("Remove file: {file_name} OK? (y/n)".format(file_name=file))
-            flag = input()
+            flag = input("Remove file: {file_name} OK? (y/n)".format(file_name=file))
             if flag in ("Y", "y"):
                 pass
             else:
@@ -185,14 +184,9 @@ class Common(object):
 
         """
         dst_dir, _, _ = self._split_dir_root_ext(dst)
-        if assume_yes is True:
-            pass
-        else:
-            logger.info("Move file: {file_name} OK? (y/n/r)".format(file_name=file))
-            flag = input()
-            if flag == "Y" or flag == "y":
-                pass
-            else:
+        if assume_yes is False:
+            flag = input("Move file: {file_name} OK? (y/n/r)".format(file_name=file))
+            if flag not in ("Y", "y"):
                 logger.info("Nothing..")
                 return False
         shutil.move(file, dst_dir)
