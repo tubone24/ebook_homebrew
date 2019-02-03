@@ -10,6 +10,14 @@ build:
         tests:
           override:
             - py-scrutinizer-run
+      my-tests:
+        dependencies:
+          before:
+            - pip install -r requirements-test.txt
+            - python setup.py install
+        tests:
+          override:
+            - coverage run --source=ebook_homebrew -m pytest --it
 filter:
     excluded_paths:
         - 'tests/*'
