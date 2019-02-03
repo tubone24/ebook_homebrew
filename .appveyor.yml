@@ -10,9 +10,10 @@ init:
   - SET PATH=%PYTHON%;%PATH%
 
 install:
-  - pip install -r requirements-test.txt
-  - pip install -r requirements.txt
-  - pip install wheel
+
+  - python -m pip install -U tox
+  - python -m pip install -U wheel
+
 build_script:
   - python setup.py build
 
