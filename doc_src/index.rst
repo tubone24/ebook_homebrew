@@ -32,6 +32,9 @@ Badges:
 .. image:: https://scrutinizer-ci.com/g/tubone24/ebook_homebrew/badges/code-intelligence.svg?b=master
    :target: https://scrutinizer-ci.com/g/tubone24/ebook_homebrew/?branch=master
 
+.. image:: https://ci.appveyor.com/api/projects/status/mx93pu69tqkngjxv?svg=true
+   :target: https://ci.appveyor.com/project/tubone24/ebook-homebrew
+
 .. image:: https://readthedocs.org/projects/ebook-homebrew/badge/?version=latest
    :target: https://ebook-homebrew.readthedocs.io/en/latest/?badge=latest
    :alt: Documentation Status
