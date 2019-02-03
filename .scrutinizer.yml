@@ -7,8 +7,6 @@ build:
         python: 3.6
     nodes:
       analysis:
-        resources:
-          cpus: 3
         tests:
           override:
             - py-scrutinizer-run
