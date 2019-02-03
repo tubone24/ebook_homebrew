@@ -13,6 +13,7 @@
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/tubone24/ebook_homebrew/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/tubone24/ebook_homebrew/?branch=master)
 [![Code Intelligence Status](https://scrutinizer-ci.com/g/tubone24/ebook_homebrew/badges/code-intelligence.svg?b=master)](https://scrutinizer-ci.com/code-intelligence)
 [![Build status](https://ci.appveyor.com/api/projects/status/mx93pu69tqkngjxv?svg=true)](https://ci.appveyor.com/project/tubone24/ebook-homebrew)
+![Build status](https://img.shields.io/appveyor/tests/tubone24/ebook-homebrew.svg?style=flat)
 ![Downloads](https://img.shields.io/pypi/dm/ebook-homebrew.svg)
 ![PyPi](https://img.shields.io/pypi/v/ebook-homebrew.svg)
 ![Python version](https://img.shields.io/pypi/pyversions/ebook-homebrew.svg)
