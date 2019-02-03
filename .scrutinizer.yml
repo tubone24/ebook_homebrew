@@ -28,7 +28,6 @@ build:
             - command: 'coverage run --source=ebook_homebrew -m pytest --it tests/'
               coverage:
                 file: '.coverage'
-                config_file: '.coveragerc'
                 format: 'py-cc'
 filter:
     excluded_paths:
