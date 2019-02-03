@@ -12,6 +12,7 @@ init:
 install:
 
   - python -m pip install -U tox
+  - pip install wheel
 
 build_script:
   - python setup.py build
