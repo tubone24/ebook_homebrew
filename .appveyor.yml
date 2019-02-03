@@ -10,12 +10,23 @@ init:
   - SET PATH=%PYTHON%;%PATH%
 
 install:
+
   - python -m pip install -U tox
 
-build: false
+build_script:
+  - python setup.py build
 
 test_script:
   - python -m tox
+
+after_test:
+  - python setup.py bdist_wheel
+  - python setup.py bdist_wininst
+  - python setup.py bdist_msi
+  - ps: "ls dist"
+
+artifacts:
+  - path: dist\*
 
 cache:
   - '%LOCALAPPDATA%\pip\Cache'
