@@ -8,7 +8,7 @@ build:
     nodes:
       analysis:
         resources:
-          cpus: 4
+          cpus: 3
         tests:
           override:
             - py-scrutinizer-run
