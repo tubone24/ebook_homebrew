@@ -10,6 +10,12 @@ build:
             project_setup:
                 override:
                     - 'true'
+            tests:
+                override:
+                    - py-scrutinizer-run
+                        command: pylint-run
+                        use_website_config: true
+        tests: false
 filter:
     excluded_paths:
         - 'tests/*'

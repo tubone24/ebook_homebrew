@@ -26,6 +26,12 @@ Badges:
    :target: https://codeclimate.com/github/tubone24/ebook_homebrew/test_coverage
    :alt: Test Coverage
 
+.. image:: https://scrutinizer-ci.com/g/tubone24/ebook_homebrew/badges/quality-score.png?b=master
+   :target: https://scrutinizer-ci.com/g/tubone24/ebook_homebrew/?branch=master
+
+.. image:: https://scrutinizer-ci.com/g/tubone24/ebook_homebrew/badges/code-intelligence.svg?b=master
+   :target: https://scrutinizer-ci.com/g/tubone24/ebook_homebrew/?branch=master
+
 .. image:: https://readthedocs.org/projects/ebook-homebrew/badge/?version=latest
    :target: https://ebook-homebrew.readthedocs.io/en/latest/?badge=latest
    :alt: Documentation Status
@@ -45,7 +51,6 @@ Badges:
 
 .. image:: https://img.shields.io/gitter/room/tubone24/ebook_homebrew.svg
    :target: https://gitter.im/ebook_homebrew/community#
-
 
 .. toctree::
    :maxdepth: 2
