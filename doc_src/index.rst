@@ -35,6 +35,9 @@ Badges:
 .. image:: https://ci.appveyor.com/api/projects/status/mx93pu69tqkngjxv?svg=true
    :target: https://ci.appveyor.com/project/tubone24/ebook-homebrew
 
+.. image:: https://img.shields.io/appveyor/tests/tubone24/ebook-homebrew.svg?style=flat
+   :target: https://ci.appveyor.com/project/tubone24/ebook-homebrew
+
 .. image:: https://readthedocs.org/projects/ebook-homebrew/badge/?version=latest
    :target: https://ebook-homebrew.readthedocs.io/en/latest/?badge=latest
    :alt: Documentation Status

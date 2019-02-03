@@ -10,12 +10,29 @@ init:
   - SET PATH=%PYTHON%;%PATH%
 
 install:
-  - python -m pip install -U tox
 
-build: false
+  - python -m pip install -U tox
+  - python -m pip install -U wheel
+
+build_script:
+  - python setup.py build
 
 test_script:
   - python -m tox
+
+after_test:
+  - python setup.py bdist_wheel
+  - python setup.py bdist_wininst
+  - python setup.py bdist_msi
+  - ps: "ls dist"
+
+artifacts:
+  - path: dist\*
+
+on_finish:
+  - ps: |
+      $wc = New-Object 'System.Net.WebClient'
+      $wc.UploadFile("https://ci.appveyor.com/api/testresults/junit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path .\test_results.xml))
 
 cache:
   - '%LOCALAPPDATA%\pip\Cache'
