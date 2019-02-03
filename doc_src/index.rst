@@ -29,6 +29,9 @@ Badges:
 .. image:: https://scrutinizer-ci.com/g/tubone24/ebook_homebrew/badges/quality-score.png?b=master
    :target: https://scrutinizer-ci.com/g/tubone24/ebook_homebrew/?branch=master
 
+.. image:: https://scrutinizer-ci.com/g/tubone24/ebook_homebrew/badges/code-intelligence.svg?b=master
+   :target: https://scrutinizer-ci.com/g/tubone24/ebook_homebrew/?branch=master
+
 .. image:: https://readthedocs.org/projects/ebook-homebrew/badge/?version=latest
    :target: https://ebook-homebrew.readthedocs.io/en/latest/?badge=latest
    :alt: Documentation Status
