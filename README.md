@@ -10,6 +10,7 @@
 [![Documentation Status](https://readthedocs.org/projects/ebook-homebrew/badge/?version=latest)](https://ebook-homebrew.readthedocs.io/en/latest/?badge=latest)
 [![codecov](https://codecov.io/gh/tubone24/ebook_homebrew/branch/master/graph/badge.svg)](https://codecov.io/gh/tubone24/ebook_homebrew)
 [![Maintainability](https://api.codeclimate.com/v1/badges/a3e2d70a87998a18e225/maintainability)](https://codeclimate.com/github/tubone24/ebook_homebrew/maintainability)
+![tech dept](https://img.shields.io/codeclimate/tech-debt/tubone24/ebook_homebrew.svg?style=flat)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/tubone24/ebook_homebrew/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/tubone24/ebook_homebrew/?branch=master)
 [![Code Intelligence Status](https://scrutinizer-ci.com/g/tubone24/ebook_homebrew/badges/code-intelligence.svg?b=master)](https://scrutinizer-ci.com/code-intelligence)
 [![Build status](https://ci.appveyor.com/api/projects/status/mx93pu69tqkngjxv?svg=true)](https://ci.appveyor.com/project/tubone24/ebook-homebrew)

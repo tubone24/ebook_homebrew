@@ -26,6 +26,9 @@ Badges:
    :target: https://codeclimate.com/github/tubone24/ebook_homebrew/test_coverage
    :alt: Test Coverage
 
+.. image:: https://img.shields.io/codeclimate/tech-debt/tubone24/ebook_homebrew.svg?style=flat
+   :target: https://codeclimate.com/github/tubone24/ebook_homebrew/maintainability
+
 .. image:: https://scrutinizer-ci.com/g/tubone24/ebook_homebrew/badges/quality-score.png?b=master
    :target: https://scrutinizer-ci.com/g/tubone24/ebook_homebrew/?branch=master
 
