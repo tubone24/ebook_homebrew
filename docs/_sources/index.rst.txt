@@ -26,6 +26,9 @@ Badges:
    :target: https://codeclimate.com/github/tubone24/ebook_homebrew/test_coverage
    :alt: Test Coverage
 
+.. image:: https://img.shields.io/codeclimate/tech-debt/tubone24/ebook_homebrew.svg?style=flat
+   :target: https://codeclimate.com/github/tubone24/ebook_homebrew/maintainability
+
 .. image:: https://scrutinizer-ci.com/g/tubone24/ebook_homebrew/badges/quality-score.png?b=master
    :target: https://scrutinizer-ci.com/g/tubone24/ebook_homebrew/?branch=master
 
@@ -40,6 +43,9 @@ Badges:
 
 .. image:: https://img.shields.io/lgtm/alerts/g/tubone24/ebook_homebrew.svg?logo=lgtm&logoWidth=18
    :target: https://lgtm.com/projects/g/tubone24/ebook_homebrew/alerts
+
+.. image:: https://img.shields.io/lgtm/grade/python/g/tubone24/ebook_homebrew.svg?logo=lgtm&logoWidth=18
+   :target: https://lgtm.com/projects/g/tubone24/ebook_homebrew/context:python
 
 .. image:: https://readthedocs.org/projects/ebook-homebrew/badge/?version=latest
    :target: https://ebook-homebrew.readthedocs.io/en/latest/?badge=latest
@@ -60,6 +66,10 @@ Badges:
 
 .. image:: https://img.shields.io/gitter/room/tubone24/ebook_homebrew.svg
    :target: https://gitter.im/ebook_homebrew/community#
+
+.. image:: https://badge.waffle.io/tubone24/ebook_homebrew.svg?columns=all
+   :target: https://waffle.io/tubone24/ebook_homebrew
+   :alt: Waffle.io - Columns and their card count
 
 .. toctree::
    :maxdepth: 2

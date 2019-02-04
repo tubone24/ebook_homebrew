@@ -10,16 +10,19 @@
 [![Documentation Status](https://readthedocs.org/projects/ebook-homebrew/badge/?version=latest)](https://ebook-homebrew.readthedocs.io/en/latest/?badge=latest)
 [![codecov](https://codecov.io/gh/tubone24/ebook_homebrew/branch/master/graph/badge.svg)](https://codecov.io/gh/tubone24/ebook_homebrew)
 [![Maintainability](https://api.codeclimate.com/v1/badges/a3e2d70a87998a18e225/maintainability)](https://codeclimate.com/github/tubone24/ebook_homebrew/maintainability)
+![tech dept](https://img.shields.io/codeclimate/tech-debt/tubone24/ebook_homebrew.svg?style=flat)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/tubone24/ebook_homebrew/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/tubone24/ebook_homebrew/?branch=master)
 [![Code Intelligence Status](https://scrutinizer-ci.com/g/tubone24/ebook_homebrew/badges/code-intelligence.svg?b=master)](https://scrutinizer-ci.com/code-intelligence)
 [![Build status](https://ci.appveyor.com/api/projects/status/mx93pu69tqkngjxv?svg=true)](https://ci.appveyor.com/project/tubone24/ebook-homebrew)
 ![Build status](https://img.shields.io/appveyor/tests/tubone24/ebook-homebrew.svg?style=flat)
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/tubone24/ebook_homebrew.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/tubone24/ebook_homebrew/alerts/)
+[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/tubone24/ebook_homebrew.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/tubone24/ebook_homebrew/context:python)
 ![Downloads](https://img.shields.io/pypi/dm/ebook-homebrew.svg)
 ![PyPi](https://img.shields.io/pypi/v/ebook-homebrew.svg)
 ![Python version](https://img.shields.io/pypi/pyversions/ebook-homebrew.svg)
 [![format](https://img.shields.io/pypi/format/ebook-homebrew.svg)](https://pypi.org/project/ebook-homebrew/)
 ![Gitter](https://img.shields.io/gitter/room/tubone24/ebook_homebrew.svg)
+[![Waffle.io - Columns and their card count](https://badge.waffle.io/tubone24/ebook_homebrew.svg?columns=all)](https://waffle.io/tubone24/ebook_homebrew)
 
 Change file name to only digit name like `001.jpg` and make e-book format files.
 
