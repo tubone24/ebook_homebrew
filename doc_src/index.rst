@@ -67,6 +67,10 @@ Badges:
 .. image:: https://img.shields.io/gitter/room/tubone24/ebook_homebrew.svg
    :target: https://gitter.im/ebook_homebrew/community#
 
+.. image:: https://badge.waffle.io/tubone24/ebook_homebrew.svg?columns=all
+   :target: https://waffle.io/tubone24/ebook_homebrew
+   :alt: Waffle.io - Columns and their card count
+
 .. toctree::
    :maxdepth: 2
 

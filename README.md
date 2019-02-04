@@ -22,6 +22,7 @@
 ![Python version](https://img.shields.io/pypi/pyversions/ebook-homebrew.svg)
 [![format](https://img.shields.io/pypi/format/ebook-homebrew.svg)](https://pypi.org/project/ebook-homebrew/)
 ![Gitter](https://img.shields.io/gitter/room/tubone24/ebook_homebrew.svg)
+[![Waffle.io - Columns and their card count](https://badge.waffle.io/tubone24/ebook_homebrew.svg?columns=all)](https://waffle.io/tubone24/ebook_homebrew)
 
 Change file name to only digit name like `001.jpg` and make e-book format files.
 
