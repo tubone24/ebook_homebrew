@@ -1,5 +1,6 @@
 import logging
 import os
+from time import time
 import shutil
 from unittest.mock import patch
 
@@ -34,7 +35,9 @@ class TestItRename(object):
         _logger.debug("Temp directory: {tmp_dir}".format(tmp_dir=tmpdir))
         self.copy_image_file(str(tmpdir))
         rename_ins = ChangeFilename(directory_path=str(tmpdir), digits="3", extension="png")
+        start_time = time()
         actual = rename_ins.filename_to_digit_number()
+        end_time = time()
         assert len(actual) == 1
 
         with patch("builtins.input") as mock_input:
@@ -49,3 +52,15 @@ class TestItRename(object):
         expected = {"foo" + str(x).zfill(3) + "bar.png" for x in range(100)}
         actual = actual_file_list - expected
         assert actual == {"test.png"}
+        _logger.info("filename_to_digit_number spent: {} s".format(end_time - start_time))
+
+    @pytest.mark.it
+    def test_it_async_rename(self, tmpdir):
+        _logger.debug("Temp directory: {tmp_dir}".format(tmp_dir=tmpdir))
+        self.copy_image_file(str(tmpdir))
+        rename_ins = ChangeFilename(directory_path=str(tmpdir), digits="3", extension="png")
+        start_time = time()
+        actual = rename_ins.async_filename_to_digit_number()
+        end_time = time()
+        assert len(actual) == 1
+        _logger.info("async_filename_to_digit_number spent: {} s".format(end_time - start_time))
