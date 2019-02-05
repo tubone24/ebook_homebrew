@@ -4,6 +4,8 @@
 import os
 import re
 import shutil
+import asyncio
+import concurrent.futures
 
 import PIL.Image
 
@@ -249,3 +251,73 @@ class Common(object):
         """
         destination = os.path.join(dst, file)
         return self._move_file(file=file, dst=destination, assume_yes=assume_yes)
+
+    @staticmethod
+    def _get_eventloop():
+        """Get event loop
+
+        Returns:
+            event_loop: Event loop object
+        """
+        loop = asyncio.get_event_loop()
+        return loop
+
+    @staticmethod
+    def _get_multi_process_executor():
+        """Get multi process executor
+
+        Returns:
+            executor: multi process executor for using max processors.
+        """
+        executor = concurrent.futures.ProcessPoolExecutor(max_workers=os.cpu_count())
+        return executor
+
+    @staticmethod
+    def _output_result(future):
+        """Output async queue task result
+
+        Args:
+            future: Async future
+
+        Returns:
+            bool: If success, return true.
+        """
+        logger.info(future.result())
+        return True
+
+    @staticmethod
+    def _create_task_queue(task_list):
+        """Make async queue and put tasks
+
+        Returns:
+            asyncio.Queue: Async task queue
+        """
+        queue = asyncio.Queue()
+
+        for task in task_list:
+            queue.put_nowait(task)
+
+        return queue
+
+    async def _set_task_queue_for_executor(self, queue, loop, executor, func):
+        """Set task queue using executor
+
+        Args:
+            queue: asyncio queue
+            loop: event loop
+            executor: executor
+            func: function
+
+        Returns:
+            future
+        """
+        while not queue.empty():
+            task = await queue.get()
+            future = loop.run_in_executor(executor, func, task)
+            future.add_done_callback(self._output_result)
+            await future
+
+    async def _execute_queuing_tasks(self, queue, loop, executor, func):
+        """Execute queue tasks"""
+        tasks = [self._set_task_queue_for_executor(queue, loop, executor, func) for i in range(os.cpu_count())]
+        return await asyncio.wait(tasks)

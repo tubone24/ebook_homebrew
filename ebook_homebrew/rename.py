@@ -30,6 +30,7 @@ class ChangeFilename(Common):
         self.__digits = digits
         self.__exist_files = []
         self.__extension = self._convert_extension_with_dot(extension)
+        self.__max_digit = self._check_digit_format(self.__digits)
         self.__regex_ext = re.compile(self.__extension)
         os.chdir(self.__directory_path)
 
@@ -114,19 +115,41 @@ class ChangeFilename(Common):
         _logger.info("Extension: {extension}".format(extension=self.__extension))
         _logger.info("-" * 55)
 
-        max_digit = self._check_digit_format(self.__digits)
-
         for file in files:
-            num = self._check_serial_number(file, self.__digits)
-            if not self._check_skip_file(file, self.__regex_ext, num):
-                new_name = self._create_new_name(num, max_digit, self.__extension)
-                if not self.__check_exist_file(new_name, file, True):
-                    self._rename_file(file, new_name)
-                    count += 1
+            self._rename_digit_filename(file)
+            count += 1
 
         _logger.info("-" * 55)
         _logger.info("Finished! Rename file count: {count}".format(count=count))
         return self.__exist_files
+
+    def async_filename_to_digit_number(self):
+        """Change file name to only digit name on async.
+
+        Returns:
+
+        """
+        files = self._make_file_list(self.__directory_path)
+
+        _logger.info("Target directory: {directory_path}".format(directory_path=self.__directory_path))
+        _logger.info("Digit: {digits}".format(digits=self.__digits))
+        _logger.info("Extension: {extension}".format(extension=self.__extension))
+        _logger.info("-" * 55)
+
+        loop = self._get_eventloop()
+        queue = self._create_task_queue(files)
+        loop.run_until_complete(self._execute_queuing_tasks(queue, loop, None, self._rename_digit_filename))
+        _logger.info("-" * 55)
+        _logger.info("Finished! Async rename")
+        return self.__exist_files
+
+    def _rename_digit_filename(self, file):
+        num = self._check_serial_number(file, self.__digits)
+        if not self._check_skip_file(file, self.__regex_ext, num):
+            new_name = self._create_new_name(num, self.__max_digit, self.__extension)
+            if not self.__check_exist_file(new_name, file, True):
+                self._rename_file(file, new_name)
+        return True
 
     def change_name_manually(self, overwrite=False):
         """Change filename manually looking exist_file list.
