@@ -5,7 +5,6 @@ import os
 import re
 import shutil
 import asyncio
-import concurrent.futures
 
 import PIL.Image
 
@@ -309,5 +308,8 @@ class Common(object):
 
     async def _execute_queuing_tasks(self, queue, loop, executor, func):
         """Execute queue tasks"""
-        tasks = [self._set_task_queue_for_executor(queue, loop, executor, func) for i in range(os.cpu_count())]
+        tasks = [self._set_task_queue_for_executor(queue,
+                                                   loop,
+                                                   executor,
+                                                   func) for i in range(os.cpu_count())]
         return await asyncio.wait(tasks)
