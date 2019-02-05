@@ -126,8 +126,11 @@ class ChangeFilename(Common):
     def async_filename_to_digit_number(self):
         """Change file name to only digit name on async.
 
-        Returns:
+        If use this function, a little bit speedy
+        compare with filename_to_digit_number function.
 
+        Returns:
+            List[str]: Skipping files list by exists same name.
         """
         files = self._make_file_list(self.__directory_path)
 
