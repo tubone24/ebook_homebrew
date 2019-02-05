@@ -263,16 +263,6 @@ class Common(object):
         return loop
 
     @staticmethod
-    def _get_multi_process_executor():
-        """Get multi process executor
-
-        Returns:
-            executor: multi process executor for using max processors.
-        """
-        executor = concurrent.futures.ProcessPoolExecutor(max_workers=os.cpu_count())
-        return executor
-
-    @staticmethod
     def _output_result(future):
         """Output async queue task result
 
