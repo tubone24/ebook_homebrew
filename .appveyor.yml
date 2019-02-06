@@ -1,6 +1,8 @@
 environment:
   global:
     TOXENV: py,codecov
+  PYPI_PASSWORD:
+    secure: E1hXZZ9LsjhERaKpZLBn3w==
 
   matrix:
     - PYTHON: C:\Python36-x64
@@ -12,9 +14,9 @@ init:
   - SET PATH=%PYTHON%;%PATH%
 
 install:
-
   - python -m pip install -U tox
   - python -m pip install -U wheel
+  - python -m pip install -U twine
 
 build_script:
   - python setup.py build
@@ -23,6 +25,7 @@ test_script:
   - python -m tox
 
 after_test:
+  - python setup.py sdist
   - python setup.py bdist_wheel
   - python setup.py bdist_wininst
   - python setup.py bdist_msi
@@ -30,11 +33,30 @@ after_test:
 
 artifacts:
   - path: dist\*
+    name: pypiartifacts
+
+deploy_script:
+  - echo "Starting Artifact Deployment"
+  - echo [distutils]                                  > %USERPROFILE%\\.pypirc
+  - echo index-servers =                             >> %USERPROFILE%\\.pypirc
+  - echo     pypi                                    >> %USERPROFILE%\\.pypirc
+  - echo [pypi]                                      >> %USERPROFILE%\\.pypirc
+  - echo username=tubone24                           >> %USERPROFILE%\\.pypirc
+  - echo password=%PYPI_PASSWORD%                    >> %USERPROFILE%\\.pypirc
+  - set PATH=%BK_PATH%
+  - set HOME=%USERPROFILE%
+  - ps: If ($env:APPVEYOR_REPO_TAG -eq "true" -And $env:APPVEYOR_REPO_BRANCH -eq "master") { Invoke-Expression "twine upload --skip-existing dist/*" 2>$null } Else { write-output "Not on a tag on master, won't deploy to pypi"}
+  - echo "Finished Artifact Deployment"
 
 on_finish:
   - ps: |
       $wc = New-Object 'System.Net.WebClient'
       $wc.UploadFile("https://ci.appveyor.com/api/testresults/junit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path .\test_results.xml))
+
+notifications:
+  - provider: Webhook
+    url: https://webhooks.gitter.im/e/aad7507945af342edab5
+    method: POST
 
 cache:
   - '%LOCALAPPDATA%\pip\Cache'
