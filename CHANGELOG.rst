@@ -1,0 +1,14 @@
+=========
+Changelog
+=========
+
+`v1.0.0 <https://github.com/tubone24/ebook_homebrew/releases/tag/v1.0.0>`_ (2019-1-14)
+======================================================================================
+
+* First release.
+
+`v1.1.0 <https://github.com/tubone24/ebook_homebrew/releases/tag/v1.1.0>`_ (2019-02-05)
+=======================================================================================
+
+* Rename to digit filename a little bit speedy for using asyncio
+* More Testcase(Windows)
