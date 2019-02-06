@@ -78,14 +78,14 @@ Getting Started
 The Ebook_homebrew is a python package, so that you can use ``setup.py`` or ``pip`` installer.
 
 Using setup.py
-^^^^^^^^^^^^^^
+--------------
 
 .. code-block:: bash
 
    $ python setup.py install
 
 Or using pip installer
-^^^^^^^^^^^^^^^^^^^^^^
+----------------------
 
 .. code-block:: bash
 
