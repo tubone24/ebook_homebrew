@@ -32,7 +32,7 @@ jobs:
 
   - task: PublishTestResults@2
     inputs:
-      testResultsFiles: 'test-results.xml'
+      testResultsFiles: 'test_results.xml'
       testRunTitle: 'Python $(python.version)'
     condition: succeededOrFailed()
 
