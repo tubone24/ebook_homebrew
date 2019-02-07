@@ -11,6 +11,29 @@ jobs:
 - job: 'Test'
   pool:
     vmImage: 'Ubuntu-16.04'
+  steps:
+  - script: echo Ubuntu-16.04
+  strategy:
+    matrix:
+      Python36:
+        python.version: '3.6'
+    maxParallel: 4
+- job: macOS
+  pool:
+    vmImage: 'macOS-10.13'
+  steps:
+  - script: echo MacOSX
+  strategy:
+    matrix:
+      Python36:
+        python.version: '3.6'
+    maxParallel: 4
+
+- job: Windows
+  pool:
+    vmImage: 'vs2017-win2016'
+  steps:
+  - script: echo Windows server
   strategy:
     matrix:
       Python36:
