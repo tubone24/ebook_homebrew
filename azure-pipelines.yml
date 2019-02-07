@@ -18,6 +18,11 @@ jobs:
       Python36:
         python.version: '3.6'
     maxParallel: 4
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '$(python.version)'
+      architecture: 'x64'
+
 - job: macOS
   pool:
     vmImage: 'macOS-10.13'
@@ -28,6 +33,10 @@ jobs:
       Python36:
         python.version: '3.6'
     maxParallel: 4
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '$(python.version)'
+      architecture: 'x64'
 
 - job: Windows
   pool:
@@ -39,8 +48,6 @@ jobs:
       Python36:
         python.version: '3.6'
     maxParallel: 4
-
-  steps:
   - task: UsePythonVersion@0
     inputs:
       versionSpec: '$(python.version)'
