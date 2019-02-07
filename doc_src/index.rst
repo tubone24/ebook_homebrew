@@ -70,6 +70,9 @@ Badges:
 .. image:: https://img.shields.io/gitter/room/tubone24/ebook_homebrew.svg
    :target: https://gitter.im/ebook_homebrew/community#
 
+.. image:: https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg
+   :target: https://saythanks.io/to/tubone24
+
 .. image:: https://badge.waffle.io/tubone24/ebook_homebrew.svg?columns=all
    :target: https://waffle.io/tubone24/ebook_homebrew
    :alt: Waffle.io - Columns and their card count
