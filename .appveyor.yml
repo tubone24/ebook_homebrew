@@ -62,5 +62,12 @@ notifications:
     url: https://webhooks.gitter.im/e/aad7507945af342edab5
     method: POST
 
+deploy:
+  - provider: Environment
+    name: production
+    on:
+      branch: master
+      APPVEYOR_REPO_TAG: true
+
 cache:
   - '%LOCALAPPDATA%\pip\Cache'
