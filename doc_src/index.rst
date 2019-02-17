@@ -47,6 +47,9 @@ Badges:
 .. image:: https://api.shippable.com/projects/5c64353c33944406008b4ae8/badge?branch=master
    :target: https://app.shippable.com/github/tubone24/ebook_homebrew/dashboard
 
+.. image:: https://circleci.com/gh/tubone24/ebook_homebrew.svg?style=svg
+   :target: https://circleci.com/gh/tubone24/ebook_homebrew
+
 .. image:: https://img.shields.io/lgtm/alerts/g/tubone24/ebook_homebrew.svg?logo=lgtm&logoWidth=18
    :target: https://lgtm.com/projects/g/tubone24/ebook_homebrew/alerts
 
