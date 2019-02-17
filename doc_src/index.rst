@@ -12,6 +12,12 @@ like `001.jpg` and make e-book format files.
 
 Badges:
 
+.. image:: http://img.shields.io/badge/license-MIT-blue.svg?style=flat
+   :target: https://github.com/tubone24/ebook_homebrew/blob/master/LICENSE
+
+.. image:: https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square
+   :target: http://makeapullrequest.com
+
 .. image:: https://travis-ci.org/tubone24/ebook_homebrew.svg?branch=master
    :target: https://travis-ci.org/tubone24/ebook_homebrew
 
