@@ -41,6 +41,9 @@ Badges:
 .. image:: https://img.shields.io/appveyor/tests/tubone24/ebook-homebrew.svg?style=flat
    :target: https://ci.appveyor.com/project/tubone24/ebook-homebrew
 
+.. image:: https://dev.azure.com/meitantei-conan/ebook_homebrew/_apis/build/status/tubone24.ebook_homebrew?branchName=master
+   :target: https://dev.azure.com/meitantei-conan/ebook_homebrew/_build?definitionId=1
+
 .. image:: https://img.shields.io/azure-devops/tests/meitantei-conan/ebook_homebrew/1.svg?compact_message&style=flat
    :target: https://dev.azure.com/meitantei-conan/ebook_homebrew/_build?definitionId=1
 
