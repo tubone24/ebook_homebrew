@@ -100,9 +100,7 @@ class ChangeFilename(Common):
         while self.__check_exist_file(new_name, new_name, False) and not overwrite:
             _logger.warn("Already file exist: {new_name}")
             new_name = input(
-                "Input Another file name {old_name} => ?".format(
-                    new_name=new_name, old_name=old_name
-                )
+                "Input Another file name {old_name} => ?".format(old_name=old_name)
             )
         return new_name
 
