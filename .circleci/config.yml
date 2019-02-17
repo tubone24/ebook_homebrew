@@ -24,8 +24,10 @@ jobs:
       - run:
           command: |
             pipenv run "pip install -r requirements-test.txt"
+            pipenv run "pip install wheel"
             pipenv run "python setup.py install"
             pipenv run "coverage run --source=ebook_homebrew -m pytest --it --junit-xml=test-results/test_results.xml"
+            pipenv run "python setup.py sdist bdist_wheel"
       - store_test_results:
           path: test-results
       - store_artifacts:
