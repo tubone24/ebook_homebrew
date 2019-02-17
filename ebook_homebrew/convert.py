@@ -18,6 +18,7 @@ class Image2PDF(Common):
     """Make pdf file for using e-books.
 
     """
+
     def __init__(self, digits, extension, directory_path=None):
         """Constructor
 
@@ -67,7 +68,9 @@ class Image2PDF(Common):
                 pdf_file = self._convert_image_to_pdf(file)
 
                 if self._merge_pdf_file(pdf_file, filename):
-                    logger.info("Success write pdf for {page} page.".format(page=page_count + 1))
+                    logger.info(
+                        "Success write pdf for {page} page.".format(page=page_count + 1)
+                    )
                     page_count += 1
                     if remove_flag:
                         remove_files.append(file)
@@ -75,7 +78,11 @@ class Image2PDF(Common):
         if page_count == 0:
             logger.warn("Target file doesn't exist... Finish.")
             return False
-        logger.info("All image file are converted. Filename: {filename}".format(filename=filename))
+        logger.info(
+            "All image file are converted. Filename: {filename}".format(
+                filename=filename
+            )
+        )
         if self._remove_file_bulk(remove_files):
             logger.info("Post possess is finished")
         return True
