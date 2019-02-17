@@ -1,0 +1,25 @@
+name: ebook_homebrew_runCI
+
+type: runCI
+
+language: python
+
+python:
+  - 3.6
+
+before_install:
+  - pip install -r requirements-test.txt
+
+install:
+  - python setup.py install
+
+before_script:
+  - mkdir -p shippable/testresults
+  - mkdir -p shippable/codecoverage
+
+script:
+  - coverage run --source=ebook_homebrew -m pytest --it --junit-xml=shippable/testresults/test_results.xml
+  - coverage xml -o shippable/codecoverage/coverage.xml
+
+after_success:
+  - echo "OK"
