@@ -1,0 +1,35 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/ebook_homebrew
+    docker:
+      - image: circleci/python:3.6.4
+        environment:
+          PIPENV_VENV_IN_PROJECT: true
+    steps:
+      - checkout
+      - run: sudo chown -R circleci:circleci /usr/local/bin
+      - run: sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
+      - run: mkdir test-results && sudo chown -R circleci:circleci test-results
+      - run:
+          command: |
+            sudo pip install pipenv
+            pipenv install --pre
+      - save_cache:
+          key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+          paths:
+            - ".venv"
+            - "/usr/local/bin"
+            - "/usr/local/lib/python3.6/site-packages"
+      - run:
+          command: |
+            pipenv run "pip install -r requirements-test.txt"
+            pipenv run "pip install wheel"
+            pipenv run "python setup.py install"
+            pipenv run "coverage run --source=ebook_homebrew -m pytest --it --junit-xml=test-results/test_results.xml"
+            pipenv run "python setup.py sdist bdist_wheel"
+      - store_test_results:
+          path: test-results
+      - store_artifacts:
+          path: dist
+          destination: tr1
