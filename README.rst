@@ -43,6 +43,9 @@ The ``Ebook_homebrew`` is changing file name to only digit name like ``001.jpg``
 .. image:: https://img.shields.io/azure-devops/tests/meitantei-conan/ebook_homebrew/1.svg?compact_message&style=flat
    :target: https://dev.azure.com/meitantei-conan/ebook_homebrew/_build?definitionId=1
 
+.. image:: https://api.shippable.com/projects/5c64353c33944406008b4ae8/badge?branch=master
+   :target: https://app.shippable.com/github/tubone24/ebook_homebrew/dashboard
+
 .. image:: https://img.shields.io/lgtm/alerts/g/tubone24/ebook_homebrew.svg?logo=lgtm&logoWidth=18
    :target: https://lgtm.com/projects/g/tubone24/ebook_homebrew/alerts
 
