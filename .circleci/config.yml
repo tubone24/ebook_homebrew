@@ -28,3 +28,6 @@ jobs:
             pipenv run "coverage run --source=ebook_homebrew -m pytest --it --junit-xml=test-results/test_results.xml"
       - store_test_results:
           path: test-results
+      - store_artifacts:
+          path: dist
+          destination: tr1
