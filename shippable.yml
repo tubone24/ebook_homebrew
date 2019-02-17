@@ -2,17 +2,28 @@ language: python
 
 python:
   - 3.5
-  - 3.6
 
 env:
   - CI_REPORTS=shippable/testresults COVERAGE_REPORTS=shippable/codecoverage
 
 build:
-  pre_ci:
-    - pip install -r requirements-test.txt
+  ci:
     - echo $CI_REPORTS && mkdir -p $CI_REPORTS
     - echo $COVERAGE_REPORTS && mkdir -p $COVERAGE_REPORTS
-  ci:
-    - python setup.py install
-    - coverage run --source=ebook_homebrew -m pytest --it --junit-xml=$CI_REPORTS//test_results.xml
-    - coverage xml -o $COVERAGE_REPORTS/coverage.xml
+
+before_install:
+  - pip install -r requirements-test.txt
+
+install:
+  - python setup.py install
+
+before_script:
+  - mkdir -p shippable/testresults
+  - mkdir -p shippable/codecoverage
+
+script:
+  - coverage run --source=ebook_homebrew -m pytest --it --junit-xml=$CI_REPORTS//test_results.xml
+  - coverage xml -o $COVERAGE_REPORTS/coverage.xml
+
+after_success:
+  - echo "OK"
