@@ -54,6 +54,9 @@ Badges:
    :target: https://ebook-homebrew.readthedocs.io/en/latest/?badge=latest
    :alt: Documentation Status
 
+.. image:: https://img.shields.io/badge/code%20style-black-000000.svg
+   :target: https://github.com/ambv/black
+
 .. image:: https://img.shields.io/pypi/dm/ebook-homebrew.svg
    :target: https://pypi.org/project/ebook-homebrew/#files
 

@@ -16,6 +16,7 @@ class MakeArchive(Common):
     """Make archive file.
 
     """
+
     def __init__(self, extension, directory_path=None):
         """Constructor
 
@@ -55,14 +56,20 @@ class MakeArchive(Common):
             file_mode = "x"
         for file in files:
             if not self.__regex_ext.search(file):
-                _logger.debug("Skip(No target extension): {filename}".format(filename=file))
+                _logger.debug(
+                    "Skip(No target extension): {filename}".format(filename=file)
+                )
             else:
                 try:
-                    with zipfile.ZipFile(filename, file_mode, zipfile.ZIP_DEFLATED) as zip_file:
+                    with zipfile.ZipFile(
+                        filename, file_mode, zipfile.ZIP_DEFLATED
+                    ) as zip_file:
                         zip_file.write(file)
                         count += 1
-                        _logger.debug("Add Zipfile n files: {count}. Filename: "
-                                      "{filename}".format(count=count, filename=file))
+                        _logger.debug(
+                            "Add Zipfile n files: {count}. Filename: "
+                            "{filename}".format(count=count, filename=file)
+                        )
                         file_mode = "a"
                 except FileExistsError:
                     raise ZipFileExistError()

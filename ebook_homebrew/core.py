@@ -8,9 +8,14 @@ import asyncio
 
 import PIL.Image
 
-from .exceptions import InvalidDigitsFormatError, ChangeFileNameOSError, \
-    InvalidImageParameterTypeError, InvalidExtensionTypeError, \
-    InvalidPathTypeError, TargetSrcFileNotFoundError
+from .exceptions import (
+    InvalidDigitsFormatError,
+    ChangeFileNameOSError,
+    InvalidImageParameterTypeError,
+    InvalidExtensionTypeError,
+    InvalidPathTypeError,
+    TargetSrcFileNotFoundError,
+)
 from .utils.logging import get_logger
 
 logger = get_logger("Core")
@@ -121,7 +126,9 @@ class Common(object):
             logger.debug("Skip(No number): {filename}".format(filename=filename))
             return True
         elif not regex_ext.search(filename):
-            logger.debug("Skip(No target extension): {filename}".format(filename=filename))
+            logger.debug(
+                "Skip(No target extension): {filename}".format(filename=filename)
+            )
             return True
         else:
             return False
@@ -142,8 +149,11 @@ class Common(object):
         """
         try:
             os.rename(old_name, new_name)
-            logger.info("Rename file success: {old_name} => {new_name}".format(old_name=old_name,
-                                                                               new_name=new_name))
+            logger.info(
+                "Rename file success: {old_name} => {new_name}".format(
+                    old_name=old_name, new_name=new_name
+                )
+            )
             return True
         except OSError as os_error:
             logger.exception(os_error)
@@ -192,7 +202,11 @@ class Common(object):
                 logger.info("Nothing..")
                 return False
         shutil.move(file, dst_dir)
-        logger.info("Move file success: {file_name} => {dst_dir}".format(file_name=file, dst_dir=dst_dir))
+        logger.info(
+            "Move file success: {file_name} => {dst_dir}".format(
+                file_name=file, dst_dir=dst_dir
+            )
+        )
         return True
 
     @staticmethod
@@ -308,8 +322,8 @@ class Common(object):
 
     async def _execute_queuing_tasks(self, queue, loop, executor, func):
         """Execute queue tasks"""
-        tasks = [self._set_task_queue_for_executor(queue,
-                                                   loop,
-                                                   executor,
-                                                   func) for i in range(os.cpu_count())]
+        tasks = [
+            self._set_task_queue_for_executor(queue, loop, executor, func)
+            for i in range(os.cpu_count())
+        ]
         return await asyncio.wait(tasks)

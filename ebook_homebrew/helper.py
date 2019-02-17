@@ -24,9 +24,11 @@ def auto(args):
         bool: If success, return true.
     """
     try:
-        rename_obj = ChangeFilename(directory_path=args.src_dir[0],
-                                    digits=args.digit[0],
-                                    extension=args.extension[0])
+        rename_obj = ChangeFilename(
+            directory_path=args.src_dir[0],
+            digits=args.digit[0],
+            extension=args.extension[0],
+        )
         rename_obj.filename_to_digit_number()
         if args.manual is True:
             rename_obj.change_name_manually(overwrite=args.assume_yes)
@@ -35,7 +37,9 @@ def auto(args):
         convert_obj.make_pdf(filename=args.filename[0], remove_flag=args.remove)
 
         if args.dst_dir is not None:
-            convert_obj.move_file(file=args.filename[0], dst=args.dst_dir[0], assume_yes=args.assume_yes)
+            convert_obj.move_file(
+                file=args.filename[0], dst=args.dst_dir[0], assume_yes=args.assume_yes
+            )
         return True
     except BaseError as base_error:
         _logger.exception(base_error)
@@ -57,10 +61,16 @@ def make_zip(args):
         bool: If success, return true.
     """
     try:
-        make_zip_obj = MakeArchive(extension=args.extension[0], directory_path=args.src_dir[0])
-        make_zip_obj.make_zip(filename=args.filename[0], remove_flag=args.remove, overwrite=False)
+        make_zip_obj = MakeArchive(
+            extension=args.extension[0], directory_path=args.src_dir[0]
+        )
+        make_zip_obj.make_zip(
+            filename=args.filename[0], remove_flag=args.remove, overwrite=False
+        )
         if args.dst_dir is not None:
-            make_zip_obj.move_file(file=args.filename[0], dst=args.dst_dir[0], assume_yes=args.assume_yes)
+            make_zip_obj.move_file(
+                file=args.filename[0], dst=args.dst_dir[0], assume_yes=args.assume_yes
+            )
         return True
     except BaseError as base_error:
         _logger.exception(base_error)
