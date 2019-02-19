@@ -63,7 +63,7 @@ notifications:
     method: POST
 
 deploy:
-  release: ebook-homebrew-v$(appveyor_build_version)
+  release: $(APPVEYOR_REPO_TAG_NAME)
   description: 'Appveyor Auto Release'
   provider: GitHub
   auth_token:
