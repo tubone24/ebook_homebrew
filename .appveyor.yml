@@ -63,11 +63,17 @@ notifications:
     method: POST
 
 deploy:
-  - provider: Environment
-    name: production
-    on:
-      branch: master
-      APPVEYOR_REPO_TAG: true
+  release: ebook-homebrew-v$(appveyor_build_version)
+  description: 'Appveyor Auto Release'
+  provider: GitHub
+  auth_token:
+    secure: CXemmlpL+6wTVzfLD3GELI7H6XE0+Wp9Q6aH6dhg8ii0T7wFlaxbGr5s0O8LSG6n
+  artifact: /dist\.*/
+  draft: false
+  prerelease: false
+  on:
+    branch: master
+    APPVEYOR_REPO_TAG: true
 
 cache:
   - '%LOCALAPPDATA%\pip\Cache'

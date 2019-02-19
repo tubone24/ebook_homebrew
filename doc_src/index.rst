@@ -65,6 +65,9 @@ Badges:
 .. image:: https://img.shields.io/lgtm/grade/python/g/tubone24/ebook_homebrew.svg?logo=lgtm&logoWidth=18
    :target: https://lgtm.com/projects/g/tubone24/ebook_homebrew/context:python
 
+.. image:: https://snyk.io/test/github/tubone24/ebook_homebrew/badge.svg?targetFile=requirements.txt
+   :target: https://snyk.io/test/github/tubone24/ebook_homebrew?targetFile=requirements.txt
+
 .. image:: https://readthedocs.org/projects/ebook-homebrew/badge/?version=latest
    :target: https://ebook-homebrew.readthedocs.io/en/latest/?badge=latest
    :alt: Documentation Status
@@ -90,6 +93,10 @@ Badges:
 
 .. image:: https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg
    :target: https://saythanks.io/to/tubone24
+
+.. image:: https://beerpay.io/tubone24/ebook_homebrew/badge.svg
+   :target: https://beerpay.io/tubone24/ebook_homebrew
+
 
 .. image:: https://badge.waffle.io/tubone24/ebook_homebrew.svg?columns=all
    :target: https://waffle.io/tubone24/ebook_homebrew
