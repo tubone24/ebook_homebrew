@@ -94,6 +94,10 @@ Badges:
 .. image:: https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg
    :target: https://saythanks.io/to/tubone24
 
+.. image:: https://beerpay.io/tubone24/ebook_homebrew/badge.svg
+   :target: https://beerpay.io/tubone24/ebook_homebrew
+
+
 .. image:: https://badge.waffle.io/tubone24/ebook_homebrew.svg?columns=all
    :target: https://waffle.io/tubone24/ebook_homebrew
    :alt: Waffle.io - Columns and their card count
