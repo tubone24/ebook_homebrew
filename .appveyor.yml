@@ -1,6 +1,6 @@
 environment:
   global:
-    TOXENV: py,codecov
+    TOXENV: py
   PYPI_PASSWORD:
     secure: E1hXZZ9LsjhERaKpZLBn3w==
 
