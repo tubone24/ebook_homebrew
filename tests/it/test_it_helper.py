@@ -5,6 +5,7 @@ import shutil
 import pytest
 
 from ebook_homebrew.helper import auto, make_zip
+from ebook_homebrew.exceptions import BaseError
 
 _logger = logging.getLogger(name=__name__)
 
@@ -97,9 +98,8 @@ def args_no_support_file_auto(tmpdir):
 
 @pytest.mark.it
 def test_base_error_auto(args_no_support_file_auto):
-    with pytest.raises(SystemExit) as e:
+    with pytest.raises(BaseError):
         auto(args_no_support_file_auto)
-        assert e.code == 2
 
 
 @pytest.fixture
@@ -119,9 +119,8 @@ def args_no_support_file_make_zip(tmpdir):
 
 @pytest.mark.it
 def test_base_error_make_zip(args_no_support_file_make_zip):
-    with pytest.raises(SystemExit) as e:
+    with pytest.raises(BaseError):
         make_zip(args_no_support_file_make_zip)
-        assert e.code == 2
 
 
 @pytest.fixture
@@ -134,13 +133,11 @@ def args_unhandled(tmpdir):
 
 @pytest.mark.it
 def test_unhandled_error_auto(args_unhandled):
-    with pytest.raises(SystemExit) as e:
+    with pytest.raises(Exception):
         auto(args_unhandled)
-        assert e.code == 1
 
 
 @pytest.mark.it
 def test_unhandled_error_make_zip(args_unhandled):
-    with pytest.raises(SystemExit) as e:
+    with pytest.raises(Exception):
         make_zip(args_unhandled)
-        assert e.code == 1

@@ -53,8 +53,8 @@ class Common(object):
             else:
                 extension_with_dot = "." + extension
                 return extension_with_dot
-        except TypeError:
-            raise InvalidExtensionTypeError()
+        except TypeError as type_error:
+            raise InvalidExtensionTypeError() from type_error
 
     @staticmethod
     def _split_dir_root_ext(path):
@@ -73,8 +73,8 @@ class Common(object):
             base_name = os.path.basename(path)
             base_root, ext = os.path.splitext(base_name)
             return dir_name, base_root, ext
-        except (TypeError, AttributeError):
-            raise InvalidPathTypeError()
+        except (TypeError, AttributeError) as origin_error:
+            raise InvalidPathTypeError() from origin_error
 
     @staticmethod
     def _check_serial_number(filename, digits):
@@ -108,8 +108,8 @@ class Common(object):
                 return max(map(int, (digits.split(","))))
             else:
                 raise InvalidDigitsFormatError()
-        except TypeError:
-            raise InvalidDigitsFormatError()
+        except TypeError as type_error:
+            raise InvalidDigitsFormatError() from type_error
 
     @staticmethod
     def _check_skip_file(filename, regex_ext, num):
@@ -157,7 +157,7 @@ class Common(object):
             return True
         except OSError as os_error:
             logger.exception(os_error)
-            raise ChangeFileNameOSError()
+            raise ChangeFileNameOSError() from os_error
 
     @staticmethod
     def _remove_file(file, assume_yes=False):

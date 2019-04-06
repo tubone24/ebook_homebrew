@@ -57,7 +57,7 @@ class ChangeFilename(Common):
             return num.group().zfill(digit) + extension
         except AttributeError as attribute_error:
             _logger.exception(attribute_error)
-            raise InvalidNumberParameterTypeError()
+            raise InvalidNumberParameterTypeError() from attribute_error
 
     def __check_exist_file(self, new_name, old_name, append_list):
         """Check current directory and exists same name file, return true.
@@ -85,7 +85,7 @@ class ChangeFilename(Common):
                 return False
         except OSError as os_error:
             _logger.exception(os_error)
-            raise ChangeFileNameOSError()
+            raise ChangeFileNameOSError() from os_error
 
     def __input_new_file_name(self, old_name, overwrite):
         """Provide input command prompt.

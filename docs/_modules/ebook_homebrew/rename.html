@@ -17,32 +17,34 @@
   
 
   
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
-
-  
-  <script src="../../_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -156,8 +158,11 @@
 <span class="kn">import</span> <span class="nn">re</span>
 
 <span class="kn">from</span> <span class="nn">.core</span> <span class="k">import</span> <span class="n">Common</span>
-<span class="kn">from</span> <span class="nn">.exceptions</span> <span class="k">import</span> <span class="n">InvalidNumberParameterTypeError</span><span class="p">,</span> \
-    <span class="n">ChangeFileNameOSError</span><span class="p">,</span> <span class="n">InvalidImageParameterTypeError</span>
+<span class="kn">from</span> <span class="nn">.exceptions</span> <span class="k">import</span> <span class="p">(</span>
+    <span class="n">InvalidNumberParameterTypeError</span><span class="p">,</span>
+    <span class="n">ChangeFileNameOSError</span><span class="p">,</span>
+    <span class="n">InvalidImageParameterTypeError</span><span class="p">,</span>
+<span class="p">)</span>
 <span class="kn">from</span> <span class="nn">.utils.logging</span> <span class="k">import</span> <span class="n">get_logger</span>
 
 <span class="n">_logger</span> <span class="o">=</span> <span class="n">get_logger</span><span class="p">(</span><span class="s2">&quot;change_filename&quot;</span><span class="p">)</span>
@@ -204,7 +209,7 @@
             <span class="k">return</span> <span class="n">num</span><span class="o">.</span><span class="n">group</span><span class="p">()</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="n">digit</span><span class="p">)</span> <span class="o">+</span> <span class="n">extension</span>
         <span class="k">except</span> <span class="ne">AttributeError</span> <span class="k">as</span> <span class="n">attribute_error</span><span class="p">:</span>
             <span class="n">_logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="n">attribute_error</span><span class="p">)</span>
-            <span class="k">raise</span> <span class="n">InvalidNumberParameterTypeError</span><span class="p">()</span>
+            <span class="k">raise</span> <span class="n">InvalidNumberParameterTypeError</span><span class="p">()</span> <span class="kn">from</span> <span class="nn">attribute_error</span>
 
     <span class="k">def</span> <span class="nf">__check_exist_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_name</span><span class="p">,</span> <span class="n">old_name</span><span class="p">,</span> <span class="n">append_list</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Check current directory and exists same name file, return true.</span>
@@ -223,14 +228,16 @@
             <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">new_name</span><span class="p">):</span>
                 <span class="n">_logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;File Exist: </span><span class="si">{filename}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">new_name</span><span class="p">))</span>
                 <span class="k">if</span> <span class="n">old_name</span> <span class="o">!=</span> <span class="n">new_name</span> <span class="ow">and</span> <span class="n">append_list</span><span class="p">:</span>
-                    <span class="n">_logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Append exist files list: </span><span class="si">{filename}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">old_name</span><span class="p">))</span>
+                    <span class="n">_logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+                        <span class="s2">&quot;Append exist files list: </span><span class="si">{filename}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">old_name</span><span class="p">)</span>
+                    <span class="p">)</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">__exist_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">old_name</span><span class="p">)</span>
                 <span class="k">return</span> <span class="kc">True</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">return</span> <span class="kc">False</span>
         <span class="k">except</span> <span class="ne">OSError</span> <span class="k">as</span> <span class="n">os_error</span><span class="p">:</span>
             <span class="n">_logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="n">os_error</span><span class="p">)</span>
-            <span class="k">raise</span> <span class="n">ChangeFileNameOSError</span><span class="p">()</span>
+            <span class="k">raise</span> <span class="n">ChangeFileNameOSError</span><span class="p">()</span> <span class="kn">from</span> <span class="nn">os_error</span>
 
     <span class="k">def</span> <span class="nf">__input_new_file_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">old_name</span><span class="p">,</span> <span class="n">overwrite</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Provide input command prompt.</span>
@@ -244,8 +251,9 @@
         <span class="n">new_name</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Input new name? </span><span class="si">{old_name}</span><span class="s2"> =&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">old_name</span><span class="o">=</span><span class="n">old_name</span><span class="p">))</span>
         <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">__check_exist_file</span><span class="p">(</span><span class="n">new_name</span><span class="p">,</span> <span class="n">new_name</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">overwrite</span><span class="p">:</span>
             <span class="n">_logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Already file exist: </span><span class="si">{new_name}</span><span class="s2">&quot;</span><span class="p">)</span>
-            <span class="n">new_name</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Input Another file name </span><span class="si">{old_name}</span><span class="s2"> =&gt; ?&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">new_name</span><span class="o">=</span><span class="n">new_name</span><span class="p">,</span>
-                                                                              <span class="n">old_name</span><span class="o">=</span><span class="n">old_name</span><span class="p">))</span>
+            <span class="n">new_name</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span>
+                <span class="s2">&quot;Input Another file name </span><span class="si">{old_name}</span><span class="s2"> =&gt; ?&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">old_name</span><span class="o">=</span><span class="n">old_name</span><span class="p">)</span>
+            <span class="p">)</span>
         <span class="k">return</span> <span class="n">new_name</span>
 
 <div class="viewcode-block" id="ChangeFilename.filename_to_digit_number"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.rename.ChangeFilename.filename_to_digit_number">[docs]</a>    <span class="k">def</span> <span class="nf">filename_to_digit_number</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -260,7 +268,11 @@
         <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="n">files</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_file_list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__directory_path</span><span class="p">)</span>
 
-        <span class="n">_logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Target directory: </span><span class="si">{directory_path}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">directory_path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__directory_path</span><span class="p">))</span>
+        <span class="n">_logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="s2">&quot;Target directory: </span><span class="si">{directory_path}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">directory_path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__directory_path</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
         <span class="n">_logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Digit: </span><span class="si">{digits}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">digits</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__digits</span><span class="p">))</span>
         <span class="n">_logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Extension: </span><span class="si">{extension}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">extension</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__extension</span><span class="p">))</span>
         <span class="n">_logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">55</span><span class="p">)</span>
@@ -284,14 +296,20 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">files</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_file_list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__directory_path</span><span class="p">)</span>
 
-        <span class="n">_logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Target directory: </span><span class="si">{directory_path}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">directory_path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__directory_path</span><span class="p">))</span>
+        <span class="n">_logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="s2">&quot;Target directory: </span><span class="si">{directory_path}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">directory_path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__directory_path</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
         <span class="n">_logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Digit: </span><span class="si">{digits}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">digits</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__digits</span><span class="p">))</span>
         <span class="n">_logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Extension: </span><span class="si">{extension}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">extension</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__extension</span><span class="p">))</span>
         <span class="n">_logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">55</span><span class="p">)</span>
 
         <span class="n">loop</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_eventloop</span><span class="p">()</span>
         <span class="n">queue</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_task_queue</span><span class="p">(</span><span class="n">files</span><span class="p">)</span>
-        <span class="n">loop</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_execute_queuing_tasks</span><span class="p">(</span><span class="n">queue</span><span class="p">,</span> <span class="n">loop</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rename_digit_filename</span><span class="p">))</span>
+        <span class="n">loop</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_execute_queuing_tasks</span><span class="p">(</span><span class="n">queue</span><span class="p">,</span> <span class="n">loop</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rename_digit_filename</span><span class="p">)</span>
+        <span class="p">)</span>
         <span class="n">_logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">55</span><span class="p">)</span>
         <span class="n">_logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Finished! Async rename&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__exist_files</span></div>
@@ -317,14 +335,20 @@
 <span class="sd">            bool: If success, return True.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="k">def</span> <span class="nf">_flag_yes</span><span class="p">():</span>
             <span class="n">new_name_y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__input_new_file_name</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">overwrite</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_rename_file</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">new_name_y</span><span class="p">)</span>
-            <span class="n">_logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Rename: </span><span class="si">{old_name}</span><span class="s2"> =&gt; </span><span class="si">{new_name}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">old_name</span><span class="o">=</span><span class="n">file</span><span class="p">,</span> <span class="n">new_name</span><span class="o">=</span><span class="n">new_name_y</span><span class="p">))</span>
+            <span class="n">_logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                <span class="s2">&quot;Rename: </span><span class="si">{old_name}</span><span class="s2"> =&gt; </span><span class="si">{new_name}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">old_name</span><span class="o">=</span><span class="n">file</span><span class="p">,</span> <span class="n">new_name</span><span class="o">=</span><span class="n">new_name_y</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
 
         <span class="k">def</span> <span class="nf">_flag_rename</span><span class="p">():</span>
-            <span class="n">flag_delete</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Will be </span><span class="si">{file}</span><span class="s2"> deleted? &quot;</span>
-                                <span class="s2">&quot;OK? (y/n/c/r)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="n">file</span><span class="p">))</span>  <span class="c1"># y=&quot;Yes&quot; n=&quot;No&quot; c=&quot;check&quot; r=&quot;rename&quot;</span>
+            <span class="n">flag_delete</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span>
+                <span class="s2">&quot;Will be </span><span class="si">{file}</span><span class="s2"> deleted? &quot;</span> <span class="s2">&quot;OK? (y/n/c/r)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="n">file</span><span class="p">)</span>
+            <span class="p">)</span>  <span class="c1"># y=&quot;Yes&quot; n=&quot;No&quot; c=&quot;check&quot; r=&quot;rename&quot;</span>
             <span class="k">if</span> <span class="n">flag_delete</span> <span class="o">==</span> <span class="s2">&quot;c&quot;</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_check_image_file</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
             <span class="k">elif</span> <span class="n">flag_delete</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;Y&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">):</span>
@@ -339,7 +363,9 @@
         <span class="n">_logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Manually determine file names duplicated by the serial number</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__exist_files</span><span class="p">:</span>
             <span class="n">_logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;File name: </span><span class="si">{file_name}</span><span class="s2">&quot;</span><span class="p">)</span>
-            <span class="n">flag</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Does it rename? (y/n/r)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="n">file</span><span class="p">))</span>  <span class="c1"># y=&quot;Yes&quot; n=&quot;No&quot; r=&quot;Remove&quot;</span>
+            <span class="n">flag</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span>
+                <span class="s2">&quot;Does it rename? (y/n/r)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="n">file</span><span class="p">)</span>
+            <span class="p">)</span>  <span class="c1"># y=&quot;Yes&quot; n=&quot;No&quot; r=&quot;Remove&quot;</span>
             <span class="k">if</span> <span class="n">flag</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;Y&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">):</span>
                 <span class="n">_flag_yes</span><span class="p">()</span>
             <span class="k">elif</span> <span class="n">flag</span> <span class="o">==</span> <span class="s2">&quot;r&quot;</span><span class="p">:</span>
@@ -420,26 +446,16 @@
   
 
 
-  
-
-    
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/language_data.js"></script>
-    
-
-  
-
-  <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>

@@ -43,12 +43,12 @@ def auto(args):
         return True
     except BaseError as base_error:
         _logger.exception(base_error)
-        sys.exit(2)
+        raise base_error
     except Exception as other_error:
         _logger.error("Unhandled Error occurred.")
         _logger.exception(other_error)
         _logger.critical(other_error)
-        sys.exit(1)
+        raise other_error
 
 
 def make_zip(args):
@@ -74,12 +74,12 @@ def make_zip(args):
         return True
     except BaseError as base_error:
         _logger.exception(base_error)
-        sys.exit(2)
+        raise base_error
     except Exception as other_error:
         _logger.error("Unhandled Error occurred.")
         _logger.exception(other_error)
         _logger.critical(other_error)
-        sys.exit(1)
+        raise other_error
 
 
 def show_version():
