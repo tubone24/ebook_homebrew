@@ -17,32 +17,34 @@
   
 
   
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
-
-  
-  <script src="../../_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -174,9 +176,11 @@
 <span class="sd">        bool: If success, return true.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">rename_obj</span> <span class="o">=</span> <span class="n">ChangeFilename</span><span class="p">(</span><span class="n">directory_path</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">src_dir</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-                                    <span class="n">digits</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">digit</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-                                    <span class="n">extension</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">extension</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">rename_obj</span> <span class="o">=</span> <span class="n">ChangeFilename</span><span class="p">(</span>
+            <span class="n">directory_path</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">src_dir</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+            <span class="n">digits</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">digit</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+            <span class="n">extension</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">extension</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+        <span class="p">)</span>
         <span class="n">rename_obj</span><span class="o">.</span><span class="n">filename_to_digit_number</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">manual</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
             <span class="n">rename_obj</span><span class="o">.</span><span class="n">change_name_manually</span><span class="p">(</span><span class="n">overwrite</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">assume_yes</span><span class="p">)</span>
@@ -185,16 +189,18 @@
         <span class="n">convert_obj</span><span class="o">.</span><span class="n">make_pdf</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">filename</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">remove_flag</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">remove</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">dst_dir</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">convert_obj</span><span class="o">.</span><span class="n">move_file</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">filename</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dst</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">dst_dir</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">assume_yes</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">assume_yes</span><span class="p">)</span>
+            <span class="n">convert_obj</span><span class="o">.</span><span class="n">move_file</span><span class="p">(</span>
+                <span class="n">file</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">filename</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dst</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">dst_dir</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">assume_yes</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">assume_yes</span>
+            <span class="p">)</span>
         <span class="k">return</span> <span class="kc">True</span>
     <span class="k">except</span> <span class="n">BaseError</span> <span class="k">as</span> <span class="n">base_error</span><span class="p">:</span>
         <span class="n">_logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="n">base_error</span><span class="p">)</span>
-        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">base_error</span>
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">other_error</span><span class="p">:</span>
         <span class="n">_logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Unhandled Error occurred.&quot;</span><span class="p">)</span>
         <span class="n">_logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="n">other_error</span><span class="p">)</span>
         <span class="n">_logger</span><span class="o">.</span><span class="n">critical</span><span class="p">(</span><span class="n">other_error</span><span class="p">)</span>
-        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></div>
+        <span class="k">raise</span> <span class="n">other_error</span></div>
 
 
 <div class="viewcode-block" id="make_zip"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.helper.make_zip">[docs]</a><span class="k">def</span> <span class="nf">make_zip</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
@@ -207,19 +213,25 @@
 <span class="sd">        bool: If success, return true.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">make_zip_obj</span> <span class="o">=</span> <span class="n">MakeArchive</span><span class="p">(</span><span class="n">extension</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">extension</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">directory_path</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">src_dir</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-        <span class="n">make_zip_obj</span><span class="o">.</span><span class="n">make_zip</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">filename</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">remove_flag</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">remove</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">make_zip_obj</span> <span class="o">=</span> <span class="n">MakeArchive</span><span class="p">(</span>
+            <span class="n">extension</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">extension</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">directory_path</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">src_dir</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="n">make_zip_obj</span><span class="o">.</span><span class="n">make_zip</span><span class="p">(</span>
+            <span class="n">filename</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">filename</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">remove_flag</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">remove</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">False</span>
+        <span class="p">)</span>
         <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">dst_dir</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">make_zip_obj</span><span class="o">.</span><span class="n">move_file</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">filename</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dst</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">dst_dir</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">assume_yes</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">assume_yes</span><span class="p">)</span>
+            <span class="n">make_zip_obj</span><span class="o">.</span><span class="n">move_file</span><span class="p">(</span>
+                <span class="n">file</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">filename</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dst</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">dst_dir</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">assume_yes</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">assume_yes</span>
+            <span class="p">)</span>
         <span class="k">return</span> <span class="kc">True</span>
     <span class="k">except</span> <span class="n">BaseError</span> <span class="k">as</span> <span class="n">base_error</span><span class="p">:</span>
         <span class="n">_logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="n">base_error</span><span class="p">)</span>
-        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">base_error</span>
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">other_error</span><span class="p">:</span>
         <span class="n">_logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Unhandled Error occurred.&quot;</span><span class="p">)</span>
         <span class="n">_logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="n">other_error</span><span class="p">)</span>
         <span class="n">_logger</span><span class="o">.</span><span class="n">critical</span><span class="p">(</span><span class="n">other_error</span><span class="p">)</span>
-        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></div>
+        <span class="k">raise</span> <span class="n">other_error</span></div>
 
 
 <div class="viewcode-block" id="show_version"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.helper.show_version">[docs]</a><span class="k">def</span> <span class="nf">show_version</span><span class="p">():</span>
@@ -255,26 +267,16 @@
   
 
 
-  
-
-    
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/language_data.js"></script>
-    
-
-  
-
-  <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>

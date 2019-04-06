@@ -71,8 +71,8 @@ class MakeArchive(Common):
                             "{filename}".format(count=count, filename=file)
                         )
                         file_mode = "a"
-                except FileExistsError:
-                    raise ZipFileExistError()
+                except FileExistsError as file_exists_error:
+                    raise ZipFileExistError() from file_exists_error
 
                 if remove_flag:
                     self._remove_file(file, assume_yes=True)
