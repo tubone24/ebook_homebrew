@@ -2,8 +2,6 @@
 """Provides helper for command line interface
 """
 
-import sys
-
 from .__init__ import __version__
 from .convert import Image2PDF
 from .exceptions import BaseError
