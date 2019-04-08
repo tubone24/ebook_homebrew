@@ -33,4 +33,4 @@ Like This TOP pages. Click ``GO DEMO APP`` .
 
 Choose Files, digits and extension. Click ``Create!`` and Downloading ``result.pdf``
 
-.. image:: https://raw.githubusercontent.com/tubone24/ebook_homebrew/master/examples/web_gui/docs/images/to2.png
+.. image:: https://raw.githubusercontent.com/tubone24/ebook_homebrew/master/examples/web_gui/docs/images/top2.png
