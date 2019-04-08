@@ -1,0 +1,4 @@
+Flask==1.0.2
+Jinja2==2.10
+Werkzeug==0.15.2
+ebook-homebrew==1.1.5
