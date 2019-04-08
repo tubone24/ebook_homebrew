@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Create PDF from Images</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+    <!-- Web Fonts -->
+    <link href="//fonts.googleapis.com/css?family=Playfair+Display:400,700%7COpen+Sans:300,400,700" rel="stylesheet">
+
+    <!-- Bootstrap Styles -->
+    <link rel="stylesheet" type="text/css" href="static/vendors/bootstrap/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    <!-- Components Vendor Styles -->
+    <link rel="stylesheet" type="text/css" href="static/vendors/font-awesome/css/fontawesome-all.min.css">
+
+    <!-- Theme Styles -->
+    <link rel="stylesheet" type="text/css" href="static/css/styles.css">
+</head>
+<body>
+<!-- Header -->
+<header role="header">
+    <!-- Navbar -->
+    <nav class="js-navbar-scroll navbar fixed-top navbar-expand-lg navbar-transparent navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">
+                <img src="static/img/logo.png" alt="logo" style="width: 100px;">
+            </a>
+
+            <button class="navbar-toggler" type="button"
+                    data-toggle="collapse"
+                    data-target="#navbarTogglerDemo"
+
+                    aria-controls="navbarTogglerDemo"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo">
+                <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                    <li class="nav-item mr-4 mb-2 mb-lg-0">
+                        <a href="#js-scroll-to-section" class="nav-link"
+                           href="https://github.com/tubone24/ebook_homebrew">
+                            <i class="fab fa-github u-font-size-90 mr-1"></i> Github
+                        </a>
+                    </li>
+                    <li class="nav-item mr-4 mb-2 mb-lg-0">
+                        <a class="nav-link" href="https://tubone-project24.xyz/">
+                            <i class="fas fa-blog u-font-size-90 mr-1"></i> Blog
+                        </a>
+                    </li>
+                    <li class="nav-item mr-4 mb-2 mb-lg-0">
+                        <a class="nav-link" href="https://ebook-homebrew.readthedocs.io/en/latest/">
+                            <i class="fas fa-book u-font-size-90 mr-1"></i> Docs
+                        </a>
+                    </li>
+                </ul>
+                <div>
+                    <a class="btn btn-primary" href="https://pypi.org/project/ebook-homebrew/">
+                        <i class="fas fa-cloud-download-alt mr-1"></i> PyPI Download
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navbar -->
+    <!-- Promo Block -->
+    <section class="js-parallax u-promo-block" style="background-image: url(static/img/bg.jpg);">
+        <!-- Promo Content -->
+        <div class="container text-white u-ver-center u-content-space">
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <div class="text-center">
+                        <p class="h6 text-uppercase u-letter-spacing-sm mb-0">Create PDF from your Images</p>
+                        <h1 class="display-2 display-md-1 u-font-accent font-weight-light">Ebook <span
+                                class="d-none d-md-inline-block">-</span>Homebrew</h1>
+                        <a href="upload#js-scroll-to-section"
+                           class="text-uppercase text-white font-weight-bold u-font-size-75">Go Demo App</a>
+                        <span class="fa fa-angle-down d-block"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Promo Content -->
+    </section>
+    <!-- End Promo Block -->
+</header>
+<!-- End Header -->
+<main role="main">
+
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">
+        </a>
+
+        <section class="js-parallax u-promo-block">
+            <div class="container">
+                <div class="row">
+                    {% block content %}
+                    {% endblock %}
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="bg-dark u-content-space-top pb-4" role="footer">
+    <div class="container-fluid">
+        <div class="px-md-3">
+            <div class="text-center">
+                <h2 class="h5 font-weight-light text-white mb-4">ebook-homebrew</h2>
+            </div>
+            <hr class="u-opacity-1 mb-4">
+        </div>
+
+        <!-- Copyright and Social Icons -->
+        <div class="row px-md-3">
+            <div class="col-md-8 text-center text-md-left mb-3 mb-md-0">
+                <small class="text-white">&copy; 2019 <a class="text-white" href="http://tubone-project24.xyz">tubone-project24</a>.
+                    All Rights Reserved.
+                </small>
+            </div>
+
+            <div class="col-md-4 align-self-center">
+                <ul class="list-inline text-center text-md-right mb-0">
+                    <li class="list-inline-item mx-2" data-toggle="tooltip" data-placement="top" title="Facebook">
+                        <a class="text-white" target="_blank" href="https://www.facebook.com/yu.otsubo">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item mx-2" data-toggle="tooltip" data-placement="top" title="Twitter">
+                        <a class="text-white" target="_blank" href="https://twitter.com/meitante1conan">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- End Copyright and Social Icons --></div>
+</footer>
+<!-- End Footer -->
+<!-- JAVASCRIPTS (Load javascripts at bottom, this will reduce page load time) -->
+<!-- Global Vendor -->
+<script src="static/vendors/jquery.min.js"></script>
+<script src="static/vendors/jquery.migrate.min.js"></script>
+<script src="static/vendors/popper.min.js"></script>
+<script src="static/vendors/bootstrap/js/bootstrap.min.js"></script>
+<script src="static/vendors/magnific-popup/jquery.magnific-popup.min.js"></script>
+<script src="static/vendors/jquery.parallax.js"></script>
+<script src="static/js/vendors/parallax.js"></script>
+
+<!-- Theme Settings and Calls -->
+<script src="static/js/global.js"></script>
+<!-- END JAVASCRIPTS -->
+</body>
+</html>

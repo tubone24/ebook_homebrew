@@ -218,6 +218,11 @@ Travis-CI
 
 This repository uses `Travis-CI <https://travis-ci.org/>`_ and be building jobs by push or PR branches.
 
+Examples
+========
+
+Web GUI. Such as `Create PDF from your images <examples/web_gui/application.py>`_
+
 Licence
 =======
 

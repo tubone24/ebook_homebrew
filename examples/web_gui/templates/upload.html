@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<section id="js-scroll-to-section" class="u-content-space">
+<form class="form-horizontal" action="/data/upload" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="files_upload">Image Files</label>
+        <input id="files_upload" type="file" name="uploadFiles"/ multiple="multiple">
+        <p class="help-block text-primary fa ">Put your Image file like ".jpg", ".png", ".gif"</p>
+    </div>
+    <div class="form-group">
+        <label for="digits" class="text-primary fa-bold">Digits</label>
+        <input type="text" class="form-control" id="digits" placeholder="digits" name="digits">
+        <p class="help-block text-primary fa ">Serial digits number such like "003.jpg" is 3.</p>
+    </div>
+    <div class="form-group">
+        <label for="extension" class="text-primary fa-bold">Extension</label>
+        <input type="text" class="form-control" id="extension" placeholder="extension" name="extension">
+        <p class="help-block text-primary fa ">Extension such like "test.png" is "png".</p>
+    </div>
+    <input type="submit" class="btn btn-primary rounded-pill" value="Create!"/>
+</form>
+</section>
+{% endblock %}

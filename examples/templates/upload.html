@@ -1,9 +1,0 @@
-{% extends "base.html" %}
-{% block content %}
-<form action="/data/upload" method="post" enctype="multipart/form-data">
-    <p>Img files: <input type="file" name="uploadFiles"/ multiple="multiple"></p>
-    <p>Digits: <input type="text" name="digits"></p>
-    <p>Extension: <input type="text" name="extension"></p>
-    <input type="submit" value="submit"/>
-</form>
-{% endblock %}
