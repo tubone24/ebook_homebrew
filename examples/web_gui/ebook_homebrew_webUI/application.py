@@ -32,27 +32,47 @@ def uploader():
 def create_pdf():
     """Create PDF input images
     """
-    digits = ""
-    extension = ""
 
     if "digits" in request.form:
         digits = str(request.form["digits"])
+        if digits == "":
+            return make_response(jsonify({"result": "Must set digits"}))
     if "extension" in request.form:
         extension = str(request.form["extension"])
+        if extension == "":
+            return make_response(jsonify({"result": "Must set extension"}))
     if "uploadFile" not in request.files:
-        make_response(jsonify({"result": "uploadFile is required."}))
+        return make_response(jsonify({"result": "uploadFile is required."}))
 
-    sys.stderr.write("digits = " + digits + "\n")
     upload_files = request.files.getlist("uploadFiles")
-    response = make_response()
+
     for file in upload_files:
         file_name = file.filename
         sys.stderr.write("fileName = " + file_name + "\n")
         save_file_name = werkzeug.utils.secure_filename(file_name)
         file.save(os.path.join(UPLOAD_DIR, save_file_name))
+    image_to_pdf(digits, extension)
+
+    response = create_result_pdf_response()
+    return response
+
+
+def image_to_pdf(digits, extension):
+    """Image to PDF
+
+    Args:
+        digits: digits
+        extension: extension
+
+    Returns:
+
+    """
     converter = Image2PDF(digits, extension, UPLOAD_DIR)
     converter.make_pdf("result.pdf", True)
 
+
+def create_result_pdf_response():
+    response = make_response()
     with open("result.pdf", "rb") as f:
         response.data = f.read()
         downloadFileName = "result.pdf"

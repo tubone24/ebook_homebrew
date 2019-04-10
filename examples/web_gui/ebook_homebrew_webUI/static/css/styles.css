@@ -982,7 +982,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .navbar-bg-onscroll.fixed-top {
-  background-color: #ffffaa;
+  background-color: #00ffdf;
   transition: all .3s ease-out;
 }
 
