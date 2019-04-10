@@ -44,3 +44,4 @@ exclude_paths:
 - tests/**/*
 - docs/**/*
 - doc_src/**/*
+- examples/web_gui/ebook_homebrew_webUI/vendors/**/*
