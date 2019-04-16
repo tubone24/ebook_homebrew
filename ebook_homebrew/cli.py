@@ -3,10 +3,15 @@ import argparse
 
 from ebook_homebrew.helper import auto
 from ebook_homebrew.helper import show_version
+from ebook_homebrew.rest import api
 
 
 def execute_auto(args_auto):
     auto(args_auto)
+
+
+def execute_api(args_api):
+    api.run(port=8080)
 
 
 def main():
@@ -29,7 +34,14 @@ def main():
         help="Make only digit file name, " "convert e-book file such as PDF",
     )
 
+    parser_api = subparsers.add_parser(
+        "api",
+        description="API",
+        help="API",
+    )
+
     parser_auto.set_defaults(handler=execute_auto)
+    parser_api.set_defaults(handler=execute_api)
 
     parser_auto.add_argument(
         "-s",
