@@ -8,8 +8,8 @@ env:
 
 build:
   pre_ci_boot:
-    image_name: drydock/u14pytall
-    image_tag: v5.8.2
+    image_name: drydock/c7pytall
+    image_tag: v6.8.4
   ci:
     - echo $CI_REPORTS && mkdir -p $CI_REPORTS
     - echo $COVERAGE_REPORTS && mkdir -p $COVERAGE_REPORTS
