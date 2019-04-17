@@ -70,12 +70,14 @@ class TestCli(object):
                                  "convert e-book file such as PDF",
                      help="Make only digit file name, "
                           "convert e-book file such as PDF"),
+                call("api",
+                     description="Run Rest API server.",
+                     help="Provides Rest API interfaces."),
                 call("makezip",
                      description="Make zip file for files "
                                  "which you choose extension.",
-                     help="Make zip file for adding specify extension files.")]
+                     help="Make zip file for adding specify extension files."),]
             mock_subparser.add_parser.assert_has_calls(calls_subparser)
-            mock_parser_auto.set_defaults.assert_called_once_with(handler=execute_auto)
             calls_parser_auto = [call("-s", "--src_dir",
                                       action="store",
                                       nargs=1,
