@@ -8,6 +8,7 @@ from .exceptions import BaseError
 from .rename import ChangeFilename
 from .utils.logging import get_logger
 from .archive import MakeArchive
+from .rest import api
 
 _logger = get_logger("helper")
 
@@ -78,6 +79,11 @@ def make_zip(args):
         _logger.exception(other_error)
         _logger.critical(other_error)
         raise other_error
+
+
+def rest_api(args):
+    port = int(args.port[0])
+    api.run(port=port)
 
 
 def show_version():

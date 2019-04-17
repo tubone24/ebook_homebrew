@@ -3,7 +3,7 @@ import argparse
 
 from ebook_homebrew.helper import auto
 from ebook_homebrew.helper import show_version
-from ebook_homebrew.rest import api
+from ebook_homebrew.helper import rest_api
 
 
 def execute_auto(args_auto):
@@ -11,7 +11,7 @@ def execute_auto(args_auto):
 
 
 def execute_api(args_api):
-    api.run(port=8080)
+    rest_api(args_api)
 
 
 def main():
@@ -38,6 +38,19 @@ def main():
         "api",
         description="API",
         help="API",
+    )
+
+    parser_api.add_argument(
+        "-p",
+        "--port",
+        action="store",
+        nargs=1,
+        const=None,
+        default=None,
+        required=True,
+        type=int,
+        help="API Server Port",
+        metavar="PORT",
     )
 
     parser_auto.set_defaults(handler=execute_auto)
