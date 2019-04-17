@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+"""Provides Rest API interfaces
+"""
+
 import os
 import base64
 import glob
@@ -16,11 +20,15 @@ _logger = get_logger("RestAPI")
 
 @api.route("/status")
 def status(req, resp):
+    """Health Check
+    """
     resp.media = {"status": "ok"}
 
 
 @api.route("/data/upload")
 async def upload_image_file(req, resp):
+    """Endpoint: File uploader
+    """
     data = await req.media()
     _logger.debug(data)
     content_type = data["contentType"]
@@ -33,6 +41,18 @@ async def upload_image_file(req, resp):
 
 @api.background.task
 def write_image(images_b64, extension, tmp_dir):
+    """Images write at tmp_dir
+
+    This API is background task.
+
+    Args:
+     images_b64: Base64 encoded images list
+     extension: Image extension
+     tmp_dir: Temp directory writing images
+    Returns:
+        bool: If success return true.
+
+    """
     for i, content in enumerate(images_b64):
         image = base64.b64decode(content)
         file_name = os.path.join(tmp_dir, str(i) + "." + extension)
@@ -44,6 +64,8 @@ def write_image(images_b64, extension, tmp_dir):
 
 @api.route("/convert/pdf")
 async def convert_image_to_pdf(req, resp):
+    """Endpoint Image converter to PDF
+    """
     data = await req.media()
     _logger.debug(data)
     upload_id = data["uploadId"]
@@ -62,6 +84,18 @@ async def convert_image_to_pdf(req, resp):
 
 @api.background.task
 def convert_pdf(digits, extension, upload_id):
+    """Convert images to PDF
+
+    This API is background task.
+
+    Args:
+     digits: file serial number digits
+     extension: Image extension
+     upload_id: Request ID
+    Returns:
+        bool: If success return true.
+
+    """
     converter = Image2PDF(digits=digits, extension=extension, directory_path=upload_id)
     converter.make_pdf("result.pdf")
     with open(os.path.join(upload_id, "result_meta.txt"), "w") as f:
@@ -74,6 +108,8 @@ def convert_pdf(digits, extension, upload_id):
 
 @api.route("/convert/pdf/download")
 async def download_result_pdf(req, resp):
+    """Endpoint download result PDF
+    """
     data = await req.media()
     _logger.debug(data)
     upload_id = data["uploadId"]
@@ -87,6 +123,14 @@ async def download_result_pdf(req, resp):
 
 
 def convert_content_type_to_extension(content_type):
+    """Convert image extension to Content-Type
+
+    Args:
+     content_type: Content-Type
+    Returns:
+        str: extension
+
+    """
     if content_type == "image/jpeg":
         return "jpg"
     elif content_type == "image/png":

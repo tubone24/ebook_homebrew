@@ -82,6 +82,10 @@ def make_zip(args):
 
 
 def rest_api(args):
+    """Rest API
+
+    :param args: argparse namespace object
+    """
     port = int(args.port[0])
     api.run(port=port)
 
