@@ -18,7 +18,7 @@ def api():
 @pytest.fixture
 def image_b64():
     with open(os.path.join(os.path.dirname(__file__), "it", "assets", "test_image.png"), "rb") as f:
-        return str(base64.b64encode(f.read()))
+        return base64.b64encode(f.read()).decode("utf-8")
 
 
 def copy_image_file(directory):
@@ -50,13 +50,6 @@ def test_upload_image_file(api, image_b64, tmpdir):
         assert r.text == json.dumps({"upload_id": str(tmpdir)})
         mock_write_image.assert_called_once_with([image_b64], "png", str(tmpdir))
         mock_mkdtemp.assert_called_once_with()
-
-
-@pytest.mark.asyncio
-async def test_write_image(image_b64, tmpdir):
-    expected = True
-    actual = await target.write_image(image_b64, "png", tmpdir)
-    assert actual == expected
 
 
 def test_convert_image_to_pdf(api, tmpdir):

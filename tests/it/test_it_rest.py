@@ -19,7 +19,7 @@ def api():
 @pytest.fixture
 def image_b64():
     with open(os.path.join(os.path.dirname(__file__), "assets", "test_image3.png"), "rb") as f:
-        return str(base64.b64encode(f.read()))
+        return base64.b64encode(f.read()).decode("utf-8")
 
 
 @pytest.mark.it
@@ -41,3 +41,6 @@ def test_it_rest_convert_pdf(api, image_b64):
     assert r3.text == json.dumps({"upload_id": str(upload_id)})
     r3 = api.requests.post("/convert/pdf", event3)
     assert r3.text == json.dumps({"upload_id": str(upload_id)})
+    event4 = json.dumps({"uploadId": str(upload_id)})
+    r4 = api.requests.post("/convert/pdf/download", event2)
+    assert r4.status_code == 404
