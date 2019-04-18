@@ -19,16 +19,12 @@ install:
   - python -m pip install -U tox
   - python -m pip install -U wheel
   - python -m pip install -U twine
-  - python -m pip install -r requirements-test.txt
 
 build_script:
   - python setup.py build
 
 test_script:
-  - python setup.py install
-  - coverage run --source=ebook_homebrew -m pytest --it --junit-xml=test_results.xml
-  - coverage report -m
-  - coverage xml
+  - python -m tox
 
 after_test:
   - python setup.py sdist
