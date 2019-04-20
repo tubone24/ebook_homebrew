@@ -16,10 +16,12 @@ ebookhomebrew command line interfaces provides subcommand. ::
 
      Choose subcommands. Usually choose "auto"
 
-     {auto}
+     {auto,api,makezip}
       auto      Make only digit file name, convert e-book file such as PDF
+      api               Provides Rest API interfaces
+      makezip           Make zip file for adding specify extension files.
 
-Also provides Options. ::
+Also provides Options auto. ::
 
       -h, --help            show this help message and exit
       -s SRC_DIR, --src_dir SRC_DIR
@@ -34,6 +36,11 @@ Also provides Options. ::
       -r, --remove          Remove original image file.
       -y, --assume_yes      no verify users.
 
+Also provides Options api. ::
+
+      -h, --help            show this help message and exit
+      -p PORT, --port PORT  API Server Port
+
 
 Auto command
 ------------
@@ -41,5 +48,14 @@ Auto command
 Rename image file to only digit and Create PDF file. ::
 
     $ ebookhomebrew auto -s ./tests -d 3,4 -e jpg -f test.pdf
+
+
+API command
+-----------
+
+Run API Server. ::
+
+    $ ebookhomebrew api -p 8080
+
 
 

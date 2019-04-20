@@ -6,7 +6,7 @@ import yaml
 yaml_path = os.path.join(os.path.dirname(__file__), "logging.yaml")
 
 with open(yaml_path) as f:
-    dict_config = yaml.load(f)
+    dict_config = yaml.load(f, Loader=yaml.FullLoader)
 
 config.dictConfig(dict_config)
 

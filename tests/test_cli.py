@@ -8,6 +8,7 @@ import pytest
 from ebook_homebrew import cli
 from ebook_homebrew.cli import main
 from ebook_homebrew.cli import execute_auto
+from ebook_homebrew.cli import execute_api
 
 _logger = logging.getLogger(name=__name__)
 
@@ -24,6 +25,7 @@ class TestCli(object):
             self.manual = False
             self.assume_yes = False
             self.remove = False
+            self.port = []
 
     @pytest.fixture
     def args_ok(self):
@@ -42,6 +44,17 @@ class TestCli(object):
         with patch.object(cli, "auto") as mock_auto:
             execute_auto(args_ok)
             mock_auto.assert_called_once_with(args_ok)
+
+    @pytest.fixture
+    def args_api(self):
+        args_obj = self.ArgNameSpace()
+        args_obj.port.append(8080)
+        return args_obj
+
+    def test_execute_api(self, args_api):
+        with patch.object(cli, "rest_api") as mock_api:
+            execute_api(args_api)
+            mock_api.assert_called_once_with(args_api)
 
     def test_main_set_args(self):
         mock_parser = MagicMock(name="mock_parser")
@@ -70,12 +83,14 @@ class TestCli(object):
                                  "convert e-book file such as PDF",
                      help="Make only digit file name, "
                           "convert e-book file such as PDF"),
+                call("api",
+                     description="Run Rest API server.",
+                     help="Provides Rest API interfaces."),
                 call("makezip",
                      description="Make zip file for files "
                                  "which you choose extension.",
-                     help="Make zip file for adding specify extension files.")]
+                     help="Make zip file for adding specify extension files."),]
             mock_subparser.add_parser.assert_has_calls(calls_subparser)
-            mock_parser_auto.set_defaults.assert_called_once_with(handler=execute_auto)
             calls_parser_auto = [call("-s", "--src_dir",
                                       action="store",
                                       nargs=1,

@@ -20,6 +20,7 @@ class ArgNameSpace(object):
         self.manual = False
         self.assume_yes = False
         self.remove = False
+        self.port = []
 
 
 def copy_image_file(directory):

@@ -3,10 +3,15 @@ import argparse
 
 from ebook_homebrew.helper import auto
 from ebook_homebrew.helper import show_version
+from ebook_homebrew.helper import rest_api
 
 
 def execute_auto(args_auto):
     auto(args_auto)
+
+
+def execute_api(args_api):
+    rest_api(args_api)
 
 
 def main():
@@ -29,7 +34,27 @@ def main():
         help="Make only digit file name, " "convert e-book file such as PDF",
     )
 
+    parser_api = subparsers.add_parser(
+        "api",
+        description="Run Rest API server.",
+        help="Provides Rest API interfaces.",
+    )
+
+    parser_api.add_argument(
+        "-p",
+        "--port",
+        action="store",
+        nargs=1,
+        const=None,
+        default=None,
+        required=True,
+        type=int,
+        help="API Server Port",
+        metavar="PORT",
+    )
+
     parser_auto.set_defaults(handler=execute_auto)
+    parser_api.set_defaults(handler=execute_api)
 
     parser_auto.add_argument(
         "-s",

@@ -17,34 +17,32 @@
   
 
   
-  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/language_data.js"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
+  
+  
     
 
   
+
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
+
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search">
           
 
           
@@ -154,14 +152,13 @@
 <span class="sd">&quot;&quot;&quot;Provides helper for command line interface</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">sys</span>
-
 <span class="kn">from</span> <span class="nn">.__init__</span> <span class="k">import</span> <span class="n">__version__</span>
 <span class="kn">from</span> <span class="nn">.convert</span> <span class="k">import</span> <span class="n">Image2PDF</span>
 <span class="kn">from</span> <span class="nn">.exceptions</span> <span class="k">import</span> <span class="n">BaseError</span>
 <span class="kn">from</span> <span class="nn">.rename</span> <span class="k">import</span> <span class="n">ChangeFilename</span>
 <span class="kn">from</span> <span class="nn">.utils.logging</span> <span class="k">import</span> <span class="n">get_logger</span>
 <span class="kn">from</span> <span class="nn">.archive</span> <span class="k">import</span> <span class="n">MakeArchive</span>
+<span class="kn">from</span> <span class="nn">.rest</span> <span class="k">import</span> <span class="n">api</span>
 
 <span class="n">_logger</span> <span class="o">=</span> <span class="n">get_logger</span><span class="p">(</span><span class="s2">&quot;helper&quot;</span><span class="p">)</span>
 
@@ -234,6 +231,15 @@
         <span class="k">raise</span> <span class="n">other_error</span></div>
 
 
+<div class="viewcode-block" id="rest_api"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.helper.rest_api">[docs]</a><span class="k">def</span> <span class="nf">rest_api</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Rest API</span>
+
+<span class="sd">    :param args: argparse namespace object</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">port</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">port</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">api</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">)</span></div>
+
+
 <div class="viewcode-block" id="show_version"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.helper.show_version">[docs]</a><span class="k">def</span> <span class="nf">show_version</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;Show version</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -267,16 +273,26 @@
   
 
 
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

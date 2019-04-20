@@ -67,6 +67,14 @@ ebook\_homebrew.rename module
     :undoc-members:
     :show-inheritance:
 
+ebook\_homebrew.rest module
+---------------------------
+
+.. automodule:: ebook_homebrew.rest
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 
 Module contents
 ---------------
