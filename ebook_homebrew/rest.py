@@ -139,7 +139,3 @@ def convert_content_type_to_extension(content_type):
         return "gif"
     else:
         return False
-
-
-if __name__ == "__main__":
-    api.run(port=8080)

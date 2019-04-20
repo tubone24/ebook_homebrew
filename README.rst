@@ -132,11 +132,18 @@ Show help.
 
    $ ebookhomebrew -h
 
-Ex) Rename image file to only digit and Create PDF file.
+Ex1) Rename image file to only digit and Create PDF file.
 
 .. code-block:: bash
 
    $ ebookhomebrew auto -s ./tests -d 3,4 -e jpg -f test.pdf
+
+Ex2) Run Rest API Server for converting pdf from images.
+
+.. code-block:: bash
+
+   $ ebookhomebrew api -p 8080
+
 
 ebookhomebrew command line interface
 ------------------------------------
@@ -149,11 +156,13 @@ Subcommands
 .. code-block:: bash
 
      Choose subcommands. Usually choose "auto"
-     {auto}
+     {auto,api,makezip}
       auto      Make only digit file name, convert e-book file such as PDF
+      api               Provides Rest API interfaces
+      makezip           Make zip file for adding specify extension files.
 
-Options
-^^^^^^^
+Options auto
+^^^^^^^^^^^^
 
 .. code-block:: bash
 
@@ -169,6 +178,16 @@ Options
    -m, --manual          Duplicate file name, solving manually.
    -r, --remove          Remove original image file.
    -y, --assume_yes      no verify users.
+
+Options api
+^^^^^^^^^^^
+
+.. code-block:: bash
+
+   optional arguments:
+   -h, --help            show this help message and exit
+   -p PORT, --port PORT  API Server Port
+
 
 Testing
 =======
@@ -216,7 +235,7 @@ With tox, you can test multiple python version.(only python3.5, 3.6)
 Travis-CI
 ---------
 
-This repository uses `Travis-CI <https://travis-ci.org/>`_ and be building jobs by push or PR branches.
+This repository uses `Travis-CI <https://travis-ci.org/tubone24/ebook_homebrew/>`_ and be building jobs by push or PR branches.
 
 Examples
 ========

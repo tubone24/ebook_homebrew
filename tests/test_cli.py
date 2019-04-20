@@ -8,6 +8,7 @@ import pytest
 from ebook_homebrew import cli
 from ebook_homebrew.cli import main
 from ebook_homebrew.cli import execute_auto
+from ebook_homebrew.cli import execute_api
 
 _logger = logging.getLogger(name=__name__)
 
@@ -24,6 +25,7 @@ class TestCli(object):
             self.manual = False
             self.assume_yes = False
             self.remove = False
+            self.port = []
 
     @pytest.fixture
     def args_ok(self):
@@ -42,6 +44,17 @@ class TestCli(object):
         with patch.object(cli, "auto") as mock_auto:
             execute_auto(args_ok)
             mock_auto.assert_called_once_with(args_ok)
+
+    @pytest.fixture
+    def args_api(self):
+        args_obj = self.ArgNameSpace()
+        args_obj.port.append(8080)
+        return args_obj
+
+    def test_execute_api(self, args_api):
+        with patch.object(cli, "rest_api") as mock_api:
+            execute_api(args_api)
+            mock_api.assert_called_once_with(args_api)
 
     def test_main_set_args(self):
         mock_parser = MagicMock(name="mock_parser")

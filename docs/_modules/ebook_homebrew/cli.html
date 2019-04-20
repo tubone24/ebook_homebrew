@@ -17,34 +17,32 @@
   
 
   
-  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/language_data.js"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
+  
+  
     
 
   
+
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
+
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search">
           
 
           
@@ -155,10 +153,15 @@
 
 <span class="kn">from</span> <span class="nn">ebook_homebrew.helper</span> <span class="k">import</span> <span class="n">auto</span>
 <span class="kn">from</span> <span class="nn">ebook_homebrew.helper</span> <span class="k">import</span> <span class="n">show_version</span>
+<span class="kn">from</span> <span class="nn">ebook_homebrew.helper</span> <span class="k">import</span> <span class="n">rest_api</span>
 
 
 <div class="viewcode-block" id="execute_auto"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.cli.execute_auto">[docs]</a><span class="k">def</span> <span class="nf">execute_auto</span><span class="p">(</span><span class="n">args_auto</span><span class="p">):</span>
     <span class="n">auto</span><span class="p">(</span><span class="n">args_auto</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="execute_api"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.cli.execute_api">[docs]</a><span class="k">def</span> <span class="nf">execute_api</span><span class="p">(</span><span class="n">args_api</span><span class="p">):</span>
+    <span class="n">rest_api</span><span class="p">(</span><span class="n">args_api</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="main"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.cli.main">[docs]</a><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
@@ -181,7 +184,27 @@
         <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Make only digit file name, &quot;</span> <span class="s2">&quot;convert e-book file such as PDF&quot;</span><span class="p">,</span>
     <span class="p">)</span>
 
+    <span class="n">parser_api</span> <span class="o">=</span> <span class="n">subparsers</span><span class="o">.</span><span class="n">add_parser</span><span class="p">(</span>
+        <span class="s2">&quot;api&quot;</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Run Rest API server.&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Provides Rest API interfaces.&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">parser_api</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;-p&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;--port&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store&quot;</span><span class="p">,</span>
+        <span class="n">nargs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">const</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;API Server Port&quot;</span><span class="p">,</span>
+        <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;PORT&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
     <span class="n">parser_auto</span><span class="o">.</span><span class="n">set_defaults</span><span class="p">(</span><span class="n">handler</span><span class="o">=</span><span class="n">execute_auto</span><span class="p">)</span>
+    <span class="n">parser_api</span><span class="o">.</span><span class="n">set_defaults</span><span class="p">(</span><span class="n">handler</span><span class="o">=</span><span class="n">execute_api</span><span class="p">)</span>
 
     <span class="n">parser_auto</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
         <span class="s2">&quot;-s&quot;</span><span class="p">,</span>
@@ -336,10 +359,7 @@
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">main</span><span class="p">()</span>
-    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">e</span>
+    <span class="n">main</span><span class="p">()</span>
 </pre></div>
 
            </div>
@@ -369,16 +389,26 @@
   
 
 
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>
