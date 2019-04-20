@@ -19,9 +19,10 @@ _logger = get_logger("RestAPI")
 
 
 @api.route("/status")
-def status(req, resp):
+def status(_, resp):
     """Health Check
     """
+    _logger.debug("health Check")
     resp.media = {"status": "ok"}
 
 
@@ -57,8 +58,8 @@ def write_image(images_b64, extension, tmp_dir):
         image = base64.b64decode(content)
         file_name = os.path.join(tmp_dir, str(i) + "." + extension)
         _logger.debug("file_name: {}".format(file_name))
-        with open(file_name, "wb") as f:
-            f.write(image)
+        with open(file_name, "wb") as image_file:
+            image_file.write(image)
     return True
 
 
@@ -74,7 +75,9 @@ async def convert_image_to_pdf(req, resp):
     if os.path.exists(result_meta):
         os.remove(result_meta)
     extension = convert_content_type_to_extension(content_type)
-    file_list = sorted(glob.glob(os.path.join(upload_id, "*." + extension)), reverse=True)
+    file_list = sorted(
+        glob.glob(os.path.join(upload_id, "*." + extension)), reverse=True
+    )
     file_base, _ = os.path.splitext(os.path.basename(file_list[0]))
     digits = len(file_base)
     _logger.debug(file_list)
@@ -98,11 +101,15 @@ def convert_pdf(digits, extension, upload_id):
     """
     converter = Image2PDF(digits=digits, extension=extension, directory_path=upload_id)
     converter.make_pdf("result.pdf")
-    with open(os.path.join(upload_id, "result_meta.txt"), "w") as f:
+    with open(os.path.join(upload_id, "result_meta.txt"), "w") as result_txt:
         now = datetime.datetime.now()
-        result = {"upload_id": upload_id, "digits": digits, "extension": extension,
-                  "datetime": now.strftime("%Y/%m/%d %H:%M:%S")}
-        f.write(json.dumps(result))
+        result = {
+            "upload_id": upload_id,
+            "digits": digits,
+            "extension": extension,
+            "datetime": now.strftime("%Y/%m/%d %H:%M:%S"),
+        }
+        result_txt.write(json.dumps(result))
     return True
 
 
@@ -115,9 +122,9 @@ async def download_result_pdf(req, resp):
     upload_id = data["uploadId"]
     result_meta = os.path.join(upload_id, "result_meta.txt")
     if os.path.exists(result_meta):
-        with open(os.path.join(upload_id, "result.pdf"), "rb") as f:
+        with open(os.path.join(upload_id, "result.pdf"), "rb") as result_pdf:
             resp.headers["Content-Type"] = "application/pdf"
-            resp.content = f.read()
+            resp.content = result_pdf.read()
     else:
         resp.status_code = api.status_codes.HTTP_404
 
@@ -137,5 +144,5 @@ def convert_content_type_to_extension(content_type):
         return "png"
     elif content_type == "image/gif":
         return "gif"
-    else:
-        return False
+
+    return False
