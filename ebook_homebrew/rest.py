@@ -139,10 +139,12 @@ def convert_content_type_to_extension(content_type):
 
     """
     if content_type == "image/jpeg":
-        return "jpg"
+        extension = "jpg"
     elif content_type == "image/png":
-        return "png"
+        extension = "png"
     elif content_type == "image/gif":
-        return "gif"
+        extension = "gif"
+    else:
+        extension = False
 
-    return False
+    return extension
