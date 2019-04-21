@@ -102,6 +102,10 @@ Badges:
    :target: https://waffle.io/tubone24/ebook_homebrew
    :alt: Waffle.io - Columns and their card count
 
+.. image:: https://dockeri.co/image/tubone24/ebook-homebrew
+   :target: https://cloud.docker.com/repository/docker/tubone24/ebook-homebrew
+   :alt: dockerhub
+
 .. toctree::
    :maxdepth: 2
 
