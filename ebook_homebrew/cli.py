@@ -35,9 +35,7 @@ def main():
     )
 
     parser_api = subparsers.add_parser(
-        "api",
-        description="Run Rest API server.",
-        help="Provides Rest API interfaces.",
+        "api", description="Run Rest API server.", help="Provides Rest API interfaces."
     )
 
     parser_api.add_argument(

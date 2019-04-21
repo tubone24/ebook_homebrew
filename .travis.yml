@@ -26,6 +26,7 @@ script:
     - python setup.py install
     - coverage run --source=ebook_homebrew -m pytest --it
     - coverage report -m
+    - black ebook_homebrew setup.py --check
 
 after_success:
     - codecov
