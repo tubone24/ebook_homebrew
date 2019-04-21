@@ -100,6 +100,10 @@ The ``Ebook_homebrew`` is changing file name to only digit name like ``001.jpg``
    :target: https://waffle.io/tubone24/ebook_homebrew
    :alt: Waffle.io - Columns and their card count
 
+.. image:: https://dockeri.co/image/tubone24/ebook-homebrew
+   :target: https://cloud.docker.com/repository/docker/tubone24/ebook-homebrew
+   :alt: dockerhub
+
 ebook_homebrew is command line interface which change file name to only digit name like 001.jpg and make e-book format files.
 
 Getting Started
