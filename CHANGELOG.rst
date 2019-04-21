@@ -12,3 +12,8 @@ Changelog
 
 * Rename to digit filename a little bit speedy for using asyncio
 * More Testcase(Windows)
+
+`v2.0.0 <https://github.com/tubone24/ebook_homebrew/releases/tag/v2.0.0>`_ (2019-04-20)
+=======================================================================================
+
+* Rest API Interface.

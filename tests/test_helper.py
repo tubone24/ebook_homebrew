@@ -28,4 +28,4 @@ def test_rest_api():
     args.port.append(8080)
     with patch.object(target, "api") as mock_api:
         target.rest_api(args)
-        mock_api.run.assert_called_once_with(port=8080)
+        mock_api.run.assert_called_once_with(address="0.0.0.0", port=8080)

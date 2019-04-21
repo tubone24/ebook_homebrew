@@ -20,7 +20,7 @@ Run ``application.py`` .
 
 .. code-block:: bash
 
-   $ cd ebook_homebrew_webUI
+   $ cd src
    $ python application.py
 
 And access `localhost:8080 <http://localhost:8080/>`_

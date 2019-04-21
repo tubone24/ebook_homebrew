@@ -17,4 +17,10 @@ test-report:
 	coverage report -m
 	coverage html
 
+pypi-upload-test:
+	twine upload --repository testpypi dist/*
+
+pypi-upload:
+	twine upload --repository pypi dist/*
+
 .PHONY: all
