@@ -8,3 +8,4 @@ pytest-flake8==1.0.4
 pytest-pep8==1.0.6
 coverage==4.5.3
 codecov==2.0.15
+black==18.9b0

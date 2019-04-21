@@ -32,7 +32,7 @@ def main(args):
         show_version()
 
 
-def open_image_file():
+def _open_image_file():
     pass
 
 
