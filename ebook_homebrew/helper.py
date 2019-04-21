@@ -87,7 +87,7 @@ def rest_api(args):
     :param args: argparse namespace object
     """
     port = int(args.port[0])
-    api.run(port=port)
+    api.run(address="0.0.0.0", port=port)
 
 
 def show_version():
