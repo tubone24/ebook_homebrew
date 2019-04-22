@@ -104,6 +104,10 @@ The ``Ebook_homebrew`` is changing file name to only digit name like ``001.jpg``
    :target: https://cloud.docker.com/repository/docker/tubone24/ebook-homebrew
    :alt: dockerhub
 
+.. image:: https://www.herokucdn.com/deploy/button.png
+   :target: https://heroku.com/deploy
+   :alt: Deploy to Heroku
+
 ebook_homebrew is command line interface which change file name to only digit name like 001.jpg and make e-book format files.
 
 Getting Started
