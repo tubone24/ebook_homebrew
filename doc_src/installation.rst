@@ -4,7 +4,7 @@ Installation
 Warnings
 --------
 
-.. warning:: Ebook_homebrew Only compatible Python 3.5 and 3.6 now.
+.. warning:: Ebook_homebrew Only compatible Python 3.6 and 3.7 now.
 
 
 Basic Installation

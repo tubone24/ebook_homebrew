@@ -250,6 +250,17 @@ Examples
 
 Web GUI. Such as `Create PDF from your images <examples/web_gui/>`_
 
+Deploy API to Heroku
+====================
+
+Deploy Ebook-homebrew to Heroku app.
+
+Push a button below.
+
+.. image:: https://www.herokucdn.com/deploy/button.png
+   :target: https://heroku.com/deploy
+   :alt: Deploy to Heroku
+
 Licence
 =======
 
