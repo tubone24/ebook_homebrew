@@ -106,6 +106,10 @@ Badges:
    :target: https://cloud.docker.com/repository/docker/tubone24/ebook-homebrew
    :alt: dockerhub
 
+.. image:: https://www.herokucdn.com/deploy/button.png
+   :target: https://heroku.com/deploy
+   :alt: Deploy to Heroku
+
 .. toctree::
    :maxdepth: 2
 

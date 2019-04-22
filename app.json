@@ -1,0 +1,13 @@
+{
+  "name": "ebook-homebrew",
+  "description": "Rename image file to only digit name and convert ebook files.",
+  "keywords": [
+    "ebook",
+    "pdf"
+  ],
+  "website": "https://tubone-project24.xyz",
+  "repository": "https://github.com/tubone24/ebook_homebrew",
+  "logo": "https://raw.githubusercontent.com/tubone24/ebook_homebrew/master/docs/_images/bookicon.png",
+  "success_url": "/status",
+  "stack": "container"
+}

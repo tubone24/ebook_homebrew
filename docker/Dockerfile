@@ -27,4 +27,4 @@ RUN cd /app && git clone https://github.com/tubone24/ebook_homebrew.git
 WORKDIR /app/ebook_homebrew
 RUN pip3 install -r requirements.txt
 RUN python3 setup.py install
-CMD ebookhomebrew api -p 8080
+CMD ebookhomebrew api -p 80
