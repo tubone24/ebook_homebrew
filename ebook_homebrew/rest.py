@@ -44,7 +44,7 @@ class HealthCheckSchema(Schema):
 @api.schema("UploadImagesReq")
 class UploadImagesReqSchema(Schema):
     contentType = fields.Str(required=True)
-    images = fields.List(fields.Str(), required=True)
+    images = fields.List(fields.Str())
 
 
 @api.schema("UploadIdResp")
@@ -102,14 +102,15 @@ async def upload_image_file(req, resp):
                         schema:
                             $ref: '#/components/schemas/UploadIdResp'
     """
-    data = await req.media()
+    request = await req.media()
+    data = ConvertReqSchema().loads(request).data
     _logger.debug(data)
     content_type = data["contentType"]
     extension = convert_content_type_to_extension(content_type)
     images_b64 = data["images"]
     tmp_dir = tempfile.mkdtemp()
     write_image(images_b64, extension, tmp_dir)
-    resp.media = UploadIdRespSchema().dump(Upload(tmp_dir)).data
+    resp.media = UploadIdRespSchema().dump(Upload(str(tmp_dir))).data
 
 
 @api.background.task
@@ -154,7 +155,7 @@ async def convert_image_to_pdf(req, resp):
     digits = len(file_base)
     _logger.debug(file_list)
     convert_pdf(digits, extension, upload_id)
-    resp.media = resp.media = UploadIdRespSchema().dump(Upload(upload_id)).data
+    resp.media = UploadIdRespSchema().dump(Upload(upload_id)).data
 
 
 @api.background.task
