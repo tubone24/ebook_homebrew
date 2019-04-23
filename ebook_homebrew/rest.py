@@ -9,18 +9,67 @@ import json
 import datetime
 import tempfile
 import responder
+from marshmallow import Schema, fields
 
 from .convert import Image2PDF
 from .utils.logging import get_logger
+from .__init__ import __version__
 
-api = responder.API()
+api = responder.API(title="Ebook-homebrew",
+                    version=__version__,
+                    openapi="3.0.2",
+                    docs_route='/docs',
+                    description="Make PDF file taken in "
+                                "some image files such as "
+                                "jpeg, png and gif.",
+                    contact={
+                        "name": "tubone24",
+                        "url": "https://tubone-project24.xyz",
+                        "email": "tubo.yyyuuu@gmail.com",
+                    },
+                    license={
+                        "name": "MIT",
+                        "url": "http://www.apache.org/licenses/LICENSE-2.0.html",
+                    })
 
 _logger = get_logger("RestAPI")
 
 
+@api.schema("HealthCheck")
+class HealthCheckSchema(Schema):
+    status = fields.Str()
+
+
+@api.schema("Images")
+class ImagesSchema(Schema):
+    contentType = fields.Str(required=True)
+    images = fields.List(fields.Str(), required=True)
+
+
+@api.schema("ConvertReq")
+class ConvertReqSchema(Schema):
+    uploadId = fields.Str(required=True)
+    contentType = fields.Str(required=True)
+
+
+@api.schema("Download")
+class DownloadSchema(Schema):
+    uploadId = fields.Str(required=True)
+
+
 @api.route("/status")
 def status(_, resp):
-    """Health Check
+    """Health Check Response.
+    ---
+    get:
+        description: Get Status
+        responses:
+            200:
+                description: Status Response
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/HealthCheck'
     """
     _logger.debug("health Check")
     resp.media = {"status": "ok"}
