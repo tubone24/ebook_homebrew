@@ -8,6 +8,7 @@ import glob
 import json
 import datetime
 import tempfile
+from collections import namedtuple
 import responder
 from marshmallow import Schema, fields
 
@@ -40,21 +41,26 @@ class HealthCheckSchema(Schema):
     status = fields.Str()
 
 
-@api.schema("Images")
-class ImagesSchema(Schema):
+@api.schema("UploadImagesReq")
+class UploadImagesReqSchema(Schema):
     contentType = fields.Str(required=True)
     images = fields.List(fields.Str(), required=True)
+
+
+@api.schema("UploadIdResp")
+class UploadIdRespSchema(Schema):
+    upload_id = fields.Str()
+
+
+class Upload(object):
+    def __init__(self, upload_id):
+        self.upload_id = upload_id
 
 
 @api.schema("ConvertReq")
 class ConvertReqSchema(Schema):
     uploadId = fields.Str(required=True)
     contentType = fields.Str(required=True)
-
-
-@api.schema("Download")
-class DownloadSchema(Schema):
-    uploadId = fields.Str(required=True)
 
 
 @api.route("/status")
@@ -72,12 +78,29 @@ def status(_, resp):
                             $ref: '#/components/schemas/HealthCheck'
     """
     _logger.debug("health Check")
-    resp.media = {"status": "ok"}
+    Status = namedtuple("Status", ["status"])
+    resp.media = HealthCheckSchema().dump(Status("ok")).data
 
 
 @api.route("/data/upload")
 async def upload_image_file(req, resp):
-    """Endpoint: File uploader
+    """Upload Image files.
+    ---
+    post:
+        description: base64 encoded Images
+        parameters:
+            description: base64 encoded Images in images Array
+            content:
+                application/json:
+                    schema:
+                        $ref: '#/components/schemas/UploadImagesReq'
+        responses:
+            200:
+                description: Upload Id
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/UploadIdResp'
     """
     data = await req.media()
     _logger.debug(data)
@@ -86,7 +109,7 @@ async def upload_image_file(req, resp):
     images_b64 = data["images"]
     tmp_dir = tempfile.mkdtemp()
     write_image(images_b64, extension, tmp_dir)
-    resp.media = {"upload_id": tmp_dir}
+    resp.media = UploadIdRespSchema().dump(Upload(tmp_dir)).data
 
 
 @api.background.task
@@ -131,7 +154,7 @@ async def convert_image_to_pdf(req, resp):
     digits = len(file_base)
     _logger.debug(file_list)
     convert_pdf(digits, extension, upload_id)
-    resp.media = {"upload_id": upload_id}
+    resp.media = resp.media = UploadIdRespSchema().dump(Upload(upload_id)).data
 
 
 @api.background.task
