@@ -21,9 +21,9 @@ Deploy Heroku button
 
 Or Push a Heroku button below
 
-.. image:: https://www.herokucdn.com/deploy/button.png
-   :target: https://heroku.com/deploy
-   :alt: Deploy to Heroku
+.. _a link: https://github.com/tubone24/ebook_homebrew#deploy-api-to-heroku
+
+
 
 
 
