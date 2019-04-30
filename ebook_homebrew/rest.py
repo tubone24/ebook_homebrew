@@ -17,9 +17,13 @@ from .utils.logging import get_logger
 from .__init__ import __version__
 
 api = responder.API(title="Ebook-homebrew",
+                    debug=True,
                     version=__version__,
+                    static_dir=os.path.join(os.path.dirname(os.path.abspath(__file__)), "static"),
+                    static_route="/static",
                     openapi="3.0.2",
-                    docs_route='/docs',
+                    docs_route="/docs",
+                    openapi_route="/schema.yml",
                     description="Make PDF file taken in "
                                 "some image files such as "
                                 "jpeg, png and gif.",
@@ -30,7 +34,7 @@ api = responder.API(title="Ebook-homebrew",
                     },
                     license={
                         "name": "MIT",
-                        "url": "http://www.apache.org/licenses/LICENSE-2.0.html",
+                        "url": "https://opensource.org/licenses/MIT",
                     })
 
 _logger = get_logger("RestAPI")
@@ -44,7 +48,7 @@ class HealthCheckSchema(Schema):
 @api.schema("UploadImagesReq")
 class UploadImagesReqSchema(Schema):
     contentType = fields.Str(required=True)
-    images = fields.List(fields.Str())
+    images = fields.List(fields.Str(required=True))
 
 
 @api.schema("UploadIdResp")
@@ -63,6 +67,14 @@ class ConvertReqSchema(Schema):
     contentType = fields.Str(required=True)
 
 
+@api.schema("DownloadReq")
+class DownloadReqSchema(Schema):
+    uploadId = fields.Str(required=True)
+
+
+api.add_route("/", static=True)
+
+
 @api.route("/status")
 def status(_, resp):
     """Health Check Response.
@@ -70,12 +82,12 @@ def status(_, resp):
     get:
         description: Get Status
         responses:
-            200:
-                description: Status Response
+            "200":
+                description: OK
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/HealthCheck'
+                            $ref: "#/components/schemas/HealthCheck"
     """
     _logger.debug("health Check")
     Status = namedtuple("Status", ["status"])
@@ -87,23 +99,24 @@ async def upload_image_file(req, resp):
     """Upload Image files.
     ---
     post:
-        description: base64 encoded Images
-        parameters:
+        summary: Base64 encoded Images
+
+        requestBody:
             description: base64 encoded Images in images Array
             content:
                 application/json:
                     schema:
-                        $ref: '#/components/schemas/UploadImagesReq'
+                        $ref: "#/components/schemas/UploadImagesReq"
         responses:
-            200:
-                description: Upload Id
+            "200":
+                description: OK
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/UploadIdResp'
+                            $ref: "#/components/schemas/UploadIdResp"
     """
     request = await req.media()
-    data = ConvertReqSchema().loads(request).data
+    data = UploadImagesReqSchema().load(request).data
     _logger.debug(data)
     content_type = data["contentType"]
     extension = convert_content_type_to_extension(content_type)
@@ -138,9 +151,27 @@ def write_image(images_b64, extension, tmp_dir):
 
 @api.route("/convert/pdf")
 async def convert_image_to_pdf(req, resp):
-    """Endpoint Image converter to PDF
+    """Convert Image files to PDF.
+    ---
+    post:
+        summary: Upload Id witch get upload images and ContentType
+
+        requestBody:
+            description: Upload Id and ContentType
+            content:
+                application/json:
+                    schema:
+                        $ref: "#/components/schemas/ConvertReq"
+        responses:
+            "200":
+                description: OK
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/UploadIdResp"
     """
-    data = await req.media()
+    request = await req.media()
+    data = ConvertReqSchema().load(request).data
     _logger.debug(data)
     upload_id = data["uploadId"]
     content_type = data["contentType"]
@@ -188,10 +219,30 @@ def convert_pdf(digits, extension, upload_id):
 
 @api.route("/convert/pdf/download")
 async def download_result_pdf(req, resp):
-    """Endpoint download result PDF
+    """Upload Image files.
+    ---
+    post:
+        summary: Upload Id witch get upload images
+
+        requestBody:
+            description: Upload Id
+            content:
+                application/json:
+                    schema:
+                        $ref: "#/components/schemas/UploadImagesReq"
+        responses:
+            "200":
+                description: OK
+                content:
+                    application/pdf:
+                        schema:
+                            type: string
+                            format: binary
+            "404":
+                description: FileNotFound
     """
-    data = await req.media()
-    _logger.debug(data)
+    request = await req.media()
+    data = DownloadReqSchema().load(request).data
     upload_id = data["uploadId"]
     result_meta = os.path.join(upload_id, "result_meta.txt")
     if os.path.exists(result_meta):
