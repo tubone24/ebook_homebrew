@@ -106,16 +106,13 @@ Badges:
    :target: https://cloud.docker.com/repository/docker/tubone24/ebook-homebrew
    :alt: dockerhub
 
-.. image:: https://www.herokucdn.com/deploy/button.png
-   :target: https://heroku.com/deploy
-   :alt: Deploy to Heroku
-
 .. toctree::
    :maxdepth: 2
 
    installation.rst
    overview.rst
    howtouse.rst
+   restapi.rst
    deploy2heroku.rst
    releasenotes/index.rst
 

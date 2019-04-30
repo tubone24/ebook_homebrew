@@ -53,6 +53,7 @@ class UploadImagesReqSchema(Schema):
 @api.schema("UploadIdResp")
 class UploadIdRespSchema(Schema):
     upload_id = fields.Str()
+    release_date = fields.Date()
 
 
 class Upload:
@@ -60,6 +61,7 @@ class Upload:
 
     def __init__(self, upload_id):
         self.upload_id = upload_id
+        release_date = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
 
 
 @api.schema("ConvertReq")
@@ -230,7 +232,7 @@ async def download_result_pdf(req, resp):
             content:
                 application/json:
                     schema:
-                        $ref: "#/components/schemas/UploadImagesReq"
+                        $ref: "#/components/schemas/DownloadReq"
         responses:
             "200":
                 description: OK

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>setup module &mdash; ebook_homebrew 1.0.0 documentation</title>
+  <title>HTTP Routing Table &mdash; ebook_homebrew 1.0.0 documentation</title>
   
 
   
@@ -34,7 +34,14 @@
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+ 
+
+    <script type="text/javascript">
+      DOCUMENTATION_OPTIONS.COLLAPSE_INDEX = true;
+    </script>
+
+
 </head>
 
 <body class="wy-body-for-nav">
@@ -134,14 +141,10 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>setup module</li>
+      <li>HTTP Routing Table</li>
     
     
       <li class="wy-breadcrumbs-aside">
-        
-            
-            <a href="_sources/setup.rst.txt" rel="nofollow"> View page source</a>
-          
         
       </li>
     
@@ -153,9 +156,46 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="setup-module">
-<h1>setup module<a class="headerlink" href="#setup-module" title="Permalink to this headline">¶</a></h1>
-</div>
+
+   <h1>HTTP Routing Table</h1>
+
+   <div class="modindex-jumpbox">
+   <a href="#cap-/convert"><strong>/convert</strong></a> | 
+   <a href="#cap-/data"><strong>/data</strong></a> | 
+   <a href="#cap-/status"><strong>/status</strong></a>
+   </div>
+
+   <table class="indextable modindextable">
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-/convert"><td></td><td>
+       <strong>/convert</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="restapi.html#post--convert-pdf"><code class="xref">POST /convert/pdf</code></a></td><td>
+       <em>Upload Id witch get upload images and ContentType</em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="restapi.html#post--convert-pdf-download"><code class="xref">POST /convert/pdf/download</code></a></td><td>
+       <em>Upload Id witch get upload images</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-/data"><td></td><td>
+       <strong>/data</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="restapi.html#post--data-upload"><code class="xref">POST /data/upload</code></a></td><td>
+       <em>Base64 encoded Images</em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-/status"><td></td><td>
+       <strong>/status</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="restapi.html#get--status"><code class="xref">GET /status</code></a></td><td>
+       <em>null</em></td></tr>
+   </table>
 
 
            </div>
