@@ -23,3 +23,8 @@ Making Zip by digit files
 -------------------------
 
 Make zip file for files which you choose extension.
+
+Provides Rest API
+-----------------
+
+Provides Rest API interfaces.

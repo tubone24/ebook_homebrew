@@ -8,36 +8,123 @@ import glob
 import json
 import datetime
 import tempfile
+from collections import namedtuple
 import responder
+from marshmallow import Schema, fields
 
 from .convert import Image2PDF
 from .utils.logging import get_logger
+from .__init__ import __version__
 
-api = responder.API()
+api = responder.API(
+    title="Ebook-homebrew",
+    debug=True,
+    version=__version__,
+    static_dir=os.path.join(os.path.dirname(os.path.abspath(__file__)), "static"),
+    static_route="/static",
+    openapi="3.0.2",
+    docs_route="/docs",
+    openapi_route="/schema.yml",
+    description="Make PDF file taken in "
+    "some image files such as "
+    "jpeg, png and gif.",
+    contact={
+        "name": "tubone24",
+        "url": "https://tubone-project24.xyz",
+        "email": "tubo.yyyuuu@gmail.com",
+    },
+    license={"name": "MIT", "url": "https://opensource.org/licenses/MIT"},
+)
 
 _logger = get_logger("RestAPI")
 
 
+@api.schema("HealthCheck")
+class HealthCheckSchema(Schema):
+    status = fields.Str()
+
+
+@api.schema("UploadImagesReq")
+class UploadImagesReqSchema(Schema):
+    contentType = fields.Str(required=True)
+    images = fields.List(fields.Str(required=True))
+
+
+@api.schema("UploadIdResp")
+class UploadIdRespSchema(Schema):
+    upload_id = fields.Str()
+
+
+class Upload:
+    """Upload_id Model"""
+
+    def __init__(self, upload_id):
+        self.upload_id = upload_id
+
+
+@api.schema("ConvertReq")
+class ConvertReqSchema(Schema):
+    uploadId = fields.Str(required=True)
+    contentType = fields.Str(required=True)
+
+
+@api.schema("DownloadReq")
+class DownloadReqSchema(Schema):
+    uploadId = fields.Str(required=True)
+
+
+api.add_route("/", static=True)
+
+
 @api.route("/status")
 def status(_, resp):
-    """Health Check
+    """Health Check Response.
+    ---
+    get:
+        description: Get Status
+        responses:
+            "200":
+                description: OK
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/HealthCheck"
     """
     _logger.debug("health Check")
-    resp.media = {"status": "ok"}
+    Status = namedtuple("Status", ["status"])
+    resp.media = HealthCheckSchema().dump(Status("ok")).data
 
 
 @api.route("/data/upload")
 async def upload_image_file(req, resp):
-    """Endpoint: File uploader
+    """Upload Image files.
+    ---
+    post:
+        summary: Base64 encoded Images
+
+        requestBody:
+            description: base64 encoded Images in images Array
+            content:
+                application/json:
+                    schema:
+                        $ref: "#/components/schemas/UploadImagesReq"
+        responses:
+            "200":
+                description: OK
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/UploadIdResp"
     """
-    data = await req.media()
+    request = await req.media()
+    data = UploadImagesReqSchema().load(request).data
     _logger.debug(data)
     content_type = data["contentType"]
     extension = convert_content_type_to_extension(content_type)
     images_b64 = data["images"]
     tmp_dir = tempfile.mkdtemp()
     write_image(images_b64, extension, tmp_dir)
-    resp.media = {"upload_id": tmp_dir}
+    resp.media = UploadIdRespSchema().dump(Upload(str(tmp_dir))).data
 
 
 @api.background.task
@@ -65,9 +152,27 @@ def write_image(images_b64, extension, tmp_dir):
 
 @api.route("/convert/pdf")
 async def convert_image_to_pdf(req, resp):
-    """Endpoint Image converter to PDF
+    """Convert Image files to PDF.
+    ---
+    post:
+        summary: Upload Id witch get upload images and ContentType
+
+        requestBody:
+            description: Upload Id and ContentType
+            content:
+                application/json:
+                    schema:
+                        $ref: "#/components/schemas/ConvertReq"
+        responses:
+            "200":
+                description: OK
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/UploadIdResp"
     """
-    data = await req.media()
+    request = await req.media()
+    data = ConvertReqSchema().load(request).data
     _logger.debug(data)
     upload_id = data["uploadId"]
     content_type = data["contentType"]
@@ -82,7 +187,7 @@ async def convert_image_to_pdf(req, resp):
     digits = len(file_base)
     _logger.debug(file_list)
     convert_pdf(digits, extension, upload_id)
-    resp.media = {"upload_id": upload_id}
+    resp.media = UploadIdRespSchema().dump(Upload(upload_id)).data
 
 
 @api.background.task
@@ -115,10 +220,30 @@ def convert_pdf(digits, extension, upload_id):
 
 @api.route("/convert/pdf/download")
 async def download_result_pdf(req, resp):
-    """Endpoint download result PDF
+    """Upload Image files.
+    ---
+    post:
+        summary: Upload Id witch get upload images
+
+        requestBody:
+            description: Upload Id
+            content:
+                application/json:
+                    schema:
+                        $ref: "#/components/schemas/UploadImagesReq"
+        responses:
+            "200":
+                description: OK
+                content:
+                    application/pdf:
+                        schema:
+                            type: string
+                            format: binary
+            "404":
+                description: FileNotFound
     """
-    data = await req.media()
-    _logger.debug(data)
+    request = await req.media()
+    data = DownloadReqSchema().load(request).data
     upload_id = data["uploadId"]
     result_meta = os.path.join(upload_id, "result_meta.txt")
     if os.path.exists(result_meta):

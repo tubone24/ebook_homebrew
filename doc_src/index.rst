@@ -116,6 +116,7 @@ Badges:
    installation.rst
    overview.rst
    howtouse.rst
+   deploy2heroku.rst
    releasenotes/index.rst
 
 

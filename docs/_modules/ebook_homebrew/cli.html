@@ -84,6 +84,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../howtouse.html">How to use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deploy2heroku.html">Deploy to Heroku</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../releasenotes/index.html">Release Notes</a></li>
 </ul>
 
@@ -185,9 +186,7 @@
     <span class="p">)</span>
 
     <span class="n">parser_api</span> <span class="o">=</span> <span class="n">subparsers</span><span class="o">.</span><span class="n">add_parser</span><span class="p">(</span>
-        <span class="s2">&quot;api&quot;</span><span class="p">,</span>
-        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Run Rest API server.&quot;</span><span class="p">,</span>
-        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Provides Rest API interfaces.&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;api&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Run Rest API server.&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Provides Rest API interfaces.&quot;</span>
     <span class="p">)</span>
 
     <span class="n">parser_api</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>

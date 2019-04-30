@@ -84,6 +84,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../howtouse.html">How to use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deploy2heroku.html">Deploy to Heroku</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../releasenotes/index.html">Release Notes</a></li>
 </ul>
 
@@ -169,9 +170,10 @@
 
 
 <div class="viewcode-block" id="status"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.rest.status">[docs]</a><span class="nd">@api</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/status&quot;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">status</span><span class="p">(</span><span class="n">req</span><span class="p">,</span> <span class="n">resp</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">status</span><span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="n">resp</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Health Check</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;health Check&quot;</span><span class="p">)</span>
     <span class="n">resp</span><span class="o">.</span><span class="n">media</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;ok&quot;</span><span class="p">}</span></div>
 
 
@@ -207,8 +209,8 @@
         <span class="n">image</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64decode</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
         <span class="n">file_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tmp_dir</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;.&quot;</span> <span class="o">+</span> <span class="n">extension</span><span class="p">)</span>
         <span class="n">_logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;file_name: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">file_name</span><span class="p">))</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">image_file</span><span class="p">:</span>
+            <span class="n">image_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
     <span class="k">return</span> <span class="kc">True</span>
 
 
@@ -224,7 +226,9 @@
     <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">result_meta</span><span class="p">):</span>
         <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">result_meta</span><span class="p">)</span>
     <span class="n">extension</span> <span class="o">=</span> <span class="n">convert_content_type_to_extension</span><span class="p">(</span><span class="n">content_type</span><span class="p">)</span>
-    <span class="n">file_list</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">upload_id</span><span class="p">,</span> <span class="s2">&quot;*.&quot;</span> <span class="o">+</span> <span class="n">extension</span><span class="p">)),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">file_list</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span>
+        <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">upload_id</span><span class="p">,</span> <span class="s2">&quot;*.&quot;</span> <span class="o">+</span> <span class="n">extension</span><span class="p">)),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span>
     <span class="n">file_base</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">file_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
     <span class="n">digits</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">file_base</span><span class="p">)</span>
     <span class="n">_logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">file_list</span><span class="p">)</span>
@@ -248,11 +252,15 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">converter</span> <span class="o">=</span> <span class="n">Image2PDF</span><span class="p">(</span><span class="n">digits</span><span class="o">=</span><span class="n">digits</span><span class="p">,</span> <span class="n">extension</span><span class="o">=</span><span class="n">extension</span><span class="p">,</span> <span class="n">directory_path</span><span class="o">=</span><span class="n">upload_id</span><span class="p">)</span>
     <span class="n">converter</span><span class="o">.</span><span class="n">make_pdf</span><span class="p">(</span><span class="s2">&quot;result.pdf&quot;</span><span class="p">)</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">upload_id</span><span class="p">,</span> <span class="s2">&quot;result_meta.txt&quot;</span><span class="p">),</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">upload_id</span><span class="p">,</span> <span class="s2">&quot;result_meta.txt&quot;</span><span class="p">),</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">result_txt</span><span class="p">:</span>
         <span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;upload_id&quot;</span><span class="p">:</span> <span class="n">upload_id</span><span class="p">,</span> <span class="s2">&quot;digits&quot;</span><span class="p">:</span> <span class="n">digits</span><span class="p">,</span> <span class="s2">&quot;extension&quot;</span><span class="p">:</span> <span class="n">extension</span><span class="p">,</span>
-                  <span class="s2">&quot;datetime&quot;</span><span class="p">:</span> <span class="n">now</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y/%m/</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">)}</span>
-        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;upload_id&quot;</span><span class="p">:</span> <span class="n">upload_id</span><span class="p">,</span>
+            <span class="s2">&quot;digits&quot;</span><span class="p">:</span> <span class="n">digits</span><span class="p">,</span>
+            <span class="s2">&quot;extension&quot;</span><span class="p">:</span> <span class="n">extension</span><span class="p">,</span>
+            <span class="s2">&quot;datetime&quot;</span><span class="p">:</span> <span class="n">now</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y/%m/</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">),</span>
+        <span class="p">}</span>
+        <span class="n">result_txt</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
     <span class="k">return</span> <span class="kc">True</span>
 
 
@@ -265,9 +273,9 @@
     <span class="n">upload_id</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;uploadId&quot;</span><span class="p">]</span>
     <span class="n">result_meta</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">upload_id</span><span class="p">,</span> <span class="s2">&quot;result_meta.txt&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">result_meta</span><span class="p">):</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">upload_id</span><span class="p">,</span> <span class="s2">&quot;result.pdf&quot;</span><span class="p">),</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">upload_id</span><span class="p">,</span> <span class="s2">&quot;result.pdf&quot;</span><span class="p">),</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">result_pdf</span><span class="p">:</span>
             <span class="n">resp</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s2">&quot;Content-Type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;application/pdf&quot;</span>
-            <span class="n">resp</span><span class="o">.</span><span class="n">content</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+            <span class="n">resp</span><span class="o">.</span><span class="n">content</span> <span class="o">=</span> <span class="n">result_pdf</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">resp</span><span class="o">.</span><span class="n">status_code</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">status_codes</span><span class="o">.</span><span class="n">HTTP_404</span></div>
 
@@ -282,13 +290,15 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">content_type</span> <span class="o">==</span> <span class="s2">&quot;image/jpeg&quot;</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;jpg&quot;</span>
+        <span class="n">extension</span> <span class="o">=</span> <span class="s2">&quot;jpg&quot;</span>
     <span class="k">elif</span> <span class="n">content_type</span> <span class="o">==</span> <span class="s2">&quot;image/png&quot;</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;png&quot;</span>
+        <span class="n">extension</span> <span class="o">=</span> <span class="s2">&quot;png&quot;</span>
     <span class="k">elif</span> <span class="n">content_type</span> <span class="o">==</span> <span class="s2">&quot;image/gif&quot;</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;gif&quot;</span>
+        <span class="n">extension</span> <span class="o">=</span> <span class="s2">&quot;gif&quot;</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="kc">False</span></div>
+        <span class="n">extension</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">return</span> <span class="n">extension</span></div>
 </pre></div>
 
            </div>
