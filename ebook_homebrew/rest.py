@@ -55,8 +55,9 @@ class UploadIdRespSchema(Schema):
     upload_id = fields.Str()
 
 
-class Upload():
+class Upload:
     """Upload_id Model"""
+
     def __init__(self, upload_id):
         self.upload_id = upload_id
 
