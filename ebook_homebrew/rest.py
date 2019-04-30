@@ -61,7 +61,7 @@ class Upload:
 
     def __init__(self, upload_id):
         self.upload_id = upload_id
-        release_date = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
+        self.release_date = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
 
 
 @api.schema("ConvertReq")
