@@ -16,26 +16,25 @@ from .convert import Image2PDF
 from .utils.logging import get_logger
 from .__init__ import __version__
 
-api = responder.API(title="Ebook-homebrew",
-                    debug=True,
-                    version=__version__,
-                    static_dir=os.path.join(os.path.dirname(os.path.abspath(__file__)), "static"),
-                    static_route="/static",
-                    openapi="3.0.2",
-                    docs_route="/docs",
-                    openapi_route="/schema.yml",
-                    description="Make PDF file taken in "
-                                "some image files such as "
-                                "jpeg, png and gif.",
-                    contact={
-                        "name": "tubone24",
-                        "url": "https://tubone-project24.xyz",
-                        "email": "tubo.yyyuuu@gmail.com",
-                    },
-                    license={
-                        "name": "MIT",
-                        "url": "https://opensource.org/licenses/MIT",
-                    })
+api = responder.API(
+    title="Ebook-homebrew",
+    debug=True,
+    version=__version__,
+    static_dir=os.path.join(os.path.dirname(os.path.abspath(__file__)), "static"),
+    static_route="/static",
+    openapi="3.0.2",
+    docs_route="/docs",
+    openapi_route="/schema.yml",
+    description="Make PDF file taken in "
+    "some image files such as "
+    "jpeg, png and gif.",
+    contact={
+        "name": "tubone24",
+        "url": "https://tubone-project24.xyz",
+        "email": "tubo.yyyuuu@gmail.com",
+    },
+    license={"name": "MIT", "url": "https://opensource.org/licenses/MIT"},
+)
 
 _logger = get_logger("RestAPI")
 
