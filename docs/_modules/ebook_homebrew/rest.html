@@ -164,7 +164,7 @@
 <span class="kn">import</span> <span class="nn">tempfile</span>
 <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">namedtuple</span>
 <span class="kn">import</span> <span class="nn">responder</span>
-<span class="kn">from</span> <span class="nn">marshmallow</span> <span class="k">import</span> <span class="n">Schema</span><span class="p">,</span> <span class="n">fields</span>
+<span class="kn">from</span> <span class="nn">marshmallow</span> <span class="k">import</span> <span class="n">Schema</span><span class="p">,</span> <span class="n">fields</span><span class="p">,</span> <span class="n">ValidationError</span>
 
 <span class="kn">from</span> <span class="nn">.convert</span> <span class="k">import</span> <span class="n">Image2PDF</span>
 <span class="kn">from</span> <span class="nn">.utils.logging</span> <span class="k">import</span> <span class="n">get_logger</span>
@@ -201,7 +201,7 @@
 <div class="viewcode-block" id="UploadImagesReqSchema"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.rest.UploadImagesReqSchema">[docs]</a><span class="nd">@api</span><span class="o">.</span><span class="n">schema</span><span class="p">(</span><span class="s2">&quot;UploadImagesReq&quot;</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">UploadImagesReqSchema</span><span class="p">(</span><span class="n">Schema</span><span class="p">):</span>
     <span class="n">contentType</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Str</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">images</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">List</span><span class="p">(</span><span class="n">fields</span><span class="o">.</span><span class="n">Str</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span></div>
+    <span class="n">images</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">List</span><span class="p">(</span><span class="n">fields</span><span class="o">.</span><span class="n">Str</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="UploadIdRespSchema"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.rest.UploadIdRespSchema">[docs]</a><span class="nd">@api</span><span class="o">.</span><span class="n">schema</span><span class="p">(</span><span class="s2">&quot;UploadIdResp&quot;</span><span class="p">)</span>
@@ -210,12 +210,12 @@
     <span class="n">release_date</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Date</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="Upload"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.rest.Upload">[docs]</a><span class="k">class</span> <span class="nc">Upload</span><span class="p">:</span>
+<div class="viewcode-block" id="UploadModel"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.rest.UploadModel">[docs]</a><span class="k">class</span> <span class="nc">UploadModel</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Upload_id Model&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">upload_id</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">upload_id</span> <span class="o">=</span> <span class="n">upload_id</span>
-        <span class="n">release_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y/%m/</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">upload_id</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">upload_id</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">release_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="ConvertReqSchema"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.rest.ConvertReqSchema">[docs]</a><span class="nd">@api</span><span class="o">.</span><span class="n">schema</span><span class="p">(</span><span class="s2">&quot;ConvertReq&quot;</span><span class="p">)</span>
@@ -227,6 +227,34 @@
 <div class="viewcode-block" id="DownloadReqSchema"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.rest.DownloadReqSchema">[docs]</a><span class="nd">@api</span><span class="o">.</span><span class="n">schema</span><span class="p">(</span><span class="s2">&quot;DownloadReq&quot;</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">DownloadReqSchema</span><span class="p">(</span><span class="n">Schema</span><span class="p">):</span>
     <span class="n">uploadId</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Str</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ErrorModel"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.rest.ErrorModel">[docs]</a><span class="k">class</span> <span class="nc">ErrorModel</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Error Model&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">error</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">errorDate</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="ErrorRespSchema"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.rest.ErrorRespSchema">[docs]</a><span class="nd">@api</span><span class="o">.</span><span class="n">schema</span><span class="p">(</span><span class="s2">&quot;ErrorResp&quot;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">ErrorRespSchema</span><span class="p">(</span><span class="n">Schema</span><span class="p">):</span>
+    <span class="n">error</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Str</span><span class="p">()</span>
+    <span class="n">errorDate</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Date</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="FileNotFoundModel"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.rest.FileNotFoundModel">[docs]</a><span class="k">class</span> <span class="nc">FileNotFoundModel</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;FileNotFound Model&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reason</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reason</span> <span class="o">=</span> <span class="n">reason</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">errorDate</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="FileNotFoundRespSchema"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.rest.FileNotFoundRespSchema">[docs]</a><span class="nd">@api</span><span class="o">.</span><span class="n">schema</span><span class="p">(</span><span class="s2">&quot;FileNotFoundResp&quot;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">FileNotFoundRespSchema</span><span class="p">(</span><span class="n">Schema</span><span class="p">):</span>
+    <span class="n">reason</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Str</span><span class="p">()</span>
+    <span class="n">errorDate</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Date</span><span class="p">()</span></div>
 
 
 <span class="n">api</span><span class="o">.</span><span class="n">add_route</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">static</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -271,16 +299,27 @@
 <span class="sd">                    application/json:</span>
 <span class="sd">                        schema:</span>
 <span class="sd">                            $ref: &quot;#/components/schemas/UploadIdResp&quot;</span>
+<span class="sd">            &quot;400&quot;:</span>
+<span class="sd">                description: BadRequest</span>
+<span class="sd">                content:</span>
+<span class="sd">                    application/json:</span>
+<span class="sd">                        schema:</span>
+<span class="sd">                            $ref: &quot;#/components/schemas/ErrorResp&quot;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">request</span> <span class="o">=</span> <span class="k">await</span> <span class="n">req</span><span class="o">.</span><span class="n">media</span><span class="p">()</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">UploadImagesReqSchema</span><span class="p">()</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">request</span><span class="p">)</span><span class="o">.</span><span class="n">data</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">UploadImagesReqSchema</span><span class="p">(</span><span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">request</span><span class="p">)</span><span class="o">.</span><span class="n">data</span>
+    <span class="k">except</span> <span class="n">ValidationError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+        <span class="n">resp</span><span class="o">.</span><span class="n">status_code</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">status_codes</span><span class="o">.</span><span class="n">HTTP_400</span>
+        <span class="n">resp</span><span class="o">.</span><span class="n">media</span> <span class="o">=</span> <span class="n">ErrorRespSchema</span><span class="p">()</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">ErrorModel</span><span class="p">(</span><span class="n">error</span><span class="p">))</span><span class="o">.</span><span class="n">data</span>
+        <span class="k">return</span>
     <span class="n">_logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
     <span class="n">content_type</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;contentType&quot;</span><span class="p">]</span>
     <span class="n">extension</span> <span class="o">=</span> <span class="n">convert_content_type_to_extension</span><span class="p">(</span><span class="n">content_type</span><span class="p">)</span>
     <span class="n">images_b64</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;images&quot;</span><span class="p">]</span>
     <span class="n">tmp_dir</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">mkdtemp</span><span class="p">()</span>
     <span class="n">write_image</span><span class="p">(</span><span class="n">images_b64</span><span class="p">,</span> <span class="n">extension</span><span class="p">,</span> <span class="n">tmp_dir</span><span class="p">)</span>
-    <span class="n">resp</span><span class="o">.</span><span class="n">media</span> <span class="o">=</span> <span class="n">UploadIdRespSchema</span><span class="p">()</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">Upload</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">tmp_dir</span><span class="p">)))</span><span class="o">.</span><span class="n">data</span></div>
+    <span class="n">resp</span><span class="o">.</span><span class="n">media</span> <span class="o">=</span> <span class="n">UploadIdRespSchema</span><span class="p">()</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">UploadModel</span><span class="p">(</span><span class="n">tmp_dir</span><span class="p">))</span><span class="o">.</span><span class="n">data</span></div>
 
 
 <span class="nd">@api</span><span class="o">.</span><span class="n">background</span><span class="o">.</span><span class="n">task</span>
@@ -326,12 +365,38 @@
 <span class="sd">                    application/json:</span>
 <span class="sd">                        schema:</span>
 <span class="sd">                            $ref: &quot;#/components/schemas/UploadIdResp&quot;</span>
+<span class="sd">            &quot;400&quot;:</span>
+<span class="sd">                description: BadRequest</span>
+<span class="sd">                content:</span>
+<span class="sd">                    application/json:</span>
+<span class="sd">                        schema:</span>
+<span class="sd">                            $ref: &quot;#/components/schemas/ErrorResp&quot;</span>
+<span class="sd">            &quot;404&quot;:</span>
+<span class="sd">                description: UploadIdNotFound</span>
+<span class="sd">                content:</span>
+<span class="sd">                    application/json:</span>
+<span class="sd">                    application/json:</span>
+<span class="sd">                        schema:</span>
+<span class="sd">                            $ref: &quot;#/components/schemas/FileNotFoundResp&quot;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">request</span> <span class="o">=</span> <span class="k">await</span> <span class="n">req</span><span class="o">.</span><span class="n">media</span><span class="p">()</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">ConvertReqSchema</span><span class="p">()</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">request</span><span class="p">)</span><span class="o">.</span><span class="n">data</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">ConvertReqSchema</span><span class="p">(</span><span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">request</span><span class="p">)</span><span class="o">.</span><span class="n">data</span>
+    <span class="k">except</span> <span class="n">ValidationError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+        <span class="n">resp</span><span class="o">.</span><span class="n">status_code</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">status_codes</span><span class="o">.</span><span class="n">HTTP_400</span>
+        <span class="n">resp</span><span class="o">.</span><span class="n">media</span> <span class="o">=</span> <span class="n">ErrorRespSchema</span><span class="p">()</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">ErrorModel</span><span class="p">(</span><span class="n">error</span><span class="p">))</span><span class="o">.</span><span class="n">data</span>
+        <span class="k">return</span>
     <span class="n">_logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
     <span class="n">upload_id</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;uploadId&quot;</span><span class="p">]</span>
     <span class="n">content_type</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;contentType&quot;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">upload_id</span><span class="p">):</span>
+        <span class="n">resp</span><span class="o">.</span><span class="n">status_code</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">status_codes</span><span class="o">.</span><span class="n">HTTP_404</span>
+        <span class="n">resp</span><span class="o">.</span><span class="n">media</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">FileNotFoundRespSchema</span><span class="p">()</span>
+            <span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">FileNotFoundModel</span><span class="p">(</span><span class="s2">&quot;upload_id is NotFound&quot;</span><span class="p">))</span>
+            <span class="o">.</span><span class="n">data</span>
+        <span class="p">)</span>
+        <span class="k">return</span>
     <span class="n">result_meta</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">upload_id</span><span class="p">,</span> <span class="s2">&quot;result_meta.txt&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">result_meta</span><span class="p">):</span>
         <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">result_meta</span><span class="p">)</span>
@@ -343,7 +408,7 @@
     <span class="n">digits</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">file_base</span><span class="p">)</span>
     <span class="n">_logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">file_list</span><span class="p">)</span>
     <span class="n">convert_pdf</span><span class="p">(</span><span class="n">digits</span><span class="p">,</span> <span class="n">extension</span><span class="p">,</span> <span class="n">upload_id</span><span class="p">)</span>
-    <span class="n">resp</span><span class="o">.</span><span class="n">media</span> <span class="o">=</span> <span class="n">UploadIdRespSchema</span><span class="p">()</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">Upload</span><span class="p">(</span><span class="n">upload_id</span><span class="p">))</span><span class="o">.</span><span class="n">data</span></div>
+    <span class="n">resp</span><span class="o">.</span><span class="n">media</span> <span class="o">=</span> <span class="n">UploadIdRespSchema</span><span class="p">()</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">UploadModel</span><span class="p">(</span><span class="n">upload_id</span><span class="p">))</span><span class="o">.</span><span class="n">data</span></div>
 
 
 <span class="nd">@api</span><span class="o">.</span><span class="n">background</span><span class="o">.</span><span class="n">task</span>
@@ -395,11 +460,26 @@
 <span class="sd">                        schema:</span>
 <span class="sd">                            type: string</span>
 <span class="sd">                            format: binary</span>
+<span class="sd">            &quot;400&quot;:</span>
+<span class="sd">                description: BadRequest</span>
+<span class="sd">                content:</span>
+<span class="sd">                    application/json:</span>
+<span class="sd">                        schema:</span>
+<span class="sd">                            $ref: &quot;#/components/schemas/ErrorResp&quot;</span>
 <span class="sd">            &quot;404&quot;:</span>
-<span class="sd">                description: FileNotFound</span>
+<span class="sd">                description: ResultFileNotFound</span>
+<span class="sd">                content:</span>
+<span class="sd">                    application/json:</span>
+<span class="sd">                        schema:</span>
+<span class="sd">                            $ref: &quot;#/components/schemas/FileNotFoundResp&quot;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">request</span> <span class="o">=</span> <span class="k">await</span> <span class="n">req</span><span class="o">.</span><span class="n">media</span><span class="p">()</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">DownloadReqSchema</span><span class="p">()</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">request</span><span class="p">)</span><span class="o">.</span><span class="n">data</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">DownloadReqSchema</span><span class="p">(</span><span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">request</span><span class="p">)</span><span class="o">.</span><span class="n">data</span>
+    <span class="k">except</span> <span class="n">ValidationError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+        <span class="n">resp</span><span class="o">.</span><span class="n">status_code</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">status_codes</span><span class="o">.</span><span class="n">HTTP_400</span>
+        <span class="n">resp</span><span class="o">.</span><span class="n">media</span> <span class="o">=</span> <span class="n">ErrorRespSchema</span><span class="p">()</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">ErrorModel</span><span class="p">(</span><span class="n">error</span><span class="p">))</span><span class="o">.</span><span class="n">data</span>
+        <span class="k">return</span>
     <span class="n">upload_id</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;uploadId&quot;</span><span class="p">]</span>
     <span class="n">result_meta</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">upload_id</span><span class="p">,</span> <span class="s2">&quot;result_meta.txt&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">result_meta</span><span class="p">):</span>
@@ -407,7 +487,10 @@
             <span class="n">resp</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s2">&quot;Content-Type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;application/pdf&quot;</span>
             <span class="n">resp</span><span class="o">.</span><span class="n">content</span> <span class="o">=</span> <span class="n">result_pdf</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">resp</span><span class="o">.</span><span class="n">status_code</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">status_codes</span><span class="o">.</span><span class="n">HTTP_404</span></div>
+        <span class="n">resp</span><span class="o">.</span><span class="n">status_code</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">status_codes</span><span class="o">.</span><span class="n">HTTP_404</span>
+        <span class="n">resp</span><span class="o">.</span><span class="n">media</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">FileNotFoundRespSchema</span><span class="p">()</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">FileNotFoundModel</span><span class="p">(</span><span class="s2">&quot;resultFile NotFound&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">data</span>
+        <span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="convert_content_type_to_extension"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.rest.convert_content_type_to_extension">[docs]</a><span class="k">def</span> <span class="nf">convert_content_type_to_extension</span><span class="p">(</span><span class="n">content_type</span><span class="p">):</span>

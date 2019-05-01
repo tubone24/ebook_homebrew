@@ -90,6 +90,7 @@ def convert(args):
 
     data = json.dumps({"uploadId": upload_id, "contentType": content_type})
     r = requests.post(url, data=data).json()
+    print(r["release_date"])
     upload_id = r["upload_id"]
     print("upload_id: {}".format(upload_id))
 

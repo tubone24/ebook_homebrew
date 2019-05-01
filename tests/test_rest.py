@@ -52,9 +52,26 @@ def test_upload_image_file(api, image_b64, tmpdir):
             patch("tempfile.mkdtemp", return_value=str(tmpdir)) as mock_mkdtemp:
         r = api.requests.post("/data/upload", event)
         assert r.status_code == 200
-        assert r.text == json.dumps({"upload_id": str(tmpdir)})
+        json_response = json.loads(r.text)
+        assert "upload_id" in json_response
+        assert "release_date" in json_response
+        assert json_response["upload_id"] == str(tmpdir)
         mock_write_image.assert_called_once_with([image_b64], "png", str(tmpdir))
         mock_mkdtemp.assert_called_once_with()
+
+
+@pytest.mark.parametrize("event, expected", [
+    ({"fileName": "test.pdf", "contentType": "image/png"}, "{'images': ['Missing data for required field.']}"),
+    ({"fileName": "test.pdf", "images": ["test"]}, "{'contentType': ['Missing data for required field.']}"),
+    ({"contentType": "image/png", "images": "test"}, "{'images': ['Not a valid list.']}")])
+def test_validation_error_upload_image_file(api, event, expected):
+    r = api.requests.post("/data/upload", json.dumps(event))
+    assert r.status_code == 400
+    json_response = json.loads(r.text)
+    assert "error" in json_response
+    assert "errorDate" in json_response
+    actual = json_response["error"]
+    assert actual == expected
 
 
 def test_convert_image_to_pdf(api, tmpdir):
@@ -62,9 +79,64 @@ def test_convert_image_to_pdf(api, tmpdir):
     event = json.dumps({"uploadId": str(tmpdir),
                         "contentType": "image/png"})
     r = api.requests.post("/convert/pdf", event)
-    assert r.text == json.dumps({"upload_id": str(tmpdir)})
+    json_response = json.loads(r.text)
+    assert "upload_id" in json_response
+    assert "release_date" in json_response
+    assert json_response["upload_id"] == str(tmpdir)
     r = api.requests.post("/convert/pdf", event)
-    assert r.text == json.dumps({"upload_id": str(tmpdir)})
+    json_response = json.loads(r.text)
+    assert "upload_id" in json_response
+    assert "release_date" in json_response
+    assert json_response["upload_id"] == str(tmpdir)
+
+
+@pytest.mark.parametrize("event, expected", [
+    ({"contentType": "image/png"}, "{'uploadId': ['Missing data for required field.']}"),
+    ({"uploadId": "test"}, "{'contentType': ['Missing data for required field.']}")])
+def test_validation_error_convert_image_to_pdf(api, event, expected):
+    r = api.requests.post("/convert/pdf", json.dumps(event))
+    assert r.status_code == 400
+    json_response = json.loads(r.text)
+    assert "error" in json_response
+    assert "errorDate" in json_response
+    actual = json_response["error"]
+    assert actual == expected
+
+
+@pytest.mark.parametrize("event, expected", [
+    ({"contentType": "image/png", "uploadId": "test"}, "upload_id is NotFound")])
+def test_not_found_upload_id_convert_image_to_pdf(api, event, expected):
+    r = api.requests.post("/convert/pdf", json.dumps(event))
+    assert r.status_code == 404
+    json_response = json.loads(r.text)
+    assert "reason" in json_response
+    assert "errorDate" in json_response
+    actual = json_response["reason"]
+    assert actual == expected
+
+
+@pytest.mark.parametrize("event, expected", [
+    ({"contentType": "image/png"}, "{'uploadId': ['Missing data for required field.']}")])
+def test_validation_error_download_result_pdf(api, event, expected):
+    r = api.requests.post("/convert/pdf/download", json.dumps(event))
+    assert r.status_code == 400
+    json_response = json.loads(r.text)
+    assert "error" in json_response
+    assert "errorDate" in json_response
+    actual = json_response["error"]
+    assert actual == expected
+
+
+@pytest.mark.parametrize("event, expected", [
+    ({"uploadId": "test"}, "resultFile NotFound")])
+def test_not_found_upload_id_download_result_pdf(api, event, expected):
+    r = api.requests.post("/convert/pdf/download", json.dumps(event))
+    assert r.status_code == 404
+    json_response = json.loads(r.text)
+    assert "reason" in json_response
+    assert "errorDate" in json_response
+    actual = json_response["reason"]
+    assert actual == expected
 
 
 @pytest.mark.parametrize("input_param, expected", [

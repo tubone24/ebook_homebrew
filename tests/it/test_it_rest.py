@@ -1,15 +1,14 @@
 import os
-import shutil
 import logging
 import base64
 import json
-from time import sleep
 
 import pytest
 
 import ebook_homebrew.rest as target
 
 _logger = logging.getLogger()
+
 
 @pytest.fixture
 def api():
@@ -40,7 +39,10 @@ def test_it_rest_convert_pdf(api, image_b64):
     event3 = json.dumps({"uploadId": str(upload_id),
                         "contentType": "image/png"})
     r3 = api.requests.post("/convert/pdf", event3)
-    assert r3.text == json.dumps({"upload_id": str(upload_id)})
+    json_response = json.loads(r3.text)
+    assert "upload_id" in json_response
+    assert "release_date" in json_response
+    assert json_response["upload_id"] == str(upload_id)
 
     i = 0
     while True:
@@ -58,7 +60,10 @@ def test_it_rest_convert_pdf(api, image_b64):
     assert r4.status_code == 200
 
     r5 = api.requests.post("/convert/pdf", event3)
-    assert r5.text == json.dumps({"upload_id": str(upload_id)})
+    json_response = json.loads(r5.text)
+    assert "upload_id" in json_response
+    assert "release_date" in json_response
+    assert json_response["upload_id"] == str(upload_id)
     i = 0
     while True:
         event5 = json.dumps({"uploadId": str(upload_id)})

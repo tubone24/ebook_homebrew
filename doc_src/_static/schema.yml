@@ -17,6 +17,22 @@ components:
       required:
       - uploadId
       type: object
+    ErrorResp:
+      properties:
+        error:
+          type: string
+        errorDate:
+          format: date
+          type: string
+      type: object
+    FileNotFoundResp:
+      properties:
+        errorDate:
+          format: date
+          type: string
+        reason:
+          type: string
+      type: object
     HealthCheck:
       properties:
         status:
@@ -40,6 +56,7 @@ components:
           type: array
       required:
       - contentType
+      - images
       type: object
 info:
   contact:
@@ -79,6 +96,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/UploadIdResp'
           description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResp'
+          description: BadRequest
       summary: Base64 encoded Images
   /convert/pdf:
     post:
@@ -95,6 +118,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/UploadIdResp'
           description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResp'
+          description: BadRequest
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileNotFoundResp'
+          description: UploadIdNotFound
       summary: Upload Id witch get upload images and ContentType
   /convert/pdf/download:
     post:
@@ -112,6 +147,16 @@ paths:
                 format: binary
                 type: string
           description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResp'
+          description: BadRequest
         '404':
-          description: FileNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileNotFoundResp'
+          description: ResultFileNotFound
       summary: Upload Id witch get upload images

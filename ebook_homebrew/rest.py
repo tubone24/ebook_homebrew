@@ -10,10 +10,11 @@ import datetime
 import tempfile
 from collections import namedtuple
 import responder
-from marshmallow import Schema, fields
+from marshmallow import Schema, fields, ValidationError
 
 from .convert import Image2PDF
 from .utils.logging import get_logger
+from .models.models import UploadModel, ErrorModel, FileNotFoundModel
 from .__init__ import __version__
 
 api = responder.API(
@@ -47,21 +48,13 @@ class HealthCheckSchema(Schema):
 @api.schema("UploadImagesReq")
 class UploadImagesReqSchema(Schema):
     contentType = fields.Str(required=True)
-    images = fields.List(fields.Str(required=True))
+    images = fields.List(fields.Str(required=True), required=True)
 
 
 @api.schema("UploadIdResp")
 class UploadIdRespSchema(Schema):
     upload_id = fields.Str()
     release_date = fields.Date()
-
-
-class Upload:
-    """Upload_id Model"""
-
-    def __init__(self, upload_id):
-        self.upload_id = upload_id
-        self.release_date = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
 
 
 @api.schema("ConvertReq")
@@ -73,6 +66,18 @@ class ConvertReqSchema(Schema):
 @api.schema("DownloadReq")
 class DownloadReqSchema(Schema):
     uploadId = fields.Str(required=True)
+
+
+@api.schema("ErrorResp")
+class ErrorRespSchema(Schema):
+    error = fields.Str()
+    errorDate = fields.Date()
+
+
+@api.schema("FileNotFoundResp")
+class FileNotFoundRespSchema(Schema):
+    reason = fields.Str()
+    errorDate = fields.Date()
 
 
 api.add_route("/", static=True)
@@ -117,16 +122,27 @@ async def upload_image_file(req, resp):
                     application/json:
                         schema:
                             $ref: "#/components/schemas/UploadIdResp"
+            "400":
+                description: BadRequest
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/ErrorResp"
     """
     request = await req.media()
-    data = UploadImagesReqSchema().load(request).data
+    try:
+        data = UploadImagesReqSchema(strict=True).load(request).data
+    except ValidationError as error:
+        resp.status_code = api.status_codes.HTTP_400
+        resp.media = ErrorRespSchema().dump(ErrorModel(error)).data
+        return
     _logger.debug(data)
     content_type = data["contentType"]
     extension = convert_content_type_to_extension(content_type)
     images_b64 = data["images"]
     tmp_dir = tempfile.mkdtemp()
     write_image(images_b64, extension, tmp_dir)
-    resp.media = UploadIdRespSchema().dump(Upload(str(tmp_dir))).data
+    resp.media = UploadIdRespSchema().dump(UploadModel(tmp_dir)).data
 
 
 @api.background.task
@@ -172,12 +188,38 @@ async def convert_image_to_pdf(req, resp):
                     application/json:
                         schema:
                             $ref: "#/components/schemas/UploadIdResp"
+            "400":
+                description: BadRequest
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/ErrorResp"
+            "404":
+                description: UploadIdNotFound
+                content:
+                    application/json:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/FileNotFoundResp"
     """
     request = await req.media()
-    data = ConvertReqSchema().load(request).data
+    try:
+        data = ConvertReqSchema(strict=True).load(request).data
+    except ValidationError as error:
+        resp.status_code = api.status_codes.HTTP_400
+        resp.media = ErrorRespSchema().dump(ErrorModel(error)).data
+        return
     _logger.debug(data)
     upload_id = data["uploadId"]
     content_type = data["contentType"]
+    if not os.path.isdir(upload_id):
+        resp.status_code = api.status_codes.HTTP_404
+        resp.media = (
+            FileNotFoundRespSchema()
+            .dump(FileNotFoundModel("upload_id is NotFound"))
+            .data
+        )
+        return
     result_meta = os.path.join(upload_id, "result_meta.txt")
     if os.path.exists(result_meta):
         os.remove(result_meta)
@@ -189,7 +231,7 @@ async def convert_image_to_pdf(req, resp):
     digits = len(file_base)
     _logger.debug(file_list)
     convert_pdf(digits, extension, upload_id)
-    resp.media = UploadIdRespSchema().dump(Upload(upload_id)).data
+    resp.media = UploadIdRespSchema().dump(UploadModel(upload_id)).data
 
 
 @api.background.task
@@ -241,11 +283,26 @@ async def download_result_pdf(req, resp):
                         schema:
                             type: string
                             format: binary
+            "400":
+                description: BadRequest
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/ErrorResp"
             "404":
-                description: FileNotFound
+                description: ResultFileNotFound
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/FileNotFoundResp"
     """
     request = await req.media()
-    data = DownloadReqSchema().load(request).data
+    try:
+        data = DownloadReqSchema(strict=True).load(request).data
+    except ValidationError as error:
+        resp.status_code = api.status_codes.HTTP_400
+        resp.media = ErrorRespSchema().dump(ErrorModel(error)).data
+        return
     upload_id = data["uploadId"]
     result_meta = os.path.join(upload_id, "result_meta.txt")
     if os.path.exists(result_meta):
@@ -254,6 +311,9 @@ async def download_result_pdf(req, resp):
             resp.content = result_pdf.read()
     else:
         resp.status_code = api.status_codes.HTTP_404
+        resp.media = (
+            FileNotFoundRespSchema().dump(FileNotFoundModel("resultFile NotFound")).data
+        )
 
 
 def convert_content_type_to_extension(content_type):
