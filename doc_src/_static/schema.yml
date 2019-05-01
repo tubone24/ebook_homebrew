@@ -37,6 +37,8 @@ components:
       properties:
         status:
           type: string
+        version:
+          type: string
       type: object
     UploadIdResp:
       properties:

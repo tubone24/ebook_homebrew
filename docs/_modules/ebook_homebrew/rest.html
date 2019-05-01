@@ -168,6 +168,7 @@
 
 <span class="kn">from</span> <span class="nn">.convert</span> <span class="k">import</span> <span class="n">Image2PDF</span>
 <span class="kn">from</span> <span class="nn">.utils.logging</span> <span class="k">import</span> <span class="n">get_logger</span>
+<span class="kn">from</span> <span class="nn">.models.models</span> <span class="k">import</span> <span class="n">UploadModel</span><span class="p">,</span> <span class="n">ErrorModel</span><span class="p">,</span> <span class="n">FileNotFoundModel</span><span class="p">,</span> <span class="n">StatusModel</span>
 <span class="kn">from</span> <span class="nn">.__init__</span> <span class="k">import</span> <span class="n">__version__</span>
 
 <span class="n">api</span> <span class="o">=</span> <span class="n">responder</span><span class="o">.</span><span class="n">API</span><span class="p">(</span>
@@ -195,7 +196,8 @@
 
 <div class="viewcode-block" id="HealthCheckSchema"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.rest.HealthCheckSchema">[docs]</a><span class="nd">@api</span><span class="o">.</span><span class="n">schema</span><span class="p">(</span><span class="s2">&quot;HealthCheck&quot;</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">HealthCheckSchema</span><span class="p">(</span><span class="n">Schema</span><span class="p">):</span>
-    <span class="n">status</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Str</span><span class="p">()</span></div>
+    <span class="n">status</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Str</span><span class="p">()</span>
+    <span class="n">version</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Str</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="UploadImagesReqSchema"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.rest.UploadImagesReqSchema">[docs]</a><span class="nd">@api</span><span class="o">.</span><span class="n">schema</span><span class="p">(</span><span class="s2">&quot;UploadImagesReq&quot;</span><span class="p">)</span>
@@ -210,14 +212,6 @@
     <span class="n">release_date</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Date</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="UploadModel"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.rest.UploadModel">[docs]</a><span class="k">class</span> <span class="nc">UploadModel</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Upload_id Model&quot;&quot;&quot;</span>
-
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">upload_id</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">upload_id</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">upload_id</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">release_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span></div>
-
-
 <div class="viewcode-block" id="ConvertReqSchema"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.rest.ConvertReqSchema">[docs]</a><span class="nd">@api</span><span class="o">.</span><span class="n">schema</span><span class="p">(</span><span class="s2">&quot;ConvertReq&quot;</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">ConvertReqSchema</span><span class="p">(</span><span class="n">Schema</span><span class="p">):</span>
     <span class="n">uploadId</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Str</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -229,26 +223,10 @@
     <span class="n">uploadId</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Str</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="ErrorModel"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.rest.ErrorModel">[docs]</a><span class="k">class</span> <span class="nc">ErrorModel</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Error Model&quot;&quot;&quot;</span>
-
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">error</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">error</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">errorDate</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span></div>
-
-
 <div class="viewcode-block" id="ErrorRespSchema"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.rest.ErrorRespSchema">[docs]</a><span class="nd">@api</span><span class="o">.</span><span class="n">schema</span><span class="p">(</span><span class="s2">&quot;ErrorResp&quot;</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">ErrorRespSchema</span><span class="p">(</span><span class="n">Schema</span><span class="p">):</span>
     <span class="n">error</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Str</span><span class="p">()</span>
     <span class="n">errorDate</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Date</span><span class="p">()</span></div>
-
-
-<div class="viewcode-block" id="FileNotFoundModel"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.rest.FileNotFoundModel">[docs]</a><span class="k">class</span> <span class="nc">FileNotFoundModel</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;FileNotFound Model&quot;&quot;&quot;</span>
-
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reason</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">reason</span> <span class="o">=</span> <span class="n">reason</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">errorDate</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="FileNotFoundRespSchema"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.rest.FileNotFoundRespSchema">[docs]</a><span class="nd">@api</span><span class="o">.</span><span class="n">schema</span><span class="p">(</span><span class="s2">&quot;FileNotFoundResp&quot;</span><span class="p">)</span>
@@ -275,8 +253,7 @@
 <span class="sd">                            $ref: &quot;#/components/schemas/HealthCheck&quot;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">_logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;health Check&quot;</span><span class="p">)</span>
-    <span class="n">Status</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s2">&quot;Status&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;status&quot;</span><span class="p">])</span>
-    <span class="n">resp</span><span class="o">.</span><span class="n">media</span> <span class="o">=</span> <span class="n">HealthCheckSchema</span><span class="p">()</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">Status</span><span class="p">(</span><span class="s2">&quot;ok&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">data</span></div>
+    <span class="n">resp</span><span class="o">.</span><span class="n">media</span> <span class="o">=</span> <span class="n">HealthCheckSchema</span><span class="p">()</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">StatusModel</span><span class="p">(</span><span class="s2">&quot;ok&quot;</span><span class="p">,</span> <span class="n">__version__</span><span class="p">))</span><span class="o">.</span><span class="n">data</span></div>
 
 
 <div class="viewcode-block" id="upload_image_file"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.rest.upload_image_file">[docs]</a><span class="nd">@api</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/data/upload&quot;</span><span class="p">)</span>

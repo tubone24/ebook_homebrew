@@ -14,7 +14,7 @@ from marshmallow import Schema, fields, ValidationError
 
 from .convert import Image2PDF
 from .utils.logging import get_logger
-from .models.models import UploadModel, ErrorModel, FileNotFoundModel
+from .models.models import UploadModel, ErrorModel, FileNotFoundModel, StatusModel
 from .__init__ import __version__
 
 api = responder.API(
@@ -43,6 +43,7 @@ _logger = get_logger("RestAPI")
 @api.schema("HealthCheck")
 class HealthCheckSchema(Schema):
     status = fields.Str()
+    version = fields.Str()
 
 
 @api.schema("UploadImagesReq")
@@ -98,8 +99,7 @@ def status(_, resp):
                             $ref: "#/components/schemas/HealthCheck"
     """
     _logger.debug("health Check")
-    Status = namedtuple("Status", ["status"])
-    resp.media = HealthCheckSchema().dump(Status("ok")).data
+    resp.media = HealthCheckSchema().dump(StatusModel("ok", __version__)).data
 
 
 @api.route("/data/upload")
