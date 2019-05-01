@@ -8,7 +8,6 @@ import glob
 import json
 import datetime
 import tempfile
-from collections import namedtuple
 import responder
 from marshmallow import Schema, fields, ValidationError
 
