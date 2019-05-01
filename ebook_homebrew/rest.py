@@ -14,6 +14,7 @@ from marshmallow import Schema, fields, ValidationError
 
 from .convert import Image2PDF
 from .utils.logging import get_logger
+from .models.models import UploadModel, ErrorModel, FileNotFoundModel
 from .__init__ import __version__
 
 api = responder.API(
@@ -56,14 +57,6 @@ class UploadIdRespSchema(Schema):
     release_date = fields.Date()
 
 
-class UploadModel:
-    """Upload_id Model"""
-
-    def __init__(self, upload_id):
-        self.upload_id = str(upload_id)
-        self.release_date = datetime.datetime.now()
-
-
 @api.schema("ConvertReq")
 class ConvertReqSchema(Schema):
     uploadId = fields.Str(required=True)
@@ -75,26 +68,10 @@ class DownloadReqSchema(Schema):
     uploadId = fields.Str(required=True)
 
 
-class ErrorModel:
-    """Error Model"""
-
-    def __init__(self, error):
-        self.error = str(error)
-        self.errorDate = datetime.datetime.now()
-
-
 @api.schema("ErrorResp")
 class ErrorRespSchema(Schema):
     error = fields.Str()
     errorDate = fields.Date()
-
-
-class FileNotFoundModel:
-    """FileNotFound Model"""
-
-    def __init__(self, reason):
-        self.reason = reason
-        self.errorDate = datetime.datetime.now()
 
 
 @api.schema("FileNotFoundResp")
