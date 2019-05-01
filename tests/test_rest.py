@@ -40,8 +40,11 @@ def test_indexhtml(api):
 
 def test_status(api):
     r = api.requests.get("/status")
-    expect = json.dumps({"status": "ok"})
-    assert r.text == expect
+    json_response = json.loads(r.text)
+    assert "status" in json_response
+    actual = json_response["status"]
+    expect = "ok"
+    assert actual == expect
 
 
 def test_upload_image_file(api, image_b64, tmpdir):

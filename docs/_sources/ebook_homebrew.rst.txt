@@ -6,6 +6,7 @@ Subpackages
 
 .. toctree::
 
+    ebook_homebrew.models
     ebook_homebrew.utils
 
 Submodules

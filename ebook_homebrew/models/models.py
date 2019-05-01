@@ -4,6 +4,14 @@
 import datetime
 
 
+class StatusModel:
+    """Status Model"""
+
+    def __init__(self, status, version):
+        self.status = status
+        self.version = version
+
+
 class UploadModel:
     """Upload_id Model"""
 
