@@ -25,7 +25,10 @@
 
 <script>
   /* eslint-disable */
+  import axios from 'axios'
   import mixins from '../mixins/const'
+
+  const backendURL = mixins.data().backendURL;
 
   export default {
     name: 'FileUpload',
@@ -69,8 +72,13 @@
         this.image = '';
       },
       postImage: function (e) {
-
+        let vm = this;
         console.log(this.images);
+        console.log(backendURL);
+        axios.post(backendURL, {
+          contentType: vm.selected,
+          images: vm.images
+        });
       },
       onFileFormatChange(e) {
         console.log(e)

@@ -19,6 +19,7 @@ from .__init__ import __version__
 api = responder.API(
     title="Ebook-homebrew",
     debug=True,
+    cors=True,
     version=__version__,
     static_dir=os.path.join(os.path.dirname(os.path.abspath(__file__)), "static"),
     static_route="/static",
