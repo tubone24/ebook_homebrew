@@ -20,6 +20,7 @@ api = responder.API(
     title="Ebook-homebrew",
     debug=True,
     cors=True,
+    cors_params={"allow_origins": ["*"]},
     version=__version__,
     static_dir=os.path.join(os.path.dirname(os.path.abspath(__file__)), "static"),
     static_route="/static",
