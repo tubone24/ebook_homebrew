@@ -159,7 +159,7 @@ def write_image(images_b64, extension, tmp_dir):
 
     """
     for i, content in enumerate(images_b64):
-        image = base64.b64decode(content)
+        image = base64.b64decode(content.split(",")[-1])
         file_name = os.path.join(tmp_dir, str(i) + "." + extension)
         _logger.debug("file_name: {}".format(file_name))
         with open(file_name, "wb") as image_file:
