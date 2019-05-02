@@ -63,6 +63,36 @@ def test_upload_image_file(api, image_b64, tmpdir):
         mock_mkdtemp.assert_called_once_with()
 
 
+def test_upload_image_file_data_uri_schema(api, image_b64, tmpdir):
+    event = json.dumps({"fileName": "test.pdf",
+                        "contentType": "image/png",
+                        "images": ["data:image/png;base64," + image_b64]})
+    with patch.object(target, "write_image", return_value=True) as mock_write_image, \
+            patch("tempfile.mkdtemp", return_value=str(tmpdir)) as mock_mkdtemp:
+        r = api.requests.post("/data/upload", event)
+        assert r.status_code == 200
+        json_response = json.loads(r.text)
+        assert "upload_id" in json_response
+        assert "release_date" in json_response
+        assert json_response["upload_id"] == str(tmpdir)
+        mock_write_image.assert_called_once_with(["data:image/png;base64," + image_b64], "png", str(tmpdir))
+        mock_mkdtemp.assert_called_once_with()
+
+
+def test_write_image(image_b64, tmpdir):
+    future = target.write_image([image_b64], "png", tmpdir)
+    actual = future.result()
+    expected = True
+    assert actual == expected
+
+
+def test_write_image_data_uri_schema(image_b64, tmpdir):
+    future = target.write_image(["data:image/png;base64," + image_b64], "png", tmpdir)
+    actual = future.result()
+    expected = True
+    assert actual == expected
+
+
 @pytest.mark.parametrize("event, expected", [
     ({"fileName": "test.pdf", "contentType": "image/png"}, "{'images': ['Missing data for required field.']}"),
     ({"fileName": "test.pdf", "images": ["test"]}, "{'contentType': ['Missing data for required field.']}"),
