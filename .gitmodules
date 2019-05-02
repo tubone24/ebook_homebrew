@@ -1,0 +1,3 @@
+[submodule "examples/ebook-homebrew-vue-client"]
+	path = examples/ebook-homebrew-vue-client
+	url = https://github.com/tubone24/ebook-homebrew-vue-client.git
