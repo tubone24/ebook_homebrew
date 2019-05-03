@@ -248,7 +248,26 @@ This repository uses `Travis-CI <https://travis-ci.org/tubone24/ebook_homebrew/>
 Examples
 ========
 
-Web GUI. Such as `Create PDF from your images <examples/web_gui/>`_
+Stand Alone Web GUI
+-------------------
+
+Stand alone Web GUI. Such as `Create PDF from your images <examples/web_gui/>`_ by using Flask.
+
+Command Line Tools with using Rest API
+--------------------------------------
+
+Command Line Tools which client app for REST API.
+
+`Client App with ebook-homebrew's rest API <https://github.com/tubone24/ebook_homebrew/tree/master/examples/use_rest_api>`_
+
+Vue.js Frontend App
+-------------------
+
+Using Vue.js, Call REST API.
+
+`ebook-homebrew-vue-client <https://github.com/tubone24/ebook-homebrew-vue-client>`_
+
+
 
 Deploy API to Heroku
 ====================
@@ -260,6 +279,26 @@ Push a button below.
 .. image:: https://www.herokucdn.com/deploy/button.png
    :target: https://heroku.com/deploy
    :alt: Deploy to Heroku
+
+DEMOS
+=====
+
+REST API
+--------
+
+The ebook-homebrew REST API DEMO is deploy to Heroku.
+
+`https://ebook-homebrew.herokuapp.com/ <https://ebook-homebrew.herokuapp.com/>`_
+
+`REST API DOCS (OPENAPI) <https://ebook-homebrew.herokuapp.com/docs>`_
+
+With Vue.js Front
+-----------------
+
+Using Vue.js, Call REST API DEMO App, deploy to Heroku.
+
+`https://ebook-homebrew-vue-client.herokuapp.com/ <https://ebook-homebrew-vue-client.herokuapp.com/>`_
+
 
 Licence
 =======
