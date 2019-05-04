@@ -1,5 +1,5 @@
-pytest==4.4.0
-pytest-cov==2.6.1
+pytest==4.4.1
+pytest-cov==2.7.1
 pytest-pythonpath==0.7.3
 flake8==3.7.7
 pep8==1.7.1
@@ -8,4 +8,4 @@ pytest-flake8==1.0.4
 pytest-pep8==1.0.6
 coverage==4.5.3
 codecov==2.0.15
-black==18.9b0
+black==19.3b0
