@@ -56,6 +56,10 @@ notifications:
   - provider: Webhook
     url: https://webhooks.gitter.im/e/aad7507945af342edab5
     method: POST
+  - provider: GitHubPullRequest
+    auth_token:
+      secure: uyE7IjNU0mnVjSInKNP44FmvzNWU2C4iaajucgBSTZV6nd7wGvj8wFX9luXScsuL
+    template: "{{#passed}}:white_check_mark:{{/passed}}{{#failed}}:x:{{/failed}} [Build {{&projectName}} {{buildVersion}} {{status}}]({{buildUrl}}) (commit {{commitUrl}} by @{{&commitAuthorUsername}})"
 
 deploy:
   release: $(APPVEYOR_REPO_TAG_NAME)
