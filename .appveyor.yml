@@ -1,11 +1,9 @@
 environment:
-  global:
-    TOXENV: py
   PYPI_PASSWORD:
     secure: E1hXZZ9LsjhERaKpZLBn3w==
 
   matrix:
-    - PYTHON: C:\Python36-x64
+    - TOXENV: py37
 
 branches:
   only:
@@ -15,15 +13,15 @@ init:
   - SET PATH=%PYTHON%;%PATH%
 
 install:
-  - python -m pip install -U tox
-  - python -m pip install -U wheel
-  - python -m pip install -U twine
+  - pip install tox
+  - pip install wheel
+  - pip install twine
 
 build_script:
   - python setup.py build
 
 test_script:
-  - python -m tox
+  - tox
 
 after_test:
   - python setup.py sdist
