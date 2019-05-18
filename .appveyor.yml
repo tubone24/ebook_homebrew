@@ -29,12 +29,6 @@ after_test:
   - python setup.py bdist_wininst
   - python setup.py bdist_msi
   - ps: "ls dist"
-
-artifacts:
-  - path: dist\*
-    name: pypiartifacts
-
-deploy_script:
   - echo "Starting Artifact Deployment"
   - echo [distutils]                                  > %USERPROFILE%\\.pypirc
   - echo index-servers =                             >> %USERPROFILE%\\.pypirc
@@ -46,6 +40,10 @@ deploy_script:
   - set HOME=%USERPROFILE%
   - ps: If ($env:APPVEYOR_REPO_TAG -eq "true" -And $env:APPVEYOR_REPO_BRANCH -eq "master") { Invoke-Expression "twine upload --skip-existing dist/*" 2>$null } Else { write-output "Not on a tag on master, won't deploy to pypi"}
   - echo "Finished Artifact Deployment"
+
+artifacts:
+  - path: dist\*
+    name: pypiartifacts
 
 on_finish:
   - ps: |
