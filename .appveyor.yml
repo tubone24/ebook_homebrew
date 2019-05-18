@@ -3,7 +3,6 @@ environment:
     secure: E1hXZZ9LsjhERaKpZLBn3w==
 
   matrix:
-    - TOXENV: py36
     - TOXENV: py37
 
 branches:
