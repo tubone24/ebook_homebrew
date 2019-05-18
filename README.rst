@@ -96,10 +96,6 @@ The ``Ebook_homebrew`` is changing file name to only digit name like ``001.jpg``
 .. image:: https://beerpay.io/tubone24/ebook_homebrew/badge.svg
    :target: https://beerpay.io/tubone24/ebook_homebrew
 
-.. image:: https://badge.waffle.io/tubone24/ebook_homebrew.svg?columns=all
-   :target: https://waffle.io/tubone24/ebook_homebrew
-   :alt: Waffle.io - Columns and their card count
-
 .. image:: https://dockeri.co/image/tubone24/ebook-homebrew
    :target: https://cloud.docker.com/repository/docker/tubone24/ebook-homebrew
    :alt: dockerhub
