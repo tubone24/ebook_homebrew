@@ -1,4 +1,4 @@
-ebook_homebrew
+ebook-homebrew
 ==============
 
 .. toctree::

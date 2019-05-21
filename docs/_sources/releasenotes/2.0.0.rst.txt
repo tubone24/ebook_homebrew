@@ -1,7 +1,0 @@
-2.0.0
-=====
-
-API Server
-----------
-
-* REST API Server interface
