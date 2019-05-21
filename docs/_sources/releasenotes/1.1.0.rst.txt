@@ -1,8 +1,0 @@
-1.1.0
-=====
-
-Async rename
-------------
-
-* Rename to digit filename a little bit speedy for using asyncio
-* More Testcase(Windows)
