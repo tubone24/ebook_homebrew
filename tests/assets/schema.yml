@@ -70,7 +70,7 @@ info:
     name: MIT
     url: https://opensource.org/licenses/MIT
   title: Ebook-homebrew
-  version: 2.0.5
+  version: 2.0.6
 openapi: 3.0.2
 paths:
   /status:
