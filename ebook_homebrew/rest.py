@@ -27,7 +27,6 @@ api = responder.API(
     },
     version=__version__,
     static_dir=os.path.join(os.path.dirname(os.path.abspath(__file__)), "static"),
-    static_route="/static",
     openapi="3.0.2",
     docs_route="/docs",
     openapi_route="/schema.yml",
