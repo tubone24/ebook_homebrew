@@ -34,12 +34,13 @@ RUN mkdir /app
 RUN cd /app && git clone https://github.com/tubone24/ebook_homebrew.git && cd ebook_homebrew && git submodule update --init --recursive
 WORKDIR /app/ebook_homebrew
 RUN pip3 install -r requirements.txt
-RUN python3 setup.py install
 
 # setup vue client
 RUN rm ebook_homebrew/static/index.html
 RUN cd examples/ebook-homebrew-vue-client && npm install && npm run build
-RUN cp -r examples/ebook-homebrew-vue-client/dist/* ebook_homebrew/static
+RUN cp -r examples/ebook-homebrew-vue-client/dist/* ebook_homebrew/static/
+
+# install ebook-homebrew
 RUN python3 setup.py install
 
 CMD ebookhomebrew api -p ${PORT}
