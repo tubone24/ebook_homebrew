@@ -38,9 +38,10 @@ RUN pip3 install -r requirements.txt
 
 # setup vue client
 RUN rm ebook_homebrew/static/index.html
-RUN cd examples/ebook-homebrew-vue-client && npm install
-RUN cp -r examples/ebook-homebrew-vue-client/dist/index.html ebook_homebrew/static/
-RUN cp -r -P examples/ebook-homebrew-vue-client/dist/ ebook_homebrew/static/static/
+RUN cd examples/ebook-homebrew-vue-client && npm install && npm run build
+RUN cp examples/ebook-homebrew-vue-client/dist/index.html ebook_homebrew/static/
+RUN mkdir -p ebook_homebrew/static/static/static
+RUN cp -r examples/ebook-homebrew-vue-client/dist/static ebook_homebrew/static/static/
 
 # install ebook-homebrew
 RUN python3 setup.py install
