@@ -33,7 +33,6 @@ RUN n stable && node -v
 RUN mkdir /app
 RUN cd /app && git clone https://github.com/tubone24/ebook_homebrew.git && cd ebook_homebrew \
   && git submodule update --init --recursive
-
 WORKDIR /app/ebook_homebrew
 RUN pip3 install -r requirements.txt
 
