@@ -17,12 +17,12 @@ def api():
 
 @pytest.fixture
 def image_b64():
-    with open(os.path.join(os.path.dirname(__file__), "it", "assets", "test_image.png"), "rb") as f:
+    with open(os.path.join(os.path.dirname(__file__), "assets", "test_image.png"), "rb") as f:
         return base64.b64encode(f.read()).decode("utf-8")
 
 
 def copy_image_file(directory):
-    test_file = os.path.join(os.path.dirname(__file__), "it", "assets", "test_image.png")
+    test_file = os.path.join(os.path.dirname(__file__), "assets", "test_image.png")
     for i in range(100):
         shutil.copy2(test_file, directory)
         dst_file_name = os.path.join(directory, "foo" + str(i).zfill(3) + "bar.png")
