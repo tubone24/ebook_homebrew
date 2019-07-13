@@ -23,8 +23,14 @@ RUN yum install -y \
  && pip3 install --upgrade pip
 
 RUN mkdir /app
-RUN cd /app && git clone https://github.com/tubone24/ebook_homebrew.git
+RUN cd /app && git clone https://github.com/tubone24/ebook_homebrew.git && git submodule foreach git pull origin master
 WORKDIR /app/ebook_homebrew
 RUN pip3 install -r requirements.txt
 RUN python3 setup.py install
+
+RUN rm ebook_homebrew/static/index.html
+RUN cd examples/ebook-homebrew-vue-client && npm run build
+RUN cp -r examples/ebook-homebrew-vue-client/dist/* ebook_homebrew/static
+RUN python3 setup.py install
+
 CMD ebookhomebrew api -p ${PORT}
