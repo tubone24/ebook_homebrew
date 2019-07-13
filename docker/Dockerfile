@@ -31,14 +31,17 @@ RUN n stable && node -v
 
 # setup ebook-homebrew
 RUN mkdir /app
-RUN cd /app && git clone https://github.com/tubone24/ebook_homebrew.git && cd ebook_homebrew && git submodule update --init --recursive
+RUN cd /app && git clone https://github.com/tubone24/ebook_homebrew.git && cd ebook_homebrew \
+  && git submodule update --init --recursive
+
 WORKDIR /app/ebook_homebrew
 RUN pip3 install -r requirements.txt
 
 # setup vue client
 RUN rm ebook_homebrew/static/index.html
-RUN cd examples/ebook-homebrew-vue-client && npm install && npm run build
-RUN cp -r examples/ebook-homebrew-vue-client/dist/* ebook_homebrew/static/
+RUN cd examples/ebook-homebrew-vue-client && npm install
+RUN cp -r examples/ebook-homebrew-vue-client/dist/index.html ebook_homebrew/static/
+RUN cp -r -P examples/ebook-homebrew-vue-client/dist/ ebook_homebrew/static/static/
 
 # install ebook-homebrew
 RUN python3 setup.py install
