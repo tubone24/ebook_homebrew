@@ -295,6 +295,12 @@ Using Vue.js, Call REST API DEMO App, deploy to Heroku.
 
 `https://ebook-homebrew-vue-client.herokuapp.com/ <https://ebook-homebrew-vue-client.herokuapp.com/>`_
 
+With Flutter Android App
+------------------------
+
+Using Flutter, Call REST API DEMO Android App, deploy to Deploygate. Try me!
+
+`https://deploygate.com/distributions/14a12d44f5909adf23f0c550f960364d4b02aad0 <https://deploygate.com/distributions/14a12d44f5909adf23f0c550f960364d4b02aad0>`_
 
 Licence
 =======
