@@ -23,4 +23,13 @@ pypi-upload-test:
 pypi-upload:
 	twine upload --repository pypi dist/*
 
+docker-build:
+	docker build -t ebook-homebrew docker
+
+docker-run:
+	docker run --rm --name ebook-homebrew -e PORT=8082 -p 8082:8082 ebook-homebrew
+
+docker-stop:
+	docker stop ebook-homebrew
+
 .PHONY: all
