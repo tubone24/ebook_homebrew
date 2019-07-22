@@ -13,8 +13,7 @@ jobs:
       - run: mkdir test-results && sudo chown -R circleci:circleci test-results
       - run:
           command: |
-            sudo pip install pipenv
-            pipenv install --pre
+            sudo pip install -r requirements.txt
       - save_cache:
           key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
           paths:
@@ -23,11 +22,11 @@ jobs:
             - "/usr/local/lib/python3.6/site-packages"
       - run:
           command: |
-            pipenv run "pip install -r requirements-test.txt"
-            pipenv run "pip install wheel"
-            pipenv run "python setup.py install"
-            pipenv run "coverage run --source=ebook_homebrew -m pytest --it --junit-xml=test-results/test_results.xml"
-            pipenv run "python setup.py sdist bdist_wheel"
+            pip install -r requirements-test.txt
+            pip install wheel
+            python setup.py install
+            coverage run --source=ebook_homebrew -m pytest --it --junit-xml=test-results/test_results.xml
+            python setup.py sdist bdist_wheel
       - store_test_results:
           path: test-results
       - store_artifacts:
