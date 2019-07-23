@@ -85,11 +85,7 @@ class FileNotFoundRespSchema(Schema):
     errorDate = fields.Date()
 
 
-# Vue Sampled
 api.add_route("/", static=True)
-api.add_route("/js", static=True)
-api.add_route("/css", static=True)
-api.add_route("/img", static=True)
 
 
 @api.route("/status")
