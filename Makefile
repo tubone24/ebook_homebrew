@@ -24,7 +24,7 @@ pypi-upload:
 	twine upload --repository pypi dist/*
 
 docker-build:
-	docker build -t ebook-homebrew docker
+	docker build --no-cache=true -t ebook-homebrew docker
 
 docker-run:
 	docker run --rm --name ebook-homebrew -e PORT=8082 -p 8082:8082 ebook-homebrew
