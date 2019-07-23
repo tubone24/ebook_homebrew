@@ -108,7 +108,7 @@ Badges:
    overview.rst
    howtouse.rst
    restapi.rst
-   crient.rst
+   client.rst
    deploy2heroku.rst
    releasenotes/index.rst
 
