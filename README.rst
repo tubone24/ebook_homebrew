@@ -261,7 +261,9 @@ Vue.js Frontend App
 
 Using Vue.js, Call REST API.
 
-`ebook-homebrew-vue-client <https://github.com/tubone24/ebook-homebrew-vue-client>`_
+`ebook-homebrew-vue-client (deprecated) <https://github.com/tubone24/ebook-homebrew-vue-client>`_
+
+`ebook-homebrew-vue-typescript-client  <https://github.com/tubone24/ebook-homebrew-vue-typescript-client>`_
 
 
 

@@ -1,0 +1,282 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Client &mdash; ebook_homebrew 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> ebook_homebrew
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howtouse.html">How to use</a></li>
+<li class="toctree-l1"><a class="reference internal" href="restapi.html">Rest API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deploy2heroku.html">Deploy to Heroku</a></li>
+<li class="toctree-l1"><a class="reference internal" href="releasenotes/index.html">Release Notes</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ebook_homebrew</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Client</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/client.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="client">
+<h1>Client<a class="headerlink" href="#client" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="example-client-app">
+<h2>Example Client App<a class="headerlink" href="#example-client-app" title="Permalink to this headline">¶</a></h2>
+<p>You can use Ebook Homebrew Rest API for example client app.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Examples App use ebook-homebrew demo heroku endpoint.
+If you use your own server, fork the code and change the backend URL.</p>
+</div>
+<p>Git clone Example app with :command:<a href="#id1"><span class="problematic" id="id2">`</span></a>git clone <a href="#id3"><span class="problematic" id="id4">`</span></a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/tubone24/ebook_homebrew.git
+$ git submodule update --init --recursive
+</pre></div>
+</div>
+<div class="section" id="stand-alone-web-gui">
+<h3>Stand Alone Web GUI<a class="headerlink" href="#stand-alone-web-gui" title="Permalink to this headline">¶</a></h3>
+<p>The basic WEB app which create PDF from your images built in the ebook-homebrew.</p>
+<p>Install <strong>Flask</strong> and Execute commands below.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd examples/web_gui/
+$ pip install requirements.txt
+$ cd src
+$ python application.py
+</pre></div>
+</div>
+<p>And Access <a class="reference external" href="http://localhost:8080">localhost:8080</a></p>
+<p>You can see The TOP page like blow. Click <strong>GO DEMO APP</strong></p>
+<img alt="_images/standalone-top.png" src="_images/standalone-top.png" />
+<p>Choose Files, digits and extension. Click <strong>Create!</strong> and Downloading <strong>result.pdf</strong></p>
+<img alt="_images/standalone-choose-img.png" src="_images/standalone-choose-img.png" />
+</div>
+<div class="section" id="command-line-tools-with-using-rest-api">
+<h3>Command Line Tools with using Rest API<a class="headerlink" href="#command-line-tools-with-using-rest-api" title="Permalink to this headline">¶</a></h3>
+<p>Client App with ebook-homebrew’s rest API interface.
+Install <strong>requests</strong> and <strong>docopt</strong> and Execute.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd examples/use_rest_api/
+$ pip install requirements.txt
+$ cd src
+$ python main.py -h
+</pre></div>
+</div>
+<p>You can see the CLI’s Usage.</p>
+</div>
+<div class="section" id="android-app">
+<h3>Android App<a class="headerlink" href="#android-app" title="Permalink to this headline">¶</a></h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This app is created flutter, so you can build an Android app and an iOS app,</p>
+</div>
+<p>but I don’t try to build ios app, because I don’t have ios.</p>
+<p>Demo client Native App for using ebook-homebrew.</p>
+<p>Install Flutter SDK and Build App:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd examples/ebook-homebrew-android-app
+$ git clone -b beta https://github.com/flutter/flutter.git ~/flutter
+$ cat YOUR_APP_KEY &gt; android/app/apk_key.jks
+$ cat YOUR_APP_PROPS &gt; android/key.properties
+$ ~/flutter/bin/flutter build apk --release --split-per-abi
+</pre></div>
+</div>
+<p>Also you can use Demo app downloading to <a class="reference external" href="https://deploygate.com/distributions/14a12d44f5909adf23f0c550f960364d4b02aad0">Deploy Gate</a></p>
+<p>Or Download <a class="reference external" href="https://play.google.com/store/apps/details?id=com.tubone.ebook_homebrew_flutter">Google Play</a></p>
+<p>Run App and Enjoy!</p>
+<img alt="_images/flutter-android.gif" src="_images/flutter-android.gif" />
+</div>
+<div class="section" id="web-front-app-vue-js">
+<h3>Web Front App (Vue.js)<a class="headerlink" href="#web-front-app-vue-js" title="Permalink to this headline">¶</a></h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>ebook-homebrew-vue-client is Deprecated instead of ebook-homebrew-vue-typescript-client</p>
+</div>
+<p>If you want to use Web Front App, you can make reference of Example app building for Vue.js.</p>
+<p>You can see 2 examples, <strong>Vue.js with Javascript</strong> or <strong>Vue.js with Typescript</strong></p>
+<p><a class="reference external" href="https://github.com/tubone24/ebook-homebrew-vue-client">Vue.js with Javascript</a></p>
+<p><a class="reference external" href="https://github.com/tubone24/ebook-homebrew-vue-typescript-client">Vue.js with Typescript</a></p>
+<p>Install Node.js and NPM and Execute it:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd examples/ebook-homebrew-vue-typescript-client
+$ npm install
+$ npm run serve
+</pre></div>
+</div>
+<p>Run App and Enjoy!</p>
+<img alt="_images/vue-sample.gif" src="_images/vue-sample.gif" />
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, tubone
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
