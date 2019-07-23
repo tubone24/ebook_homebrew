@@ -293,7 +293,7 @@ With Vue.js Front
 
 Using Vue.js, Call REST API DEMO App, deploy to Heroku.
 
-`https://ebook-homebrew-vue-client.herokuapp.com/ <https://ebook-homebrew-vue-client.herokuapp.com/>`_
+`https://ebook-homebrew.herokuapp.com/ <https://ebook-homebrew.herokuapp.com/>`_
 
 With Flutter Android App
 ------------------------
@@ -301,6 +301,8 @@ With Flutter Android App
 Using Flutter, Call REST API DEMO Android App, deploy to Deploygate. Try me!
 
 `https://deploygate.com/distributions/14a12d44f5909adf23f0c550f960364d4b02aad0 <https://deploygate.com/distributions/14a12d44f5909adf23f0c550f960364d4b02aad0>`_
+
+And also, you can download to `Google Play <https://play.google.com/store/apps/details?id=com.tubone.ebook_homebrew_flutter>`_
 
 Licence
 =======
