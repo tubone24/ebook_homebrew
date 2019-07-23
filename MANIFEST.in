@@ -1,5 +1,6 @@
 recursive-include ebook_homebrew *.yaml
-recursive-include ebook_homebrew/static *.html favicon.ico
+recursive-include ebook_homebrew/static *.html
+recursive-include ebook_homebrew/static/favicon.ico
 recursive-include ebook_homebrew/static/js *.js *.map
 recursive-include ebook_homebrew/static/css *.css *.map
 recursive-include ebook_homebrew/static/img *.png
