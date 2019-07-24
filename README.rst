@@ -96,6 +96,9 @@ The ``Ebook_homebrew`` is changing file name to only digit name like ``001.jpg``
 .. image:: https://beerpay.io/tubone24/ebook_homebrew/badge.svg
    :target: https://beerpay.io/tubone24/ebook_homebrew
 
+.. image:: https://dply.me/yv0jty/button/small
+   :target: https://dply.me/yv0jty#install
+
 .. image:: https://dockeri.co/image/tubone24/ebook-homebrew
    :target: https://cloud.docker.com/repository/docker/tubone24/ebook-homebrew
    :alt: dockerhub
@@ -302,7 +305,9 @@ With Flutter Android App
 
 Using Flutter, Call REST API DEMO Android App, deploy to Deploygate. Try me!
 
-`https://deploygate.com/distributions/14a12d44f5909adf23f0c550f960364d4b02aad0 <https://deploygate.com/distributions/14a12d44f5909adf23f0c550f960364d4b02aad0>`_
+.. image:: https://dply.me/yv0jty/button/large
+   :target: https://dply.me/yv0jty#install
+   :alt: Try it on your device via DeployGate
 
 And also, you can download to `Google Play <https://play.google.com/store/apps/details?id=com.tubone.ebook_homebrew_flutter>`_
 
