@@ -298,7 +298,7 @@ With Vue.js Front
 
 Using Vue.js, Call REST API DEMO App, deploy to Heroku.
 
-`https://ebook-homebrew.herokuapp.com/ <https://ebook-homebrew.herokuapp.com/>`_
+`https://ebook-homebrew.herokuapp.com/#/sample <https://ebook-homebrew.herokuapp.com/#/sample>`_
 
 With Flutter Android App
 ------------------------
