@@ -13,7 +13,13 @@ from marshmallow import Schema, fields, ValidationError
 
 from .convert import Image2PDF
 from .utils.logging import get_logger
-from .models.rest_models import UploadModel, ErrorModel, FileNotFoundModel, StatusModel
+from .models.rest_models import (
+    UploadModel,
+    ErrorModel,
+    FileNotFoundModel,
+    StatusModel,
+    ListUploadFiles,
+)
 from .rdb import UploadedFile
 from .__init__ import __version__
 
@@ -49,6 +55,11 @@ _logger = get_logger("RestAPI")
 class HealthCheckSchema(Schema):
     status = fields.Str()
     version = fields.Str()
+
+
+@api.schema("ListUploadFiles")
+class ListUploadFilesSchema(Schema):
+    fileList = fields.List(fields.Dict(fields.Str()))
 
 
 @api.schema("UploadImagesReq")
@@ -105,6 +116,26 @@ def status(_, resp):
     """
     _logger.debug("health Check")
     resp.media = HealthCheckSchema().dump(StatusModel("ok", __version__)).data
+
+
+@api.route("/data/upload/list")
+def list_upload_files(_, resp):
+    """Responce File List.
+    ---
+    get:
+        description: Get file list
+        responses:
+            "200":
+                description: OK
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/ListUploadFiles"
+    """
+    _logger.debug("List File")
+    upload_file = UploadedFile()
+    file_list = upload_file.get_all_uploaded_file()
+    resp.media = ListUploadFilesSchema().dump(ListUploadFiles(file_list)).data
 
 
 @api.route("/data/upload")

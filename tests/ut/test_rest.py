@@ -48,6 +48,26 @@ def test_status(api):
     assert actual == expect
 
 
+def test_list_upload_files(api):
+    file_list = {"id": 1,
+                 "name": "test",
+                 "file_path": "/tmp/test",
+                 "file_type": "image/png",
+                 "last_index": 0,
+                 "created_at": "2019-07-28 16:21:14",
+                 "updated_at": "2019-07-28 16:21:14"}
+    mock_uploadedfile = MagicMock()
+    mock_get_all_uploaded_file = MagicMock(return_value=[file_list])
+    mock_uploadedfile.get_all_uploaded_file = mock_get_all_uploaded_file
+    with patch.object(target, "UploadedFile", return_value=mock_uploadedfile):
+        r = api.requests.get("/data/upload/list")
+        json_response = json.loads(r.text)
+        assert "fileList" in json_response
+        actual = json_response["fileList"]
+        expect = [file_list]
+        assert actual == expect
+
+
 def test_upload_image_file(api, image_b64, tmpdir):
     event = json.dumps({"fileName": "test.pdf",
                         "contentType": "image/png",
