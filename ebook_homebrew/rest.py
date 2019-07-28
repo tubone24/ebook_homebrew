@@ -13,7 +13,8 @@ from marshmallow import Schema, fields, ValidationError
 
 from .convert import Image2PDF
 from .utils.logging import get_logger
-from .models.models import UploadModel, ErrorModel, FileNotFoundModel, StatusModel
+from .models.rest_models import UploadModel, ErrorModel, FileNotFoundModel, StatusModel
+from .rdb import UploadedFile
 from .__init__ import __version__
 
 api = responder.API(
@@ -142,33 +143,43 @@ async def upload_image_file(req, resp):
         return
     _logger.debug(data)
     content_type = data["contentType"]
-    extension = convert_content_type_to_extension(content_type)
     images_b64 = data["images"]
     tmp_dir = tempfile.mkdtemp()
-    write_image(images_b64, extension, tmp_dir)
+    write_image(images_b64, content_type, tmp_dir)
     resp.media = UploadIdRespSchema().dump(UploadModel(tmp_dir)).data
 
 
 @api.background.task
-def write_image(images_b64, extension, tmp_dir):
+def write_image(images_b64, content_type, tmp_dir):
     """Images write at tmp_dir
 
     This API is background task.
 
     Args:
      images_b64: Base64 encoded images list
-     extension: Image extension
+     content_type: Image ContentType
      tmp_dir: Temp directory writing images
     Returns:
         bool: If success return true.
 
     """
+    global file_name
+    last_index = 0
+    extension = convert_content_type_to_extension(content_type)
     for i, content in enumerate(images_b64):
         image = base64.b64decode(content.split(",")[-1])
         file_name = os.path.join(tmp_dir, str(i) + "." + extension)
         _logger.debug("file_name: {}".format(file_name))
         with open(file_name, "wb") as image_file:
             image_file.write(image)
+            last_index = i
+    upload_file = UploadedFile()
+    upload_file.add_uploaded_file(
+        name=file_name,
+        file_path=str(tmp_dir),
+        file_type=content_type,
+        last_index=last_index,
+    )
     return True
 
 
