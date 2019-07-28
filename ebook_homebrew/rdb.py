@@ -16,7 +16,15 @@ _logger = get_logger("rdb")
 
 
 class UploadedFile:
+    """Provides UploadFile Sqlite3 operation
+    """
     def __init__(self, dbname="ebook-homebrew.sqlite3", echo_log=True):
+        """Constructor
+        Create Sqlite3 db file and session.
+        Args:
+            dbname (str): Sqlite3 db name, default is ebook-homebrew.sqlite3
+            echo_log (bool): If True, echo DB queries.
+        """
         self.dbname = dbname
         self.engine = create_engine(
             "sqlite:///{dbname}".format(dbname=self.dbname), echo=echo_log
@@ -28,6 +36,19 @@ class UploadedFile:
         self.session = Session()
 
     def add_uploaded_file(self, name, file_path, file_type, last_index):
+        """Insert upload file
+
+        Args:
+            name (str): filename
+            file_path (str): file path means upload ID
+            file_type (str): ContentType like Image/png
+            last_index (int): file index
+
+        Returns:
+            None: If Success
+        Raises:
+            SQLAlchemyError: SQL's Error
+        """
         try:
             upload_files = UploadedFilesModel(
                 name=name,
@@ -48,10 +69,21 @@ class UploadedFile:
         finally:
             self.session.close()
 
-    def update_uploaded_file_last_index(self, id, last_index):
+    def update_uploaded_file_last_index(self, table_id, last_index):
+        """Update file last index.
+
+        Args:
+            table_id (str): id
+            last_index (int): file last index
+
+        Returns:
+            None: If Success
+        Raises:
+            SQLAlchemyError: SQL's Error
+        """
         try:
             query = self.session.query(UploadedFilesModel).with_lockmode("update")
-            upload_file = query.filter(UploadedFilesModel.id == id).first()
+            upload_file = query.filter(UploadedFilesModel.id == table_id).first()
             upload_file.last_index = last_index
             self.session.commit()
         except SQLAlchemyError as err:
@@ -65,11 +97,21 @@ class UploadedFile:
         finally:
             self.session.close()
 
-    def delete_uploaded_file(self, id):
+    def delete_uploaded_file(self, table_id):
+        """Delete uploaded file with set id
+
+        Args:
+            table_id (str): id
+
+        Returns:
+            None: If Success
+        Raises:
+            SQLAlchemyError: SQL's Error
+        """
         try:
             upload_file = (
                 self.session.query(UploadedFilesModel)
-                .filter(UploadedFilesModel.id == id)
+                .filter(UploadedFilesModel.id == table_id)
                 .first()
             )
             self.session.delete(upload_file)
@@ -86,6 +128,13 @@ class UploadedFile:
             self.session.close()
 
     def get_all_uploaded_file(self):
+        """Get All uploaded files
+
+        Returns:
+            List[dict[int, str, str, str, int, datetime, datetime]]: uploaded files list
+        Raises:
+            SQLAlchemyError: SQL's Error
+        """
         uploaded_file_list = []
         try:
             upload_files = self.session.query(UploadedFilesModel).all()
@@ -115,11 +164,21 @@ class UploadedFile:
             self.session.close()
             return uploaded_file_list
 
-    def get_uploaded_file(self, id):
+    def get_uploaded_file(self, table_id):
+        """Get uploaded file
+
+        Args:
+            table_id (str): id
+
+        Returns:
+            dict[int, str, str, str, int, datetime, datetime]: uploaded file
+        Raises:
+            SQLAlchemyError: SQL's Error
+        """
         try:
             upload_file = (
                 self.session.query(UploadedFilesModel)
-                .filter(UploadedFilesModel.id == id)
+                .filter(UploadedFilesModel.id == table_id)
                 .first()
             )
             if upload_file:

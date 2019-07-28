@@ -10,7 +10,7 @@ Base = declarative_base()
 
 
 class UploadedFilesModel(Base):
-    """
+    """Create Uploaded Files Model
     """
 
     __tablename__ = "uploaded_files"
