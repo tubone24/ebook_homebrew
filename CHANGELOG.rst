@@ -17,3 +17,9 @@ Changelog
 =======================================================================================
 
 * Rest API Interface.
+
+`v2.1.0 <https://github.com/tubone24/ebook_homebrew/releases/tag/v2.1.0>`_ (2019-07-29)
+=======================================================================================
+
+* Use Sqlite3 and save uploadID
+* Typescript Demo app

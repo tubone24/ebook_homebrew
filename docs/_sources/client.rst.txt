@@ -68,7 +68,9 @@ Install Flutter SDK and Build App::
   $ cat YOUR_APP_PROPS > android/key.properties
   $ ~/flutter/bin/flutter build apk --release --split-per-abi
 
-Also you can use Demo app downloading to `Deploy Gate <https://deploygate.com/distributions/14a12d44f5909adf23f0c550f960364d4b02aad0>`_
+.. image:: https://dply.me/yv0jty/button/large
+   :target: https://dply.me/yv0jty#install
+   :alt: Try it on your device via DeployGate
 
 Or Download `Google Play <https://play.google.com/store/apps/details?id=com.tubone.ebook_homebrew_flutter>`_
 

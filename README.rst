@@ -239,10 +239,71 @@ With tox, you can test multiple python version.(only python3.5, 3.6)
 
    $ tox
 
+CI/CD
+-----
+
+This Repo is studies repo which CI/CD Config by tubone.
+Check config on this repo!
+
 Travis-CI
----------
+^^^^^^^^^
 
 This repository uses `Travis-CI <https://travis-ci.org/tubone24/ebook_homebrew/>`_ and be building jobs by push or PR branches.
+
+Codecov
+^^^^^^^
+
+Also you can check coverage with `Codecov <https://codecov.io/gh/tubone24/ebook_homebrew>`_
+
+CodeClimate
+^^^^^^^^^^^
+
+You can check the code maintainability, smells and technical debt with `CodeClimate <https://codeclimate.com/github/tubone24/ebook_homebrew>`_
+
+Scrutinizer
+^^^^^^^^^^^
+
+`Scrutinizer <https://scrutinizer-ci.com/g/tubone24/ebook_homebrew/?branch=master>`_ is the CI which build app and check code quality
+
+Appveyor
+^^^^^^^^
+
+`Appveyor <https://ci.appveyor.com/project/tubone24/ebook-homebrew>`_ is the CI which use Windows Platform and Push the artifacts to `PyPI <https://pypi.org/project/ebook-homebrew/>`_
+
+Azure Pipelines
+^^^^^^^^^^^^^^^
+
+This repo use `Azure Dev Ops Azure Pipelines <https://dev.azure.com/meitantei-conan/ebook_homebrew/_build?definitionId=1>`_ with platform MacOS.
+
+Shippable
+^^^^^^^^^
+
+`Shippable <https://app.shippable.com/github/tubone24/ebook_homebrew/dashboard>`_ is the CI use Docker containers.
+
+CircleCI
+^^^^^^^^
+
+`CircleCI <https://circleci.com/gh/tubone24/ebook_homebrew>`_ is the great CI which can use selenium (not use selenium test in this repo but use `ebook-homebrew-vue-typescript-client <https://github.com/tubone24/ebook-homebrew-vue-typescript-client>`_).
+
+LGTM
+^^^^
+
+`LGTM <https://lgtm.com/projects/g/tubone24/ebook_homebrew/alerts>`_ is code smells check.
+
+Snyk
+^^^^
+
+`Snyk <https://snyk.io/test/github/tubone24/ebook_homebrew?targetFile=requirements.txt>`_ is fix and prevent vulnerabilities in this code.
+
+Readthedocs
+^^^^^^^^^^^
+
+This repo use `ReadTheDocs <https://ebook-homebrew.readthedocs.io/en/latest/?badge=latest>`_ by Docs.
+
+DockerHub
+^^^^^^^^^
+
+Push master branch, build docker container with `DockerHub <https://cloud.docker.com/u/tubone24/repository/docker/tubone24/ebook-homebrew>`_
 
 Examples
 ========

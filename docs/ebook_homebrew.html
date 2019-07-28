@@ -87,6 +87,7 @@
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="howtouse.html">How to use</a></li>
 <li class="toctree-l1"><a class="reference internal" href="restapi.html">Rest API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="client.html">Client</a></li>
 <li class="toctree-l1"><a class="reference internal" href="deploy2heroku.html">Deploy to Heroku</a></li>
 <li class="toctree-l1"><a class="reference internal" href="releasenotes/index.html">Release Notes</a></li>
 </ul>
@@ -161,7 +162,8 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="ebook_homebrew.models.html">ebook_homebrew.models package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="ebook_homebrew.models.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ebook_homebrew.models.html#module-ebook_homebrew.models.models">ebook_homebrew.models.models module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ebook_homebrew.models.html#module-ebook_homebrew.models.rest_models">ebook_homebrew.models.rest_models module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ebook_homebrew.models.html#module-ebook_homebrew.models.uploaded_files_models">ebook_homebrew.models.uploaded_files_models module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ebook_homebrew.models.html#module-ebook_homebrew.models">Module contents</a></li>
 </ul>
 </li>
@@ -440,6 +442,122 @@ files such as jpeg, png and gif.</p>
 </dd></dl>
 
 </div>
+<div class="section" id="module-ebook_homebrew.rdb">
+<span id="ebook-homebrew-rdb-module"></span><h2>ebook_homebrew.rdb module<a class="headerlink" href="#module-ebook_homebrew.rdb" title="Permalink to this headline">¶</a></h2>
+<p>Provides RDB execute</p>
+<dl class="class">
+<dt id="ebook_homebrew.rdb.UploadedFile">
+<em class="property">class </em><code class="sig-prename descclassname">ebook_homebrew.rdb.</code><code class="sig-name descname">UploadedFile</code><span class="sig-paren">(</span><em class="sig-param">dbname='ebook-homebrew.sqlite3'</em>, <em class="sig-param">echo_log=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebook_homebrew/rdb.html#UploadedFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.rdb.UploadedFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Provides UploadFile Sqlite3 operation</p>
+<dl class="method">
+<dt id="ebook_homebrew.rdb.UploadedFile.add_uploaded_file">
+<code class="sig-name descname">add_uploaded_file</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">file_path</em>, <em class="sig-param">file_type</em>, <em class="sig-param">last_index</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebook_homebrew/rdb.html#UploadedFile.add_uploaded_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.rdb.UploadedFile.add_uploaded_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Insert upload file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – filename</p></li>
+<li><p><strong>file_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – file path means upload ID</p></li>
+<li><p><strong>file_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – ContentType like Image/png</p></li>
+<li><p><strong>last_index</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – file index</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>If Success</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.7)">None</a></p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>SQLAlchemyError</strong> – SQL’s Error</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="ebook_homebrew.rdb.UploadedFile.delete_uploaded_file">
+<code class="sig-name descname">delete_uploaded_file</code><span class="sig-paren">(</span><em class="sig-param">table_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebook_homebrew/rdb.html#UploadedFile.delete_uploaded_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.rdb.UploadedFile.delete_uploaded_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete uploaded file with set id</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>table_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – id</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>If Success</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.7)">None</a></p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>SQLAlchemyError</strong> – SQL’s Error</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="ebook_homebrew.rdb.UploadedFile.get_all_uploaded_file">
+<code class="sig-name descname">get_all_uploaded_file</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebook_homebrew/rdb.html#UploadedFile.get_all_uploaded_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.rdb.UploadedFile.get_all_uploaded_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get All uploaded files</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>uploaded files list</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)">int</a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)">int</a>, datetime, datetime]]</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>SQLAlchemyError</strong> – SQL’s Error</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="ebook_homebrew.rdb.UploadedFile.get_uploaded_file">
+<code class="sig-name descname">get_uploaded_file</code><span class="sig-paren">(</span><em class="sig-param">table_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebook_homebrew/rdb.html#UploadedFile.get_uploaded_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.rdb.UploadedFile.get_uploaded_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get uploaded file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>table_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – id</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>uploaded file</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.7)">dict</a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)">int</a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)">str</a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)">int</a>, datetime, datetime]</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>SQLAlchemyError</strong> – SQL’s Error</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="ebook_homebrew.rdb.UploadedFile.update_uploaded_file_last_index">
+<code class="sig-name descname">update_uploaded_file_last_index</code><span class="sig-paren">(</span><em class="sig-param">table_id</em>, <em class="sig-param">last_index</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebook_homebrew/rdb.html#UploadedFile.update_uploaded_file_last_index"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.rdb.UploadedFile.update_uploaded_file_last_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update file last index.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>table_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – id</p></li>
+<li><p><strong>last_index</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – file last index</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>If Success</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.7)">None</a></p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>SQLAlchemyError</strong> – SQL’s Error</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
 <div class="section" id="module-ebook_homebrew.rename">
 <span id="ebook-homebrew-rename-module"></span><h2>ebook_homebrew.rename module<a class="headerlink" href="#module-ebook_homebrew.rename" title="Permalink to this headline">¶</a></h2>
 <p>Rename file name.</p>
@@ -578,6 +696,17 @@ only digit file name like “001.txt”.</p>
 <dl class="attribute">
 <dt id="ebook_homebrew.rest.HealthCheckSchema.opts">
 <code class="sig-name descname">opts</code><em class="property"> = &lt;marshmallow.schema.SchemaOpts object&gt;</em><a class="headerlink" href="#ebook_homebrew.rest.HealthCheckSchema.opts" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="ebook_homebrew.rest.ListUploadFilesSchema">
+<em class="property">class </em><code class="sig-prename descclassname">ebook_homebrew.rest.</code><code class="sig-name descname">ListUploadFilesSchema</code><span class="sig-paren">(</span><em class="sig-param">extra=None</em>, <em class="sig-param">only=None</em>, <em class="sig-param">exclude=()</em>, <em class="sig-param">prefix=''</em>, <em class="sig-param">strict=None</em>, <em class="sig-param">many=False</em>, <em class="sig-param">context=None</em>, <em class="sig-param">load_only=()</em>, <em class="sig-param">dump_only=()</em>, <em class="sig-param">partial=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebook_homebrew/rest.html#ListUploadFilesSchema"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.rest.ListUploadFilesSchema" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">marshmallow.schema.Schema</span></code></p>
+<dl class="attribute">
+<dt id="ebook_homebrew.rest.ListUploadFilesSchema.opts">
+<code class="sig-name descname">opts</code><em class="property"> = &lt;marshmallow.schema.SchemaOpts object&gt;</em><a class="headerlink" href="#ebook_homebrew.rest.ListUploadFilesSchema.opts" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -748,6 +877,34 @@ content:</p>
 </dl>
 </dd>
 </dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="ebook_homebrew.rest.list_upload_files">
+<code class="sig-prename descclassname">ebook_homebrew.rest.</code><code class="sig-name descname">list_upload_files</code><span class="sig-paren">(</span><em class="sig-param">_</em>, <em class="sig-param">resp</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebook_homebrew/rest.html#list_upload_files"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.rest.list_upload_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Responce File List.
+—
+get:</p>
+<blockquote>
+<div><p>description: Get file list
+responses:</p>
+<blockquote>
+<div><dl>
+<dt>“200”:</dt><dd><p>description: OK
+content:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>application/json:</dt><dd><dl class="simple">
+<dt>schema:</dt><dd><p>$ref: “#/components/schemas/ListUploadFiles”</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</div></blockquote>
+</dd>
+</dl>
+</div></blockquote>
 </div></blockquote>
 </dd></dl>
 

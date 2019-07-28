@@ -87,6 +87,7 @@
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="howtouse.html">How to use</a></li>
 <li class="toctree-l1"><a class="reference internal" href="restapi.html">Rest API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="client.html">Client</a></li>
 <li class="toctree-l1"><a class="reference internal" href="deploy2heroku.html">Deploy to Heroku</a></li>
 <li class="toctree-l1"><a class="reference internal" href="releasenotes/index.html">Release Notes</a></li>
 </ul>
@@ -158,35 +159,88 @@
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-ebook_homebrew.models.models">
-<span id="ebook-homebrew-models-models-module"></span><h2>ebook_homebrew.models.models module<a class="headerlink" href="#module-ebook_homebrew.models.models" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-ebook_homebrew.models.rest_models">
+<span id="ebook-homebrew-models-rest-models-module"></span><h2>ebook_homebrew.models.rest_models module<a class="headerlink" href="#module-ebook_homebrew.models.rest_models" title="Permalink to this headline">¶</a></h2>
 <p>Provides Rest API models</p>
 <dl class="class">
-<dt id="ebook_homebrew.models.models.ErrorModel">
-<em class="property">class </em><code class="sig-prename descclassname">ebook_homebrew.models.models.</code><code class="sig-name descname">ErrorModel</code><span class="sig-paren">(</span><em class="sig-param">error</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebook_homebrew/models/models.html#ErrorModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.models.models.ErrorModel" title="Permalink to this definition">¶</a></dt>
+<dt id="ebook_homebrew.models.rest_models.ErrorModel">
+<em class="property">class </em><code class="sig-prename descclassname">ebook_homebrew.models.rest_models.</code><code class="sig-name descname">ErrorModel</code><span class="sig-paren">(</span><em class="sig-param">error</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebook_homebrew/models/rest_models.html#ErrorModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.models.rest_models.ErrorModel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Error Model</p>
 </dd></dl>
 
 <dl class="class">
-<dt id="ebook_homebrew.models.models.FileNotFoundModel">
-<em class="property">class </em><code class="sig-prename descclassname">ebook_homebrew.models.models.</code><code class="sig-name descname">FileNotFoundModel</code><span class="sig-paren">(</span><em class="sig-param">reason</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebook_homebrew/models/models.html#FileNotFoundModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.models.models.FileNotFoundModel" title="Permalink to this definition">¶</a></dt>
+<dt id="ebook_homebrew.models.rest_models.FileNotFoundModel">
+<em class="property">class </em><code class="sig-prename descclassname">ebook_homebrew.models.rest_models.</code><code class="sig-name descname">FileNotFoundModel</code><span class="sig-paren">(</span><em class="sig-param">reason</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebook_homebrew/models/rest_models.html#FileNotFoundModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.models.rest_models.FileNotFoundModel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>FileNotFound Model</p>
 </dd></dl>
 
 <dl class="class">
-<dt id="ebook_homebrew.models.models.StatusModel">
-<em class="property">class </em><code class="sig-prename descclassname">ebook_homebrew.models.models.</code><code class="sig-name descname">StatusModel</code><span class="sig-paren">(</span><em class="sig-param">status</em>, <em class="sig-param">version</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebook_homebrew/models/models.html#StatusModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.models.models.StatusModel" title="Permalink to this definition">¶</a></dt>
+<dt id="ebook_homebrew.models.rest_models.ListUploadFiles">
+<em class="property">class </em><code class="sig-prename descclassname">ebook_homebrew.models.rest_models.</code><code class="sig-name descname">ListUploadFiles</code><span class="sig-paren">(</span><em class="sig-param">file_list</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebook_homebrew/models/rest_models.html#ListUploadFiles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.models.rest_models.ListUploadFiles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>ListUploadFiles Model</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="ebook_homebrew.models.rest_models.StatusModel">
+<em class="property">class </em><code class="sig-prename descclassname">ebook_homebrew.models.rest_models.</code><code class="sig-name descname">StatusModel</code><span class="sig-paren">(</span><em class="sig-param">status</em>, <em class="sig-param">version</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebook_homebrew/models/rest_models.html#StatusModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.models.rest_models.StatusModel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Status Model</p>
 </dd></dl>
 
 <dl class="class">
-<dt id="ebook_homebrew.models.models.UploadModel">
-<em class="property">class </em><code class="sig-prename descclassname">ebook_homebrew.models.models.</code><code class="sig-name descname">UploadModel</code><span class="sig-paren">(</span><em class="sig-param">upload_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebook_homebrew/models/models.html#UploadModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.models.models.UploadModel" title="Permalink to this definition">¶</a></dt>
+<dt id="ebook_homebrew.models.rest_models.UploadModel">
+<em class="property">class </em><code class="sig-prename descclassname">ebook_homebrew.models.rest_models.</code><code class="sig-name descname">UploadModel</code><span class="sig-paren">(</span><em class="sig-param">upload_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebook_homebrew/models/rest_models.html#UploadModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.models.rest_models.UploadModel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Upload_id Model</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-ebook_homebrew.models.uploaded_files_models">
+<span id="ebook-homebrew-models-uploaded-files-models-module"></span><h2>ebook_homebrew.models.uploaded_files_models module<a class="headerlink" href="#module-ebook_homebrew.models.uploaded_files_models" title="Permalink to this headline">¶</a></h2>
+<p>Provides Upload status models</p>
+<dl class="class">
+<dt id="ebook_homebrew.models.uploaded_files_models.UploadedFilesModel">
+<em class="property">class </em><code class="sig-prename descclassname">ebook_homebrew.models.uploaded_files_models.</code><code class="sig-name descname">UploadedFilesModel</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ebook_homebrew/models/uploaded_files_models.html#UploadedFilesModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ebook_homebrew.models.uploaded_files_models.UploadedFilesModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sqlalchemy.ext.declarative.api.Base</span></code></p>
+<p>Create Uploaded Files Model</p>
+<dl class="attribute">
+<dt id="ebook_homebrew.models.uploaded_files_models.UploadedFilesModel.created_at">
+<code class="sig-name descname">created_at</code><a class="headerlink" href="#ebook_homebrew.models.uploaded_files_models.UploadedFilesModel.created_at" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ebook_homebrew.models.uploaded_files_models.UploadedFilesModel.file_path">
+<code class="sig-name descname">file_path</code><a class="headerlink" href="#ebook_homebrew.models.uploaded_files_models.UploadedFilesModel.file_path" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ebook_homebrew.models.uploaded_files_models.UploadedFilesModel.file_type">
+<code class="sig-name descname">file_type</code><a class="headerlink" href="#ebook_homebrew.models.uploaded_files_models.UploadedFilesModel.file_type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ebook_homebrew.models.uploaded_files_models.UploadedFilesModel.id">
+<code class="sig-name descname">id</code><a class="headerlink" href="#ebook_homebrew.models.uploaded_files_models.UploadedFilesModel.id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ebook_homebrew.models.uploaded_files_models.UploadedFilesModel.last_index">
+<code class="sig-name descname">last_index</code><a class="headerlink" href="#ebook_homebrew.models.uploaded_files_models.UploadedFilesModel.last_index" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ebook_homebrew.models.uploaded_files_models.UploadedFilesModel.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#ebook_homebrew.models.uploaded_files_models.UploadedFilesModel.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ebook_homebrew.models.uploaded_files_models.UploadedFilesModel.updated_at">
+<code class="sig-name descname">updated_at</code><a class="headerlink" href="#ebook_homebrew.models.uploaded_files_models.UploadedFilesModel.updated_at" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 </div>
