@@ -152,6 +152,7 @@ class UploadedFile:
                         "updated_at": updated_at.strftime("%Y-%m-%d %H:%M:%S"),
                     }
                 )
+            return uploaded_file_list
         except NoResultFound:
             _logger.warn("No Result found")
         except SQLAlchemyError as err:
@@ -162,7 +163,6 @@ class UploadedFile:
             raise err
         finally:
             self.session.close()
-            return uploaded_file_list
 
     def get_uploaded_file(self, table_id):
         """Get uploaded file
