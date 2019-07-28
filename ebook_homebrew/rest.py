@@ -48,6 +48,8 @@ api = responder.API(
     license={"name": "MIT", "url": "https://opensource.org/licenses/MIT"},
 )
 
+upload_file = UploadedFile()
+
 _logger = get_logger("RestAPI")
 
 
@@ -133,7 +135,6 @@ def list_upload_files(_, resp):
                             $ref: "#/components/schemas/ListUploadFiles"
     """
     _logger.debug("List File")
-    upload_file = UploadedFile()
     file_list = upload_file.get_all_uploaded_file()
     resp.media = ListUploadFilesSchema().dump(ListUploadFiles(file_list)).data
 
@@ -204,7 +205,6 @@ def write_image(images_b64, content_type, tmp_dir):
         with open(file_name, "wb") as image_file:
             image_file.write(image)
             last_index = i
-    upload_file = UploadedFile()
     upload_file.add_uploaded_file(
         name=file_name,
         file_path=str(tmp_dir),

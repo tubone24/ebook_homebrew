@@ -3,6 +3,7 @@ import shutil
 import logging
 import base64
 import json
+import types
 from unittest.mock import patch
 from unittest.mock import MagicMock
 
@@ -10,6 +11,7 @@ import pytest
 
 import ebook_homebrew.rest as target
 
+_logger = logging.getLogger(name=__name__)
 
 @pytest.fixture
 def api():
@@ -48,26 +50,6 @@ def test_status(api):
     assert actual == expect
 
 
-def test_list_upload_files(api):
-    file_list = {"id": 1,
-                 "name": "test",
-                 "file_path": "/tmp/test",
-                 "file_type": "image/png",
-                 "last_index": 0,
-                 "created_at": "2019-07-28 16:21:14",
-                 "updated_at": "2019-07-28 16:21:14"}
-    mock_uploadedfile = MagicMock()
-    mock_get_all_uploaded_file = MagicMock(return_value=[file_list])
-    mock_uploadedfile.get_all_uploaded_file = mock_get_all_uploaded_file
-    with patch.object(target, "UploadedFile", return_value=mock_uploadedfile):
-        r = api.requests.get("/data/upload/list")
-        json_response = json.loads(r.text)
-        assert "fileList" in json_response
-        actual = json_response["fileList"]
-        expect = [file_list]
-        assert actual == expect
-
-
 def test_upload_image_file(api, image_b64, tmpdir):
     event = json.dumps({"fileName": "test.pdf",
                         "contentType": "image/png",
@@ -101,19 +83,16 @@ def test_upload_image_file_data_uri_schema(api, image_b64, tmpdir):
 
 
 def test_write_image(image_b64, tmpdir):
-    mock_uploadedfile = MagicMock()
-    mock_add_uploaded_file = MagicMock()
-    mock_uploadedfile.add_uploaded_file = mock_add_uploaded_file
     file_name = os.path.join(tmpdir, "0.png")
-    with patch.object(target, "UploadedFile", return_value=mock_uploadedfile):
+    with patch.object(target, "upload_file") as mock_uploadedfile:
         future = target.write_image([image_b64], "image/png", tmpdir)
         actual = future.result()
         expected = True
         assert actual == expected
-        mock_add_uploaded_file.assert_called_once_with(name=file_name,
-                                                       file_path=str(tmpdir),
-                                                       file_type="image/png",
-                                                       last_index=0)
+        mock_uploadedfile.add_uploaded_file.assert_called_once_with(name=file_name,
+                                                                    file_path=str(tmpdir),
+                                                                    file_type="image/png",
+                                                                    last_index=0)
 
 
 def test_write_image_data_uri_schema(image_b64, tmpdir):
