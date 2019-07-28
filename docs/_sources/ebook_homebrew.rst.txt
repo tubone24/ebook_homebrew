@@ -60,6 +60,14 @@ ebook\_homebrew.helper module
    :undoc-members:
    :show-inheritance:
 
+ebook\_homebrew.rdb module
+--------------------------
+
+.. automodule:: ebook_homebrew.rdb
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 ebook\_homebrew.rename module
 -----------------------------
 

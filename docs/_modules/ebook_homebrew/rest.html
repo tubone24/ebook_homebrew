@@ -168,7 +168,14 @@
 
 <span class="kn">from</span> <span class="nn">.convert</span> <span class="k">import</span> <span class="n">Image2PDF</span>
 <span class="kn">from</span> <span class="nn">.utils.logging</span> <span class="k">import</span> <span class="n">get_logger</span>
-<span class="kn">from</span> <span class="nn">.models.models</span> <span class="k">import</span> <span class="n">UploadModel</span><span class="p">,</span> <span class="n">ErrorModel</span><span class="p">,</span> <span class="n">FileNotFoundModel</span><span class="p">,</span> <span class="n">StatusModel</span>
+<span class="kn">from</span> <span class="nn">.models.rest_models</span> <span class="k">import</span> <span class="p">(</span>
+    <span class="n">UploadModel</span><span class="p">,</span>
+    <span class="n">ErrorModel</span><span class="p">,</span>
+    <span class="n">FileNotFoundModel</span><span class="p">,</span>
+    <span class="n">StatusModel</span><span class="p">,</span>
+    <span class="n">ListUploadFiles</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">.rdb</span> <span class="k">import</span> <span class="n">UploadedFile</span>
 <span class="kn">from</span> <span class="nn">.__init__</span> <span class="k">import</span> <span class="n">__version__</span>
 
 <span class="n">api</span> <span class="o">=</span> <span class="n">responder</span><span class="o">.</span><span class="n">API</span><span class="p">(</span>
@@ -196,6 +203,8 @@
     <span class="n">license</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;MIT&quot;</span><span class="p">,</span> <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://opensource.org/licenses/MIT&quot;</span><span class="p">},</span>
 <span class="p">)</span>
 
+<span class="n">upload_file</span> <span class="o">=</span> <span class="n">UploadedFile</span><span class="p">()</span>
+
 <span class="n">_logger</span> <span class="o">=</span> <span class="n">get_logger</span><span class="p">(</span><span class="s2">&quot;RestAPI&quot;</span><span class="p">)</span>
 
 
@@ -203,6 +212,11 @@
 <span class="k">class</span> <span class="nc">HealthCheckSchema</span><span class="p">(</span><span class="n">Schema</span><span class="p">):</span>
     <span class="n">status</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Str</span><span class="p">()</span>
     <span class="n">version</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Str</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="ListUploadFilesSchema"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.rest.ListUploadFilesSchema">[docs]</a><span class="nd">@api</span><span class="o">.</span><span class="n">schema</span><span class="p">(</span><span class="s2">&quot;ListUploadFiles&quot;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">ListUploadFilesSchema</span><span class="p">(</span><span class="n">Schema</span><span class="p">):</span>
+    <span class="n">fileList</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">List</span><span class="p">(</span><span class="n">fields</span><span class="o">.</span><span class="n">Dict</span><span class="p">(</span><span class="n">fields</span><span class="o">.</span><span class="n">Str</span><span class="p">()))</span></div>
 
 
 <div class="viewcode-block" id="UploadImagesReqSchema"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.rest.UploadImagesReqSchema">[docs]</a><span class="nd">@api</span><span class="o">.</span><span class="n">schema</span><span class="p">(</span><span class="s2">&quot;UploadImagesReq&quot;</span><span class="p">)</span>
@@ -261,6 +275,25 @@
     <span class="n">resp</span><span class="o">.</span><span class="n">media</span> <span class="o">=</span> <span class="n">HealthCheckSchema</span><span class="p">()</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">StatusModel</span><span class="p">(</span><span class="s2">&quot;ok&quot;</span><span class="p">,</span> <span class="n">__version__</span><span class="p">))</span><span class="o">.</span><span class="n">data</span></div>
 
 
+<div class="viewcode-block" id="list_upload_files"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.rest.list_upload_files">[docs]</a><span class="nd">@api</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/data/upload/list&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">list_upload_files</span><span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="n">resp</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Responce File List.</span>
+<span class="sd">    ---</span>
+<span class="sd">    get:</span>
+<span class="sd">        description: Get file list</span>
+<span class="sd">        responses:</span>
+<span class="sd">            &quot;200&quot;:</span>
+<span class="sd">                description: OK</span>
+<span class="sd">                content:</span>
+<span class="sd">                    application/json:</span>
+<span class="sd">                        schema:</span>
+<span class="sd">                            $ref: &quot;#/components/schemas/ListUploadFiles&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;List File&quot;</span><span class="p">)</span>
+    <span class="n">file_list</span> <span class="o">=</span> <span class="n">upload_file</span><span class="o">.</span><span class="n">get_all_uploaded_file</span><span class="p">()</span>
+    <span class="n">resp</span><span class="o">.</span><span class="n">media</span> <span class="o">=</span> <span class="n">ListUploadFilesSchema</span><span class="p">()</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">ListUploadFiles</span><span class="p">(</span><span class="n">file_list</span><span class="p">))</span><span class="o">.</span><span class="n">data</span></div>
+
+
 <div class="viewcode-block" id="upload_image_file"><a class="viewcode-back" href="../../ebook_homebrew.html#ebook_homebrew.rest.upload_image_file">[docs]</a><span class="nd">@api</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/data/upload&quot;</span><span class="p">)</span>
 <span class="k">async</span> <span class="k">def</span> <span class="nf">upload_image_file</span><span class="p">(</span><span class="n">req</span><span class="p">,</span> <span class="n">resp</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Upload Image files.</span>
@@ -297,33 +330,42 @@
         <span class="k">return</span>
     <span class="n">_logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
     <span class="n">content_type</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;contentType&quot;</span><span class="p">]</span>
-    <span class="n">extension</span> <span class="o">=</span> <span class="n">convert_content_type_to_extension</span><span class="p">(</span><span class="n">content_type</span><span class="p">)</span>
     <span class="n">images_b64</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;images&quot;</span><span class="p">]</span>
     <span class="n">tmp_dir</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">mkdtemp</span><span class="p">()</span>
-    <span class="n">write_image</span><span class="p">(</span><span class="n">images_b64</span><span class="p">,</span> <span class="n">extension</span><span class="p">,</span> <span class="n">tmp_dir</span><span class="p">)</span>
+    <span class="n">write_image</span><span class="p">(</span><span class="n">images_b64</span><span class="p">,</span> <span class="n">content_type</span><span class="p">,</span> <span class="n">tmp_dir</span><span class="p">)</span>
     <span class="n">resp</span><span class="o">.</span><span class="n">media</span> <span class="o">=</span> <span class="n">UploadIdRespSchema</span><span class="p">()</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">UploadModel</span><span class="p">(</span><span class="n">tmp_dir</span><span class="p">))</span><span class="o">.</span><span class="n">data</span></div>
 
 
 <span class="nd">@api</span><span class="o">.</span><span class="n">background</span><span class="o">.</span><span class="n">task</span>
-<span class="k">def</span> <span class="nf">write_image</span><span class="p">(</span><span class="n">images_b64</span><span class="p">,</span> <span class="n">extension</span><span class="p">,</span> <span class="n">tmp_dir</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">write_image</span><span class="p">(</span><span class="n">images_b64</span><span class="p">,</span> <span class="n">content_type</span><span class="p">,</span> <span class="n">tmp_dir</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Images write at tmp_dir</span>
 
 <span class="sd">    This API is background task.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">     images_b64: Base64 encoded images list</span>
-<span class="sd">     extension: Image extension</span>
+<span class="sd">     content_type: Image ContentType</span>
 <span class="sd">     tmp_dir: Temp directory writing images</span>
 <span class="sd">    Returns:</span>
 <span class="sd">        bool: If success return true.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">global</span> <span class="n">file_name</span>
+    <span class="n">last_index</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">extension</span> <span class="o">=</span> <span class="n">convert_content_type_to_extension</span><span class="p">(</span><span class="n">content_type</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">content</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">images_b64</span><span class="p">):</span>
         <span class="n">image</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64decode</span><span class="p">(</span><span class="n">content</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
         <span class="n">file_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tmp_dir</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;.&quot;</span> <span class="o">+</span> <span class="n">extension</span><span class="p">)</span>
         <span class="n">_logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;file_name: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">file_name</span><span class="p">))</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">image_file</span><span class="p">:</span>
             <span class="n">image_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+            <span class="n">last_index</span> <span class="o">=</span> <span class="n">i</span>
+    <span class="n">upload_file</span><span class="o">.</span><span class="n">add_uploaded_file</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="n">file_name</span><span class="p">,</span>
+        <span class="n">file_path</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">tmp_dir</span><span class="p">),</span>
+        <span class="n">file_type</span><span class="o">=</span><span class="n">content_type</span><span class="p">,</span>
+        <span class="n">last_index</span><span class="o">=</span><span class="n">last_index</span><span class="p">,</span>
+    <span class="p">)</span>
     <span class="k">return</span> <span class="kc">True</span>
 
 
