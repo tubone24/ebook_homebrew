@@ -124,3 +124,7 @@ dmypy.json
 
 # Mac
 .DS_Store
+
+# SQLLite
+ebook-homebrew.sqlite3
+test-ebook-homebrew.sqlite3

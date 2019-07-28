@@ -4,6 +4,7 @@ import logging
 import base64
 import json
 from unittest.mock import patch
+from unittest.mock import MagicMock
 
 import pytest
 
@@ -59,7 +60,7 @@ def test_upload_image_file(api, image_b64, tmpdir):
         assert "upload_id" in json_response
         assert "release_date" in json_response
         assert json_response["upload_id"] == str(tmpdir)
-        mock_write_image.assert_called_once_with([image_b64], "png", str(tmpdir))
+        mock_write_image.assert_called_once_with([image_b64], "image/png", str(tmpdir))
         mock_mkdtemp.assert_called_once_with()
 
 
@@ -75,19 +76,28 @@ def test_upload_image_file_data_uri_schema(api, image_b64, tmpdir):
         assert "upload_id" in json_response
         assert "release_date" in json_response
         assert json_response["upload_id"] == str(tmpdir)
-        mock_write_image.assert_called_once_with(["data:image/png;base64," + image_b64], "png", str(tmpdir))
+        mock_write_image.assert_called_once_with(["data:image/png;base64," + image_b64], "image/png", str(tmpdir))
         mock_mkdtemp.assert_called_once_with()
 
 
 def test_write_image(image_b64, tmpdir):
-    future = target.write_image([image_b64], "png", tmpdir)
-    actual = future.result()
-    expected = True
-    assert actual == expected
+    mock_uploadedfile = MagicMock()
+    mock_add_uploaded_file = MagicMock()
+    mock_uploadedfile.add_uploaded_file = mock_add_uploaded_file
+    file_name = os.path.join(tmpdir, "0.png")
+    with patch.object(target, "UploadedFile", return_value=mock_uploadedfile):
+        future = target.write_image([image_b64], "image/png", tmpdir)
+        actual = future.result()
+        expected = True
+        assert actual == expected
+        mock_add_uploaded_file.assert_called_once_with(name=file_name,
+                                                       file_path=str(tmpdir),
+                                                       file_type="image/png",
+                                                       last_index=0)
 
 
 def test_write_image_data_uri_schema(image_b64, tmpdir):
-    future = target.write_image(["data:image/png;base64," + image_b64], "png", tmpdir)
+    future = target.write_image(["data:image/png;base64," + image_b64], "image/png", tmpdir)
     actual = future.result()
     expected = True
     assert actual == expected
