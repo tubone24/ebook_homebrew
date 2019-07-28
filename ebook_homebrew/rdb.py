@@ -18,6 +18,7 @@ _logger = get_logger("rdb")
 class UploadedFile:
     """Provides UploadFile Sqlite3 operation
     """
+
     def __init__(self, dbname="ebook-homebrew.sqlite3", echo_log=True):
         """Constructor
         Create Sqlite3 db file and session.
