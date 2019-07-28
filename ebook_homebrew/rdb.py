@@ -193,7 +193,9 @@ class UploadedFile:
                     "created_at": created_at.strftime("%Y-%m-%d %H:%M:%S"),
                     "updated_at": updated_at.strftime("%Y-%m-%d %H:%M:%S"),
                 }
-                return upload_file_dict
+            else:
+                upload_file_dict = {}
+            return upload_file_dict
         except NoResultFound:
             _logger.warn("No Result found")
         except SQLAlchemyError as err:
