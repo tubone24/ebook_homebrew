@@ -4,3 +4,6 @@
 [submodule "examples/ebook-homebrew-android-app"]
 	path = examples/ebook-homebrew-android-app
 	url = https://github.com/tubone24/ebook-homebrew-android-app.git
+[submodule "examples/ebook-homebrew-vue-typescript-client"]
+	path = examples/ebook-homebrew-vue-typescript-client
+	url = https://github.com/tubone24/ebook-homebrew-vue-typescript-client.git

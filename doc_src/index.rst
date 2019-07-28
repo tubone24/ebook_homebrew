@@ -97,6 +97,9 @@ Badges:
 .. image:: https://beerpay.io/tubone24/ebook_homebrew/badge.svg
    :target: https://beerpay.io/tubone24/ebook_homebrew
 
+.. image:: https://dply.me/yv0jty/button/small
+   :target: https://dply.me/yv0jty#install
+
 .. image:: https://dockeri.co/image/tubone24/ebook-homebrew
    :target: https://cloud.docker.com/repository/docker/tubone24/ebook-homebrew
    :alt: dockerhub
@@ -108,6 +111,7 @@ Badges:
    overview.rst
    howtouse.rst
    restapi.rst
+   client.rst
    deploy2heroku.rst
    releasenotes/index.rst
 
