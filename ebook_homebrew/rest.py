@@ -13,7 +13,13 @@ from marshmallow import Schema, fields, ValidationError
 
 from .convert import Image2PDF
 from .utils.logging import get_logger
-from .models.rest_models import UploadModel, ErrorModel, FileNotFoundModel, StatusModel, ListUploadFiles
+from .models.rest_models import (
+    UploadModel,
+    ErrorModel,
+    FileNotFoundModel,
+    StatusModel,
+    ListUploadFiles,
+)
 from .rdb import UploadedFile
 from .__init__ import __version__
 
