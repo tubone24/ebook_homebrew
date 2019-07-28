@@ -113,10 +113,6 @@ class UploadedFile:
             )
             self.session.delete(upload_file)
             self.session.commit()
-        except SQLAlchemyError as err:
-            _logger.exception(err)
-            self.session.rollback()
-            raise err
         except Exception as err:
             _logger.exception(err)
             self.session.rollback()
