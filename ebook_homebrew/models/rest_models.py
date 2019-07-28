@@ -12,6 +12,13 @@ class StatusModel:
         self.version = version
 
 
+class ListUploadFiles:
+    """ListUploadFiles Model"""
+
+    def __init__(self, file_list):
+        self.fileList = file_list
+
+
 class UploadModel:
     """Upload_id Model"""
 

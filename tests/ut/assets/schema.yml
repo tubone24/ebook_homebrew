@@ -40,6 +40,13 @@ components:
         version:
           type: string
       type: object
+    ListUploadFiles:
+      properties:
+        fileList:
+          items:
+            type: object
+          type: array
+      type: object
     UploadIdResp:
       properties:
         release_date:
@@ -82,6 +89,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HealthCheck'
+          description: OK
+  /data/upload/list:
+    get:
+      description: Get file list
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListUploadFiles'
           description: OK
   /data/upload:
     post:
