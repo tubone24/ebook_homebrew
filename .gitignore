@@ -127,3 +127,4 @@ dmypy.json
 
 # SQLLite
 ebook-homebrew.sqlite3
+test-ebook-homebrew.sqlite3

@@ -87,10 +87,6 @@ class UploadedFile:
             upload_file = query.filter(UploadedFilesModel.id == table_id).first()
             upload_file.last_index = last_index
             self.session.commit()
-        except SQLAlchemyError as err:
-            _logger.exception(err)
-            self.session.rollback()
-            raise err
         except Exception as err:
             _logger.exception(err)
             self.session.rollback()
@@ -154,11 +150,6 @@ class UploadedFile:
                     }
                 )
             return uploaded_file_list
-        except NoResultFound:
-            _logger.warn("No Result found")
-        except SQLAlchemyError as err:
-            _logger.exception(err)
-            raise err
         except Exception as err:
             _logger.exception(err)
             raise err
@@ -197,11 +188,6 @@ class UploadedFile:
             else:
                 upload_file_dict = {}
             return upload_file_dict
-        except NoResultFound:
-            _logger.warn("No Result found")
-        except SQLAlchemyError as err:
-            _logger.exception(err)
-            raise err
         except Exception as err:
             _logger.exception(err)
             raise err
