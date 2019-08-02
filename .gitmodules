@@ -7,3 +7,6 @@
 [submodule "examples/ebook-homebrew-vue-typescript-client"]
 	path = examples/ebook-homebrew-vue-typescript-client
 	url = https://github.com/tubone24/ebook-homebrew-vue-typescript-client.git
+[submodule "examples/ebook-homebrew-rust-client"]
+	path = examples/ebook-homebrew-rust-client
+	url = https://github.com/tubone24/ebook-homebrew-rust-client
