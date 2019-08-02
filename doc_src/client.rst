@@ -100,3 +100,33 @@ Install Node.js and NPM and Execute it::
 Run App and Enjoy!
 
 .. image:: vue-sample.gif
+
+Command Line Tool using Rust
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+If you want to use more speedy CLI, Use Rust CLI
+
+Install **Rust** and Execute commands below. ::
+
+  $ cd examples/ebook-homebrew-rust-client/
+  $ cargo run
+  $ cd target/debug
+  $ ./ebook-homebrew-rust-client -h
+
+  ebook_homebrew_rust_client 0.1.0
+  tubone24 <tubo.yyyuuu@gmail.com>
+  Ebook-homebrew Command Line Tools
+
+  USAGE:
+      ebook-homebrew-rust-client.exe [SUBCOMMAND]
+
+  FLAGS:
+      -v, --version    CLI version
+      -h, --help       Prints help information
+
+  SUBCOMMANDS:
+      status      check server status
+      upload      upload image files
+      convert     convert image files to PDF
+      download    download converted PDF file
+      help        Prints this message or the help of the given subcommand(s)
