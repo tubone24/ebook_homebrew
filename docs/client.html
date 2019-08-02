@@ -95,6 +95,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#command-line-tools-with-using-rest-api">Command Line Tools with using Rest API</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#android-app">Android App</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#web-front-app-vue-js">Web Front App (Vue.js)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#command-line-tool-using-rust">Command Line Tool using Rust</a></li>
 </ul>
 </li>
 </ul>
@@ -247,6 +248,35 @@ $ npm run serve
 </div>
 <p>Run App and Enjoy!</p>
 <img alt="_images/vue-sample.gif" src="_images/vue-sample.gif" />
+</div>
+<div class="section" id="command-line-tool-using-rust">
+<h3>Command Line Tool using Rust<a class="headerlink" href="#command-line-tool-using-rust" title="Permalink to this headline">¶</a></h3>
+<p>If you want to use more speedy CLI, Use Rust CLI</p>
+<p>Install <strong>Rust</strong> and Execute commands below.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd examples/ebook-homebrew-rust-client/
+$ cargo run
+$ cd target/debug
+$ ./ebook-homebrew-rust-client -h
+
+ebook_homebrew_rust_client 0.1.0
+tubone24 &lt;tubo.yyyuuu@gmail.com&gt;
+Ebook-homebrew Command Line Tools
+
+USAGE:
+    ebook-homebrew-rust-client.exe [SUBCOMMAND]
+
+FLAGS:
+    -v, --version    CLI version
+    -h, --help       Prints help information
+
+SUBCOMMANDS:
+    status      check server status
+    upload      upload image files
+    convert     convert image files to PDF
+    download    download converted PDF file
+    help        Prints this message or the help of the given subcommand(s)
+</pre></div>
+</div>
 </div>
 </div>
 </div>

@@ -329,7 +329,12 @@ Using Vue.js, Call REST API.
 
 `ebook-homebrew-vue-typescript-client  <https://github.com/tubone24/ebook-homebrew-vue-typescript-client>`_
 
+Rust Command Line Client
+------------------------
 
+Using Rust, Call REST API by CLI
+
+`ebook-homebrew-rust-client <https://github.com/tubone24/ebook-homebrew-rust-client>`_
 
 Deploy API to Heroku
 ====================
