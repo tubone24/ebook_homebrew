@@ -9,3 +9,4 @@ responder==1.3.2
 marshmallow==2.19.5
 sphinxcontrib-openapi==0.4.0
 SQLAlchemy==1.3.7
+six==1.12
