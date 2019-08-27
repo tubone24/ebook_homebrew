@@ -1,4 +1,4 @@
-.. image:: https://raw.githubusercontent.com/tubone24/ebook_homebrew/master/doc_src/bookicon.png
+.. image:: https://raw.githubusercontent.com/tubone24/ebook_homebrew/master/doc_src/logo.png
    :target: https://ebook-homebrew.readthedocs.io/en/latest/
    :align: center
    :alt: ebook_homebrew

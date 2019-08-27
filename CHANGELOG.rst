@@ -23,3 +23,8 @@ Changelog
 
 * Use Sqlite3 and save uploadID
 * Typescript Demo app
+
+`v2.1.1 <https://github.com/tubone24/ebook_homebrew/releases/tag/v2.1.1>`_ (2019-08-28)
+=======================================================================================
+
+* Create Logo.

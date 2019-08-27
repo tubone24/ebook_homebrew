@@ -10,3 +10,6 @@
 [submodule "examples/ebook-homebrew-rust-client"]
 	path = examples/ebook-homebrew-rust-client
 	url = https://github.com/tubone24/ebook-homebrew-rust-client
+[submodule "examples/ebook-homebrew-nim-client"]
+	path = examples/ebook-homebrew-nim-client
+	url = https://github.com/tubone24/ebook-homebrew-nim-client.git
