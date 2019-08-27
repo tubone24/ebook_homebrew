@@ -8,7 +8,7 @@ Welcome to ebook_homebrew's documentation!
 ebook_homebrew is command line interface which change file name to only digit name
 like `001.jpg` and make e-book format files.
 
-.. image:: bookicon.png
+.. image:: logo.png
 
 Badges:
 
