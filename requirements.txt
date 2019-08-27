@@ -11,3 +11,4 @@ sphinxcontrib-openapi==0.4.0
 graphql-core==2.2.1
 six==1.12
 SQLAlchemy==1.3.6
+typesystem==0.2.4
