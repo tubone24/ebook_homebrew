@@ -98,6 +98,10 @@ The ``Ebook_homebrew`` is changing file name to only digit name like ``001.jpg``
 
 .. image:: https://dply.me/yv0jty/button/small
    :target: https://dply.me/yv0jty#install
+   
+.. image:: https://img.shields.io/twitter/url/https/ebook-homebrew.herokuapp.com?style=social   
+   :target: https://twitter.com/intent/tweet?text=LikeThis:&url=https%3A%2F%2Febook-homebrew.herokuapp.com
+   :alt: Twitter URL
 
 .. image:: https://dockeri.co/image/tubone24/ebook-homebrew
    :target: https://cloud.docker.com/repository/docker/tubone24/ebook-homebrew
