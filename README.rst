@@ -63,6 +63,10 @@ The ``Ebook_homebrew`` is changing file name to only digit name like ``001.jpg``
 
 .. image:: https://img.shields.io/lgtm/grade/python/g/tubone24/ebook_homebrew.svg?logo=lgtm&logoWidth=18
    :target: https://lgtm.com/projects/g/tubone24/ebook_homebrew/context:python
+   
+.. image:: https://www.codefactor.io/repository/github/tubone24/ebook_homebrew/badge
+   :target: https://www.codefactor.io/repository/github/tubone24/ebook_homebrew
+   :alt: CodeFactor
 
 .. image:: https://snyk.io/test/github/tubone24/ebook_homebrew/badge.svg?targetFile=requirements.txt
    :target: https://snyk.io/test/github/tubone24/ebook_homebrew?targetFile=requirements.txt
