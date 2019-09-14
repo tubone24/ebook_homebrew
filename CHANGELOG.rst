@@ -28,3 +28,10 @@ Changelog
 =======================================================================================
 
 * Create Logo.
+
+`v2.1.3 <https://github.com/tubone24/ebook_homebrew/releases/tag/v2.1.3>`_ (2019-09-14)
+=======================================================================================
+
+* Fix Vulnerability
+* Awesome Design
+* Result List
