@@ -1,0 +1,67 @@
+.align-points {
+    display: inline-block;
+    text-align: left;
+}
+
+.center-image {
+    margin: auto auto;
+}
+
+.reveal pre code {
+    max-height: 700px;
+}
+
+.gp-logo div {
+    top: 2px;
+    left: 2px;
+}
+
+.jsfiddle {
+    height: 450px;
+    width: 100%;
+}
+
+.reveal section img {
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+}
+
+.subtitle {
+    color: gray;
+    font-size: 0.6em;
+}.align-points {
+     display: inline-block;
+     text-align: left;
+ }
+
+.center-image {
+    margin: auto auto;
+}
+
+.reveal pre code {
+    max-height: 700px;
+}
+
+.gp-logo div {
+    top: 2px;
+    left: 2px;
+}
+
+.jsfiddle {
+    height: 450px;
+    width: 100%;
+}
+
+.reveal section img {
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+}
+
+.subtitle {
+    color: gray;
+    font-size: 0.6em;
+}
+
+.silver-fox { color: #D4D4DC !important; }

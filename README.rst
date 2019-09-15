@@ -63,10 +63,13 @@ The ``Ebook_homebrew`` is changing file name to only digit name like ``001.jpg``
 
 .. image:: https://img.shields.io/lgtm/grade/python/g/tubone24/ebook_homebrew.svg?logo=lgtm&logoWidth=18
    :target: https://lgtm.com/projects/g/tubone24/ebook_homebrew/context:python
-   
+
 .. image:: https://www.codefactor.io/repository/github/tubone24/ebook_homebrew/badge
    :target: https://www.codefactor.io/repository/github/tubone24/ebook_homebrew
    :alt: CodeFactor
+
+.. image:: https://api.codacy.com/project/badge/Grade/d25ad1bd88f24a0abfb2d801034be820
+   :target: https://www.codacy.com/manual/tubone24/ebook_homebrew?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=tubone24/ebook_homebrew&amp;utm_campaign=Badge_Grade
 
 .. image:: https://snyk.io/test/github/tubone24/ebook_homebrew/badge.svg?targetFile=requirements.txt
    :target: https://snyk.io/test/github/tubone24/ebook_homebrew?targetFile=requirements.txt
@@ -102,10 +105,14 @@ The ``Ebook_homebrew`` is changing file name to only digit name like ``001.jpg``
 
 .. image:: https://dply.me/yv0jty/button/small
    :target: https://dply.me/yv0jty#install
-   
-.. image:: https://img.shields.io/twitter/url/https/ebook-homebrew.herokuapp.com?style=social   
+
+.. image:: https://img.shields.io/twitter/url/https/ebook-homebrew.herokuapp.com?style=social
    :target: https://twitter.com/intent/tweet?text=LikeThis:&url=https%3A%2F%2Febook-homebrew.herokuapp.com
    :alt: Twitter URL
+
+.. image:: https://gitpitch.com/assets/badge.svg
+   :target: https://gitpitch.com/tubone24/ebook_homebrew/master?grs=github
+   :alt: GitPitch
 
 .. image:: https://dockeri.co/image/tubone24/ebook-homebrew
    :target: https://cloud.docker.com/repository/docker/tubone24/ebook-homebrew
