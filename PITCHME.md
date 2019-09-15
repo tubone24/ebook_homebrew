@@ -34,5 +34,11 @@ $ ebookhomebrew auto -s ./tests -d 3,4 -e jpg -f test.pdf
 
 ---
 
+@snap[north-east span-65]
+@quote[I want to learn more Python]
+@snapend
+
+---
+
 ## Now..
 
