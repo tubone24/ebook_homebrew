@@ -45,9 +45,20 @@ $ ebookhomebrew auto -s ./tests -d 3,4 -e jpg -f test.pdf
 
 @img[clip-img clean-img span-20](assets/gitpitch/img/author.png)
 
-@quote[I want to learn more Python](tubone)
+@quote[I want to learn more!](tubone)
 
----
+---?color=#FF9000
 
 ## Now..
 
+---
+
+### Evolution
+
+- Awesome REST API
+- OpenAPI
+- Read The Docs
+- Perfect Tests(UT/IT/E2E)
+- CI/CD
+- PyPI
+- Heroku
