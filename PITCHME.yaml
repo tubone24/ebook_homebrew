@@ -1,0 +1,23 @@
+theme: moon
+# background: assets/gitpitch/img/bg.jpg
+# background-size: cover
+
+logo: assets/gitpitch/img/logo.png
+
+highlight: monokai
+
+slide-number: true
+
+footnote: "© 2019 tubone-project24"
+
+# mathjax: TeX-MML-AM_HTMLorMML-full
+
+vertical-center: true
+
+theme-override: assets/gitpitch/css/main.css
+
+transition: concave
+
+# mousewheel: false
+
+# gatoken: UA-aaaa
