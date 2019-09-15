@@ -6,6 +6,8 @@
 
 Ebook homebrew is ...
 
+### My Studies
+
 ---
 
 ## ～2018
@@ -38,7 +40,7 @@ $ ebookhomebrew auto -s ./tests -d 3,4 -e jpg -f test.pdf
 
 @img[clip-img clean-img span-20](assets/gitpitch/img/author.png)
 
-@snap[north-east span-20]
+@snap[span-20]
 @quote[I want to learn more Python](tubone)
 @snapend
 
