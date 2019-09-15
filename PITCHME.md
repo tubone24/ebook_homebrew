@@ -16,7 +16,7 @@ Command Line tool to make with `Python`.
 
 ---
 
-### Like This..
+Examples
 
 ```
 $ ebookhomebrew auto -s ./tests -d 3,4 -e jpg -f test.pdf
