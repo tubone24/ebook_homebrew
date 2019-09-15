@@ -28,16 +28,18 @@ Command Line tool to make with `Python`.
 
 Examples
 
-```
+```bash
 $ ebookhomebrew auto -s ./tests -d 3,4 -e jpg -f test.pdf
 ```
 
 ---
 
-@img[clip-img clean-img span-80](assets/gitpitch/img/author.png)
+## Think about..
+
+@img[clip-img clean-img span-20](assets/gitpitch/img/author.png)
 
 @snap[north-east span-20]
-@quote[I want to learn more Python](Bruce Wayne)
+@quote[I want to learn more Python](tubone)
 @snapend
 
 ---
