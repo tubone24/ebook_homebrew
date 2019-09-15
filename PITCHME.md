@@ -12,6 +12,16 @@ Ebook homebrew is ...
 
 Ebook homebrew is changing file name to only digit name like 001.jpg and make e-book format files.
 
+Command Line tool to make with `Python`.
+
+---
+
+### Like This..
+
+```
+$ ebookhomebrew auto -s ./tests -d 3,4 -e jpg -f test.pdf
+```
+
 ---
 
 ## Now..
