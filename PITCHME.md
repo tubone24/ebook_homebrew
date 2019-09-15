@@ -87,4 +87,6 @@ $ ebookhomebrew auto -s ./tests -d 3,4 -e jpg -f test.pdf
 
 ---?image=assets/gitpitch/img/journey.jpg
 
+@snap[silver-fox text-italics]
 Ebook Homebrew's journey is not over yet..
+@snapend
