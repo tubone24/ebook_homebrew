@@ -6,13 +6,18 @@
 
 Ebook homebrew is ...
 
+---?color=#FF9000
+
 ### My Studies
+
+My Python and more languages studies materials.
 
 ---
 
 ## ～2018
 
-Ebook homebrew is changing file name to only digit name like 001.jpg and make e-book format files.
+First commits, Ebook homebrew is changing file name 
+to only digit name like 001.jpg and make e-book format files.
 
 Command Line tool to make with `Python`.
 
@@ -26,9 +31,9 @@ Command Line tool to make with `Python`.
 - Make Zip
 @ulend
 
----
+Examples..
 
-Examples
+---
 
 ```bash
 $ ebookhomebrew auto -s ./tests -d 3,4 -e jpg -f test.pdf
@@ -40,9 +45,7 @@ $ ebookhomebrew auto -s ./tests -d 3,4 -e jpg -f test.pdf
 
 @img[clip-img clean-img span-20](assets/gitpitch/img/author.png)
 
-@snap[span-20]
 @quote[I want to learn more Python](tubone)
-@snapend
 
 ---
 
