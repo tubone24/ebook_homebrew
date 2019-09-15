@@ -79,10 +79,12 @@ $ ebookhomebrew auto -s ./tests -d 3,4 -e jpg -f test.pdf
 
 ![Flutter](assets/gitpitch/img/flutter-android.gif)
 
+---
+
 ### Vue Client
 
 ![vue](assets/gitpitch/img/vue.png)
 
 ---?image=assets/gitpitch/img/journey.jpg
 
-### Ebook Homebrew's journey is not over yet..
+Ebook Homebrew's journey is not over yet..
