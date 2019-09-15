@@ -34,7 +34,7 @@ $ ebookhomebrew auto -s ./tests -d 3,4 -e jpg -f test.pdf
 
 ---
 
-![author](assets/gitpitch/img/author.png)
+@img[clip-img clean-img span-80](assets/gitpitch/img/author.png)
 
 @snap[north-east span-20]
 @quote[I want to learn more Python](Bruce Wayne)
