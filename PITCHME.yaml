@@ -1,12 +1,12 @@
 theme: template
 
-theme-background: [ "#01BBD4" ]
-theme-headline: [ "Raleway", "#33B490", "none" ]
+theme-background: [ "#FFF5E3" ]
+theme-headline: [ "Raleway", "#01BBD4", "none" ]
 theme-byline: [ "Raleway", "#464E70", "none" ]
-theme-text: [ "Ubuntu", "#FFF5E3", "none" ]
+theme-text: [ "Ubuntu", "#464E70", "none" ]
 theme-links: [ "#5289F7", "#5254F7" ]
 theme-code: [ "Source Code Pro" ]
-theme-controls: [ "#484848" ]
+theme-controls: [ "#464E70" ]
 theme-margins: [ "0", "15px" ]
 # background: assets/gitpitch/img/bg.jpg
 # background-size: cover
