@@ -104,6 +104,14 @@ Badges:
 .. image:: https://beerpay.io/tubone24/ebook_homebrew/badge.svg
    :target: https://beerpay.io/tubone24/ebook_homebrew
 
+.. image:: https://img.shields.io/twitter/url/https/ebook-homebrew.herokuapp.com?style=social
+   :target: https://twitter.com/intent/tweet?text=LikeThis:&url=https%3A%2F%2Febook-homebrew.herokuapp.com
+   :alt: Twitter URL
+
+.. image:: https://gitpitch.com/assets/badge.svg
+   :target: https://gitpitch.com/tubone24/ebook_homebrew/master?grs=github
+   :alt: GitPitch
+
 .. image:: https://dply.me/yv0jty/button/small
    :target: https://dply.me/yv0jty#install
 
