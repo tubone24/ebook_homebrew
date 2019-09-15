@@ -18,7 +18,7 @@ Command Line tool to make with `Python`.
 
 ### Features
 
-@ul[list-square-bullets list-spaced-bullets font-righteous](false)
+@ul[list-square-bullets list-spaced-bullets](false)
 - Rename file to only digit name like `001.jpg`
 - Convert Image to PDF
 - Make Zip
