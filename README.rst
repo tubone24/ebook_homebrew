@@ -122,6 +122,10 @@ The ``Ebook_homebrew`` is changing file name to only digit name like ``001.jpg``
    :target: https://heroku.com/deploy
    :alt: Deploy to Heroku
 
+.. image:: https://azuredeploy.net/deploybutton.png
+   :target: https://azuredeploy.net/?repository=https://github.com/tubone24/ebook_homebrew
+   :alt: Deploy to Azure
+
 ebook_homebrew is command line interface which change file name to only digit name like 001.jpg and make e-book format files.
 
 Getting Started
