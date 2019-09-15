@@ -55,14 +55,73 @@ $ ebookhomebrew auto -s ./tests -d 3,4 -e jpg -f test.pdf
 
 ### Evolution
 
-- Awesome REST API
-- OpenAPI
+- Awesome REST API with Open API
 - Read The Docs
 - Perfect Tests(UT/IT/E2E)
 - CI/CD
 - PyPI
 - Heroku
 - **More Client**
+
+---?color=#FF3F80
+
+### Awesome REST API
+
+[DEMO SITE](https://ebook-homebrew.herokuapp.com/#/)
+
+![openapi](assets/gitpitch/img/openapi.png)
+
+---?color=#B867C6
+
+### Read The Docs
+
+[Make Docs, Read the docs](https://ebook-homebrew.readthedocs.io/en/latest/)
+
+![readthedoc](assets/gitpitch/img/readthedocs.png)
+
+---
+
+### Perfect Tests
+
+Perfect Test with Pytest.
+
+Awesome test! coverage 98%! Write UT and IT.
+
+![coverage98](assets/gitpitch/img/coverage98.png)
+
+---?color=#02A8F4
+
+### CI/CD
+
+Many Badges!!
+
+![morebadges](assets/gitpitch/img/morebadges.png)
+
+---
+
+#### And AutoDeploy!
+
+Auto Deploy using CI/CD
+
+![autodeploy](assets/gitpitch/img/autodeploy.png)
+
+---
+
+### PyPI
+
+Auto Deploy PyPI with CI/CD
+
+`pip install ebook-homebrew`
+
+![pypi](assets/gitpitch/img/pypi.png)
+
+---?color=#B867C6
+
+### Heroku
+
+Heroku Deploy!
+
+![heroku](assets/gitpitch/img/heroku.png)
 
 ---?color=#FF9000
 
