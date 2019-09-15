@@ -6,12 +6,12 @@
 
 Ebook homebrew is ...
 
-+++
+---
 
 ## ～2018
 
-Ebook_homebrew is changing file name to only digit name like 001.jpg and make e-book format files.
+Ebook homebrew is changing file name to only digit name like 001.jpg and make e-book format files.
 
-+++
+---
 
 ## Now..
