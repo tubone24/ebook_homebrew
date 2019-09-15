@@ -62,3 +62,27 @@ $ ebookhomebrew auto -s ./tests -d 3,4 -e jpg -f test.pdf
 - CI/CD
 - PyPI
 - Heroku
+- **More Client**
+
+---?color=#FF9000
+
+### More Client
+
+- Flutter (Android & iOS App)
+- Nim Client
+- Rust Client
+- Vue Client
+
+---
+
+### Flutter
+
+![Flutter](assets/gitpitch/img/flutter-android.gif)
+
+### Vue Client
+
+![vue](assets/gitpitch/img/vue.png)
+
+---?image=assets/gitpitch/img/journey.jpg
+
+### Ebook Homebrew's journey is not over yet..
