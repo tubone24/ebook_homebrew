@@ -392,6 +392,13 @@ Using Flutter, Call REST API DEMO Android App, deploy to Deploygate. Try me!
 
 And also, you can download to `Google Play <https://play.google.com/store/apps/details?id=com.tubone.ebook_homebrew_flutter>`_
 
+GitPitch
+========
+
+Ebook Homebrew presentation is made in GitPitch.
+
+`GitPitch <https://gitpitch.com/tubone24/ebook_homebrew/master?grs=github>`_
+
 Licence
 =======
 

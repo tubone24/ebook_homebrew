@@ -10,7 +10,7 @@ Ebook homebrew is ...
 
 ### My Studies
 
-My Python and more languages studies materials.
+This repo is my Python and more languages studies materials.
 
 ---
 

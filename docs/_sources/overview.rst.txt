@@ -28,3 +28,8 @@ Provides Rest API
 -----------------
 
 Provides Rest API interfaces.
+
+How about Ebook Homebrew?
+-------------------------
+
+If you want to know Ebook Homebrew more, Look at `GitPitch <https://gitpitch.com/tubone24/ebook_homebrew/master?grs=github>`_
