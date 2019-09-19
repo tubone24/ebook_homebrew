@@ -55,13 +55,13 @@ $ ebookhomebrew auto -s ./tests -d 3,4 -e jpg -f test.pdf
 
 ### Evolution
 
-- Awesome REST API with Open API
-- Read The Docs
-- Perfect Tests(UT/IT/E2E)
-- CI/CD
-- PyPI
-- Heroku
-- **More Client**
+- Awesome REST API with Open API |
+- Read The Docs |
+- Perfect Tests(UT/IT/E2E) |
+- CI/CD |
+- PyPI |
+- Heroku |
+- **More Client** |
 
 ---?color=#FF3F80
 
@@ -127,10 +127,10 @@ Heroku Deploy!
 
 ### More Client
 
-- Flutter (Android & iOS App)
-- Nim Client
-- Rust Client
-- Vue Client
+- Flutter (Android & iOS App) |
+- Nim Client |
+- Rust Client |
+- Vue Client |
 
 ---
 
