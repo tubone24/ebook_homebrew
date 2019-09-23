@@ -16,6 +16,10 @@ The ``Ebook_homebrew`` is changing file name to only digit name like ``001.jpg``
 
 .. image:: https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square
    :target: http://makeapullrequest.com
+   
+.. image:: http://www.repostatus.org/badges/latest/active.svg
+   :target: http://www.repostatus.org/#active
+   :alt: Project Status: Active
 
 .. image:: https://travis-ci.org/tubone24/ebook_homebrew.svg?branch=master
    :target: https://travis-ci.org/tubone24/ebook_homebrew
