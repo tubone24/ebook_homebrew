@@ -12,9 +12,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      env:
-        GITHUB_TOKEN: ${{ secrets.$GITHUB_DOCKER_PUSH_TOKEN }}
       - uses: actions/checkout@v1
+      - name: My first action
+        env:
+          GITHUB_TOKEN: ${{ secrets.$GITHUB_DOCKER_PUSH_TOKEN }}
       - name: Build the Docker image
         run: docker build -t docker.pkg.github.com/tubone24/ebook_homebrew/ebook-homebrew docker
       - name: Docker Login for GitHub Packages
