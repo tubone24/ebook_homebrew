@@ -21,7 +21,7 @@ The ``Ebook_homebrew`` is changing file name to only digit name like ``001.jpg``
    :target: http://www.repostatus.org/#active
    :alt: Project Status: Active
 
-.. image:: https://travis-ci.org/tubone24/ebook_homebrew.svg?branch=master
+.. image:: https://travis-ci.org/tubone24/ebook_homebrew.svg?branch=master&logo=travis
    :target: https://travis-ci.org/tubone24/ebook_homebrew
 
 .. image:: https://codecov.io/gh/tubone24/ebook_homebrew/branch/master/graph/badge.svg
