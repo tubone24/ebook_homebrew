@@ -13,12 +13,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v1
-      - name: My first action
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_DOCKER_PUSH_TOKEN }}
       - name: Build the Docker image
         run: docker build -t docker.pkg.github.com/tubone24/ebook_homebrew/ebook-homebrew docker
       - name: Docker Login for GitHub Packages
-        run: docker login --username tubone24 --password $GITHUB_TOKEN
+        run: docker login --username tubone24 --password ${{ secrets.GITHUB_DOCKER_PUSH_TOKEN }}
       - name: Push image GitHub Packages
         run: docker push docker.pkg.github.com/tubone24/ebook_homebrew/ebook-homebrew
