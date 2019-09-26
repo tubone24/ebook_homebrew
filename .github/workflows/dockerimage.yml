@@ -12,10 +12,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      env:
+        GITHUB_TOKEN: ${{ secrets.$GITHUB_DOCKER_PUSH_TOKEN }}
       - uses: actions/checkout@v1
       - name: Build the Docker image
-        run: docker build --no-cache=true -t docker.pkg.github.com/tubone24/ebook_homebrew/ebook-homebrew docker
+        run: docker build -t docker.pkg.github.com/tubone24/ebook_homebrew/ebook-homebrew docker
       - name: Docker Login for GitHub Packages
-        run: docker login -u tubone24 -p $GITHUB_DOCKER_PUSH_TOKEN
+        run: docker login --username tubone24 --password $GITHUB_TOKEN
       - name: Push image GitHub Packages
         run: docker push docker.pkg.github.com/tubone24/ebook_homebrew/ebook-homebrew
