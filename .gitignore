@@ -6,7 +6,7 @@
 __pycache__/
 *.py[cod]
 *$py.class
-
+docker login docker.pkg.github.com --username tubone24
 # C extensions
 *.so
 
