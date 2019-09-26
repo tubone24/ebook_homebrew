@@ -69,6 +69,14 @@ Badges:
    :target: https://www.codefactor.io/repository/github/tubone24/ebook_homebrew
    :alt: CodeFactor
 
+.. image:: https://github.com/tubone24/ebook_homebrew/workflows/Python%20package/badge.svg
+   :target: https://github.com/tubone24/ebook_homebrew/actions
+   :alt: Actions Status
+
+.. image:: https://github.com/tubone24/ebook_homebrew/workflows/Docker%20Image%20CI/badge.svg
+   :target: https://github.com/tubone24/ebook_homebrew/actions
+   :alt: Actions Status
+
 .. image:: https://api.codacy.com/project/badge/Grade/d25ad1bd88f24a0abfb2d801034be820
    :target: https://www.codacy.com/manual/tubone24/ebook_homebrew?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=tubone24/ebook_homebrew&amp;utm_campaign=Badge_Grade
 
