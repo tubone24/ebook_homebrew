@@ -13,3 +13,6 @@
 [submodule "examples/ebook-homebrew-nim-client"]
 	path = examples/ebook-homebrew-nim-client
 	url = https://github.com/tubone24/ebook-homebrew-nim-client.git
+[submodule "examples/ebook-homebrew-nuxt-with-typescript-client"]
+	path = examples/ebook-homebrew-nuxt-with-typescript-client
+	url = https://github.com/tubone24/ebook-homebrew-nuxt-with-typescript-client.git
