@@ -136,6 +136,7 @@ Badges:
    restapi.rst
    client.rst
    deploy2heroku.rst
+   loadtest.rst
    releasenotes/index.rst
 
 
