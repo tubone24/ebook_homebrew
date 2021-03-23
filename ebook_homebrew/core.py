@@ -87,7 +87,7 @@ class Common(object):
         Returns:
             Match: If filename contains digit, return Match object, others return false.
         """
-        match_obj = re.search("\\d{" + str(digits) + "}", filename)
+        match_obj = re.search("\\d{" + re.escape(str(digits)) + "}", filename)
         return match_obj
 
     @staticmethod
